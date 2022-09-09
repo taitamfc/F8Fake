@@ -37,6 +37,7 @@ return new class extends Migration
             $table->boolean('is_bookmark');
             $table->boolean('is_published');
             $table->timestamps();
+            
         });
     }
 
