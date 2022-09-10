@@ -13,36 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/index', function () {
-    // echo '<br>'.route('index');
-    // echo '<br>'.route('create');
-
-    // goi view
-    $params = [
-        'first_name' => 'Nguyen Van',
-        'last_name' => 'A',
-    ];
-    return view('welcome', $params);
-
-})->name('index');
-
-Route::get('/create1234',function(){
-    dd('Trang them moi');
-})->name('create');
-
-// Nhan du lieu tu form them moi
-Route::post('/store',function(Request $request){
-    dd( $request->all() );
-});
-
-Route::get('/edit/{id}', function( $id ){
-    dd('Trang chinh sua' . $id);
-});
-
-// Nhan du lieu tu form cap nhat
-Route::put('/update/{id}',function(Request $request, $id){
-    dd( $request->all() );
-});
-Route::delete('/destroy/{id}',function($id){
-
-});
+Route::resource('levels',App\Http\Controllers\LevelController::class);
