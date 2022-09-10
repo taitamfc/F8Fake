@@ -17,16 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained('courses');
             $table->foreignId('student_id')->constrained('students');
-
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('student_sourse');
