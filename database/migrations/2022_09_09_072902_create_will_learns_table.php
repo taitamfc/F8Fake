@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('will_learns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained('courses');
+            $table->longText('content');
             $table->timestamps();
         });
     }
