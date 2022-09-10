@@ -29,6 +29,7 @@ class LevelTest extends TestCase
     Kiem tra chuc nang them moi dung factory
     - Tao factory ( TenModelFactory ) bang lenh: 
     php artisan make:factory LevelFactory
+    - Xem file duoc tao ra trong database/factories
     - Trong ham definition return ve mang la cac truong trong CSDL, bo qua cac truong cho phep NULL, hoac de nguyen
         return [
             'name' => fake()->name(),
