@@ -11,10 +11,10 @@ class Group extends Model
     protected $table = 'groups';
     function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
-    function groupRole()
+    function Role()
     {
-        return $this->belongsTo(GroupRole::class);
+        return $this->belongsToMany(Role::class);
     }
 }
