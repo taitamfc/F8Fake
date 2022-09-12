@@ -14,6 +14,6 @@ class Track extends Model
         return $this->belongsTo(Courses::class);
     }
     function track_steps(){
-        return $this->hasMany(Track_steps::class);
+        return $this->hasMany(TrackStep::class);
     }
 }
