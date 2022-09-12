@@ -73,7 +73,7 @@
           <div class="page">
             <!-- .page-inner -->
             @yield('content')
-<!-- /.page-inner -->
+            <!-- /.page-inner -->
           </div><!-- /.page -->
         </div><!-- .app-footer -->
         <footer class="app-footer">
