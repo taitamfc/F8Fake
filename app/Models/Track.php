@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WillLearn extends Model
+class Track extends Model
 {
     use HasFactory;
-    protected $table = 'will_learns';
-    function course(){
+    protected $table = 'tracks';
+    function course()
+    {
         return $this->belongsTo(Courses::class);
+    }
+    function track_steps(){
+        return $this->hasMany(Track_steps::class);
     }
 }
