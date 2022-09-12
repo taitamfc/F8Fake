@@ -9,7 +9,7 @@ class WillLearn extends Model
 {
     use HasFactory;
     protected $table = 'will_learns';
-    function courses(){
+    function course(){
         return $this->belongsTo(Courses::class);
     }
 }
