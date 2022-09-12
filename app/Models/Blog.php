@@ -9,7 +9,7 @@ class Blog extends Model
 {
     use HasFactory;
     protected $table = 'blogs';
-    function users(){
-        return $this->belongsTo(Users::class);
+    function user(){
+        return $this->belongsTo(User::class);
     }
 }
