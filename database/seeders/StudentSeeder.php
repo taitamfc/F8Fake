@@ -17,25 +17,22 @@ class StudentSeeder extends Seeder
     {
         DB::table('students')->insert([
             [
-                'id' =>1,
                 'name' =>'Nguyễn Đức Thuần',
                 'email' =>'thuan@gmail.com',
                 'password' =>123456,
-                'image' => "",
+                'image' => ""
             ],
             [
-                'id' =>2,
                 'name' =>'Trần Ngọc Vinh',
                 'email' =>'Vinh@gmail.com',
                 'password' =>12345,
-                'image' => "",
+                'image' => ""
             ],
             [
-                'id' =>3,
                 'name' =>'Hoàng Thanh Hải',
                 'email' =>'Hai@gmail.com',
                 'password' =>1234,
-                'image' => "",
+                'image' => ""
             ]
         ]);
     }
