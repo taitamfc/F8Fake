@@ -12,7 +12,7 @@ class Course extends Model
     function level(){
         return $this->belongsTo(level::class);
     }
-    function VillLean(){
-        return $this->hasMany(VillLean::class);
+    function WillLean(){
+        return $this->hasMany(WillLean::class);
     }
 }
