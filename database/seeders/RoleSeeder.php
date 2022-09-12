@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class groupSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,10 @@ class groupSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('groups')->insert([
+        DB::table('role')->insert([
             [
-                'id' => 1,
-                'name' => "App",
-                'description' => "a",
-                'deleted_at' => "",
+                'name'=>'mai xuan thao',
+                'group_name'=>'Kiến Thức Nhập Môn IT',
             ]
         ]);
     }

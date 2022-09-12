@@ -17,16 +17,15 @@ class BannerSeeder extends Seeder
     {
         DB::table('banners')->insert([
             [
-                'id' =>1,
-                'placement' => 'học viên',
-                'type' => '',
-                'banner' => '',
-                'title' => 'Học IT cần tố chất gì?',
-                'description' => 'ngành công nghệ thông tin có cái nhìn đúng ngành nghề và gặt hái thành công trong lĩnh vực này.',
-                'cta_title' => '',
-                'link_to' => 'https://htt.edu.vn/nhung-to-chat-can-co-de-hoc-tot-nganh-cong-nghe-thong-tin/',
-                'priority' => '',
-                'expires' => '',
+                'placement' => 'home',
+                'type' => 'slideshow',
+                'banner' => 'banners/20/6308a6bf603a4.png',
+                'title' => 'Khóa học HTML CSS Pro',
+                'description' => 'Đây là khóa học đầy đủ và chi tiết nhất bạn có thể tìm thấy được ở trên Internet!',
+                'cta_title' => 'Tìm hiểu thêm',
+                'link_to' =>  "https://fullstack.edu.vn/landing/htmlcss",
+                'priority' => 1,
+                'expires' => '2022-12-18 ',
             ]
         ]);
     }
