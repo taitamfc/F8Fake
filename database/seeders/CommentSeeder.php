@@ -22,21 +22,21 @@ class CommentSeeder extends Seeder
                 'commentstable_type'=>'Lộ trình học Front-end',
                 'comment'=>'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
                 'is_approved'=>true,
-                'course_id'=>'13',
+                'course_id'=>13,
             ],
             [
                 'user_id'=> 2,
                 'commentstable_type'=>'Lộ trình học Front-end',
                 'comment'=>'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
                 'is_approved'=>true,
-                'course_id'=>'14',
+                'course_id'=>14,
             ],
             [
                 'user_id'=> 3,
                 'commentstable_type'=>'Lộ trình học Front-end',
                 'comment'=>'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
                 'is_approved'=>true,
-                'course_id'=>'15',
+                'course_id'=>15,
             ]
 
 
