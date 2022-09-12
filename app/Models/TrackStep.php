@@ -13,4 +13,12 @@ class TrackStep extends Model
     {
         return $this->belongsTo(Track::class);
     }
+    function step()
+    {
+        return $this->belongsTo(Step::class);
+    }
+    
+
+    
+
 }
