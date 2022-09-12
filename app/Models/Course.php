@@ -12,8 +12,8 @@ class Course extends Model
     function level(){
         return $this->belongsTo(level::class);
     }
-
-    function WillLeans(){
-        return $this->hasMany(WillLean::class);
+    
+    function will_learns(){
+        return $this->hasMany(WillLearn::class);
     }
 }
