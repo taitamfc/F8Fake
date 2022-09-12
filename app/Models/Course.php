@@ -10,9 +10,9 @@ class Course extends Model
     use HasFactory;
     protected $table = 'courses';
     function level(){
-        return $this->belongsTo(level::class);
+        return $this->belongsTo(Level::class);
     }
-    
+
     function will_learns(){
         return $this->hasMany(WillLearn::class);
     }
