@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Step extends Model
 {
     use HasFactory;
-    protected $table = 'Steps';
+    protected $table = 'steps';
     function track_step()
     {
-        return $this->belongsTo(Track_steps::class);
+        return $this->belongsTo(TrackStep::class);
     }
 }

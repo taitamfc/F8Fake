@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Requirement extends Model
 {
     use HasFactory;
-    protected $table = 'Requirements';
+    protected $table = 'requirements';
     function course()
     {
-        return $this->belongsTo(Courses::class);
+        return $this->belongsTo(Course::class);
     }
 }
