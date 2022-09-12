@@ -18,9 +18,9 @@ class groupSeeder extends Seeder
         DB::table('groups')->insert([
             [
                 'id' => 1,
-                'name' => 1,
-                'description' => "",
-                'delete_at' => '',
+                'name' => "App",
+                'description' => "a",
+                'deleted_at' => "",
             ]
         ]);
     }
