@@ -17,7 +17,6 @@ class BannerSeeder extends Seeder
     {
         DB::table('banners')->insert([
             [
-                'id' =>1,
                 'placement' => 'home',
                 'type' => 'slideshow',
                 'banner' => 'banners/20/6308a6bf603a4.png',
