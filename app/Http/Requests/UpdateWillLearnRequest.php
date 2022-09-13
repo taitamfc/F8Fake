@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class levelRequest extends FormRequest
+class UpdateWillLearnRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,7 +12,7 @@ class levelRequest extends FormRequest
      * @return bool
      */
     public function authorize()
-    {   
+    {
         return true;
     }
 
@@ -24,7 +24,15 @@ class levelRequest extends FormRequest
     public function rules()
     {
         return [
-          'title'=>'required',
+            'course_id'=>'required',
+            'content'=>'content',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'course_id.requied'=> 'Trường bắt buộc',
+            'content.requied'=> 'Trường bắt buộc',
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WillLearnRequest extends FormRequest
+class StorelevelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,17 +15,17 @@ class WillLearnRequest extends FormRequest
     {
         return true;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            'course_id'=>'required',
-            'content'=>'content',
+          'title'=>'required|unique::levels',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.requied'=> 'Trương bắt buộc',
+            'title.unique'=> 'Đã tồn tại'
         ];
     }
 }
