@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RequirementController;
+use App\Http\Controllers\StepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -13,39 +15,35 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function(){
+Route::get('/dashboard', function () {
     return view('Admin.master');
 });
-// Route::get('/index', function () {
-//     // echo '<br>'.route('index');
-//     // echo '<br>'.route('create');
+Route::get('/step', function () {
+    return view('Admin.step.index');
+})->name('step.index');
+Route::get('/step/create', function () {
+    return view('Admin.step.create');
+})->name('step.create');
+Route::get('/step/edit', function () {
+    return view('Admin.step.edit');
+})->name('step.edit');
 
-//     // goi view
-//     $params = [
-//         'first_name' => 'Nguyen Van',
-//         'last_name' => 'A',
-//     ];
-//     return view('welcome', $params);
+Route::get('/requirement', function () {
+    return view('Admin.requirement.index');
+})->name('requirement.index');
+Route::get('/requirement/create', function () {
+    return view('Admin.requirement.create');
+})->name('requirement.create');
+Route::get('/requirement/edit', function () {
+    return view('Admin.requirement.edit');
+})->name('requirement.edit');
 
-// })->name('index');
-
-// Route::get('/create1234',function(){
-//     dd('Trang them moi');
-// })->name('create');
-
-// // Nhan du lieu tu form them moi
-// Route::post('/store',function(Request $request){
-//     dd( $request->all() );
-// });
-
-// Route::get('/edit/{id}', function( $id ){
-//     dd('Trang chinh sua' . $id);
-// });
-
-// // Nhan du lieu tu form cap nhat
-// Route::put('/update/{id}',function(Request $request, $id){
-//     dd( $request->all() );
-// });
-// Route::delete('/destroy/{id}',function($id){
-
-// });
+Route::get('/track', function () {
+    return view('Admin.track.index');
+})->name('track.index');
+Route::get('/track/create', function () {
+    return view('Admin.track.create');
+})->name('track.create');
+Route::get('/track/edit', function () {
+    return view('Admin.track.edit');
+})->name('track.edit');
