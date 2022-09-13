@@ -21,7 +21,7 @@
                         <h4 class="card-title"> Thông tin cơ bản </h4>
 
                         <!-- form -->
-                        <form action="">
+                        <form action="{{ route('requirement.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!-- .form-group -->
                             <div class="form-group">
@@ -31,13 +31,14 @@
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Khóa học</label> <input id="flatpickr01"
-                                    type="number" name="course_id" class="form-control" data-toggle="flatpickr">
+                                    type="string" name="course_id" class="form-control" data-toggle="flatpickr">
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
+
                                 {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                                <input type="submid" value="Hủy" class="btn btn-info">
-                                <input type="submid" value="Lưu" class="btn btn-info">
+                                <input type="submit" value="Hủy" class="btn btn-info">
+                                <input type="submit" value="Lưu" class="btn btn-info">
                             </div>
                         </form><!-- /form -->
                     </div><!-- /.card-body -->

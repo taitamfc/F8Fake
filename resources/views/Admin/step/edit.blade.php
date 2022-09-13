@@ -68,8 +68,8 @@
                             <!-- .form-group -->
                             <div class="form-group">
                                 {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                               <input type="submid" value="Hủy" class="btn btn-info">
-                               <input type="submid" value="Lưu" class="btn btn-info">
+                               <input type="submit" value="Hủy" class="btn btn-info">
+                               <input type="submit" value="Lưu" class="btn btn-info">
                             </div>
                         </form><!-- /form -->
                     </div><!-- /.card-body -->

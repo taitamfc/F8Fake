@@ -19,7 +19,7 @@
                 <h1 class="page-title mr-sm-auto"> Theo dõi chương học </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('step.index') }}" class="btn btn-primary mr-2">
+                    <a href="{{ route('track.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
                     </a>
@@ -75,10 +75,10 @@
                         <thead class="thead-">
                             <tr>
                                 <th style="min-width:10px"> # </th>
-                                <th> Tên </th>
-                                <th> Email </th>
-                                <th> Password </th>
-                                <th> Ảnh </th>
+                                <th> Tiêu đề </th>
+                                <th> Miễn phí </th>
+                                <th> Chức vụ </th>
+                                <th> Khóa học </th>
                                 <th></th>
                             </tr>
                         </thead><!-- /thead -->
@@ -99,9 +99,9 @@
                                             {{ 'Chưa có ảnh' }}
                                         @endif
                                     </td> --}}
-                                    <td>
+                                    {{-- <td> --}}
                                         {{-- <img style="with:100px; height:100px" src="{{ asset($student->image) }}"> --}}
-                                    </td>
+                                    {{-- </td> --}}
                                     {{-- <td>
                                         <a href="{{ route('students.edit', $student->id) }}"
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
@@ -110,9 +110,17 @@
                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                 class="far fa-trash-alt"></i></a>
                                     </td> --}}
-                                </tr>
+                                {{-- </tr> --}}
                             {{-- @endforeach --}}
-                        </tbody><!-- /tbody -->
+                            <td>
+                                <a href=""
+                                    class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
+                                <a href=""
+                                    class="btn btn-sm btn-icon btn-secondary"
+                                    onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                        class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tbody>
                     </table>
                 </div><!-- /.card-body -->
             </div><!-- /.card -->

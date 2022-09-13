@@ -13,7 +13,7 @@ class RequirementRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,6 +26,13 @@ class RequirementRequest extends FormRequest
         return [
             'content' => 'required',
             'course_id' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'content.required' => 'Vui lòng nhập nội dung',
+            'course_id.required' => 'Vui lòng nhập khóa học',
         ];
     }
 }

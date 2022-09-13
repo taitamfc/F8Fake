@@ -21,7 +21,7 @@
                         <h4 class="card-title"> Thông tin cơ bản </h4>
 
                         <!-- form -->
-                        <form action="">
+                        <form action="{{ route('track.create') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -43,8 +43,8 @@
 
                                             <div class="form-group">
                                                 {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                                                <input type="submid" value="Hủy" class="btn btn-info">
-                                                <input type="submid" value="Lưu" class="btn btn-info">
+                                                <input type="submit" value="Hủy" class="btn btn-info">
+                                                <input type="submit" value="Lưu" class="btn btn-info">
                                             </div>
                                         </div>
                                     </div>

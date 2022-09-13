@@ -23,7 +23,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        return view ('Admin.track.index');
+        return view ('Admin.track.create');
 
     }
 

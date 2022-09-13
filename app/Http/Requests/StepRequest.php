@@ -13,7 +13,7 @@ class StepRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -34,6 +34,21 @@ class StepRequest extends FormRequest
             'video' => 'required',
             'image_url' => 'required',
             'video_url' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => 'Vui lòng nhập tiêu đề',
+            'content.required' => 'Vui lòng nhập nội dung',
+            'description.required' => 'Vui lòng nhập mô tả',
+            'duration.required' => 'Vui lòng nhập thời gian',
+            'video_type.required' => 'Vui lòng nhập loại video',
+            'original_name.required' => 'Vui lòng nhập tên chính',
+            'image.required' => 'Vui lòng nhập hình ảnh',
+            'video.required' => 'Vui lòng nhập video',
+            'image_url.required' => 'Vui lòng nhập liên kết ảnh',
+            'video_url.required' => 'Vui lòng nhập liên kết video',
         ];
     }
 }

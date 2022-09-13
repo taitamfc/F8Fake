@@ -13,7 +13,7 @@ class TrackRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,6 +28,15 @@ class TrackRequest extends FormRequest
             'is_free' => 'required',
             'position' => 'required',
             'course_id' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => 'Vui lòng nhập chi nhánh',
+            'is_free.required' => 'Vui lòng chọn',
+            'position.required' => 'Vui lòng nhập chức vụ',
+            'course_id.required' => 'Vui lòng nhập khóa học',
         ];
     }
 }

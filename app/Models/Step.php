@@ -9,6 +9,7 @@ class Step extends Model
 {
     use HasFactory;
     protected $table = 'steps';
+    protected $fillable = ['title','content','description','duration','video_type','original_name','image','video','image_url','video_url'];
     function track_step()
     {
         return $this->belongsTo(TrackStep::class);

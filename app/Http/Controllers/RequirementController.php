@@ -16,9 +16,9 @@ class RequirementController extends Controller
     {
         $requirements = Requirement::latest()->paginate(3);
 
-        return view('Admin.requirements.index', compact('requirements'))
+        return view('Admin.requirement.index', compact('requirements'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
-        return view('Admin.requirement.index');
+
     }
 
     /**
@@ -39,7 +39,8 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Requirement::create($request->all());
+        return redirect()->route('requirement.index');
     }
 
     /**
@@ -88,8 +89,10 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Requirement $requirements , $id)
     {
-        //
+        $requirement = $requirements->find($id);
+        $requirement->delete();
+        return redirect()->route('requirement.index');
     }
 }

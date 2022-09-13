@@ -9,6 +9,7 @@ class Track extends Model
 {
     use HasFactory;
     protected $table = 'tracks';
+    protected $fillable = ['title','is_free','position','course_id'];
     function course()
     {
         return $this->belongsTo(Courses::class);

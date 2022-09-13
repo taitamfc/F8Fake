@@ -9,6 +9,7 @@ class Requirement extends Model
 {
     use HasFactory;
     protected $table = 'requirements';
+    protected $fillable = ['content','course_id'];
     function course()
     {
         return $this->belongsTo(Course::class);
