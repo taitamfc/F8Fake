@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\StudentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -15,6 +16,20 @@ use Illuminate\Http\Request;
 
 Route::get('/', function(){
     return view('Admin.master');
+});
+Route::get('/ha', function(){
+    return view('Admin.students.add');
+});
+Route::get('/haa', function(){
+    return view('Admin.students.edit');
+});
+Route::prefix('students')->group(function () {
+Route::get('/list', [StudentController::class, 'index'])->name('students.index');
+Route::get('/create', [StudentController::class, 'create'])->name('students.create');
+Route::post('/', [StudentController::class, 'store'])->name('students.store');
+Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
+Route::post('/{id}', [StudentController::class, 'update'])->name('students.update');
+Route::get('/{id}/destroy', [StudentController::class, 'destroy'])->name('students.destroy');
 });
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
