@@ -13,7 +13,7 @@ class UpdateCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateCourseRequest extends FormRequest
     public function rules()
     {
         return [
-                'title'             => 'required|unique:course',
+                'title'             => 'required',
                 'level_id'          => 'required',
                 'certificate_name'  => 'required',
                 'slug'              => 'required',
@@ -52,29 +52,28 @@ class UpdateCourseRequest extends FormRequest
     {
         return [
 
-            'title.required'            => 'Trường bắt buộc',
-            'title.unique'              => 'đã tồn tại',
-            'level_id.required'         => 'Trường bắt buộc',
-            'certificate_name.required' => 'Trường bắt buộc',
-            'slug.required'             => 'Trường bắt buộc',
-            'description.required'      => 'Trường bắt buộc',
-            'compeleted_content.required'=> 'Trường bắt buộc',
-            'image.required'             => 'Trường bắt buộc',
-            'icon.required'              => 'Trường bắt buộc',
-            'content.required'           => 'Trường bắt buộc',
-            'video_type.required'        => 'Trường bắt buộc',
-            'video.required'             => 'Trường bắt buộc',
-            'pass_percent.required'      => 'Trường bắt buộc',
-            'priority.required'          => 'Trường bắt buộc',
-            'student_count.required'     => 'Trường bắt buộc',
-            'old_prive.required'         => 'Trường bắt buộc',
-            'price.required'             => 'Trường bắt buộc',
-            'pre_order_price.required'   => 'Trường bắt buộc',
-            'is_relatable.required'      => 'Trường bắt buộc',
-            'is_coming_soon.required'    => 'Trường bắt buộc',
-            'is_pro.required'            => 'Trường bắt buộc',
-            'is_completable.required'    => 'Trường bắt buộc',
-            'published_at.required'      => 'Trường bắt buộc',
+            'title.required'                => 'Trường bắt buộc',
+            'level_id.required'             => 'Trường bắt buộc',
+            'certificate_name.required'     => 'Trường bắt buộc',
+            'slug.required'                 => 'Trường bắt buộc',
+            'description.required'          => 'Trường bắt buộc',
+            'compeleted_content.required'   => 'Trường bắt buộc',
+            'image.required'                => 'Trường bắt buộc',
+            'icon.required'                 => 'Trường bắt buộc',
+            'content.required'              => 'Trường bắt buộc',
+            'video_type.required'           => 'Trường bắt buộc',
+            'video.required'                => 'Trường bắt buộc',
+            'pass_percent.required'         => 'Trường bắt buộc',
+            'priority.required'             => 'Trường bắt buộc',
+            'student_count.required'        => 'Trường bắt buộc',
+            'old_prive.required'            => 'Trường bắt buộc',
+            'price.required'                => 'Trường bắt buộc',
+            'pre_order_price.required'      => 'Trường bắt buộc',
+            'is_relatable.required'         => 'Trường bắt buộc',
+            'is_coming_soon.required'       => 'Trường bắt buộc',
+            'is_pro.required'               => 'Trường bắt buộc',
+            'is_completable.required'       => 'Trường bắt buộc',
+            'published_at.required'         => 'Trường bắt buộc',
         ];
     }
 }
