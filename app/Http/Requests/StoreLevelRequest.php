@@ -12,7 +12,7 @@ class levelRequest extends FormRequest
      * @return bool
      */
     public function authorize()
-    {   
+    {
         return true;
     }
 
@@ -24,7 +24,13 @@ class levelRequest extends FormRequest
     public function rules()
     {
         return [
-          'title'=>'required',
+          'title'=>'required|unique::levels',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.requied'=> 'trương bắt buộc'
         ];
     }
 }
