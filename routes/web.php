@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\StudentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -14,23 +15,27 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function(){
-    return view('Admin.master');
-});
-Route::get('/ha', function(){
-    return view('Admin.students.add');
-});
-Route::get('/haa', function(){
-    return view('Admin.students.edit');
-});
+
 Route::prefix('students')->group(function () {
-Route::get('/list', [StudentController::class, 'index'])->name('students.index');
-Route::get('/create', [StudentController::class, 'create'])->name('students.create');
-Route::post('/', [StudentController::class, 'store'])->name('students.store');
-Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
-Route::post('/{id}', [StudentController::class, 'update'])->name('students.update');
-Route::get('/{id}/destroy', [StudentController::class, 'destroy'])->name('students.destroy');
+    Route::get('/', [StudentController::class, 'index'])->name('students.index');
+    Route::get('/create', [StudentController::class, 'create'])->name('students.create');
+    Route::post('/', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
+    Route::put('/{id}', [StudentController::class, 'update'])->name('students.update');
+    Route::get('/{id}/destroy', [StudentController::class, 'destroy'])->name('students.destroy');
+    Route::get('/trash', [StudentController::class, 'trash'])->name('students.trash');
 });
+
+Route::prefix('banners')->group(function () {
+    Route::get('/', [BannerController::class, 'index'])->name('banners.index');
+    Route::get('/create', [BannerController::class, 'create'])->name('banners.create');
+    Route::post('/', [BannerController::class, 'store'])->name('banners.store');
+    Route::get('/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+    Route::put('/{id}', [BannerController::class, 'update'])->name('banners.update');
+    Route::get('/{id}/destroy', [BannerController::class, 'destroy'])->name('banners.destroy');
+    Route::get('/trash', [BannerController::class, 'trash'])->name('banners.trash');
+});
+
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');

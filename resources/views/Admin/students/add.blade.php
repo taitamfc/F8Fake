@@ -1,82 +1,81 @@
 @extends('Admin.master')
 @section('content')
-    <div class="page-inner">
-        <!-- .page-title-bar -->
+    <div class="container">
         <header class="page-title-bar">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Forms</a>
+                        <a href="{{ route('students.index') }}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Quản Lý
+                            Học viên</a>
                     </li>
                 </ol>
             </nav>
-            <h1 class="page-title"> Thêm Học viên </h1>
-        </header><!-- /.page-title-bar -->
-        <!-- .page-section -->
+            <h1 class="page-title">Thêm Học Viên</h1>
+        </header>
+
         <div class="page-section">
-            <div class="card-deck-xl">
-                <div class="card card-fluid">
-                    <!-- .card-body -->
+            <form action="{{ route('students.store') }}" method="post" enctype="multipart/form-data">
+
+                @csrf
+                <div class="card">
                     <div class="card-body">
+                        <legend>Thông tin cơ bản</legend>
+                        <div class="form-group">
+                            <label for="tf1">Họ tên<abbr name="Trường bắt buộc">*</abbr></label> <input name="name"
+                                type="text" class="form-control" id="" placeholder="Nhập tên học viên">
+                            <small id="" class="form-text text-muted"></small>
+                            @if ($errors->any())
+                                <p style="color:red">{{ $errors->first('name') }}</p>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="tf1">Email<abbr name="Trường bắt buộc">*</abbr></label> <input name="email"
+                                type="text" class="form-control" id="" placeholder="Nhập Email">
+                            <small id="" class="form-text text-muted"></small>
+                            @if ($errors->any())
+                                <p style="color:red">{{ $errors->first('email') }}</p>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="tf1">Password<abbr name="Trường bắt buộc">*</abbr></label> <input
+                                name="password" type="text" class="form-control" id=""
+                                placeholder="Nhập password">
+                            <small id="" class="form-text text-muted"></small>
+                            @if ($errors->any())
+                                <p style="color:red">{{ $errors->first('password') }}</p>
+                            @endif
+                        </div>
 
-                        <!-- form -->
-                        <form method="post" action="{{ route('students.store') }}">
-                            @csrf
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1">Hình ảnh </label>
+                            <input type="file" name="image" class="form-control-file file" >
+                            <img id="showImage" class="rounded image_show w-100"
+                                            src="">
+                            <small id="" class="form-text text-muted"></small>
+                            @if ($errors->any())
+                                <p style="color:red">{{ $errors->first('image') }}</p>
+                            @endif
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                $('.file').change(function(e) {
+                                    var reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        $('#showImage').attr('src', e.target.result);
+                                        console.log(e);
+                                    }
+                                    reader.readAsDataURL(e.target.files['0']);
+                                });
+                            });
+                        </script>
 
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Họ Và Tên</label>
-                                <input id="flatpickr01" type="text" name="name" class="form-control"
-                                    data-toggle="flatpickr">
-
-                                @error('name')
-                                    <p style="color:red">*{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <!-- /.form-group -->
-
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr02">Email</label>
-                                <input id="flatpickr02" type="email" name="email" class="form-control"
-                                    data-toggle="flatpickr" data-enable-time="true">
-
-                                @error('email')
-                                    <p style="color:red">*{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <!-- /.form-group -->
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr03">Mật Khẩu</label>
-                                <input id="flatpickr03" type="password" name="password" class="form-control"
-                                    data-toggle="flatpickr" data-alt-input="true">
-
-                                @error('password')
-                                    <p style="color:red">*{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr03">Ảnh</label>
-                                <input id="flatpickr03" type="file" name="image" class="form-control"
-                                    data-toggle="flatpickr" data-alt-input="true">
-
-                                @error('image')
-                                    <p style="color:red">*{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <!-- /.form-group -->
-
-
-                           
-                                {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                                <button type="submit"class="btn btn-success">Thêm</button>
-                                <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Hủy</button>
-                        </form>
+                        <div class="form-actions">
+                            <a class="btn btn-secondary float-right" href="{{ route('students.index') }}">Hủy</a>
+                            <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- /form -->
-        </div><!-- /.card-body -->
-        <!-- /.card-deck-xl -->
-    @endsection
+            </form>
+        </div>
+    </div>
+@endsection

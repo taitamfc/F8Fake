@@ -12,4 +12,12 @@ class Student extends Model
     function course(){
         return $this->belongsToMany(Course::class );
     }
+
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('name', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
 }

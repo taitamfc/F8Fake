@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 
 use Illuminate\Http\Request;
 
@@ -17,8 +19,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::get();
-        return view('Admin.students.list',compact('students'));
+        // $students = Student::get();
+        $students = Student::orderBy('created_at', 'DESC')->search()->paginate(3);
+        return view('Admin.students.index', compact('students'));
     }
 
     /**
@@ -29,59 +32,35 @@ class StudentController extends Controller
     public function create()
     {
         $students = Student::get();
-        return view('Admin.students.add',compact('students'));
+        return view('Admin.students.add', compact('students'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        $request->validate(
-            [
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-                'image' => 'required'
-            ],
-            [
-                'name.required' => 'Yêu cầu nhập Họ tên',
-                'email.required' => 'Yêu cầu nhập email',
-                // 'email.email' => 'email đã tồn tại',
-                'password.required' => 'Yêu cầu nhập mật khẩu',
-                'image.required' => 'Yêu cầu thêm ảnh'
-            ]
-        );
-        
         $students = new Student();
-        $students->name = $request->input('name');
-        $students->email = $request->input('email');
-        $students->password = $request->input('password');
-
-        $get_image = $request->image;
-        $path = 'AdminTheme/public/uploads/student/';
-        $get_name_image = $get_image->getClientOriginalName();
-        $name_image = current(explode('.', $get_name_image));
-        $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-        $get_image->move($path, $new_image);
-        $students->image = $new_image;
-        $request['login_image'] = $new_image;
-
-//         $students = $request->input('image');
-// $photo = $request->file('image')->getClientOriginalName();
-// $destination = base_path() . '/AdminTheme/public/uploads/student/';
-// $request->file('image')->move($destination, $photo);
-
+        $students->name = $request->name;
+        $students->email = $request->email;
+        $students->password = $request->password;
+        
+        if ($request->hasFile('image')) {
+            $file = $request->image;
+            $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
+            $fileName = time(); //45678908766 tạo tên file theo thời gian
+            $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+            $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/images với tê mới là $newFileName
+            $students->image = $path;
+        }
         $students->save();
 
         Session::flash('success', 'Tạo mới thành công');
         //tao moi xong quay ve trang danh sach task
-        return redirect()->route('students.list');
+        return redirect()->route('students.index');
     }
-
     /**
      * Display the specified resource.
      *
@@ -103,7 +82,7 @@ class StudentController extends Controller
     {
         $students = Student::findOrFail($id);
 
-        return view('Admin.students.edit',compact('students'));
+        return view('Admin.students.edit', compact('students'));
     }
 
     /**
@@ -113,9 +92,26 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateStudentRequest $request, $id)
     {
-        //
+        
+        $students = Student::findOrFail($id);
+        $students->name = $request->name;
+        $students->email = $request->email;
+        $students->password = $request->password;
+        if ($request->hasFile('image')) {
+            $file = $request->image;
+            $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
+            $fileName = time(); //45678908766 tạo tên file theo thời gian
+            $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+            $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/images với tê mới là $newFileName
+            $students->image = $path;
+        }
+        $students->save();
+        //dung session de dua ra thong bao
+        Session::flash('success', 'Cập nhật thành công');
+        //tao moi xong quay ve trang danh sach product
+        return redirect()->route('students.index');
     }
 
     /**
@@ -126,6 +122,16 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::findOrFail($id);
+        $image = $student->image;
+        $image = 'public/uploads/student/' . $student->image;
+        if (file_exists($image)) {
+            unlink($image);
+        }
+        $student->delete();
+        //dung session de dua ra thong bao
+        Session::flash('success', 'Xóa thành công');
+        //xoa xong quay ve trang danh sach student
+        return redirect()->route('students.index');
     }
 }
