@@ -29,7 +29,13 @@
                     </a>
                     {{-- @endif --}}
                 </div><!-- /.btn-toolbar -->
-            </div><!-- /title and toolbar -->
+            </div>
+            @if (Session::has('success'))
+            <p class="text-success">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                {{ Session::get('success') }}
+            </p>
+        @endif<!-- /title and toolbar -->
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">

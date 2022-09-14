@@ -84,7 +84,7 @@ class GroupController extends Controller
         $groups->description = $request->description;
         $groups->save();
         //dung session de dua ra thong bao
-        Session::flash('success', 'Tạo mới thành công');
+        Session::flash('success', 'Sửa thành công');
         return redirect()->route('groups.index');
     }
 
@@ -100,6 +100,7 @@ class GroupController extends Controller
         // dd($id);
         $groups = Group::findOrFail($id);
         $groups->delete();
+        Session::flash('success', 'Xóa thành công');
         return redirect()->route('groups.index');
     }
 }
