@@ -28,10 +28,10 @@ class userSeeder extends Seeder
             "avatar" => "h",
             "bio" => "a",
             "group_id" => 1,
-            "avatar_url" => "",
+            "avatar_url" => "1",
             "cover_url" => '1',
-            "is_comment_blocked" => "",
-            "is_blocked" => ""
+            "is_comment_blocked" => "1",
+            "is_blocked" => "1"
         ]);
     }
 }
