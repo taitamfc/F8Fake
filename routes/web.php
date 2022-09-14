@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TrackStepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -14,39 +15,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function(){
+Route::get('/', function () {
     return view('Admin.master');
 });
-// Route::get('/index', function () {
-//     // echo '<br>'.route('index');
-//     // echo '<br>'.route('create');
-
-//     // goi view
-//     $params = [
-//         'first_name' => 'Nguyen Van',
-//         'last_name' => 'A',
-//     ];
-//     return view('welcome', $params);
-
-// })->name('index');
-
-// Route::get('/create1234',function(){
-//     dd('Trang them moi');
-// })->name('create');
-
-// // Nhan du lieu tu form them moi
-// Route::post('/store',function(Request $request){
-//     dd( $request->all() );
-// });
-
-// Route::get('/edit/{id}', function( $id ){
-//     dd('Trang chinh sua' . $id);
-// });
-
-// // Nhan du lieu tu form cap nhat
-// Route::put('/update/{id}',function(Request $request, $id){
-//     dd( $request->all() );
-// });
-// Route::delete('/destroy/{id}',function($id){
-
-// });
+Route::get('groups/trash', [GroupController::class, 'trashedItems'])->name('groups.trash');
+// Route::get('groups/{id}/destroy', [GroupController::class, 'destroy'])->name('groups.destroy');
+Route::resource('groups', GroupController::class);
+//  Route::prefix('branches')->group(function () {
+// Route::delete('/force_destroy/{id}', [BranchController::class, 'force_destroy'])->name('branches.force_destroy');
+// Route::get('/restore/{id}', [BranchController::class, 'restore'])->name('branches.restore');
+    // });
