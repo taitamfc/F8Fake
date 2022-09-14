@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TrackStepController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 Route::get('/', function(){
     return view('Admin.master');
 });
+Route::resource('users', UserController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');
