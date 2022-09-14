@@ -31,10 +31,10 @@ class StoreGroupRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên Group',
-            'description.required' => 'Vui lòng nhập mô tả',
-            'name.min' => 'Tên Group quá ngắn',
-            'description.min' => 'Mô tả quá ngắn',
+            'name.required' => 'Trường bắt buộc',
+            'description.required' => 'Trường bắt buộc',
+            'name.min' => 'Trường quá ngắn',
+            'description.min' => 'Trường quá ngắn',
         ];
     }
 }
