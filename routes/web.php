@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\TrackStepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -14,9 +15,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function(){
-    return view('Admin.master');
-});
+// Route::get('/', function(){
+//     return view('Admin.banners.index');
+// });
+
+// Route::prefix('banners')->group(function () {
+//     Route::get('/', [BannerController::class, 'index'])->name('banners.index');
+//     Route::get('/create', [BannerController::class, 'create'])->name('banners.create');
+//     Route::post('/', [BannerController::class, 'store'])->name('banners.store');
+//     Route::get('/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
+//     Route::post('/{id}', [BannerController::class, 'update'])->name('banners.update');
+//     Route::get('/{id}/destroy', [BannerController::class, 'destroy'])->name('banners.destroy');
+// });
+
+Route::resource('banners', BannerController::class);
+
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');

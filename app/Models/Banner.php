@@ -9,4 +9,12 @@ class Banner extends Model
 {
     use HasFactory;
     protected $table = 'banners';
+
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('placement', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
 }
