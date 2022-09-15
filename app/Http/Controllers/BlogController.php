@@ -76,7 +76,6 @@ class BlogController extends Controller
         $blog->save();
         Session::flash('succes', 'Sửa thành công');
         return redirect()->route('blogs.index');
-
     }
     public function destroy($id)
     {
