@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 Route::get('/', function(){
     return view('Admin.master');
 });
+Route::resource('tracksteps', TrackStepController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');

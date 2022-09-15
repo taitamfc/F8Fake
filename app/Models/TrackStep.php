@@ -17,8 +17,13 @@ class TrackStep extends Model
     {
         return $this->belongsTo(Step::class);
     }
-    
-
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('step_type', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
     
 
 }
