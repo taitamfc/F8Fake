@@ -15,5 +15,5 @@ class Comment extends Model
     function course(){
         return $this->belongsTo(Course::class);
     }
-
+    
 }
