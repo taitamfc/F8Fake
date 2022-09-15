@@ -19,20 +19,20 @@
                             <label class="">Tên cấp độ</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[name]"
+                            <div class="input text"><input type="text" name="title"
                                     class="form-control filter-column f-name"
-                                     id="name" />
+                                     value="{{ $f_title }}" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">id</label>
+                            <label class="">Mã</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[address]"
+                            <div class="input text"><input type="text" name="id"
                                     class="form-control filter-column f-name"
-                                    id="address" /></div>
+                                    value="{{ $f_id }}" /></div>
                         </div>
                     </div>
 

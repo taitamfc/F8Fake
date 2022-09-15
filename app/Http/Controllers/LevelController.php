@@ -18,10 +18,34 @@ class LevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $levels = Level::search()->paginate(5);
-        return view('Admin.levels.index', compact('levels')) ;
+        //Lấy params trên url
+        $key        = $request->key ?? '';
+        $title      = $request->title ?? '';
+        $id         = $request->id ?? '';
+
+        // thực hiện query
+        $query = Level::query(true);
+        if($title){
+            $query->where('title','LIKE','%'.$title.'%');
+        }
+        if($id){
+            $query->where('id',$id);
+        }
+        if($key){
+            $query->orWhere('id',$key);
+            $query->orWhere('title','LIKE','%'.$key.'%');
+        }
+        $levels = $query->paginate(5);
+
+        $params = [
+            'f_id'        => $id,
+            'f_title'     => $title,
+            'f_key'       => $key,
+            'levels'    => $levels,
+        ];
+        return view('Admin.levels.index', $params) ;
     }
 
     /**
