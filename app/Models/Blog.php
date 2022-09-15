@@ -12,4 +12,12 @@ class Blog extends Model
     function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function scopeSearch($query)
+    {
+        if($key = request()->key){
+        $query = $query->where('parent_id','like','%'.$key.'%');
+    }
+    return $query;
+}
 }
