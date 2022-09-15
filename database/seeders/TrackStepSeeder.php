@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class track_stepSeeder extends Seeder
+class TrackStepSeeder extends Seeder
 {
     /**
      * Run the database seeds.
