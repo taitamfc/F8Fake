@@ -96,7 +96,17 @@
         <!-- /.wrapper -->
       </main><!-- /.app-main -->
     </div><!-- /.app -->
+
     <!-- BEGIN BASE JS -->
+    <script type="text/javascript">
+      
+      CKEDITOR.replace('noidung_chapter',options);
+      CKEDITOR.replace('ckeditor_truyen');
+      CKEDITOR.replace('ckeditor_sach');
+
+
+  </script>
+    <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->

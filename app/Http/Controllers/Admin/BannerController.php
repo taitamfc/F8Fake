@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 class BannerController extends Controller
 {
     public function index(){
-        $banners = Banner::orderBy('created_at', 'DESC')->search()->paginate(2);
+        $banners = Banner::orderBy('created_at', 'DESC')->search()->paginate(4);
         return view('Admin.banners.index', compact('banners'));
     }
 

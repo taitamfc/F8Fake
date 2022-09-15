@@ -13,7 +13,7 @@ class Banner extends Model
     public function scopeSearch($query)
     {
         if ($key = request()->key) {
-            $query = $query->where('placement', 'like', '%' . $key . '%');
+            $query = $query->where('title', 'like', '%' . $key . '%');
         }
         return $query;
     }

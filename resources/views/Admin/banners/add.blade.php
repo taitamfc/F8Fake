@@ -21,7 +21,7 @@
                     <legend>Thông tin cơ bản</legend>
                     <div class="form-group">
                         <label for="tf1">Vị trí<abbr name="Trường bắt buộc">*</abbr></label> <input name="placement"
-                            type="text" class="form-control" id="" placeholder="Nhập tên vị trí">
+                            type="text" class="form-control" value= "{{old('placement')}}"  placeholder="Nhập tên vị trí">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('placement') }}</p>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">loại<abbr name="Trường bắt buộc">*</abbr></label> <input name="type"
-                            type="text" class="form-control" id="" placeholder="Nhập loại">
+                            type="text" class="form-control" value= "{{old('type')}}" id="" placeholder="Nhập loại">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('type') }}</p>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Ảnh bìa<abbr name="Trường bắt buộc">*</abbr></label> <input name="banner"
-                            type="file" class="form-control" id="">
+                            type="file" value= "{{old('banner')}}" class="form-control" id="">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('banner') }}</p>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Tiêu đề<abbr name="Trường bắt buộc">*</abbr></label> <input name="title"
-                            type="text" class="form-control" id="" placeholder="Nhập Tiêu đề">
+                            type="text" class="form-control" value= "{{old('title')}}" id="" placeholder="Nhập Tiêu đề">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('title') }}</p>
@@ -53,15 +53,16 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Mô tả<abbr name="Trường bắt buộc">*</abbr></label> <input name="description"
-                            type="text" class="form-control" id="" placeholder="Nhập mô tả">
+                            type="text" class="form-control" value= "{{old('description')}}" id="ckeditor_sach" placeholder="Nhập mô tả">
                         <small id="" class="form-text text-muted"></small>
+                        {{-- <textarea name="tomtat" class="form-control" id="ckeditor_truyen" rows="5" style="resize: none">{{$truyen->tomtat}}</textarea> --}}
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('description') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="tf1">Chi tiết<abbr name="Trường bắt buộc">*</abbr></label> <input name="cta_title"
-                            type="text" class="form-control" id="" placeholder="Nhập chi tiết">
+                            type="text" class="form-control" value= "{{old('cta_title')}}" id="" placeholder="Nhập chi tiết">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('cta_title') }}</p>
@@ -69,7 +70,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Link<abbr name="Trường bắt buộc">*</abbr></label> <input name="link_to"
-                            type="text" class="form-control" id="" placeholder="Nhập link">
+                            type="text" class="form-control" value= "{{old('link_to')}}" id="" placeholder="Nhập link">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('link_to') }}</p>
@@ -77,7 +78,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Quyền ưu tiên<abbr name="Trường bắt buộc">*</abbr></label> <input
-                            name="priority" type="text" class="form-control" id=""
+                            name="priority" type="text" value= "{{old('priority')}}" class="form-control" id=""
                             placeholder="Nhập quyền ưu tiên">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
@@ -86,7 +87,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Kỳ Hạn<abbr name="Trường bắt buộc">*</abbr></label> <input name="expires"
-                            type="text" class="form-control" id="" placeholder="Nhập kỳ hạn">
+                            type="text" class="form-control" value= "{{old('expires')}}" id="" placeholder="Nhập kỳ hạn">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('expires') }}</p>

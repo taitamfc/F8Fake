@@ -77,13 +77,13 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table">
+                    <table  class="table">
                         <thead>
                             <tr>
                                 <th> # </th>
+                                <th> Ảnh bìa </th>
                                 <th> Vị trí </th>
                                 <th> loại </th>
-                                <th> Ảnh bìa </th>
                                 <th> Tiêu đề </th>
                                 <th> Mô tả </th>
                                 <th> </th>
@@ -93,11 +93,11 @@
                             @foreach ($banners as $banner)
                                 <tr>
                                     <td class="align-middle"> {{ $banner->id }} </td>
+                                    <td>
+                                        <img style="width:100px; height:70px" src="{{ asset($banner->banner) }}">
+                                    </td>
                                     <td class="align-middle"> {{ $banner->placement }} </td>
                                     <td class="align-middle"> {{ $banner->type }} </td>
-                                    <td>
-                                        <img style="width:80px; height:80px" src="{{ asset($banner->banner) }}">
-                                    </td>
                                     <td class="align-middle"> {{ $banner->title }} </td>
                                     <td class="align-middle"> {{ $banner->description }} </td>
                                     <td>
