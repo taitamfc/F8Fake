@@ -22,7 +22,7 @@
                         <legend>Thông tin cơ bản</legend>
                         <div class="form-group">
                             <label for="tf1">Họ tên<abbr name="Trường bắt buộc">*</abbr></label> <input name="name"
-                                type="text" class="form-control" id="" placeholder="Nhập tên học viên">
+                                type="text" class="form-control" id="" value="{{old('name')}}" placeholder="Nhập tên học viên">
                             <small id="" class="form-text text-muted"></small>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('name') }}</p>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tf1">Email<abbr name="Trường bắt buộc">*</abbr></label> <input name="email"
-                                type="text" class="form-control" id="" placeholder="Nhập Email">
+                                type="text" class="form-control" id="" value="{{old('email')}}" placeholder="Nhập Email">
                             <small id="" class="form-text text-muted"></small>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('email') }}</p>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tf1">Password<abbr name="Trường bắt buộc">*</abbr></label> <input
-                                name="password" type="text" class="form-control" id=""
+                                name="password" type="password"  value="{{old('password')}}" class="form-control" id=""
                                 placeholder="Nhập password">
                             <small id="" class="form-text text-muted"></small>
                             @if ($errors->any())
@@ -48,7 +48,7 @@
 
                         <div class="mb-3">
                             <label for="exampleInputEmail1">Hình ảnh </label>
-                            <input type="file" name="image" class="form-control-file file" >
+                            <input type="file" name="image" class="form-control-file file"   >
                             <img id="showImage" class="rounded image_show w-100"
                                             src="">
                             <small id="" class="form-text text-muted"></small>
