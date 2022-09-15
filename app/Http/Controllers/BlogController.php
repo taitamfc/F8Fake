@@ -65,8 +65,6 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
-
-        // dd($blog);
         return view('blogs.edit', compact('blog'));
     }
     public function update(UpdateBlogRequest $request ,$id)
