@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class GroupController extends Controller
 {
@@ -16,7 +17,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::orderBy('created_at', 'DESC')->paginate(3);
+        $groups = Group::orderBy('created_at', 'DESC')->search()->paginate(3);
         return view('Admin.groups.index', compact('groups'));
     }
 

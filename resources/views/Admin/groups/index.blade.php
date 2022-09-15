@@ -31,11 +31,12 @@
                 </div><!-- /.btn-toolbar -->
             </div>
             @if (Session::has('success'))
-            <p class="text-success">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                {{ Session::get('success') }}
-            </p>
-        @endif<!-- /title and toolbar -->
+                <p class="text-success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    {{ Session::get('success') }}
+                </p>
+            @endif
+            <!-- /title and toolbar -->
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">
@@ -48,9 +49,11 @@
                             <a class="nav-link active " href="{{ route('groups.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="
+                            <a class="nav-link"
+                                href="
                             {{ route('groups.trash') }}
-                            ">Thùng Rác</a>
+                            ">Thùng
+                                Rác</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
@@ -61,20 +64,30 @@
                         <!-- .input-group -->
                         <!-- /.input-group -->
                         <form action="" method="GET" id="form-search">
-                            <!-- .nav-tabs -->
+                            @csrf
                             <div class="input-group input-group-alt">
-                                <!-- .input-group-prepend -->
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
                                         data-target="#modalFilterColumns">Tìm nâng cao</button>
-                                </div><!-- /.input-group-prepend -->
-                                <!-- .input-group -->
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                    </div><input type="text" class="form-control" placeholder="Search record">
-                                </div><!-- /.input-group -->
+
+                                </div>
+                                <div class="input-group has-clearable">
+                                    <button type="button" class="close trigger-submit trigger-submit-delay"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                    </button>
+                                    <div class="input-group-prepend trigger-submit">
+                                        <span class="input-group-text"><span class="fas fa-search"></span></span>
+                                    </div>
+                                    <input type="text" class="form-control" name="key" value=""
+                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
+                                        type="submit">Tìm kiếm</button>
+                                </div>
                             </div>
+                            <!-- modalFilterColumns  -->
                             @include('Admin.groups.modals.modalFilterColumns')
                         </form>
                     </div><!-- /.form-group -->
