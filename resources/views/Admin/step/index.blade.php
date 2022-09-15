@@ -75,6 +75,12 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.step.modals.modalFilterColumns')
+                            @if (Session::has('success'))
+                            <p class="text-success">
+                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                {{ Session::get('success') }}</div>
+                            </p>
+                        @endif
                         </form>
                         <!-- .input-group -->
                         <!-- /.input-group -->
@@ -84,17 +90,17 @@
                         <thead class="thead-">
                             <tr>
                                 <th width="50px"> # </th>
-                                <th width="100px"> Tiêu đề </th>
-                                <th width="100px"> Nội dung </th>
-                                <th width="100px"> Mô tả </th>
-                                <th width="100px"> Thời gian </th>
-                                <th width="100px"> Loại video </th>
-                                <th width="100px"> Tên chính </th>
-                                <th width="100px"> Hình ảnh </th>
-                                <th width="100px"> video </th>
-                                <th width="100px"> Liên kết ảnh </th>
-                                <th width="100px"> Liên kết video </th>
-                                <th width="50px"> Chức năng </th>
+                                <th width="150px"> Tiêu đề </th>
+                                <th width="150px"> Nội dung </th>
+                                <th width="150px"> Mô tả </th>
+                                {{-- <th width="20px"> Thời gian </th> --}}
+                                {{-- <th width="50px"> Loại video </th> --}}
+                                <th width="150px"> Tên chính </th>
+                                {{-- <th width="30px"> Video </th> --}}
+                                {{-- <th width="10px"> Liên kết ảnh </th>
+                                <th width="10px"> Liên kết video </th> --}}
+                                <th width="50px"> Hình ảnh </th>
+                                <th width="100px"> Chức năng </th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
@@ -106,29 +112,21 @@
                                 <td>{{ $step->title }}</td>
                                 <td>{{ $step->content }}</td>
                                 <td>{{ $step->description }}</td>
-                                <td>{{ $step->duration }}</td>
-                                <td>{{ $step->video_type }}</td>
+                                {{-- <td>{{ $step->duration }}</td> --}}
+                                {{-- <td>{{ $step->video_type }}</td> --}}
                                 <td>{{ $step->original_name }}</td>
-                                <td>{{ $step->video }}</td>
-                                <td>{{ $step->image_url }}</td>
-                                <td>{{ $step->video_url }}</td>
+                                {{-- <td>{{ $step->video }}</td> --}}
+                                {{-- <td>{{ $step->image_url }}</td>
+                                <td>{{ $step->video_url }}</td> --}}
                                 <td>
-                                    @if ($step->image)
-                                        <img src="{{ asset('public/AdminTheme/uploads/steps/' . $step->image) }}"
-                                            alt="" style="width: 80px; height: 80px">
-                                    @else
-                                        {{ 'Chưa có ảnh' }}
-                                    @endif
-                                </td>
-                                <td>
-                                    <img style="with:100px; height:100px" src="{{ asset($step->image) }}">
+                                    <img style="width:150px; height:100px" src="{{ asset($step->image) }}">
                                 </td>
                                 <td>
                                     <a href="{{ route('step.edit', $step->id) }}"
                                         class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
                                     <form action="{{ route('step.destroy', $step->id) }}" style="display:inline"
                                         method="post">
-                                        <button onclick="return confirm('Xóa {{ $step->name }} ?')"
+                                        <button onclick="return confirm('Bạn có muốn xóa {{ $step->name }}không?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf

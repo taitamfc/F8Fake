@@ -58,8 +58,8 @@
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Hình ảnh</label> <input id="flatpickr01"
-                                    type="text" name= "image" value="{{ $steps->image }}" class="form-control " data-toggle="flatpickr">
-
+                                    type="file" name= "image" class="form-control " data-toggle="flatpickr">
+                                    <img src="{{asset($steps->image) }}" alt="">
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Video</label> <input id="flatpickr01"

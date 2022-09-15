@@ -75,6 +75,18 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.track.modals.modalFilterColumns')
+                            @if (Session::has('success'))
+                                <p class="text-success">
+                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{ Session::get('success') }}</div>
+                                </p>
+                            @endif
+                            @if (Session::has('failed'))
+                                <p class="text-danger">
+                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{ Session::get('failed') }}</div>
+                                </p>
+                            @endif
                         </form>
                         <!-- .input-group -->
                         <!-- /.input-group -->
@@ -106,7 +118,7 @@
                                         class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
                                     <form action="{{ route('track.destroy', $track->id) }}" style="display:inline"
                                         method="post">
-                                        <button onclick="return confirm('Xóa {{ $track->name }} ?')"
+                                        <button onclick="return confirm('Bạn có muốn xóa {{ $track->name }}không?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf

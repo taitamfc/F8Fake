@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TrackRequest;
 use App\Models\Track;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class TrackController extends Controller
 {
@@ -40,8 +42,17 @@ class TrackController extends Controller
      */
     public function store(TrackRequest $request)
     {
-        Track::create($request->all());
-        return redirect()->route('track.index');
+
+        try {
+            Track::create($request->all());
+            Session::flash('success','Thêm mới thành công');
+            return redirect()->route('track.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('failed','Thêm mới thất bại');
+            return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+        }
     }
 
     /**
@@ -65,6 +76,7 @@ class TrackController extends Controller
     {
         $tracks = Track::all();
         $tracks = Track::find($id);
+        Session::flash('success','Sửa thành công');
         return view('Admin.track.edit', compact('tracks'));
     }
 
@@ -78,8 +90,9 @@ class TrackController extends Controller
     public function update(Request $request, Track $track)
     {
         $track->update($request->all());
-
+        Session::flash('success','Cập nhật thành công');
         return redirect()->route('track.index');
+
     }
 
     /**
@@ -92,6 +105,7 @@ class TrackController extends Controller
     {
         $track = $tracks->find($id);
         $track->delete();
+        Session::flash('success','Xóa thành công');
         return redirect()->route('track.index');
     }
 }

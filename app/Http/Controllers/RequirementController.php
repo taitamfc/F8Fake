@@ -6,6 +6,7 @@ use App\Http\Requests\RequirementRequest;
 use App\Models\Requirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class RequirementController extends Controller
 {
@@ -42,7 +43,9 @@ class RequirementController extends Controller
     public function store(RequirementRequest $request)
     {
         Requirement::create($request->all());
+        Session::flash('success','Thêm mới thành công');
         return redirect()->route('requirement.index');
+
     }
 
     /**
@@ -80,6 +83,7 @@ class RequirementController extends Controller
     public function update(Request $request , Requirement $requirement)
     {
         $requirement->update($request->all());
+        Session::flash('success','Cập nhật thành công');
         return redirect()->route('requirement.index');
     }
 
@@ -93,6 +97,7 @@ class RequirementController extends Controller
     {
         $requirement = $requirements->find($id);
         $requirement->delete();
+        Session::flash('success','Xóa thành công');
         return redirect()->route('requirement.index');
     }
 }

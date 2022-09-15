@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Thời gian</label> <input id="flatpickr01"
-                                    type="datetime" name="duration" value="{!! old('duration') !!}"
+                                    type="datetime-local" name="duration" value="{!! old('duration') !!}"
                                     class="form-control @error('duration') @enderror" data-toggle="flatpickr">
                                 @error('duration')
                                     <div style="color: red">*{{ $message }}</div>
@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <p>Loại video</p>
                                 <select class="form-select @error('video_type') @enderror" name="video_type"
-                                    value="{!! old('video_type') !!}" aria-label="Default select example">
+                                    aria-label="Default select example">
                                     <option selected>--Vui lòng chọn--</option>
                                     <option>1080p</option>
                                     <option>720p</option>
@@ -97,19 +97,20 @@
                             <div class="form-group">
                                 <p>Video</p>
                                 <select class="form-select @error('video') @enderror" name="video"
-                                    value="{!! old('video') !!}" aria-label="Default select example">
+                                    aria-label="Default select example">
                                     <option selected>--Vui lòng chọn--</option>
                                     <option>Youtube</option>
                                     <option>Facebook</option>
                                     <option>Tiktok</option>
                                     {{-- @foreach ($steps as $step)
-                                        <option value="">{{ $step->video }}>{{ $step->name }}</option>
+                                        <option value="">{{ $step->video }}{{ $step->name }}</option>
                                     @endforeach --}}
                                     @error('video')
                                         <div style="color: red">*{{ $message }}</div>
                                     @enderror
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Liên kết ảnh</label> <input id="flatpickr01"
                                     type="text" name="image_url" class="form-control @error('image_url') @enderror"

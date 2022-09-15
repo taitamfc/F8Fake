@@ -75,6 +75,12 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.requirement.modals.modalFilterColumns')
+                            @if (Session::has('success'))
+                            <p class="text-success">
+                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                {{ Session::get('success') }}</div>
+                            </p>
+                        @endif
                         </form>
                         <!-- .input-group -->
                         <!-- /.input-group -->
@@ -102,7 +108,7 @@
                                         class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
                                     <form action="{{ route('requirement.destroy', $requirement->id) }}" style="display:inline"
                                         method="post">
-                                        <button onclick="return confirm('Xóa {{ $requirement->name }} ?')"
+                                        <button onclick="return confirm('Bạn có muốn xóa {{ $requirement->name }}không?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf
