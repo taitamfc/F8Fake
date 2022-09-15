@@ -9,11 +9,9 @@
                     </li>
                 </ol>
             </nav>
-            <!-- <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button> -->
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto">Quản Lý Học viên</h1>
                 <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('student_create')) --}}
                     <a href="{{ route('students.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm Mới</span>
@@ -22,9 +20,14 @@
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
                     </a>
-                    {{-- @endif --}}
                 </div>
             </div>
+            @if (Session::has('success'))
+                <p class="text-success">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    {{ Session::get('success') }}
+                </p>
+            @endif
         </header>
         <div class="page-section">
             <div class="card card-fluid">
@@ -34,7 +37,7 @@
                             <a class="nav-link active " href="{{ route('students.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('students.trash') }}">Thùng Rác</a>
+                            <a class="nav-link" href="">Thùng Rác</a>
                         </li>
                     </ul>
                 </div>
@@ -64,19 +67,11 @@
                                             type="submit">Tìm kiếm</button>
                                     </div>
                                 </div>
-                                <!-- modalFilterColumns  -->
                                 @include('Admin.students.modals.modalFilterColumns')
                             </form>
-                            <!-- modalFilterColumns  -->
-                            {{-- @include('admin.students.modals.modalSaveSearch') --}}
                         </div>
                     </div>
-                    {{-- @if (Session::has('success'))
-            <div class="alert alert-success">{{session::get('success')}}</div>
-            @endif
-            @if (Session::has('error'))
-            <div class="alert alert-danger">{{session::get('error')}}</div>
-            @endif --}}
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-">
@@ -90,53 +85,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- tr -->
-                                @foreach ($students as $student)
+                                @foreach ($students as $key => $student)
                                     <tr>
-                                        <th scope="row">{{ $student->id }}</th>
+                                        <th scope="row">{{ ++$key }}</th>
                                         <td>
                                             <div class="rounded-circle ">
                                                 <img class=" image_photo rounded-circle "
                                                     src="{{ !empty($student->image) ? asset($student->image) : asset('assets/images/no_image.png') }}"style="width:60px; height:60px">
                                             </div>
                                         </td>
-
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->password }}</td>
-                                        {{-- <td>
-                                    @if ($student->image)
-                                        <img src="{{ asset('AdminTheme/public/uploads/student/' . $student->image) }}" alt=""
-                                            style="width: 80px; height: 80px">
-                                    @else
-                                        {{ 'Chưa có ảnh' }}
-                                    @endif
-                                </td> --}}
-                                        {{-- <td>
-                                            <img  src="{{ asset($student->image) }}" style="width:80px; height:80px">
-                                        </td> --}}
-                                       
                                         <td>
                                             <a href="{{ route('students.edit', $student->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="fa fa-pencil-alt"></i></a>
-                                            <a href="{{ route('students.destroy', $student->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></a>
+                                            <form action="{{ route('students.destroy', $student->id) }}"
+                                                style="display:inline" method="post">
+                                                <button onclick="return confirm('Bạn chắc chắn muốn xóa? ?')"
+                                                    class="btn btn-sm btn-icon btn-secondary"><i
+                                                        class="far fa-trash-alt"></i></button>
+                                                @csrf
+                                                @method('delete')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody><!-- /tbody -->
-                        </table><!-- /.table -->
+                            </tbody>
+                        </table>
                         {{ $students->onEachSide(5)->links() }}
-                        {{-- <div style="float:right">
-                    {{ $students->links() }}
-                </div> --}}
                     </div>
-                    <!-- /.table-responsive -->
-                    <!-- .pagination -->
-                </div><!-- /.card-body -->
+                </div>
             </div>
         </div>
     </div>
