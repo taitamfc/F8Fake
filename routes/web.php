@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\TrackStepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -16,6 +18,10 @@ use Illuminate\Http\Request;
 
 Route::get('/', function(){
     return view('Admin.master');
+});
+Route::prefix('admin')->group(function(){
+    Route::resource('levels', LevelController::class);
+    Route::resource('courses', CourseController::class);
 });
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
