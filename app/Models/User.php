@@ -24,6 +24,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('name', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
     /**
      * The attributes that are mass assignable.
      *

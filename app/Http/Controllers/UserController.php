@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {   
-        $users = User::orderBy('created_at', 'DESC')->paginate(3);
+        $users = User::orderBy('created_at', 'DESC')->search()->paginate(3);
         return view('Admin.users.index',compact('users'));
     }
 
@@ -126,9 +126,6 @@ class UserController extends Controller
         $users->cover_url = $request->cover_url;
         $users->is_comment_blocked = $request->is_comment_blocked;
         $users->is_blocked = $request->is_blocked;
-
-
-
         $users->save();
         Session::flash('success', 'Cập nhật thành công');
         return redirect()->route('users.index');
@@ -143,10 +140,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $users = User::findOrFail($id);
+        $image = str_replace('storage' , 'public', $users->avatar );;
+        Storage::delete($image);
         $users->destroy($id);
-        // return response()->json(['customer' => 'delete successFully']);
-
-        Storage::delete($users->avatar);
         //dung session de dua ra thong bao
         Session::flash('success', 'Xóa thành công');
         //xoa xong quay ve trang danh sach customer
