@@ -56,12 +56,12 @@
                                         <div class="input-group-prepend trigger-submit">
                                             <span class="input-group-text"><span class="fas fa-search"></span></span>
                                         </div>
-                                        <input type="text" class="form-control" name="query" value=""
+                                        <input type="text" class="form-control" name="key" value=""
                                             placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                     </div>
                                     <div class="input-group-append">
                                         <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
-                                            type="button">Lưu bộ lọc</button>
+                                            type="submit">Tìm kiếm</button>
                                     </div>
                                 </div>
                                 <!-- modalFilterColumns  -->
