@@ -30,12 +30,6 @@
                     {{-- @endif --}}
                 </div><!-- /.btn-toolbar -->
             </div>
-            @if (Session::has('success'))
-                <p class="text-success">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    {{ Session::get('success') }}
-                </p>
-            @endif
             <!-- /title and toolbar -->
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
@@ -89,6 +83,12 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.groups.modals.modalFilterColumns')
+                            @if (Session::has('success'))
+                                <p class="text-success">
+                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{ Session::get('success') }}</div>
+                                </p>
+                            @endif
                         </form>
                     </div><!-- /.form-group -->
 
