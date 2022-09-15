@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,10 +16,40 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $groups = Group::orderBy('created_at', 'DESC')->search()->paginate(3);
-        return view('Admin.groups.index', compact('groups'));
+        //Lấy params trên url
+        $key                    = $request->key ?? '';
+        $name                   = $request->name ?? '';
+        $id                     = $request->id ?? '';
+        $description            = $request->description ?? '';
+        // thực hiện query
+        $query = Group::query(true);
+        
+        if($name){
+            $query->where('name','LIKE','%'.$name.'%');
+        }
+        if($description){
+            $query->where('description','LIKE','%'.$description.'%');
+        }
+        if($id){
+            $query->where('id',$id);
+        }
+        if($key){
+            $query->orWhere('id',$key);
+            $query->orWhere('name','LIKE','%'.$key.'%');
+        }
+        //Phân trang
+        $groups = $query->paginate(3);
+
+        $params = [
+            'f_id'           => $id,
+            'f_name'         => $name,
+            'f_key'          => $key,
+            'groups'         => $groups,
+            'description'    => $description,
+        ];
+        return view('Admin.groups.index', $params);
     }
 
     /**
@@ -95,7 +126,7 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   
+
     public function destroy($id)
     {
         // dd($id);

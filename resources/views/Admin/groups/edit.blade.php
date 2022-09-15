@@ -32,8 +32,9 @@
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('description') }}</p>
                             @endif
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Sửa</button>
+                            <div class="form-actions">
+                                <a class="btn btn-secondary float-right" href="{{route('groups.index')}}">Hủy</a>
+                                <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
                             </div>
                         </form>
                     </div>

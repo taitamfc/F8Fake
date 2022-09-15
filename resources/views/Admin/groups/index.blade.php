@@ -73,7 +73,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value=""
+                                    <input type="text" class="form-control" name="key" value="{{$f_key}}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -113,7 +113,7 @@
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
                                         <form action="{{ route('groups.destroy', $group->id) }}" style="display:inline"
                                             method="post">
-                                            <button onclick="return confirm('Xóa {{ $group->name }} ?')"
+                                            <button onclick="return confirm('Bạn chắc chắn muốn xóa {{ $group->name }} ?')"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="far fa-trash-alt"></i></button>
                                             @csrf
