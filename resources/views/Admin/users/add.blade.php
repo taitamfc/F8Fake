@@ -45,7 +45,7 @@
                             @endif
 
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">User Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Tài Khoản</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{ old('username') }}" name="username"
                                     data-toggle="flatpickr">
                             </div>
@@ -53,7 +53,7 @@
                                 <p style="color:red">{{ $errors->first('username') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">First Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Họ</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{ old('first_name') }}" name="first_name"
                                     data-toggle="flatpickr">
                             </div>
@@ -61,7 +61,7 @@
                                 <p style="color:red">{{ $errors->first('first_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Last Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{ old('last_name') }}" name="last_name"
                                     data-toggle="flatpickr">
                             </div>
@@ -69,7 +69,7 @@
                                 <p style="color:red">{{ $errors->first('last_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Full Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Đầy Đủ</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{ old('full_name') }}" name="full_name"
                                     data-toggle="flatpickr">
                             </div>
@@ -77,9 +77,9 @@
                                 <p style="color:red">{{ $errors->first('full_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Avatar</label> <input id="flatpickr01"
-                                    type="file" class="form-control" value="{{ old('avatar') }}" name="avatar"
-                                    data-toggle="flatpickr">
+                                <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label>
+                                <input id="flatpickr01" type="file" class="form-control" value="{{ old('avatar') }}"
+                                    name="avatar" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('avatar') }}</p>
@@ -91,14 +91,6 @@
                             </div>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('bio') }}</p>
-                            @endif
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Group</label> <input id="flatpickr01"
-                                    type="text" class="form-control" value="{{ old('group_id') }}" name="group_id"
-                                    data-toggle="flatpickr">
-                            </div>
-                            @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('group_id') }}</p>
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Avatar Url</label> <input id="flatpickr01"
@@ -117,7 +109,7 @@
                                 <p style="color:red">{{ $errors->first('cover_url') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Comment Blocked</label> <input
+                                <label class="control-label" for="flatpickr01">Nhận xét bị chặn</label> <input
                                     id="flatpickr01" type="text" class="form-control"
                                     value="{{ old('is_comment_blocked') }}" name="is_comment_blocked"
                                     data-toggle="flatpickr">
@@ -126,7 +118,7 @@
                                 <p style="color:red">{{ $errors->first('is_comment_blocked') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Blocked</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Bị chặn</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{ old('is_blocked') }}"
                                     name="is_blocked" data-toggle="flatpickr">
                             </div>
@@ -134,7 +126,16 @@
                                 <p style="color:red">{{ $errors->first('is_blocked') }}</p>
                             @endif
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Thêm</button>
+                                <label class="control-label" for="flatpickr01">Nhóm</label> <input id="flatpickr01"
+                                    type="text" class="form-control" value="{{ old('group_id') }}" name="group_id"
+                                    data-toggle="flatpickr">
+                            </div>
+                            @if ($errors->any())
+                                <p style="color:red">{{ $errors->first('group_id') }}</p>
+                            @endif
+                            <div class="form-actions">
+                                <a class="btn btn-secondary float-right" href="{{ route('users.index') }}">Hủy</a>
+                                <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
                             </div>
                         </form>
                     </div>

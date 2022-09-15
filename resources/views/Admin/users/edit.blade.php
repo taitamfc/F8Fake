@@ -94,23 +94,15 @@
                                 <p style="color:red">{{ $errors->first('bio') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Group</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="group_id" value="{{ $users->group_id }}"
-                                    data-toggle="flatpickr">
-                            </div>
-                            @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('group_id') }}</p>
-                            @endif
-                            <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Avatar Url</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="avatar_url"
+                                type="text" class="form-control" name="avatar_url"
                                     value="{{ $users->avatar_url }}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('avatar_url') }}</p>
-                            @endif
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Cover Url</label> <input id="flatpickr01"
+                                @endif
+                                <div class="form-group">
+                                    <label class="control-label" for="flatpickr01">Cover Url</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="cover_url"
                                     value="{{ $users->cover_url }}" data-toggle="flatpickr">
                             </div>
@@ -119,22 +111,31 @@
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Comment Blocked</label> <input
-                                    id="flatpickr01" type="text" class="form-control" name="is_comment_blocked"
-                                    value="{{ $users->is_comment_blocked }}" data-toggle="flatpickr">
+                                id="flatpickr01" type="text" class="form-control" name="is_comment_blocked"
+                                value="{{ $users->is_comment_blocked }}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('is_comment_blocked') }}</p>
+                            <p style="color:red">{{ $errors->first('is_comment_blocked') }}</p>
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Blocked</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="is_blocked"
+                                type="text" class="form-control" name="is_blocked"
                                     value="{{ $users->is_blocked }}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('is_blocked') }}</p>
+                            <p style="color:red">{{ $errors->first('is_blocked') }}</p>
                             @endif
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Sửa</button>
+                                <label class="control-label" for="flatpickr01">Group</label> <input id="flatpickr01"
+                                    type="text" class="form-control" name="group_id" value="{{ $users->group_id }}"
+                                    data-toggle="flatpickr">
+                            </div>
+                            @if ($errors->any())
+                                <p style="color:red">{{ $errors->first('group_id') }}</p>
+                            @endif
+                                <div class="form-actions">
+                                    <a class="btn btn-secondary float-right" href="{{route('users.index')}}">Hủy</a>
+                                    <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
                             </div>
                         </form>
                     </div>

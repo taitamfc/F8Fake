@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
@@ -16,10 +15,48 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $users = User::orderBy('created_at', 'DESC')->search()->paginate(3);
-        return view('Admin.users.index',compact('users'));
+        //Lấy params trên url
+        $key                    = $request->key ?? '';
+        $name                   = $request->name ?? '';
+        $id                     = $request->id ?? '';
+        $email                  = $request->email  ?? '';
+        $full_name              = $request->full_name  ?? '';
+        
+        // thực hiện query
+        $query = User::query(true);
+        
+        if($name){
+            $query->where('name','LIKE','%'.$name.'%');
+        }
+        if($email ){
+            $query->where('email ','LIKE','%'.$email .'%');
+        }
+        if($full_name ){
+            $query->where('full_name ','LIKE','%'.$full_name .'%');
+        }
+        if($id){
+            $query->where('id',$id);
+        }
+        if($key){
+            $query->orWhere('id',$key);
+            $query->orWhere('name','LIKE','%'.$key.'%');
+            $query->orWhere('email','LIKE','%'.$key.'%');
+            $query->orWhere('full_name','LIKE','%'.$key.'%');
+        }
+        //Phân trang
+        $users = $query->paginate(3);
+
+        $params = [
+            'f_id'           => $id,
+            'f_name'         => $name,
+            'f_key'          => $key,
+            'f_email '       => $email ,
+            'f_full_name '   => $full_name ,
+            'users'          => $users
+        ];
+        return view('Admin.users.index',$params);
     }
 
     /**
@@ -59,11 +96,11 @@ class UserController extends Controller
             $users->avatar = $path;
         }
         $users->bio = $request->bio;
-        $users->group_id = $request->group_id;
         $users->avatar_url = $request->avatar_url;
         $users->cover_url = $request->cover_url;
         $users->is_comment_blocked = $request->is_comment_blocked;
         $users->is_blocked = $request->is_blocked;
+        $users->group_id = $request->group_id;
         $users->save();
         Session::flash('success', 'Thêm mới thành công');
         return redirect()->route('users.index');
@@ -89,7 +126,6 @@ class UserController extends Controller
     public function edit($id)
     {
         $users = User::findOrFail($id);
-
         return view('Admin.users.edit',compact('users'));
     }
 

@@ -74,7 +74,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value=""
+                                    <input type="text" class="form-control" name="key" value="{{$f_key}}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -98,10 +98,9 @@
                         <thead class="thead-">
                             <tr>
                                 <th style="min-width:50px"> #</th>
+                                <th> Ảnh Đại Diện </th>
                                 <th> Tên </th>
                                 <th> Email </th>
-                                <th> Mật Khẩu </th>
-                                <th> Tên Đầy Đủ</th>
                                 <th> Hành Động </th>
                             </tr>
                         </thead><!-- /thead -->
@@ -109,10 +108,11 @@
                             @foreach ($users as $key => $user)
                                 <tr>
                                     <th scope="row">{{ ++$key }}</th>
+                                    <td>
+                                        <img class=" image_photo rounded-circle" src="{{asset($user->avatar )}}" style="width:75px;height:75px">
+                                    </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->password }}</td>
-                                    <td>{{ $user->full_name }}</td>
                                     <td>
                                         <a href="{{ route('users.edit', $user->id) }}"
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>

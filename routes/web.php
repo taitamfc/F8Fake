@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\TrackStepController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
