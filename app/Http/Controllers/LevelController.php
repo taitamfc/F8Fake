@@ -43,11 +43,18 @@ class LevelController extends Controller
     public function store(StoreLevelRequest $request)
     {
 
-        Level::create([
-            'title' => $request->title,
-        ]);
-        Session::flash('success','thêm mới thanh công');
-        return redirect()->route('levels.index');
+        try {
+            Level::create([
+                'title' => $request->title,
+            ]);
+            Session::flash('success','thêm mới thanh công');
+            return redirect()->route('levels.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('failed','Thêm mới thất bại');
+            return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+        }
     }
 
     /**
@@ -90,6 +97,22 @@ class LevelController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('levels.index')->with($notification);
+        try {
+            $level->update([
+                'title' => $request->title
+            ]);
+            $notification = array(
+                'message' => 'Chỉnh sửa danh mục thành công',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('levels.index')->with($notification);
+
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('failed','Thêm mới thất bại');
+            return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+        }
     }
 
     /**
@@ -100,8 +123,14 @@ class LevelController extends Controller
      */
     public function destroy(Level $level)
     {
-       $level->delete();
-       return redirect()->route('levels.index');
+       try {
+        $level->delete();
+        return redirect()->route('levels.index');
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        Session::flash('failed','Thêm mới thất bại');
+        return redirect()->route('track.index')->with('error', 'xóa không thành công');
+    }
     }
 
 }

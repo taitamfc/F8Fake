@@ -68,6 +68,12 @@
                                 </div><!-- /.input-group -->
                             </div>
                             @include('Admin.courses.modals.modalCouseColumns')
+                            @if (Session::has('success'))
+                            <p class="text-success">
+                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                {{ Session::get('success') }}</div>
+                            </p>
+                        @endif
                         </form>
                     </div><!-- /.form-group -->
                     <table class="table table-hover">
@@ -75,28 +81,11 @@
                         <thead class="thead-">
                             <tr>
                                 <th style="min-width:50px"> #</th>
-                                <th> cấp độ</th>
+
                                 <th> Tiêu đề</th>
                                 <th> tên chứng chỉ</th>
-                                <th> Đường dẫn </th>
-                                <th> Mô tả </th>
-                                <th> Nội dung tổng hợp </th>
-                                <th> Ảnh </th>
-                                <th> Icon </th>
-                                <th> Nội dung </th>
-                                <th> loai video </th>
-                                <th> video </th>
-                                <th> tỷ lệ % đạt </th>
-                                <th> Quyền ưu tiên </th>
-                                <th> Số sinh viên </th>
-                                <th> giá củ </th>
-                                <th> giá </th>
-                                <th> giá đặt hàng </th>
-                                <th> có liên quan </th>
-                                <th> chuẩn bị ra mắt</th>
-                                <th> chuyên nghiệ<pre></pre> </th>
-                                <th> hoàn thành </th>
-                                <th> ngày xuất bản </th>
+                                <th> ảnh</th>
+
                                 <th> Tùy chọn</th>
                             </tr>
                         </thead><!-- /thead -->
@@ -104,28 +93,10 @@
                             @foreach ($courses as $key => $course)
                                 <tr>
                                     <th scope="row">{{ ++$key }}</th>
-                                    <td>{{ $course->level_id }}</td>
+
                                     <td>{{ $course->title }}</td>
                                     <td>{{ $course->certificate_name }}</td>
-                                    <td>{{ $course->slug }}</td>
-                                    <td>{{ $course->description }}</td>
-                                    <td>{{ $course->compeleted_content }}</td>
-                                    <td>{{ $course->image }}</td>
-                                    <td>{{ $course->icon }}</td>
-                                    <td>{{ $course->content }}</td>
-                                    <td>{{ $course->video_type }}</td>
-                                    <td>{{ $course->video }}</td>
-                                    <td>{{ $course->pass_percent }}</td>
-                                    <td>{{ $course->priority }}</td>
-                                    <td>{{ $course->student_count }}</td>
-                                    <td>{{ $course->old_prive }}</td>
-                                    <td>{{ $course->price }}</td>
-                                    <td>{{ $course->pre_order_price }}</td>
-                                    <td>{{ $course->is_relatable }}</td>
-                                    <td>{{ $course->is_coming_soon }}</td>
-                                    <td>{{ $course->is_pro }}</td>
-                                    <td>{{ $course->is_completable }}</td>
-                                    <td>{{ $course->published_at }}</td>
+                                    <td><img src="{{asset($course->image)}}" alt="" style = "width:60px;"></td>
                                     <td>
                                         <form action="{{ route('courses.destroy', $course->id) }}" method="post">
                                             <a href="{{ route('courses.edit', $course->id) }}"

@@ -83,6 +83,12 @@
                                 {{ Session::get('success') }}</div>
                             </p>
                         @endif
+                        @if (Session::has('failed'))
+                        <p class="text-danger">
+                        <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                            {{ Session::get('failed') }}</div>
+                        </p>
+                    @endif
                         </form>
                     </div><!-- /.form-group -->
                     <table class="table table-hover">
