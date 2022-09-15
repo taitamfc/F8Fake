@@ -51,21 +51,30 @@
                     <!-- .form-group -->
                     <div class="form-group">
                         <form action="" method="GET" id="form-search">
-                            <!-- .nav-tabs -->
+                            @csrf
                             <div class="input-group input-group-alt">
-                                <!-- .input-group-prepend -->
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
                                         data-target="#modalFilterColumns">Tìm nâng cao</button>
-                                </div><!-- /.input-group-prepend -->
-                                <!-- .input-group -->
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                    </div><input type="text" class="form-control" placeholder="Search record">
-                                </div><!-- /.input-group -->
+                                </div>
+                                <div class="input-group has-clearable">
+                                    <button type="button" class="close trigger-submit trigger-submit-delay"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"><i class="fa fa-times-circle"></i></span>
+                                    </button>
+                                    <div class="input-group-prepend trigger-submit">
+                                        <span class="input-group-text"><span class="fas fa-search"></span></span>
+                                    </div>
+                                    <input type="text" class="form-control" name="key" value=""
+                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
+                                        type="submit">Tìm kiếm</button>
+                                </div>
                             </div>
-                            @include('admin.step.modals.modalFilterColumns')
+                            <!-- modalFilterColumns  -->
+                            @include('Admin.requirement.modals.modalFilterColumns')
                         </form>
                         <!-- .input-group -->
                         <!-- /.input-group -->
@@ -74,53 +83,38 @@
                         <!-- thead -->
                         <thead class="thead-">
                             <tr>
-                                <th style="min-width:50px"> # </th>
-                                <th> Nội dung </th>
-                                <th> Khóa học </th>
-                                <th> Chức năng</th>
+                                <th width="100px"> # </th>
+                                <th width="200px"> Nội dung </th>
+                                <th width="200px"> Khóa học </th>
+                                <th width="50px"> Chức năng</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            <!-- tr -->
-                            {{-- @foreach ($steps as $step)
-                                <tr>
-                                    <th scope="row">{{ $student->id }}</th>
-                                    <td>{{ $student->name }}</td>
-                                    <td>{{ $student->email }}</td>
-                                    <td>{{ $student->password }}</td> --}}
-                                    {{-- <td>
-                                        @if ($student->image)
-                                            <img src="{{ asset('AdminTheme/public/uploads/student/' . $student->image) }}" alt=""
-                                                style="width: 80px; height: 80px">
-                                        @else
-                                            {{ 'Chưa có ảnh' }}
-                                        @endif
-                                    </td> --}}
-                                    {{-- <td> --}}
-                                        {{-- <img style="with:100px; height:100px" src="{{ asset($student->image) }}"> --}}
-                                    {{-- </td> --}}
-                                    {{-- <td>
-                                        <a href="{{ route('students.edit', $student->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        <a href="{{ route('students.destroy', $student->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"
-                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                class="far fa-trash-alt"></i></a>
-                                    </td> --}}
+                            <tr>
+                                @foreach ($requirements as $requirement)
+                            <tr>
+                                <th scope="row">{{ $requirement->id }}</th>
+                                <td>{{ $requirement->content }}</td>
+                                <td>{{ $requirement->course_id }}</td>
+                                <td>
+                                    <a href="{{ route('requirement.edit', $requirement->id) }}"
+                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
+                                    <form action="{{ route('requirement.destroy', $requirement->id) }}" style="display:inline"
+                                        method="post">
+                                        <button onclick="return confirm('Xóa {{ $requirement->name }} ?')"
+                                            class="btn btn-sm btn-icon btn-secondary"><i
+                                                class="far fa-trash-alt"></i></button>
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                </td>
 
-                                {{-- </tr> --}}
-                            {{-- @endforeach --}}
-                            <td>
-                                <a href=""
-                                    class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                <a href=""
-                                    class="btn btn-sm btn-icon btn-secondary"
-                                    onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                        class="far fa-trash-alt"></i></a>
-                            </td>
+                            </tr>
+                            @endforeach
                         </tbody><!-- /tbody -->
                     </table>
                 </div><!-- /.card-body -->
             </div><!-- /.card -->
+            {!! $requirements->links() !!}
         @endsection

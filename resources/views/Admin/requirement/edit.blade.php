@@ -20,24 +20,30 @@
                     <div class="card-body">
                         <h4 class="card-title"> Thông tin cơ bản </h4>
                         <!-- form -->
-                        <form action="">
+                        <form action="{{ route('requirement.update', $requirements->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
-                            {{-- @method('PUT') --}}
+                            @method('PUT')
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nội dung</label> <input id="flatpickr01"
-                                    type="text" name= "content" class="form-control" data-toggle="flatpickr">
+                                    type="text" name="content" value="{{ $requirements->content }}"class="form-control "
+                                    data-toggle="flatpickr">
+
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Khóa học</label> <input id="flatpickr01"
-                                    type="number" name= "course_id" class="form-control" data-toggle="flatpickr">
+                                    type="number" name="course_id" value="{{ $requirements->course_id }}"
+                                    class="form-control " data-toggle="flatpickr">
+
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
                                 {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                               <input type="submit" value="Hủy" class="btn btn-info">
-                               <input type="submit" value="Lưu" class="btn btn-info">
+                                {{-- <input type="submit" value="Hủy" class="btn btn-info"> --}}
+                                <a class="btn btn-info" href="{{ route('requirement.index') }}">Hủy</a>
+                                <input type="submit" value="Lưu" class="btn btn-info">
                             </div>
                         </form><!-- /form -->
                     </div><!-- /.card-body -->

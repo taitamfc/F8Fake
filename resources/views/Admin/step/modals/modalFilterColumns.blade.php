@@ -16,34 +16,111 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Tên khách hàng</label>
+                            <label class="">Tiêu đề</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[name]"
+                            <div class="input text"><input type="string" name="filter[title]"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['name']) ? $filter['name'] : '' }} " id="name" />
+                                    value=" {{ isset($filter['title']) ? $filter['title'] : '' }} " id="title" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Địa chỉ</label>
+                            <label class="">Nội dung</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[address]"
+                            <div class="input text"><input type="text" name="filter[content]"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['address']) ? $filter['address'] : '' }}"
-                                    id="address" /></div>
+                                    value=" {{ isset($filter['content']) ? $filter['content'] : '' }}"
+                                    id="content" /></div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Số điện thoại</label>
+                            <label class="">Mô tả</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[phone]"
+                            <div class="input text"><input type="text" name="filter[description]"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['phone']) ? $filter['phone'] : '' }} " id="phone" />
+                                    value=" {{ isset($filter['description']) ? $filter['description'] : '' }} " id="description" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Thời gian</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="datetime-local" name="filter[duration]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['duration']) ? $filter['duration'] : '' }} " id="duration" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Loại video</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="string" name="filter[video_type]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['video_type']) ? $filter['video_type'] : '' }} " id="video_type" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Tên chính</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="string" name="filter[original_name]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['original_name']) ? $filter['original_name'] : '' }} " id="original_name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Hình ảnh</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="file" name="filter[image]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['image']) ? $filter['image'] : '' }} " id="image" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Video</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="file" name="filter[video]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['video']) ? $filter['video'] : '' }} " id="video" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Liên kết ảnh</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="text" name="filter[image_url]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['image_url']) ? $filter['image_url'] : '' }} " id="image_url" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Liên kết video</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="text" name="filter[video_url]"
+                                    class="form-control filter-column f-name"
+                                    value=" {{ isset($filter['video_url']) ? $filter['video_url'] : '' }} " id="video_url" />
                             </div>
                         </div>
                     </div>

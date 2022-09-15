@@ -14,4 +14,11 @@ class Requirement extends Model
     {
         return $this->belongsTo(Course::class);
     }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('content', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
 }

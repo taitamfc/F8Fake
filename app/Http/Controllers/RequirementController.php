@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequirementRequest;
 use App\Models\Requirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RequirementController extends Controller
 {
@@ -14,7 +16,7 @@ class RequirementController extends Controller
      */
     public function index()
     {
-        $requirements = Requirement::latest()->paginate(3);
+        $requirements = Requirement::orderBy('created_at','DESC')->search()->paginate(3);
 
         return view('Admin.requirement.index', compact('requirements'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -37,7 +39,7 @@ class RequirementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequirementRequest $request)
     {
         Requirement::create($request->all());
         return redirect()->route('requirement.index');
@@ -60,9 +62,9 @@ class RequirementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
-
+        $requirements = Requirement::all();
         $requirements = Requirement::find($id);
         return view('Admin.requirement.edit', compact('requirements'));
 
@@ -78,9 +80,7 @@ class RequirementController extends Controller
     public function update(Request $request , Requirement $requirement)
     {
         $requirement->update($request->all());
-
-        return redirect()->route('Admin.requirement.index')
-            ->with('success', 'Requirement updated successfully');
+        return redirect()->route('requirement.index');
     }
 
     /**

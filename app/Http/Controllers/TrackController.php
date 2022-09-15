@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TrackRequest;
+use App\Models\Track;
 use Illuminate\Http\Request;
 
 class TrackController extends Controller
@@ -13,7 +15,10 @@ class TrackController extends Controller
      */
     public function index()
     {
-        return view ('Admin.track.index');
+        $tracks = Track::orderBy('created_at','DESC')->search()->paginate(3);
+
+        return view('Admin.track.index', compact('tracks'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -33,9 +38,10 @@ class TrackController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TrackRequest $request)
     {
-        //
+        Track::create($request->all());
+        return redirect()->route('track.index');
     }
 
     /**
@@ -57,8 +63,9 @@ class TrackController extends Controller
      */
     public function edit($id)
     {
-        return view ('Admin.track.edit');
-
+        $tracks = Track::all();
+        $tracks = Track::find($id);
+        return view('Admin.track.edit', compact('tracks'));
     }
 
     /**
@@ -68,9 +75,11 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Track $track)
     {
-        //
+        $track->update($request->all());
+
+        return redirect()->route('track.index');
     }
 
     /**
@@ -79,8 +88,10 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Track $tracks,$id)
     {
-        //
+        $track = $tracks->find($id);
+        $track->delete();
+        return redirect()->route('track.index');
     }
 }

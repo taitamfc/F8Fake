@@ -21,27 +21,31 @@
                         <h4 class="card-title"> Thông tin cơ bản </h4>
 
                         <!-- form -->
-                        <form action="{{ route('track.edit', $track->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('track.update', $tracks->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tiêu đề</label> <input id="flatpickr01"
-                                    type="text" name="title" class="form-control" data-toggle="flatpickr">
+                                    type="text" name="title" value="{{ $tracks->title }}" class="form-control " data-toggle="flatpickr">
+
                                 <!-- .form-group -->
                                 <div class="form-group">
                                     <label class="control-label" for="flatpickr01">Miễn phí</label> <input id="flatpickr01"
-                                        type="boolean" name="is_free" class="form-control" data-toggle="flatpickr">
+                                        type="boolean" name="is_free" value="{{ $tracks->is_free }}" class="form-control " data-toggle="flatpickr">
+
                                     <!-- .form-group -->
                                     <div class="form-group">
                                         <label class="control-label" for="flatpickr01">Chức vụ</label> <input
-                                            id="flatpickr01" type="text" name="position" class="form-control"
+                                            id="flatpickr01" type="text" name="position" value="{{ $tracks->position }}" class="form-control"
                                             data-toggle="flatpickr">
+
                                         <!-- .form-group -->
                                         <div class="form-group">
                                             <label class="control-label" for="flatpickr01">Khóa học</label> <input
-                                                id="flatpickr01" type="number" name="course_id" class="form-control"
+                                                id="flatpickr01" type="number" name="course_id" value="{{ $tracks->course_id }}" class="form-control"
                                                 data-toggle="flatpickr">
+                                            
                                             <!-- .form-group -->
                                             <div class="form-group">
                                                 {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}

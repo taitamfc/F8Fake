@@ -19,6 +19,9 @@ use Illuminate\Http\Request;
 Route::get('/dashboard', function () {
     return view('Admin.master');
 });
+Route::get('/hello', function () {
+    return view(' welcome');
+});
 Route::resource('requirement', RequirementController::class);
 Route::resource('step', StepController::class);
 Route::resource('track', TrackController::class);

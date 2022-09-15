@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StepRequest;
 use App\Models\Step;
 use Illuminate\Http\Request;
 
@@ -14,16 +15,10 @@ class StepController extends Controller
      */
     public function index()
     {
-        $steps = Step::latest()->get();
-        $steps = Step::paginate(3);
+        $steps = Step::orderBy('created_at','DESC')->search()->paginate(3);
 
-        $steps = Step::all();
-        $data = [
-            'steps' => $steps,
-        ];
-
-        return view('Admin.step.index', $data)
-            ->with('i', (request()->input('page', 1) - 1) * 3);
+        return view('Admin.step.index', compact('steps'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -31,11 +26,10 @@ class StepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        
-
-        return view('Admin.step.create');
+        $steps = Step::all();
+        return view('Admin.step.create', compact('steps'));
     }
 
     /**
@@ -44,9 +38,22 @@ class StepController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StepRequest $request)
     {
 
+        $steps = new Step();
+        if ($request->hasFile('image')) {
+            $file = $request->image;
+            $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
+            $fileName = time(); //45678908766 tạo tên file theo thời gian
+            $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+            $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/images với tê mới là $newFileName
+            $steps->image = $path;
+        }
+        Step::create($request->all());
+        return redirect()->route('step.index')
+            ->with('success', 'Product created successfully.');
+        $request->save();
     }
 
     /**
@@ -68,8 +75,9 @@ class StepController extends Controller
      */
     public function edit($id)
     {
-
-        return view('Admin.step.edit');
+        $steps = Step::all();
+        $steps = Step::find($id);
+        return view('Admin.step.edit', compact('steps'));
     }
 
     /**
@@ -79,9 +87,10 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Step $step)
     {
-        //
+        $step->update($request->all());
+        return redirect()->route('step.index');
     }
 
     /**
@@ -90,8 +99,10 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Step $steps, $id)
     {
-        //
+        $step = $steps->find($id);
+        $step->delete();
+        return redirect()->route('step.index');
     }
 }

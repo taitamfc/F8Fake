@@ -16,35 +16,25 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Tên khách hàng</label>
+                            <label class="">Nội dung</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[name]"
+                            <div class="input text"><input type="text" name="filter[content]"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['name']) ? $filter['name'] : '' }} " id="name" />
+                                    value=" {{ isset($filter['content']) ? $filter['content'] : '' }} "
+                                    id="content" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Địa chỉ</label>
+                            <label class="">Khóa học</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[address]"
+                            <div class="input text"><input type="text" name="filter[course_id]"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['address']) ? $filter['address'] : '' }}"
-                                    id="address" /></div>
-                        </div>
-                    </div>
-                    <div class="form-group form-row filter-row">
-                        <div class="col-lg-4">
-                            <label class="">Số điện thoại</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[phone]"
-                                    class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['phone']) ? $filter['phone'] : '' }} " id="phone" />
-                            </div>
+                                    value=" {{ isset($filter['course_id']) ? $filter['course_id'] : '' }}"
+                                    id="course_id" /></div>
                         </div>
                     </div>
                 </div><!-- #filter-columns -->
@@ -53,7 +43,7 @@
             <!-- .modal-footer -->
             <div class="modal-footer justify-content-start">
                 <button type="submit" class="btn btn-primary" id="apply-filter">Áp dụng</button>
-                <a href="{{ route('step.index') }}" class="btn btn-dark ">Đặt lại</a>
+                <a href="{{ route('requirement.index') }}" class="btn btn-dark ">Đặt lại</a>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary ml-auto"
                     id="clear-filter">Hủy</button>
             </div><!-- /.modal-footer -->

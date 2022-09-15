@@ -26,18 +26,23 @@
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nội dung</label> <input id="flatpickr01"
-                                    type="text" name="content" class="form-control" data-toggle="flatpickr">
+                                    type="text" name="content" class="form-control @error('content')@enderror" data-toggle="flatpickr" placeholder="Nhập nội dung" value="{!! old('content') !!}">
+                                @error('content')
+                                    <div style="color: red">*{{ $message }}</div>
+                                @enderror
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Khóa học</label> <input id="flatpickr01"
-                                    type="string" name="course_id" class="form-control" data-toggle="flatpickr">
+                                    type="string" name="course_id" class="form-control @error('course_id') @enderror" data-toggle="flatpickr" placeholder="Nhập khóa học" value="{!! old('course_id') !!}">
+                                    @error('course_id')
+                                    <div style="color: red">*{{ $message }}</div>
+                                @enderror
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
-
-                                {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                                <input type="submit" value="Hủy" class="btn btn-info">
+                                <a class="btn btn-info" href="{{ route('requirement.index') }}">Hủy</a>
+                                {{-- <input type="submit" value="Hủy" class="btn btn-info"> --}}
                                 <input type="submit" value="Lưu" class="btn btn-info">
                             </div>
                         </form><!-- /form -->

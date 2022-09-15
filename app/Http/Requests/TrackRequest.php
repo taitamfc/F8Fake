@@ -33,7 +33,7 @@ class TrackRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Vui lòng nhập chi nhánh',
+            'title.required' => 'Vui lòng nhập tiêu đề',
             'is_free.required' => 'Vui lòng chọn',
             'position.required' => 'Vui lòng nhập chức vụ',
             'course_id.required' => 'Vui lòng nhập khóa học',

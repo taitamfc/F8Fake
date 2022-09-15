@@ -17,4 +17,11 @@ class Track extends Model
     function track_steps(){
         return $this->hasMany(Track_steps::class);
     }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('title', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
 }
