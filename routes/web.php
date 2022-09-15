@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TrackStepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -17,6 +18,8 @@ use Illuminate\Http\Request;
 Route::get('/', function(){
     return view('Admin.master');
 });
+
+Route::resource('blogs', BlogController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');
