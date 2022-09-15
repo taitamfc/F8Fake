@@ -21,14 +21,14 @@
                             @csrf
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="name" data-toggle="flatpickr">
+                                    type="text" class="form-control" value="{{old('name')}}" name="name" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('name') }}</p>
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Mô Tả</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="description" data-toggle="flatpickr">
+                                    type="text" class="form-control" value="{{old('description')}}" name="description" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('description') }}</p>
