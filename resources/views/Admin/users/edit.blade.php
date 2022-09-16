@@ -81,11 +81,8 @@
                                 <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label><br>
                                 <input accept="image/*" type='file' id="inputFile" name="avatar" /><br>
                                 <img type="hidden" width="90px" height="90px" id="blah1"
-                                    src="{{ asset($users->avatar) }}" alt="" />
+                                    src="{{asset($users->avatar)}}" alt="" />
                             </div>
-                            @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('avatar') }}</p>
-                            @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Bio</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="bio"
