@@ -19,8 +19,8 @@
                             @csrf
                             @method('put')
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Track</label> 
-                                <select name="track_id" class="form-select" id="inputGroupSelect02">
+                                <label class="control-label" for="flatpickr01">Chương Học</label> 
+                                <select name="track_id" class="form-control " id="inputGroupSelect02">
                                     @foreach ($tracks as $track)
                                         <option value="{{ $track->id }}">{{ $track->title }}</option>
                                     @endforeach
@@ -37,8 +37,8 @@
                             <p style="color:red">{{ $errors->first('step_type') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Step</label> 
-                                <select name="step_id" class="form-select" id="inputGroupSelect02">
+                                <label class="control-label" for="flatpickr01">Khóa Học</label> 
+                                <select name="step_id" class="form-control " id="inputGroupSelect02">
                                     @foreach ($steps as $step)
                                         <option value="{{ $step->id }}">{{ $step->title }}</option>
                                     @endforeach
@@ -55,15 +55,18 @@
                             <p style="color:red">{{ $errors->first('position') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Công Khai</label> 
-                                <input id="flatpickr01"
-                                    type="text" class="form-control" value="{{$tracksteps->is_published}}" name="is_published" data-toggle="flatpickr">
+                                <label class="control-label" for="flatpickr01">Công Khai</label>
+                                <select name="is_published" class="form-control " id="inputGroupSelect02">
+                                    <option value="{{1}}">Có</option>
+                                    <option value="{{2}}">Không</option>
+                                </select>
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('is_published') }}</p>
                             @endif
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Sửa</button>
+                            <div class="form-actions">
+                                <a class="btn btn-secondary float-right" href="{{route('tracksteps.index')}}">Hủy</a>
+                                <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
                             </div>
                         </form>
                     </div>

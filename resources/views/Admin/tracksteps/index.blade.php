@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách TrackStep </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh Sách Bài Học </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('tracksteps.create') }}" class="btn btn-primary mr-2">
@@ -88,6 +88,12 @@
                                     {{ Session::get('success') }}</div>
                                 </p>
                             @endif
+                            @if (Session::has('error'))
+                            <p class="text-danger">
+                            <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                {{ Session::get('error') }}</div>
+                            </p>
+                            @endif
                         </form>
                     </div><!-- /.form-group -->
                     <table class="table table-hover">
@@ -97,17 +103,15 @@
                                 <th style="min-width:50px"> #</th>
                                 <th> Thể Loại </th>
                                 <th> Chức Vụ </th>
-                                <th> Công Khai </th>
                                 <th> Hành Động </th>
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
                             @foreach ($tracksteps as $key => $trackstep)
                                 <tr>
-                                    <th scope="row">{{ ++$key }}</th>
+                                    <th scope="row">{{ $trackstep->id }}</th>
                                     <td>{{ $trackstep->step_type }}</td>
                                     <td>{{ $trackstep->position }}</td>
-                                    <td>{{ $trackstep->is_published }}</td>
                                     <td>
                                         <a href="{{ route('tracksteps.edit', $trackstep->id) }}"
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
