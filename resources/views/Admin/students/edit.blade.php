@@ -44,12 +44,12 @@
                         @endif
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Ảnh</label>
                         <input type="file" name="image" class="form-control-file">
                         <img src="{{asset($students->image)}}" style="width:180px;height:150px">
-                    </div>
-{{-- 
+                    </div> --}}
+
                     <div class="form-group">
                         <label for="tf1">Ảnh</label> <input type="file" name="image"
                             value="{{ $students->image }}" class="form-control">
@@ -57,7 +57,7 @@
                         @if ($errors->any())
                             <p style="color:red">{{ $errors->first('image') }}</p>
                         @endif
-                    </div> --}}
+                    </div>
                     <div class="form-actions">
                         <a class="btn btn-secondary float-right" href="{{ route('students.index') }}">Hủy</a>
                         <button class="btn btn-primary ml-auto" type="submit">Cập nhật</button>

@@ -9,6 +9,8 @@ use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -32,19 +34,19 @@ class StudentController extends Controller
 
         // thực hiện query
         $query = Student::query(true);
-        if($name){
-            $query->where('name','LIKE','%'.$name.'%');
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
         }
-        if($email){
-            $query->where('email','LIKE','%'.$email.'%');
+        if ($email) {
+            $query->where('email', 'LIKE', '%' . $email . '%');
         }
-        if($id){
-            $query->where('id',$id);
+        if ($id) {
+            $query->where('id', $id);
         }
-        if($key){
-            $query->orWhere('id',$key);
-            $query->orWhere('name','LIKE','%'.$key.'%');
-            $query->orWhere('email','LIKE','%'.$key.'%');
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%');
+            $query->orWhere('email', 'LIKE', '%' . $key . '%');
         }
         $students = $query->paginate(5);
 
@@ -55,8 +57,7 @@ class StudentController extends Controller
             'f_key'       => $key,
             'students'    => $students,
         ];
-        return view('Admin.students.index', $params) ;
-    
+        return view('Admin.students.index', $params);
     }
 
     /**
@@ -81,7 +82,7 @@ class StudentController extends Controller
         $students->name = $request->name;
         $students->email = $request->email;
         $students->password = $request->password;
-        
+
         if ($request->hasFile('image')) {
             $file = $request->image;
             $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
@@ -90,11 +91,16 @@ class StudentController extends Controller
             $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/images với tê mới là $newFileName
             $students->image = $path;
         }
-        $students->save();
 
-        Session::flash('success', 'Tạo mới thành công');
-        //tao moi xong quay ve trang danh sach task
-        return redirect()->route('students.index');
+        try {
+            $students->save();
+            Session::flash('success', 'Tạo mới thành công');
+            //tao moi xong quay ve trang danh sach task
+            return redirect()->route('students.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('students.index')->with('error', 'Tạo mới không thành công');
+        }
     }
     /**
      * Display the specified resource.
@@ -129,7 +135,7 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, $id)
     {
-        
+
         $students = Student::findOrFail($id);
         $students->name = $request->name;
         $students->email = $request->email;
@@ -142,11 +148,17 @@ class StudentController extends Controller
             $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/images với tê mới là $newFileName
             $students->image = $path;
         }
-        $students->save();
-        //dung session de dua ra thong bao
-        Session::flash('success', 'Cập nhật thành công');
-        //tao moi xong quay ve trang danh sach product
-        return redirect()->route('students.index');
+
+        try {
+            $students->save();
+            //dung session de dua ra thong bao
+            Session::flash('success', 'Cập nhật thành công');
+            //tao moi xong quay ve trang danh sach product
+            return redirect()->route('students.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('students.index')->with('error', 'cập nhật không thành công');
+        }
     }
 
     /**
@@ -157,16 +169,19 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::findOrFail($id);
-        $image = $student->image;
-        $image = 'public/uploads/student/' . $student->image;
-        if (file_exists($image)) {
-            unlink($image);
+        $students = Student::findOrFail($id);
+
+        try {
+            $image = str_replace('storage', 'public', $students->image);;
+            Storage::delete($image);
+            $students->destroy($id);
+            //dung session de dua ra thong bao
+            Session::flash('success', 'Xóa thành công');
+            //xoa xong quay ve trang danh sach banners
+            return redirect()->route('students.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('students.index')->with('error', 'Xóa không thành công');
         }
-        $student->delete();
-        //dung session de dua ra thong bao
-        Session::flash('success', 'Xóa thành công');
-        //xoa xong quay ve trang danh sach student
-        return redirect()->route('students.index');
     }
 }

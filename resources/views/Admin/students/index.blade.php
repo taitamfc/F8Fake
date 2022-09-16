@@ -22,12 +22,7 @@
                     </a>
                 </div>
             </div>
-            @if (Session::has('success'))
-                <p class="text-success">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    {{ Session::get('success') }}
-                </p>
-            @endif
+
         </header>
         <div class="page-section">
             <div class="card card-fluid">
@@ -59,7 +54,8 @@
                                         <div class="input-group-prepend trigger-submit">
                                             <span class="input-group-text"><span class="fas fa-search"></span></span>
                                         </div>
-                                        <input type="text" class="form-control" name="key" value="{{$f_key}}"
+                                        <input type="text" class="form-control" name="key"
+                                            value="{{ $f_key }}"
                                             placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                     </div>
                                     <div class="input-group-append">
@@ -71,7 +67,25 @@
                             </form>
                         </div>
                     </div>
-
+                    @if (Session::has('success'))
+                        <p class="text-success">
+                            <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                            {{ Session::get('success') }}</div>
+                        </p>
+                    @endif
+                    @if (Session::has('error'))
+                        <p class="text-danger">
+                        <div class="alert alert-danger"> <i class="bi bi-x-circle"></i>
+                            {{ Session::get('error') }}</div>
+                        </p>
+                    @endif
+                    @if (!count($students))
+                        <p class="text-success">
+                        <div class="alert alert-danger"> <i class="bi bi-x-circle"></i>
+                            không tìm thấy kết quả.
+                        </div>
+                        </p>
+                    @endif
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-">
@@ -80,14 +94,13 @@
                                     <th> Ảnh </th>
                                     <th> Tên </th>
                                     <th> Email </th>
-                                    {{-- <th> Password </th> --}}
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($students as $key => $student)
+                                @foreach ($students as $student)
                                     <tr>
-                                        <th scope="row">{{ ++$key }}</th>
+                                        <th scope="row">{{ $student->id }}</th>
                                         <td>
                                             <div class="rounded-circle ">
                                                 <img class=" image_photo rounded-circle "
@@ -96,7 +109,6 @@
                                         </td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
-                                        {{-- <td>{{ $student->password }}</td> --}}
                                         <td>
                                             <a href="{{ route('students.edit', $student->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
