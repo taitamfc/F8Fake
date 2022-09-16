@@ -20,7 +20,7 @@
                         <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Sinh Viên</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{ old('name') }}" name="name"
                                     data-toggle="flatpickr">
                             </div>

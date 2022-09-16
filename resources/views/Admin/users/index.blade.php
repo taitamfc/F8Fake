@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách User </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh Sách Người Dùng </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('users.create') }}" class="btn btn-primary mr-2">
@@ -74,7 +74,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value="{{$f_key}}"
+                                    <input type="text" class="form-control" name="key" value="{{ $f_key }}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -90,6 +90,12 @@
                                     {{ Session::get('success') }}</div>
                                 </p>
                             @endif
+                            @if (Session::has('error'))
+                                <p class="text-danger">
+                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{ Session::get('error') }}</div>
+                                </p>
+                            @endif
                         </form>
                     </div><!-- /.form-group -->
 
@@ -99,7 +105,7 @@
                             <tr>
                                 <th style="min-width:50px"> #</th>
                                 <th> Ảnh Đại Diện </th>
-                                <th> Tên </th>
+                                <th> Tên Sinh Viên </th>
                                 <th> Email </th>
                                 <th> Hành Động </th>
                             </tr>
@@ -107,9 +113,10 @@
                         <tbody>
                             @foreach ($users as $key => $user)
                                 <tr>
-                                    <th scope="row">{{ ++$key }}</th>
+                                    <th scope="row">{{ $user->id }}</th>
                                     <td>
-                                        <img class=" image_photo rounded-circle" src="{{asset($user->avatar )}}" style="width:75px;height:75px">
+                                        <img class=" image_photo rounded-circle" src="{{ asset($user->avatar) }}"
+                                            style="width:75px;height:75px">
                                     </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>

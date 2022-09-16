@@ -21,7 +21,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Sinh Viên</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="name" value="{{ $users->name }}"
                                     data-toggle="flatpickr">
                             </div>
@@ -46,7 +46,7 @@
                             @endif
                            
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">User Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Tài Khoản</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="username" value="{{ $users->username }}"
                                     data-toggle="flatpickr">
                             </div>
@@ -54,7 +54,7 @@
                                 <p style="color:red">{{ $errors->first('username') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">First Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Họ</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="first_name" value="{{ $users->first_name }}"
                                     data-toggle="flatpickr">
                             </div>
@@ -62,7 +62,7 @@
                                 <p style="color:red">{{ $errors->first('first_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Last Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="last_name" value="{{ $users->last_name }}"
                                     data-toggle="flatpickr">
                             </div>
@@ -70,7 +70,7 @@
                                 <p style="color:red">{{ $errors->first('last_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Full Name</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Đầy Đủ</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="full_name" value="{{ $users->full_name }}"
                                     data-toggle="flatpickr">
                             </div>
@@ -78,7 +78,7 @@
                                 <p style="color:red">{{ $errors->first('full_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label>Avatar</label>
+                                <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label>
                                 <input type="file" name="avatar" class="form-control-file">
                                 <img src="{{asset($users->avatar)}}" style="width:180px;height:150px">
                             </div>
@@ -110,7 +110,7 @@
                                 <p style="color:red">{{ $errors->first('cover_url') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Comment Blocked</label> <input
+                                <label class="control-label" for="flatpickr01">Nhận xét bị chặn</label> <input
                                 id="flatpickr01" type="text" class="form-control" name="is_comment_blocked"
                                 value="{{ $users->is_comment_blocked }}" data-toggle="flatpickr">
                             </div>
@@ -118,7 +118,7 @@
                             <p style="color:red">{{ $errors->first('is_comment_blocked') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Blocked</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Bị chặn</label> <input id="flatpickr01"
                                 type="text" class="form-control" name="is_blocked"
                                     value="{{ $users->is_blocked }}" data-toggle="flatpickr">
                             </div>
@@ -126,7 +126,7 @@
                             <p style="color:red">{{ $errors->first('is_blocked') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Group</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Nhóm</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="group_id" value="{{ $users->group_id }}"
                                     data-toggle="flatpickr">
                             </div>

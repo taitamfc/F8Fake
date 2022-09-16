@@ -16,7 +16,16 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Sinh Viên</label>
+                            <label class="">ID</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="text" name="id"
+                                    value="{{ $f_id }}" class="form-control filter-column f-name"/></div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Tên Sinh Viên</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="name" value=" {{ $f_name }} "
@@ -30,19 +39,10 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="email"
-                                    value="" class="form-control filter-column f-name"/></div>
+                                    value="{{ $f_email }}" class="form-control filter-column f-name"/></div>
                         </div>
                     </div>
-                    <div class="form-group form-row filter-row">
-                        <div class="col-lg-4">
-                            <label class="">Tên Đầy Đủ</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="full_name"
-                                    value="" class="form-control filter-column f-name" />
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->
