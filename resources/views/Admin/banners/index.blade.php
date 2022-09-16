@@ -25,12 +25,7 @@
             </div>
 
         </div>
-        @if (Session::has('success'))
-            <p class="text-success">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                {{ Session::get('success') }}
-            </p>
-        @endif
+
     </header>
     <div class="page-section">
         <div class="card card-fluid">
@@ -61,12 +56,12 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                        <input type="text" class="form-control" name="key" value=""
-                                            placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
+                                    <input type="text" class="form-control" name="key" value="{{ $f_key }}"
+                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch"
-                                       >Tìm kiếm</button>
+                                    <button class="btn btn-secondary" type="submit" data-toggle="modal"
+                                        data-target="#modalSaveSearch">Tìm kiếm</button>
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
@@ -75,9 +70,20 @@
 
                     </div>
                 </div>
-
+                @if (Session::has('success'))
+                    <p class="text-success">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        {{ Session::get('success') }}
+                    </p>
+                @endif
+                @if (Session::has('error'))
+                    <p class="text-danger">
+                    <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                        {{ Session::get('error') }}</div>
+                    </p>
+                @endif
                 <div class="table-responsive">
-                    <table  class="table">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -99,7 +105,7 @@
                                     <td class="align-middle"> {{ $banner->placement }} </td>
                                     <td class="align-middle"> {{ $banner->type }} </td>
                                     <td class="align-middle"> {{ $banner->title }} </td>
-                                    <td class="align-middle"> {{ $banner->description }} </td>
+                                    <td class="align-middle"> {!! $banner->description !!} </td>
                                     <td>
                                         <a href="{{ route('banners.edit', $banner->id) }}"
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>

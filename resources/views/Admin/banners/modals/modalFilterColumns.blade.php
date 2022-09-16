@@ -12,31 +12,52 @@
                 <!-- #filter-columns -->
                 <div id="filter-columns">
                     <!-- .form-row -->
+
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Tên khách hàng</label>
+                            <label class="">id</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[name]" class="form-control filter-column f-name" value=" {{ (isset($filter['name']) ? $filter['name'] : '') }} " id="name" /></div>
+                            <div class="input text"><input type="text" name="id" class="form-control filter-column f-name" value=" {{ $f_id }}" id="name" /></div>
                         </div>
                     </div>
 
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Địa chỉ</label>
+                            <label class="">Vị trí</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[address]" class="form-control filter-column f-name" value=" {{ (isset( $filter['address']) ? $filter['address'] : '')}}" id="address" /></div>
+                            <div class="input text"><input type="text" name="placement" class="form-control filter-column f-name" value=" {{ $f_placement }}" id="name" /></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Loại</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="text" name="type" class="form-control filter-column f-name" value=" {{ $f_type }}" id="address" /></div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Số điện thoại</label>
+                            <label class="">Tiêu đề</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[phone]" class="form-control filter-column f-name" value=" {{  (isset($filter['phone']) ? $filter['phone'] : '') }} " id="phone" /></div>
+                            <div class="input text"><input type="text" name="title" class="form-control filter-column f-name" value=" {{ $f_title }}" id="phone" /></div>
                         </div>
                     </div>
+
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Mô tả</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="text" name="description" class="form-control filter-column f-name" value=" {{ $f_description }}" id="phone" /></div>
+                        </div>
+                    </div>
+
+                   
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->

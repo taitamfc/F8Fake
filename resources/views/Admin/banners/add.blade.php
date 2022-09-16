@@ -52,10 +52,8 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="tf1">Mô tả<abbr name="Trường bắt buộc">*</abbr></label> <input name="description"
-                            type="text" class="form-control" value= "{{old('description')}}" id="ckeditor_sach" placeholder="Nhập mô tả">
-                        <small id="" class="form-text text-muted"></small>
-                        {{-- <textarea name="tomtat" class="form-control" id="ckeditor_truyen" rows="5" style="resize: none">{{$truyen->tomtat}}</textarea> --}}
+                        <label for="tf1">Mô tả<abbr name="Trường bắt buộc">*</abbr></label> 
+                        <textarea name="description" class="form-control" value= "{{old('description')}}" id="ckeditor1" rows="5" style="resize: none"></textarea>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('description') }}</p>
                         @endif
@@ -87,7 +85,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tf1">Kỳ Hạn<abbr name="Trường bắt buộc">*</abbr></label> <input name="expires"
-                            type="text" class="form-control" value= "{{old('expires')}}" id="" placeholder="Nhập kỳ hạn">
+                            type="date" class="form-control" value= "{{old('expires')}}" id="" placeholder="Nhập kỳ hạn">
                         <small id="" class="form-text text-muted"></small>
                         @if ($errors->any())
                             <p style="color:red">*{{ $errors->first('expires') }}</p>

@@ -7,13 +7,56 @@ use App\Http\Requests\StoreBannerRequest;
 use App\Http\Requests\UpdateBannerRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class BannerController extends Controller
 {
-    public function index(){
-        $banners = Banner::orderBy('created_at', 'DESC')->search()->paginate(4);
-        return view('Admin.banners.index', compact('banners'));
+    public function index(Request $request)
+    {
+        $key        = $request->key ?? '';
+        $placement      = $request->placement ?? '';
+        $type      = $request->type ?? '';
+        $title      = $request->title ?? '';
+        $description      = $request->description ?? '';
+        $id         = $request->id ?? '';
+
+        // thực hiện query
+        $query = Banner::query(true);
+        if ($placement) {
+            $query->where('placement', 'LIKE', '%' . $placement . '%');
+        }
+        if ($type) {
+            $query->where('type', 'LIKE', '%' . $type . '%');
+        }
+        if ($title) {
+            $query->where('title', 'LIKE', '%' . $title . '%');
+        }
+        if ($description) {
+            $query->where('description', 'LIKE', '%' . $description . '%');
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('placement', 'LIKE', '%' . $key . '%');
+            $query->orWhere('type', 'LIKE', '%' . $key . '%');
+            $query->orWhere('title', 'LIKE', '%' . $key . '%');
+            $query->orWhere('description', 'LIKE', '%' . $key . '%');
+        }
+        $banners = $query->paginate(5);
+
+        $params = [
+            'f_id'        => $id,
+            'f_placement' => $placement,
+            'f_type'     => $type,
+            'f_title'     => $title,
+            'f_description'     => $description,
+            'f_key'       => $key,
+            'banners'    => $banners,
+        ];
+        return view('Admin.banners.index', $params);
     }
 
     public function create()
@@ -33,7 +76,7 @@ class BannerController extends Controller
         $banners = new Banner();
         $banners->placement = $request->input('placement');
         $banners->type = $request->input('type');
-        
+
         if ($request->hasFile('banner')) {
             $file = $request->banner;
             $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
@@ -48,13 +91,20 @@ class BannerController extends Controller
         $banners->link_to = $request->input('link_to');
         $banners->priority = $request->input('priority');
         $banners->expires = $request->input('expires');
-        $banners->save();
-        Session::flash('success', 'Thêm thành công');
 
-        return redirect()->route('banners.index');
+        try {
+            $banners->save();
+            Session::flash('success', 'Thêm thành công');
+
+            return redirect()->route('banners.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('banners.index')->with('error', '*thêm không thành công');
+        }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $banners = Banner::findOrFail($id);
         return view('Admin.banners.edit', compact('banners'));
     }
@@ -79,7 +129,7 @@ class BannerController extends Controller
         $banners->link_to = $request->input('link_to');
         $banners->priority = $request->input('priority');
         $banners->expires = $request->input('expires');
-        
+
         $banners->save();
 
         //dung session de dua ra thong bao
@@ -91,15 +141,21 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $banners = Banner::findOrFail($id);
-        $image = $banners->image;
-        $image = 'public/uploads/banners/' . $banners->image;
-        if (file_exists($image)) {
-            unlink($image);
+
+        try {
+            $image = $banners->image;
+            $image = 'public/uploads/banners/' . $banners->image;
+            if (file_exists($image)) {
+                unlink($image);
+            }
+            $banners->delete();
+            //dung session de dua ra thong bao
+            Session::flash('success', 'Xóa thành công');
+            //xoa xong quay ve trang danh sach banners
+            return redirect()->route('banners.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('banners.index')->with('error', 'Xóa không thành công');
         }
-        $banners->delete();
-        //dung session de dua ra thong bao
-        Session::flash('success', 'Xóa thành công');
-        //xoa xong quay ve trang danh sach banners
-        return redirect()->route('banners.index');
     }
 }

@@ -27,7 +27,7 @@
                             value="{{ $banners->placement }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('name') }}</p>
+                            <p style="color:red">{{ $errors->first('placement') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -35,7 +35,7 @@
                             value="{{ $banners->type }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('address') }}</p>
+                            <p style="color:red">{{ $errors->first('type') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -43,7 +43,7 @@
                              class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('banner') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -51,15 +51,15 @@
                             value="{{ $banners->title }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('title') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="tf1">Mô tả</label> <input type="text" name="description"
+                        <label for="tf1">Mô tả</label> <input type="text" name="description" id="ckeditor1"
                             value="{{ $banners->description }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('description') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -67,7 +67,7 @@
                             value="{{ $banners->cta_title }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('cta_title') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -75,7 +75,7 @@
                             value="{{ $banners->link_to }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('link_to') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -83,7 +83,7 @@
                             value="{{ $banners->priority }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('priority') }}</p>
                         @endif
                     </div>
                     <div class="form-group">
@@ -91,7 +91,7 @@
                             value="{{ $banners->expires }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                            <p style="color:red">{{ $errors->first('expires') }}</p>
                         @endif
                     </div>
                     <div class="form-actions">

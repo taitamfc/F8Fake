@@ -98,15 +98,7 @@
     </div><!-- /.app -->
 
     <!-- BEGIN BASE JS -->
-    <script type="text/javascript">
-      
-      CKEDITOR.replace('noidung_chapter',options);
-      CKEDITOR.replace('ckeditor_truyen');
-      CKEDITOR.replace('ckeditor_sach');
-
-
-  </script>
-    <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+    
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
@@ -123,6 +115,11 @@
     <script src="{{ asset('AdminTheme/assets/javascript/pages/dashboard-demo.js')}}"></script> <!-- END PAGE LEVEL JS -->
     <!-- Global site tag (gtag.js')}}) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+    <script src="{{ asset('AdminTheme/ckeditor/ckeditor.js')}}"></script> <!-- END THEME JS -->
+    <script>
+      CKEDITOR.replace('ckeditor');
+      CKEDITOR.replace('ckeditor1');
+  </script>
     <script>
       window.dataLayer = window.dataLayer || [];
 
