@@ -46,16 +46,24 @@
                             @endif
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="exampleInputEmail1">Hình ảnh </label>
                             <input type="file" name="image" class="form-control-file file"   >
                             <img id="showImage" class="rounded image_show w-100"
                                             src="">
                             <small id="" class="form-text text-muted"></small>
-                            @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('image') }}</p>
-                            @endif
+                           
+                        </div> --}}
+                        <div class="form-group">
+                            <label class="control-label" for="flatpickr01">Hình ảnh</label><br>
+                            <input accept="image/*" type='file' id="inputFile" name="image" /><br>
+                            <br>
+                            <img type="hidden" width="90px" height="90px" id="blah" src="#"
+                                alt=""  />
                         </div>
+                        @if ($errors->any())
+                        <p style="color:red">{{ $errors->first('image') }}</p>
+                    @endif
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 $('.file').change(function(e) {

@@ -43,21 +43,16 @@
                             <p style="color:red">{{ $errors->first('password') }}</p>
                         @endif
                     </div>
-
-                    {{-- <div class="form-group">
-                        <label>Ảnh</label>
-                        <input type="file" name="image" class="form-control-file">
-                        <img src="{{asset($students->image)}}" style="width:180px;height:150px">
-                    </div> --}}
-
                     <div class="form-group">
-                        <label for="tf1">Ảnh</label> <input type="file" name="image"
-                            value="{{ $students->image }}" class="form-control">
-                        <small class="form-text text-muted"></small>
-                        @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('image') }}</p>
-                        @endif
+                        <label class="control-label" for="flatpickr01">Hình ảnh</label><br>
+                        <input accept="image/*" type='file' id="inputFile" name="image" /><br>
+                        <br>
+                        <img type="hidden" width="90px" height="90px" id="blah1" src="{{asset($students->image)}}"
+                            alt=""  />
                     </div>
+                    @if ($errors->any())
+                    <p style="color:red">{{ $errors->first('image') }}</p>
+                @endif
                     <div class="form-actions">
                         <a class="btn btn-secondary float-right" href="{{ route('students.index') }}">Hủy</a>
                         <button class="btn btn-primary ml-auto" type="submit">Cập nhật</button>

@@ -100,7 +100,7 @@
     </div><!-- /.app -->
     <!-- BEGIN BASE JS -->
    
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
@@ -128,5 +128,21 @@
       gtag('js', new Date());
       gtag('config', 'UA-116692175-1');
     </script>
+     <script>
+       jQuery(document).ready(function() {
+         if( $('#blah').hide()){
+           $('#blah').hide();
+         }
+           jQuery('#inputFile').change(function() {
+               $('#blah').show();
+               const file = jQuery(this)[0].files;
+               if (file[0]) {
+                   jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
+                   jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
+               }
+           });
+       });
+       
+   </script>
   </body>
 </html>
