@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,19 +27,19 @@ class GroupController extends Controller
         $description            = $request->description ?? '';
         // thực hiện query
         $query = Group::query(true);
-        
-        if($name){
-            $query->where('name','LIKE','%'.$name.'%');
+
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
         }
-        if($description){
-            $query->where('description','LIKE','%'.$description.'%');
+        if ($description) {
+            $query->where('description', 'LIKE', '%' . $description . '%');
         }
-        if($id){
-            $query->where('id',$id);
+        if ($id) {
+            $query->where('id', $id);
         }
-        if($key){
-            $query->orWhere('id',$key);
-            $query->orWhere('name','LIKE','%'.$key.'%');
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%');
         }
         //Phân trang
         $groups = $query->paginate(3);
@@ -73,10 +75,17 @@ class GroupController extends Controller
         $groups = new Group();
         $groups->name = $request->name;
         $groups->description = $request->description;
-        $groups->save();
-        //dung session de dua ra thong bao
-        Session::flash('success', 'Tạo mới thành công');
-        return redirect()->route('groups.index');
+
+        try {
+            $groups->save();
+            //dung session de dua ra thong bao
+            Session::flash('success', 'Tạo mới thành công');
+            return redirect()->route('groups.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'Thêm không thành công');
+            return redirect()->route('groups.index');
+        }
     }
 
     /**
@@ -114,10 +123,15 @@ class GroupController extends Controller
         $groups = Group::findOrFail($id);
         $groups->name = $request->name;
         $groups->description = $request->description;
-        $groups->save();
-        //dung session de dua ra thong bao
-        Session::flash('success', 'Sửa thành công');
-        return redirect()->route('groups.index');
+        try {
+            $groups->save();
+            //dung session de dua ra thong bao
+            Session::flash('success', 'Cập nhật thành công');
+            return redirect()->route('groups.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('groups.index')->with('error', 'Cập nhật' . ' ' . $request->name . ' ' .  ' không thành công');
+        }
     }
 
     /**
@@ -131,8 +145,15 @@ class GroupController extends Controller
     {
         // dd($id);
         $groups = Group::findOrFail($id);
-        $groups->delete();
-        Session::flash('success', 'Xóa thành công');
-        return redirect()->route('groups.index');
+
+        try {
+            $groups->delete();
+            Session::flash('success', 'Xóa thành công');
+            return redirect()->route('groups.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'Xóa không thành công');
+            return redirect()->route('groups.index');
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GroupController;
+use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\TrackStepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
