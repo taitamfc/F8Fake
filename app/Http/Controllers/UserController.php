@@ -42,7 +42,7 @@ class UserController extends Controller
             $query->orWhere('email', 'LIKE', '%' . $key . '%');
         }
         //Phân trang
-        $users = $query->paginate(3);
+        $users = $query->paginate(5);
 
         $params = [
             'f_id'           => $id,

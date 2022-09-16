@@ -44,6 +44,23 @@
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css')}}" data-skin="dark">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      jQuery(document).ready(function() {
+        if( $('#blah').hide()){
+          $('#blah').hide();
+        }
+          jQuery('#inputFile').change(function() {
+              $('#blah').show();
+              const file = jQuery(this)[0].files;
+              if (file[0]) {
+                  jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
+                  jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
+              }
+          });
+      });
+      
+  </script>
     <script>
       var skin = localStorage.getItem('skin') || 'default';
       var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');

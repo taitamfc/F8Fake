@@ -17,7 +17,7 @@
             <div class="card-deck-xl">
                 <div class="card card-fluid">
                     <div class="card-body">
-                        <form action="{{ route('users.update',$users->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('users.update', $users->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -44,7 +44,7 @@
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('password') }}</p>
                             @endif
-                           
+
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tên Tài Khoản</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="username" value="{{ $users->username }}"
@@ -78,13 +78,14 @@
                                 <p style="color:red">{{ $errors->first('full_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label>
-                                <input type="file" name="avatar" class="form-control-file">
-                                <img src="{{asset($users->avatar)}}" style="width:180px;height:150px">
+                                <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label><br>
+                                <input accept="image/*" type='file' id="inputFile" name="avatar" /><br>
+                                <img type="hidden" width="90px" height="90px" id="blah1"
+                                    src="{{ asset($users->avatar) }}" alt="" />
                             </div>
                             @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('avatar') }}</p>
-                        @endif
+                                <p style="color:red">{{ $errors->first('avatar') }}</p>
+                            @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Bio</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="bio"
@@ -95,14 +96,14 @@
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Avatar Url</label> <input id="flatpickr01"
-                                type="text" class="form-control" name="avatar_url"
+                                    type="text" class="form-control" name="avatar_url"
                                     value="{{ $users->avatar_url }}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('avatar_url') }}</p>
-                                @endif
-                                <div class="form-group">
-                                    <label class="control-label" for="flatpickr01">Cover Url</label> <input id="flatpickr01"
+                            @endif
+                            <div class="form-group">
+                                <label class="control-label" for="flatpickr01">Cover Url</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="cover_url"
                                     value="{{ $users->cover_url }}" data-toggle="flatpickr">
                             </div>
@@ -111,19 +112,19 @@
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nhận xét bị chặn</label> <input
-                                id="flatpickr01" type="text" class="form-control" name="is_comment_blocked"
-                                value="{{ $users->is_comment_blocked }}" data-toggle="flatpickr">
+                                    id="flatpickr01" type="text" class="form-control" name="is_comment_blocked"
+                                    value="{{ $users->is_comment_blocked }}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_comment_blocked') }}</p>
+                                <p style="color:red">{{ $errors->first('is_comment_blocked') }}</p>
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Bị chặn</label> <input id="flatpickr01"
-                                type="text" class="form-control" name="is_blocked"
+                                    type="text" class="form-control" name="is_blocked"
                                     value="{{ $users->is_blocked }}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_blocked') }}</p>
+                                <p style="color:red">{{ $errors->first('is_blocked') }}</p>
                             @endif
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nhóm</label> <input id="flatpickr01"
@@ -133,9 +134,9 @@
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('group_id') }}</p>
                             @endif
-                                <div class="form-actions">
-                                    <a class="btn btn-secondary float-right" href="{{route('users.index')}}">Hủy</a>
-                                    <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
+                            <div class="form-actions">
+                                <a class="btn btn-secondary float-right" href="{{ route('users.index') }}">Hủy</a>
+                                <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
                             </div>
                         </form>
                     </div>

@@ -77,9 +77,11 @@
                                 <p style="color:red">{{ $errors->first('full_name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label>
-                                <input id="flatpickr01" type="file" class="form-control" value="{{ old('avatar') }}"
-                                    name="avatar" data-toggle="flatpickr">
+                                <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label><br>
+                                <input accept="image/*" type='file' id="inputFile" name="avatar" /><br>
+                                <br>
+                                <img type="hidden" width="90px" height="90px" id="blah" src="#"
+                                    alt=""  />
                             </div>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('avatar') }}</p>
