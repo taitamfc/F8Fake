@@ -38,14 +38,14 @@ class UpdateBannerRequest extends FormRequest
     public function messages()
     {
         return [
-            'placement.required' => 'Vui lòng nhập vị trí',
-            'type.required' => 'Vui lòng nhập loại',
-            'title.required' => 'Vui lòng nhập tiêu đề',
-            'description.required' => 'Vui lòng thêm mô tả',
-            'cta_title.required' => 'Vui lòng thêm chi tiết',
-            'link_to.required' => 'Vui lòng nhập link',
-            'priority.required' => 'Vui lòng nhập id quyền ưu tiên',
-            'expires.required' => 'Vui lòng nhập kỳ hạn',
+            'placement.required' => 'Trường bắt buộc',
+            'type.required' => 'Trường bắt buộc',
+            'title.required' => 'Trường bắt buộc',
+            'description.required' => 'Trường bắt buộc',
+            'cta_title.required' => 'Trường bắt buộc',
+            'link_to.required' => 'Trường bắt buộc',
+            'priority.required' => 'Trường bắt buộc',
+            'expires.required' => 'Trường bắt buộc',
         ];
     }
 }

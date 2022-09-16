@@ -35,9 +35,12 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="tf1">Ảnh bìa</label> <input type="file" name="banner"
-                             class="form-control" >
-                        <small class="form-text text-muted"></small>
+                            <label for="tf1">Ảnh bìa<abbr name="Trường bắt buộc">*</abbr></label>
+                            {{-- <input name="banner"
+                                type="file" value="{{ old('banner') }}" class="form-control" id=""> --}}
+                            <input accept="image/*" type='file' id="inputFile" name="banner" /><br>
+                            <br>
+                            <img type="hidden" width="90px" height="90px" id="blah1" src="{{ asset($banners->banner) }}" alt="" />
                         @if ($errors->any())
                             <p style="color:red">{{ $errors->first('banner') }}</p>
                         @endif

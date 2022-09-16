@@ -31,7 +31,7 @@ class StoreBannerRequest extends FormRequest
             'description' => 'required',
             'cta_title' => 'required',
             'link_to' => 'required',
-            'priority' => 'required',
+            'priority' => 'required|numeric|max:2',
             'expires' => 'required',
         ];
     }
@@ -39,15 +39,17 @@ class StoreBannerRequest extends FormRequest
     public function messages()
     {
         return [
-            'placement.required' => 'Vui lòng nhập vị trí',
-            'type.required' => 'Vui lòng nhập loại',
-            'banner.required' => 'Vui lòng thêm ảnh bìa',
-            'title.required' => 'Vui lòng nhập tiêu đề',
-            'description.required' => 'Vui lòng thêm mô tả',
-            'cta_title.required' => 'Vui lòng thêm chi tiết',
-            'link_to.required' => 'Vui lòng nhập link',
-            'priority.required' => 'Vui lòng thêm quyền ưu tiên',
-            'expires.required' => 'Vui lòng nhập kỳ hạn',
+            'placement.required' => 'Trường bắt buộc',
+            'type.required' => 'Trường bắt buộc',
+            'banner.required' => 'Trường bắt buộc',
+            'title.required' => 'Trường bắt buộc',
+            'description.required' => 'Trường bắt buộc',
+            'cta_title.required' => 'Trường bắt buộc',
+            'link_to.required' =>'Trường bắt buộc',
+            'priority.required' => 'Trường bắt buộc',
+            'priority.numeric' => 'Trường bắt buộc phải là số',
+            'priority.max' => 'Trường bắt buộc nhỏ hơn 2 chữ số',
+            'expires.required' => 'Trường bắt buộc',
         ];
     }
 }
