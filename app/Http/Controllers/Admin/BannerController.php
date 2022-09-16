@@ -9,6 +9,7 @@ use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -18,7 +19,6 @@ class BannerController extends Controller
         $placement      = $request->placement ?? '';
         $type      = $request->type ?? '';
         $title      = $request->title ?? '';
-        $description      = $request->description ?? '';
         $id         = $request->id ?? '';
 
         // thực hiện query
@@ -32,9 +32,6 @@ class BannerController extends Controller
         if ($title) {
             $query->where('title', 'LIKE', '%' . $title . '%');
         }
-        if ($description) {
-            $query->where('description', 'LIKE', '%' . $description . '%');
-        }
         if ($id) {
             $query->where('id', $id);
         }
@@ -43,7 +40,6 @@ class BannerController extends Controller
             $query->orWhere('placement', 'LIKE', '%' . $key . '%');
             $query->orWhere('type', 'LIKE', '%' . $key . '%');
             $query->orWhere('title', 'LIKE', '%' . $key . '%');
-            $query->orWhere('description', 'LIKE', '%' . $key . '%');
         }
         $banners = $query->paginate(5);
 
@@ -52,7 +48,6 @@ class BannerController extends Controller
             'f_placement' => $placement,
             'f_type'     => $type,
             'f_title'     => $title,
-            'f_description'     => $description,
             'f_key'       => $key,
             'banners'    => $banners,
         ];
@@ -99,7 +94,7 @@ class BannerController extends Controller
             return redirect()->route('banners.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('banners.index')->with('error', '*thêm không thành công');
+            return redirect()->route('banners.index')->with('error', 'thêm không thành công');
         }
     }
 
@@ -130,12 +125,18 @@ class BannerController extends Controller
         $banners->priority = $request->input('priority');
         $banners->expires = $request->input('expires');
 
-        $banners->save();
+       
+        try {
+            $banners->save();
 
-        //dung session de dua ra thong bao
-        Session::flash('success', 'Cập nhật thành công');
-        //tao moi xong quay ve trang danh sach banner
-        return redirect()->route('banners.index');
+            //dung session de dua ra thong bao
+            Session::flash('success', 'Cập nhật thành công');
+            //tao moi xong quay ve trang danh sach banner
+            return redirect()->route('banners.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('banners.index')->with('error', 'cập nhật không thành công');
+        }
     }
 
     public function destroy($id)
@@ -143,12 +144,9 @@ class BannerController extends Controller
         $banners = Banner::findOrFail($id);
 
         try {
-            $image = $banners->image;
-            $image = 'public/uploads/banners/' . $banners->image;
-            if (file_exists($image)) {
-                unlink($image);
-            }
-            $banners->delete();
+            $banner = str_replace('storage', 'public', $banners->banner);;
+            Storage::delete($banner);
+            $banners->destroy($id);
             //dung session de dua ra thong bao
             Session::flash('success', 'Xóa thành công');
             //xoa xong quay ve trang danh sach banners

@@ -12,7 +12,6 @@
                 <!-- #filter-columns -->
                 <div id="filter-columns">
                     <!-- .form-row -->
-
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">id</label>
@@ -47,21 +46,8 @@
                             <div class="input text"><input type="text" name="title" class="form-control filter-column f-name" value=" {{ $f_title }}" id="phone" /></div>
                         </div>
                     </div>
-
-                    <div class="form-group form-row filter-row">
-                        <div class="col-lg-4">
-                            <label class="">Mô tả</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="description" class="form-control filter-column f-name" value=" {{ $f_description }}" id="phone" /></div>
-                        </div>
-                    </div>
-
-                   
                 </div><!-- #filter-columns -->
-                <!-- .btn -->
             </div><!-- /.modal-body -->
-            <!-- .modal-footer -->
             <div class="modal-footer justify-content-start">
             <button type="submit" class="btn btn-primary" id="apply-filter">Áp dụng</button>
                 <a href="{{ route('banners.index') }}" class="btn btn-dark " >Đặt lại</a>

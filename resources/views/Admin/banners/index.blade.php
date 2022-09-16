@@ -8,11 +8,9 @@
                 </li>
             </ol>
         </nav>
-        <!-- <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button> -->
         <div class="d-md-flex align-items-md-start">
             <h1 class="page-title mr-sm-auto">Quản Lý Khách Hàng</h1>
             <div class="btn-toolbar">
-                {{-- @if (Auth::user()->hasPermission('Banner_create')) --}}
                 <a href="{{ route('banners.create') }}" class="btn btn-primary mr-2">
                     <i class="fa-solid fa fa-plus"></i>
                     <span class="ml-1">Thêm Mới</span>
@@ -21,7 +19,6 @@
                     <i class="fas fa-file"></i>
                     <span class="ml-1">Xuất file excel</span>
                 </a>
-                {{-- @endif --}}
             </div>
 
         </div>
@@ -64,21 +61,27 @@
                                         data-target="#modalSaveSearch">Tìm kiếm</button>
                                 </div>
                             </div>
-                            <!-- modalFilterColumns  -->
                             @include('admin.banners.modals.modalFilterColumns')
                         </form>
 
                     </div>
                 </div>
+
                 @if (Session::has('success'))
                     <p class="text-success">
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                        {{ Session::get('success') }}
+                    <div class="alert alert-success"><i class="fa fa-check" aria-hidden="true"></i>
+                        {{ Session::get('success') }}</div>
                     </p>
                 @endif
                 @if (Session::has('error'))
                     <p class="text-danger">
-                    <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                    <div class="alert alert-danger"> <i class="bi bi-x-circle"></i>
+                        {{ Session::get('error') }}</div>
+                    </p>
+                @endif
+                @if (!count($banners))
+                    <p class="text-danger">
+                    <div class="alert alert-danger"> <i class="bi bi-x-circle"></i> Không tìm thấy kết quả
                         {{ Session::get('error') }}</div>
                     </p>
                 @endif
@@ -91,7 +94,6 @@
                                 <th> Vị trí </th>
                                 <th> loại </th>
                                 <th> Tiêu đề </th>
-                                <th> Mô tả </th>
                                 <th> </th>
                             </tr>
                         </thead>
@@ -105,7 +107,6 @@
                                     <td class="align-middle"> {{ $banner->placement }} </td>
                                     <td class="align-middle"> {{ $banner->type }} </td>
                                     <td class="align-middle"> {{ $banner->title }} </td>
-                                    <td class="align-middle"> {!! $banner->description !!} </td>
                                     <td>
                                         <a href="{{ route('banners.edit', $banner->id) }}"
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
@@ -118,17 +119,14 @@
                                             @method('delete')
                                         </form>
                                     </td>
-                                </tr><!-- /tr -->
+                                </tr>
                             @endforeach
-                        </tbody><!-- /tbody -->
-                    </table><!-- /.table -->
+                        </tbody>
+                    </table>
                     {{ $banners->onEachSide(5)->links() }}
-
                 </div>
             </div>
-            <!-- /.table-responsive -->
-            <!-- .pagination -->
-        </div><!-- /.card-body -->
+        </div>
     </div>
     </div>
 @endsection

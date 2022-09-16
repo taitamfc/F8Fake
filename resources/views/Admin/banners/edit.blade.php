@@ -11,11 +11,7 @@
         </nav>
         <h1 class="page-title"> Chỉnh Sửa danh sách</h1>
     </header>
-
     <div class="page-section">
-        {{-- <form method="post" action="{{ route('banners.update', $banner->id) }}">
-            @csrf
-            @method('PUT') --}}
         <div class="card">
             <div class="card-body">
                 <legend>Thông tin cơ bản</legend>
@@ -55,7 +51,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="tf1">Mô tả</label> <input type="text" name="description" id="ckeditor1"
+                        <label for="tf1">Mô tả</label> <input type="text" name="description" 
                             value="{{ $banners->description }}" class="form-control" >
                         <small class="form-text text-muted"></small>
                         @if ($errors->any())
