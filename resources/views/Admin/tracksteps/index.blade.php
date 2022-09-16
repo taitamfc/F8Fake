@@ -82,6 +82,13 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.tracksteps.modals.modalFilterColumns')
+                            @if (!count($tracksteps))
+                                <p class="text-success">
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle"aria-hidden="true"></i>
+                                    không tìm thấy kết quả.
+                                </div>
+                                </p>
+                            @endif
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -90,7 +97,7 @@
                             @endif
                             @if (Session::has('error'))
                             <p class="text-danger">
-                            <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                            <div class="alert alert-danger"> <i class="bi bi-x-circle"aria-hidden="true"></i>
                                 {{ Session::get('error') }}</div>
                             </p>
                             @endif
