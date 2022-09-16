@@ -15,12 +15,53 @@ class TrackController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tracks = Track::orderBy('created_at','DESC')->search()->paginate(3);
+        //Lấy params trên url
+        $key        = $request->key ?? '';
+        $title      = $request->title ?? '';
+        $is_free      = $request->is_free ?? '';
+        $position      = $request->position ?? '';
+        $course_id      = $request->course_id ?? '';
+        $id         = $request->id ?? '';
 
-        return view('Admin.track.index', compact('tracks'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        // thực hiện query
+        $query = Track::query(true);
+        if ($title) {
+            $query->where('title', 'LIKE', '%' . $title . '%');
+        }
+        if ($is_free) {
+            $query->where('is_free', 'LIKE', '%' . $is_free . '%');
+        }
+        if ($position) {
+            $query->where('position', 'LIKE', '%' . $position . '%');
+        }
+        if ($course_id) {
+            $query->where('course_id', $course_id);
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            // $query->orWhere('title', 'LIKE', '%' . $key . '%');
+            // $query->orWhere('is_free', 'LIKE', '%' . $key . '%');
+            // $query->orWhere('position', 'LIKE', '%' . $key . '%');
+            // $query->orWhere('course_id', $key);
+        }
+        $query->orderBy('id', 'DESC');
+        $tracks = $query->paginate(5);  
+
+        $params = [
+            'id'        => $id,
+            'title'     => $title,
+            'is_free'     => $is_free,
+            'position'     => $position,
+            'course_id'     => $course_id,
+            'key'       => $key,
+            'tracks'    => $tracks,
+        ];
+        return view('Admin.track.index', $params);
     }
 
     /**
@@ -30,8 +71,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        return view ('Admin.track.create');
-
+        return view('Admin.track.create');
     }
 
     /**
@@ -43,14 +83,17 @@ class TrackController extends Controller
     public function store(TrackRequest $request)
     {
 
+        $track = new Track();
+        $track->title = $request->title;
+        $track->is_free = $request->is_free;
+        $track->position = $request->position;
+        $track->course_id = $request->course_id;
         try {
-            Track::create($request->all());
-            Session::flash('success','Thêm mới thành công');
+            $track->save();
             return redirect()->route('track.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
-
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            Session::flash('failed','Thêm mới thất bại');
+            Session::flash('failed', 'Thêm mới thất bại');
             return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
@@ -74,9 +117,9 @@ class TrackController extends Controller
      */
     public function edit($id)
     {
+
         $tracks = Track::all();
         $tracks = Track::find($id);
-        Session::flash('success','Sửa thành công');
         return view('Admin.track.edit', compact('tracks'));
     }
 
@@ -87,12 +130,20 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Track $track)
+    public function update(TrackRequest $request, $id)
     {
-        $track->update($request->all());
-        Session::flash('success','Cập nhật thành công');
-        return redirect()->route('track.index');
-
+        $track = Track::find($id);
+        $track->title = $request->title;
+        $track->is_free = $request->is_free;
+        $track->position = $request->position;
+        $track->course_id = $request->course_id;
+        try {
+            $track->save();
+            return redirect()->route('track.index')->with('success', 'Sửa' . ' ' . $request->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('track.index')->with('error', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
+        }
     }
 
     /**
@@ -101,11 +152,15 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Track $tracks,$id)
+    public function destroy(Track $tracks, $id)
     {
         $track = $tracks->find($id);
-        $track->delete();
-        Session::flash('success','Xóa thành công');
-        return redirect()->route('track.index');
+        try {
+            $track->delete();
+            return redirect()->route('track.index')->with('failed', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('track.index')->with('error', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
+        }
     }
 }

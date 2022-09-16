@@ -16,14 +16,14 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách chương học </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách khóa học </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('step.create') }}" class="btn btn-primary mr-2">
+                    <a href="{{ route('step.create') }}" class="btn btn-info mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
                     </a>
-                    <a href="" class="btn btn-primary">
+                    <a href="" class="btn btn-info">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
                     </a>
@@ -39,7 +39,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('requirement.index') }}">Tất Cả</a>
+                            <a class="nav-link active " href="{{ route('step.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">Thùng Rác</a>
@@ -75,12 +75,25 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.step.modals.modalFilterColumns')
+                            @if (!count($steps))
+                                <p class="text-success">
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
+                                    không tìm thấy kết quả.
+                                </div>
+                                </p>
+                            @endif
                             @if (Session::has('success'))
-                            <p class="text-success">
+                                <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                                {{ Session::get('success') }}</div>
-                            </p>
-                        @endif
+                                    {{ Session::get('success') }}</div>
+                                </p>
+                            @endif
+                            @if (Session::has('failed'))
+                                <p class="text-danger">
+                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{ Session::get('failed') }}</div>
+                                </p>
+                            @endif
                         </form>
                         <!-- .input-group -->
                         <!-- /.input-group -->

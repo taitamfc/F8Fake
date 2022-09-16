@@ -16,12 +16,24 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
+                            <label class="">Mã số (#)</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="number" name="id"
+                                    class="form-control filter-column f-name"
+                                    value=" {{"$id"}} "
+                                    id="id" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
                             <label class="">Nội dung</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[content]"
+                            <div class="input text"><input type="text" name="content"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['content']) ? $filter['content'] : '' }} "
+                                    value=" {{"$content"}} "
                                     id="content" />
                             </div>
                         </div>
@@ -31,9 +43,9 @@
                             <label class="">Khóa học</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="filter[course_id]"
+                            <div class="input text"><input type="text" name="course_id"
                                     class="form-control filter-column f-name"
-                                    value=" {{ isset($filter['course_id']) ? $filter['course_id'] : '' }}"
+                                    value=" {{"$course_id"}}"
                                     id="course_id" /></div>
                         </div>
                     </div>

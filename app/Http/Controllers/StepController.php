@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StepRequest;
 use App\Models\Step;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class StepController extends Controller
@@ -14,12 +15,42 @@ class StepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $steps = Step::orderBy('created_at','DESC')->search()->paginate(3);
+        //Lấy params trên url
+        $key        = $request->key ?? '';
+        $title      = $request->title ?? '';
+        $original_name      = $request->original_name ?? '';
+        $id         = $request->id ?? '';
 
-        return view('Admin.step.index', compact('steps'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        // thực hiện query
+        $query = Step::query(true);
+        if ($title) {
+            $query->where('title', 'LIKE', '%' . $title . '%');
+        }
+        if ($original_name) {
+            $query->where('original_name', 'LIKE', '%' . $original_name . '%');
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            // $query->orWhere('title', 'LIKE', '%' . $key . '%');
+            // $query->orWhere('original_name', 'LIKE', '%' . $key . '%');
+        }
+
+        $query->orderBy('id', 'DESC');
+        $steps = $query->paginate(5);
+
+        $params = [
+            'id'        => $id,
+            'title'     => $title,
+            'original_name'     => $original_name,
+            'key'       => $key,
+            'steps'    => $steps,
+        ];
+        return view('Admin.step.index', $params);
     }
 
     /**
@@ -27,7 +58,7 @@ class StepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $steps = Step::all();
         return view('Admin.step.create', compact('steps'));
@@ -41,30 +72,34 @@ class StepController extends Controller
      */
     public function store(StepRequest $request)
     {
+        try {
+            $steps = new Step();
+            $steps->title = $request->input('title');
+            $steps->content = $request->input('content');
+            $steps->description = $request->input('description');
+            $steps->duration = $request->input('duration');
+            $steps->video_type = $request->input('video_type');
+            $steps->original_name = $request->input('original_name');
+            $steps->video = $request->input('video');
+            $steps->image_url = $request->input('image_url');
+            $steps->video_url = $request->input('video_url');
 
-        $steps = new Step();
-        $steps->title = $request->input('title');
-        $steps->content = $request->input('content');
-        $steps->description = $request->input('description');
-        $steps->duration = $request->input('duration');
-        $steps->video_type = $request->input('video_type');
-        $steps->original_name = $request->input('original_name');
-        $steps->video = $request->input('video');
-        $steps->image_url = $request->input('image_url');
-        $steps->video_url = $request->input('video_url');
-
-        if ($request->hasFile('image')) {
-            $file = $request->image;
-            $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
-            $fileName = time(); //45678908766 tạo tên file theo thời gian
-            $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
-            $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/steps với tê mới là $newFileName
-            $steps->image = $path;
+            if ($request->hasFile('image')) {
+                $file = $request->image;
+                $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
+                $fileName = time(); //45678908766 tạo tên file theo thời gian
+                $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+                $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/steps với tê mới là $newFileName
+                $steps->image = $path;
+            }
+            // dd($path);
+            $steps->save();
+            return redirect()->route('step.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('failed', 'Thêm mới thất bại');
+            return redirect()->route('step.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
-        $steps->save();
-        Session::flash('success','Thêm mới thành công');
-        return redirect()->route('step.index');
-
     }
 
     /**
@@ -84,11 +119,11 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         $steps = Step::all();
         $steps = Step::find($id);
-        Session::flash('success','Sửa thành công');
+
         return view('Admin.step.edit', compact('steps'));
     }
 
@@ -99,11 +134,35 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Step $step)
+    public function update(Request $request, $id)
     {
-        $step->update($request->all());
-        Session::flash('success','Cập nhật thành công');
-        return redirect()->route('step.index');
+        try {
+            $step = Step::find($id);
+            if ($request->hasFile('image')) {
+                $file = $request->image;
+                $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
+                $fileName = time(); //45678908766 tạo tên file theo thời gian
+                $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
+                $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/steps với tê mới là $newFileName
+                $step->image = $path;
+            }
+
+            $step->title = $request->title;
+            $step->content = $request->content;
+            $step->description = $request->description;
+            $step->duration = $request->duration;
+            $step->video_type = $request->video_type;
+            $step->original_name = $request->original_name;
+            $step->video = $request->video;
+            $step->image_url = $request->image_url;
+            $step->video_url = $request->video_url;
+
+            $step->save();
+            return redirect()->route('step.index')->with('success', 'Sửa' . ' ' . $request->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('step.index')->with('error', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
+        }
     }
 
     /**
@@ -115,8 +174,12 @@ class StepController extends Controller
     public function destroy(Step $steps, $id)
     {
         $step = $steps->find($id);
-        $step->delete();
-        Session::flash('success','Xóa thành công');
-        return redirect()->route('step.index');
+        try {
+            $step->delete();
+            return redirect()->route('step.index')->with('failed', 'Xóa' . ' ' . $step->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('step.index')->with('error', 'Xóa' . ' ' . $step->title . ' ' .  'không thành công');
+        }
     }
 }

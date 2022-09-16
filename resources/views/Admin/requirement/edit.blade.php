@@ -6,11 +6,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Quản lý step</a>
+                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Danh sách yêu cầu</a>
                     </li>
                 </ol>
             </nav>
-            <h1 class="page-title"> Sửa chương học </h1>
+            <h1 class="page-title"> Sửa yêu cầu </h1>
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">
@@ -40,13 +40,14 @@
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
-                                {{-- <label class="control-label" for="flatpickr11">Month Select</label> --}}
-                                {{-- <input type="submit" value="Hủy" class="btn btn-info"> --}}
-                                <a class="btn btn-info" href="{{ route('requirement.index') }}">Hủy</a>
-                                <input type="submit" value="Lưu" class="btn btn-info">
+                                <a class="btn btn-secondary float-left" href="{{ route('requirement.index') }}">Hủy</a>
+                                <button class="btn btn-info float-right" type="submit">Lưu</button>
                             </div>
+
                         </form><!-- /form -->
                     </div><!-- /.card-body -->
                 </div><!-- /.card -->
             </div><!-- /.card-deck-xl -->
-        @endsection
+        </div>
+    </div>
+@endsection

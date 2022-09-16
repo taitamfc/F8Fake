@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme.min.css')}}" data-skin="default">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css')}}" data-skin="dark">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script>
       var skin = localStorage.getItem('skin') || 'default';
       var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
