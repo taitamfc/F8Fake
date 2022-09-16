@@ -17,11 +17,46 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $students = Student::get();
-        $students = Student::orderBy('created_at', 'DESC')->search()->paginate(4);
-        return view('Admin.students.index', compact('students'));
+        // $students = Student::orderBy('created_at', 'DESC')->search()->paginate(4);
+        // return view('Admin.students.index', compact('students'));
+
+
+        $key        = $request->key ?? '';
+        $name         = $request->name ?? '';
+        $email      = $request->email ?? '';
+        $id         = $request->id ?? '';
+
+
+        // thực hiện query
+        $query = Student::query(true);
+        if($name){
+            $query->where('name','LIKE','%'.$name.'%');
+        }
+        if($email){
+            $query->where('email','LIKE','%'.$email.'%');
+        }
+        if($id){
+            $query->where('id',$id);
+        }
+        if($key){
+            $query->orWhere('id',$key);
+            $query->orWhere('name','LIKE','%'.$key.'%');
+            $query->orWhere('email','LIKE','%'.$key.'%');
+        }
+        $students = $query->paginate(5);
+
+        $params = [
+            'f_id'        => $id,
+            'f_name'     => $name,
+            'f_email'     => $email,
+            'f_key'       => $key,
+            'students'    => $students,
+        ];
+        return view('Admin.students.index', $params) ;
+    
     }
 
     /**

@@ -99,6 +99,7 @@
       </main><!-- /.app-main -->
     </div><!-- /.app -->
     <!-- BEGIN BASE JS -->
+   
     
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>

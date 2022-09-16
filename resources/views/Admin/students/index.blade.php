@@ -59,7 +59,7 @@
                                         <div class="input-group-prepend trigger-submit">
                                             <span class="input-group-text"><span class="fas fa-search"></span></span>
                                         </div>
-                                        <input type="text" class="form-control" name="key" value=""
+                                        <input type="text" class="form-control" name="key" value="{{$f_key}}"
                                             placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                     </div>
                                     <div class="input-group-append">
@@ -80,7 +80,7 @@
                                     <th> Ảnh </th>
                                     <th> Tên </th>
                                     <th> Email </th>
-                                    <th> Password </th>
+                                    {{-- <th> Password </th> --}}
                                     <th></th>
                                 </tr>
                             </thead>
@@ -96,7 +96,7 @@
                                         </td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
-                                        <td>{{ $student->password }}</td>
+                                        {{-- <td>{{ $student->password }}</td> --}}
                                         <td>
                                             <a href="{{ route('students.edit', $student->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
