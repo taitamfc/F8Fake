@@ -85,7 +85,7 @@
                             @include('Admin.groups.modals.modalFilterColumns')
                             @if (!count($groups))
                                 <p class="text-success">
-                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                <div class="alert alert-danger"><i class="bi bi-x-circle"aria-hidden="true"></i>
                                     không tìm thấy kết quả.
                                 </div>
                                 </p>
@@ -98,7 +98,7 @@
                             @endif
                             @if (Session::has('error'))
                                 <p class="text-danger">
-                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle"aria-hidden="true"></i>
                                     {{ Session::get('error') }}</div>
                                 </p>
                             @endif
