@@ -35,6 +35,7 @@ class CourseSeeder extends Seeder
                 'is_coming_soon' => false,
                 'is_pro' => false,
                 'is_completable' => false,
+                'published_at' => null,
                 'delete_at'=>'1'
             ],
             [
@@ -60,6 +61,7 @@ class CourseSeeder extends Seeder
                 'is_coming_soon' => false,
                 'is_pro' => false,
                 'is_completable' => false,
+                'published_at' => null,
                 'delete_at'=>'1'
             ]
         ]);

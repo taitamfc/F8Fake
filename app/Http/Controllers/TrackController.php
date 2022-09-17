@@ -90,11 +90,11 @@ class TrackController extends Controller
         $track->course_id = $request->course_id;
         try {
             $track->save();
-            return redirect()->route('track.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
+            return redirect()->route('track.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('track.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('track.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' không thành công');
         }
     }
 

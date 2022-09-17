@@ -94,11 +94,11 @@ class StepController extends Controller
             }
             // dd($path);
             $steps->save();
-            return redirect()->route('step.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
+            return redirect()->route('step.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('step.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('step.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' không thành công');
         }
     }
 

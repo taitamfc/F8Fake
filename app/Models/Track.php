@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Track extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $table = 'tracks';
-    protected $fillable = ['title','is_free','position','course_id'];
+    protected $fillable = ['title', 'is_free', 'position', 'course_id'];
     function course()
     {
         return $this->belongsTo(Courses::class);
     }
-    function track_steps(){
+    function track_steps()
+    {
         return $this->hasMany(Track_steps::class);
     }
     public function scopeSearch($query)

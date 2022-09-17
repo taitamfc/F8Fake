@@ -74,11 +74,11 @@ class RequirementController extends Controller
         $requirement->course_id = $request->course_id;
         try {
             $requirement->save();
-            return redirect()->route('requirement.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' mới thành công');
+            return redirect()->route('requirement.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('requirement.index')->with('failed', 'Thêm' . ' ' . $request->content . ' ' .  ' mới không thành công');
+            return redirect()->route('requirement.index')->with('failed', 'Thêm' . ' ' . $request->content . ' ' .  ' không thành công');
         }
     }
 
