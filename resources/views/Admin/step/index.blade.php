@@ -78,7 +78,7 @@
                             @if (!count($steps))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả.
+                                    không tìm thấy kết quả
                                 </div>
                                 </p>
                             @endif
@@ -90,7 +90,7 @@
                             @endif
                             @if (Session::has('failed'))
                                 <p class="text-danger">
-                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
                                     {{ Session::get('failed') }}</div>
                                 </p>
                             @endif

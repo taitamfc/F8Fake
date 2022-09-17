@@ -59,8 +59,9 @@
                             <div class="form-group">
                                 <p>Loại video</p>
                                 <select class="form-select @error('video_type') @enderror" name="video_type"
-                                     aria-label="Default select example">
-                                    <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled selected>--Vui
+                                    aria-label="Default select example">
+                                    <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled selected>
+                                        --Vui
                                         lòng chọn--</option>
                                     <option value="1" {{ old('video_type') == 1 ? 'selected' : '' }}>1080p</option>
                                     <option value="2" {{ old('video_type') == 2 ? 'selected' : '' }}>720p</option>
@@ -85,16 +86,13 @@
                                     <div style="color: red">*{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Hình ảnh</label>
-                                <input id="flatpickr01"type="file" name="image"
-                                    class="form-control
-                                @error('image') @enderror"
-                                    data-toggle="flatpickr" placeholder="Tải hình ảnh lên" value="{!! old('image') !!}">
-                                @error('image')
-                                    <div style="color: red">*{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <input accept="image/*" type='file' id="imgInp" name="inputFile"
+                                class="form-control @error('image') @enderror" value="{!! old('image') !!}" />
+                            <img type="hidden" width="200px" height="200px" id="blah" src=""
+                                alt="" />
+                            @error('image')
+                                <div style="color: red">*{{ $message }}</div>
+                            @enderror
                             <div class="form-group">
                                 <p>Video</p>
                                 <select class="form-select @error('video') @enderror" name="video"

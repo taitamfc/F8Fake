@@ -64,39 +64,43 @@
                                                     data-toggle="flatpickr">
 
                                                 <!-- .form-group -->
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label class="control-label" for="flatpickr01">Hình ảnh</label> <input
                                                         id="flatpickr01" type="file" name="image" class="form-control "
                                                         data-toggle="flatpickr">
-                                                    <img src="{{ asset($steps->image) }}" alt="">
+                                                    <img src="{{ asset($steps->image) }}" alt=""> --}}
+                                                <input accept="image/*" type='file' id="imgInp"
+                                                    name="inputFile" /><br><br>
+                                                <img type="hidden" width="200px" height="200px" id="blah1"
+                                                    src="{{ asset($steps->image) ?? $request->inputFile }}"
+                                                    alt="" />
+                                                <!-- .form-group -->
+                                                <div class="form-group">
+                                                    <label class="control-label" for="flatpickr01">Video</label> <input
+                                                        id="flatpickr01" type="text" name="video"
+                                                        value="{{ $steps->video }}" class="form-control  "
+                                                        data-toggle="flatpickr">
+
                                                     <!-- .form-group -->
                                                     <div class="form-group">
-                                                        <label class="control-label" for="flatpickr01">Video</label> <input
-                                                            id="flatpickr01" type="text" name="video"
-                                                            value="{{ $steps->video }}" class="form-control  "
-                                                            data-toggle="flatpickr">
-
-                                                        <!-- .form-group -->
-                                                        <div class="form-group">
-                                                            <label class="control-label" for="flatpickr01">Liên kết
-                                                                ảnh</label> <input id="flatpickr01" type="text"
-                                                                name="image_url" value="{{ $steps->image_url }}"
-                                                                class="form-control " data-toggle="flatpickr">
-                                                        </div>
-                                                        <!-- .form-group -->
-                                                        <div class="form-group">
-                                                            <label class="control-label" for="flatpickr01">Liên kết
-                                                                video</label> <input id="flatpickr01" type="text"
-                                                                name="video_url" value="{{ $steps->video_url }}"
-                                                                class="form-control " data-toggle="flatpickr">
-                                                        </div>
-                                                        <!-- .form-group -->
-                                                        <div class="form-group">
-                                                            <a class="btn btn-secondary float-left"
-                                                                href="{{ route('step.index') }}">Hủy</a>
-                                                            <button class="btn btn-info float-right"
-                                                                type="submit">Lưu</button>
-                                                        </div>
+                                                        <label class="control-label" for="flatpickr01">Liên kết
+                                                            ảnh</label> <input id="flatpickr01" type="text"
+                                                            name="image_url" value="{{ $steps->image_url }}"
+                                                            class="form-control " data-toggle="flatpickr">
+                                                    </div>
+                                                    <!-- .form-group -->
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="flatpickr01">Liên kết
+                                                            video</label> <input id="flatpickr01" type="text"
+                                                            name="video_url" value="{{ $steps->video_url }}"
+                                                            class="form-control " data-toggle="flatpickr">
+                                                    </div>
+                                                    <!-- .form-group -->
+                                                    <div class="form-group">
+                                                        <a class="btn btn-secondary float-left"
+                                                            href="{{ route('step.index') }}">Hủy</a>
+                                                        <button class="btn btn-info float-right"
+                                                            type="submit">Lưu</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,10 +108,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </form><!-- /form -->
-                    </div><!-- /.card-body -->
-                </div><!-- /.card -->
-            </div><!-- /.card-deck-xl -->
-        </div>
+                    </div>
+                    </form><!-- /form -->
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
+        </div><!-- /.card-deck-xl -->
+    </div>
     </div>
 @endsection
