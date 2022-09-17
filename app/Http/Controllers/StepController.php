@@ -98,7 +98,7 @@ class StepController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('step.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('step.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
 
@@ -161,7 +161,7 @@ class StepController extends Controller
             return redirect()->route('step.index')->with('success', 'Sửa' . ' ' . $request->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('step.index')->with('error', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
+            return redirect()->route('step.index')->with('failed', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
         }
     }
 
@@ -176,10 +176,10 @@ class StepController extends Controller
         $step = $steps->find($id);
         try {
             $step->delete();
-            return redirect()->route('step.index')->with('failed', 'Xóa' . ' ' . $step->title . ' ' .  'thành công');
+            return redirect()->route('step.index')->with('success', 'Xóa' . ' ' . $step->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('step.index')->with('error', 'Xóa' . ' ' . $step->title . ' ' .  'không thành công');
+            return redirect()->route('step.index')->with('failed', 'Xóa' . ' ' . $step->title . ' ' .  'không thành công');
         }
     }
 }

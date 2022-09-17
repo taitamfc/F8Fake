@@ -75,13 +75,13 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.requirement.modals.modalFilterColumns')
-                            @if (!count($requirements))
+                            {{-- @if (!count($requirements))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
                                     không tìm thấy kết quả
                                 </div>
                                 </p>
-                            @endif
+                            @endif --}}
                             @if (Session::has('success'))
                             <p class="text-success">
                             <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>

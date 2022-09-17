@@ -50,7 +50,7 @@ class TrackController extends Controller
             // $query->orWhere('course_id', $key);
         }
         $query->orderBy('id', 'DESC');
-        $tracks = $query->paginate(5);  
+        $tracks = $query->paginate(5);
 
         $params = [
             'id'        => $id,
@@ -94,7 +94,7 @@ class TrackController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('track.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
 
@@ -142,7 +142,7 @@ class TrackController extends Controller
             return redirect()->route('track.index')->with('success', 'Sửa' . ' ' . $request->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('track.index')->with('error', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
+            return redirect()->route('track.index')->with('failed', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
         }
     }
 
@@ -157,10 +157,45 @@ class TrackController extends Controller
         $track = $tracks->find($id);
         try {
             $track->delete();
-            return redirect()->route('track.index')->with('failed', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
+            return redirect()->route('track.index')->with('success', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('track.index')->with('error', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
+            return redirect()->route('track.index')->with('failed', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
         }
+    }
+
+    public function delete($id)
+    {
+        $track = $this->Track->find($id);
+        try {
+            $track->delete();
+            return true;
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return false;
+        }
+        return $track;
+    }
+
+    public function getTrashed()
+    {
+        $query = $this->Track->onlyTrashed();
+        $query = $this->orderBy('id', 'desc');
+        $track = $query->paginate(5);
+        return $track;
+    }
+
+    public function restore($id)
+    {
+        $track = $this->Track->withTrashed()->findOrFail($id);
+        $track->restore();
+        return $track;
+    }
+
+    public function force_destroy($id)
+    {
+        $track = $this->Track->onlyTrashed()->findOrFail($id);
+        $track->force_Delete();
+        return $track;
     }
 }

@@ -19,10 +19,11 @@ use Illuminate\Http\Request;
 Route::get('/dashboard', function () {
     return view('Admin.master');
 });
-Route::get('/hello', function () {
-    return view(' welcome');
-});
+
 Route::resource('requirement', RequirementController::class);
 Route::resource('step', StepController::class);
 Route::resource('track', TrackController::class);
 
+Route::get('track/restore', [TrackController::class, 'getTrashed'])->name('track.getTrashed');
+Route::get('track/restore/{id}', [TrackController::class, 'restore'])->name('track.restore');
+Route::delete('track/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('track.force_destroy');

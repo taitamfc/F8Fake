@@ -78,7 +78,7 @@ class RequirementController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('requirement.index')->with('error', 'Thêm' . ' ' . $request->content . ' ' .  ' mới không thành công');
+            return redirect()->route('requirement.index')->with('failed', 'Thêm' . ' ' . $request->content . ' ' .  ' mới không thành công');
         }
     }
 
@@ -123,7 +123,7 @@ class RequirementController extends Controller
             return redirect()->route('requirement.index')->with('success', 'Sửa' . ' ' . $request->content . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('requirement.index')->with('error', 'Sửa' . ' ' . $request->content . ' ' .  'không thành công');
+            return redirect()->route('requirement.index')->with('failed', 'Sửa' . ' ' . $request->content . ' ' .  'không thành công');
         }
     }
 
@@ -138,10 +138,10 @@ class RequirementController extends Controller
         $requirement = $requirements->find($id);
         try {
             $requirement->delete();
-            return redirect()->route('requirement.index')->with('failed', 'Xóa' . ' ' . $requirement->content . ' ' .  'thành công');
+            return redirect()->route('requirement.index')->with('success', 'Xóa' . ' ' . $requirement->content . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('requirement.index')->with('error', 'Xóa' . ' ' . $requirement->content . ' ' .  'không thành công');
+            return redirect()->route('requirement.index')->with('failed', 'Xóa' . ' ' . $requirement->content . ' ' .  'không thành công');
         }
     }
 }
