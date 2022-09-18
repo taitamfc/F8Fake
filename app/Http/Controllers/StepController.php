@@ -36,8 +36,6 @@ class StepController extends Controller
         }
         if ($key) {
             $query->orWhere('id', $key);
-            // $query->orWhere('title', 'LIKE', '%' . $key . '%');
-            // $query->orWhere('original_name', 'LIKE', '%' . $key . '%');
         }
 
         $query->orderBy('id', 'DESC');
@@ -92,7 +90,7 @@ class StepController extends Controller
                 $path = 'storage/' . $request->file('image')->store('image', 'public'); //lưu file vào mục public/steps với tê mới là $newFileName
                 $steps->image = $path;
             }
-            // dd($path);
+
             $steps->save();
             return redirect()->route('step.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' thành công');
         } catch (\Exception $e) {
@@ -182,4 +180,38 @@ class StepController extends Controller
             return redirect()->route('step.index')->with('failed', 'Xóa' . ' ' . $step->title . ' ' .  'không thành công');
         }
     }
+    public function getTrashed(Request $request)
+    {
+        $steps = Step::onlyTrashed()->latest()->get();
+        $params = [
+            'steps' => $steps,
+        ];
+        return view('admin.step.trash', $params);
+    }
+
+    public function force_destroy($id)
+    {
+        $step = Step::withTrashed()->findOrFail($id);
+        $step->forceDelete();
+        try {
+            $step->forceDelete();
+            return redirect()->route('step.index')->with('success', 'Xóa' . ' ' . $step->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('step.index')->with('faild', 'Xóa' . ' ' . $step->title . ' ' .  'không thành công');
+        }
+    }
+
+    public function restore($id)
+    {
+        $step = Step::withTrashed()->find($id);
+        $step->restore();
+        try {
+            return redirect()->route('step.index')->with('success', 'Khôi phục' . ' ' . $step->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('step.index')->with('faild', 'Khôi phục' . ' ' . $step->title . ' ' .  'không thành công');
+        }
+    }
 }
+

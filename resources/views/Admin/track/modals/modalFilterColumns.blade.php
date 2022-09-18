@@ -18,36 +18,36 @@
                         <div class="col-lg-4">
                             <label class="">Mã Số (#)</label>
                         </div>
-                        <div class="col-lg-8">
+                        {{-- <div class="col-lg-8">
                             <div class="input text"><input type="number" name="id"
                                     class="form-control filter-column f-name" value="{{ $id }}"
                                     id="id" />
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Tiêu đề</label>
                         </div>
-                        <div class="col-lg-8">
+                        {{-- <div class="col-lg-8">
                             <div class="input text"><input type="text" name="title"
                                     class="form-control filter-column f-name" value="{{ $title }}"
                                     id="title" />
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Miễn phí</label>
                         </div>
-                        <div class="col-lg-8">
+                        {{-- <div class="col-lg-8">
                             <div class="input text"><input type="boolean" name="is_free"
                                     class="form-control filter-column f-name" value="{{ $position }}"
                                     id="position" />
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                    <div class="form-group form-row filter-row">
+                    {{-- <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Chức vụ</label>
                         </div>
@@ -57,8 +57,8 @@
                                     id="position" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group form-row filter-row">
+                    </div> --}}
+                    {{-- <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Khóa học</label>
                         </div>
@@ -68,7 +68,7 @@
                                     id="course_id" />
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->

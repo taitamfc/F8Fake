@@ -1,54 +1,29 @@
 @extends('Admin.master')
 @section('content')
     <div class="page-inner">
-        <!-- .page-title-bar -->
         <header class="page-title-bar">
-            <!-- .breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Trang chủ</a>
+                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Trang Chủ</a>
                     </li>
                 </ol>
-            </nav><!-- /.breadcrumb -->
-            <!-- floating action -->
-            <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button>
-            <!-- /floating action -->
-            <!-- title and toolbar -->
+            </nav>
+            <a href="{{ route('track.index') }}" class="btn btn-success btn-floated"></a>
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Theo dõi chương học </h1><!-- .btn-toolbar -->
-                <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('track.create') }}" class="btn btn-info mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm mới</span>
-                    </a>
-                    <a href="" class="btn btn-info">
-                        <i class="fas fa-file"></i>
-                        <span class="ml-1">Xuất file excel</span>
-                    </a>
-                    {{-- @endif --}}
-                </div><!-- /.btn-toolbar -->
-            </div><!-- /title and toolbar -->
-        </header><!-- /.page-title-bar -->
-        <!-- .page-section -->
+                <h1 class="page-title mr-sm-auto">Thùng Rác</h1>
+            </div>
+        </header>
         <div class="page-section">
-            <!-- .card -->
             <div class="card card-fluid">
-                <!-- .card-header -->
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('track.index') }}">Tất Cả</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tracks.getTrashed') }}">Thùng Rác</a>
+                            <a class="nav-link " href="{{ route('track.index') }}">Tất Cả</a>
                         </li>
                     </ul>
-                </div><!-- /.card-header -->
-                <!-- .card-body -->
+                </div>
                 <div class="card-body">
-                    <!-- .form-group -->
                     <div class="form-group">
                         <form action="" method="GET" id="form-search">
                             @csrf
@@ -75,13 +50,6 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.track.modals.modalFilterColumns')
-                            {{-- @if (!count($tracks))
-                                <p class="text-success">
-                                <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả
-                                </div> --}}
-                                {{-- </p> --}}
-                            {{-- @endif --}}
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -95,48 +63,51 @@
                                 </p>
                             @endif
                         </form>
-                        <!-- .input-group -->
-                        <!-- /.input-group -->
-                    </div><!-- /.form-group -->
+                    </div>
                     <table class="table table-hover">
                         <!-- thead -->
                         <thead class="thead-">
                             <tr>
                                 <th width="50px"> # </th>
-                                <th width="100px"> Tiêu đề </th>
-                                <th width="100px"> Miễn phí </th>
-                                <th width="100px"> Chức vụ </th>
-                                <th width="100px"> Khóa học </th>
+                                <th width="100px"> Nội dung </th>
                                 <th width="50px"> Chức năng </th>
                             </tr>
                         </thead><!-- /thead -->
-                        <!-- tbody -->
                         <tbody>
+                            <tr>
                                 @foreach ($tracks as $track)
                             <tr>
-                                <th scope="row">{{ $track->id }}</th>
-                                <td>{{ $track->title }}</td>
-                                <td>{{ $track->is_free }}</td>
-                                <td>{{ $track->position }}</td>
-                                <td>{{ $track->course_id }}</td>
+                                <th scope="row"> {{ $track->id }} </th>
+                                <td> {{ $track->title }} </td>
                                 <td>
-                                    <a href="{{ route('track.edit', $track->id) }}"
-                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                    <form action="{{ route('track.destroy', $track->id) }}" style="display:inline"
+
+                                    <form action="{{ route('tracks.force_destroy', $track->id) }}" style="display:inline"
                                         method="post">
-                                        <button onclick="return confirm('Bạn có muốn xóa {{ $track->name }}không?')"
+                                        <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $track->title }} ?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf
                                         @method('delete')
                                     </form>
+                                    <span class="sr-only">Edit</span></a> <a
+                                        href="{{ route('tracks.restore', $track->id) }}"
+                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
+                                            class="sr-only">Remove</span></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div><!-- /.card-body -->
-            </div><!-- /.card -->
+                    {{-- </div> --}}
+                </div>
+            </div>
         </div>
-            {!! $tracks->links() !!}
-        @endsection
+        {{-- <nav aria-label="Page navigation example">
+            <div class='float:right'>
+                <ul class="pagination">
+                    <span aria-hidden="true"></span>
+                </ul>
+            </div>
+        </nav> --}}
+        {{-- {!! $tracks->links() !!} --}}
+    @endsection

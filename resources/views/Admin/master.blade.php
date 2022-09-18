@@ -131,9 +131,9 @@
     </script>
     <script>
         jQuery(document).ready(function() {
-          if( $('#blah').hide()){
-            $('#blah').hide();
-          }
+            if ($('#blah').hide()) {
+                $('#blah').hide();
+            }
             jQuery('#imgInp').change(function() {
                 $('#blah').show();
                 const file = jQuery(this)[0].files;
@@ -143,7 +143,6 @@
                 }
             });
         });
-
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>

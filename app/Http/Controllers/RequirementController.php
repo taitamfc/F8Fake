@@ -36,8 +36,6 @@ class RequirementController extends Controller
         }
         if ($key) {
             $query->orWhere('id', $key);
-            // $query->orWhere('content', 'LIKE', '%' . $key . '%');
-            // $query->orWhere('course_id', 'LIKE', '%' . $key . '%');
         }
         $query->orderBy('id', 'DESC');
         $requirements = $query->paginate(5);

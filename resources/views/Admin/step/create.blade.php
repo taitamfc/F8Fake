@@ -57,7 +57,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <p>Loại video</p>
+                                <label>Loại video</label>
                                 <select class="form-select @error('video_type') @enderror" name="video_type"
                                     aria-label="Default select example">
                                     <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled selected>
@@ -86,15 +86,18 @@
                                     <div style="color: red">*{{ $message }}</div>
                                 @enderror
                             </div>
-                            <input accept="image/*" type='file' id="imgInp" name="inputFile"
-                                class="form-control @error('image') @enderror" value="{!! old('image') !!}" />
-                            <img type="hidden" width="200px" height="200px" id="blah" src=""
-                                alt="" />
-                            @error('image')
-                                <div style="color: red">*{{ $message }}</div>
-                            @enderror
                             <div class="form-group">
-                                <p>Video</p>
+                                <label>Hình ảnh</label>
+                                <input accept="image/*" type='file' id="imgInp" name="image"
+                                    class="form-control @error('image') @enderror" />
+                                <img type="hidden" width="100px" height="100px" id="blah" src=""
+                                    alt="" />
+                                @error('image')
+                                    <div style="color: red">*{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Video</label>
                                 <select class="form-select @error('video') @enderror" name="video"
                                     aria-label="Default select example">
                                     <option value="0" {{ old('video') == 0 ? 'selected' : '' }} disabled selected>

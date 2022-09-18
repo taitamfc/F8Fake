@@ -44,10 +44,6 @@ class TrackController extends Controller
         }
         if ($key) {
             $query->orWhere('id', $key);
-            // $query->orWhere('title', 'LIKE', '%' . $key . '%');
-            // $query->orWhere('is_free', 'LIKE', '%' . $key . '%');
-            // $query->orWhere('position', 'LIKE', '%' . $key . '%');
-            // $query->orWhere('course_id', $key);
         }
         $query->orderBy('id', 'DESC');
         $tracks = $query->paginate(5);
@@ -164,38 +160,37 @@ class TrackController extends Controller
         }
     }
 
-    public function delete($id)
+    public function getTrashed(Request $request)
     {
-        $track = $this->Track->find($id);
-        try {
-            $track->delete();
-            return true;
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return false;
-        }
-        return $track;
-    }
-
-    public function getTrashed()
-    {
-        $query = $this->Track->onlyTrashed();
-        $query = $this->orderBy('id', 'desc');
-        $track = $query->paginate(5);
-        return $track;
-    }
-
-    public function restore($id)
-    {
-        $track = $this->Track->withTrashed()->findOrFail($id);
-        $track->restore();
-        return $track;
+        $tracks = Track::onlyTrashed()->latest()->get();
+        $params = [
+            'tracks' => $tracks,
+        ];
+        return view('admin.track.trash', $params);
     }
 
     public function force_destroy($id)
     {
-        $track = $this->Track->onlyTrashed()->findOrFail($id);
-        $track->force_Delete();
-        return $track;
+        $track = Track::withTrashed()->findOrFail($id);
+        $track->forceDelete();
+        try {
+            $track->forceDelete();
+            return redirect()->route('track.index')->with('success', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('track.index')->with('faild', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
+        }
+    }
+
+    public function restore($id)
+    {
+        $track = Track::withTrashed()->find($id);
+        $track->restore();
+        try {
+            return redirect()->route('track.index')->with('success', 'Khôi phục' . ' ' . $track->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('track.index')->with('faild', 'Khôi phục' . ' ' . $track->title . ' ' .  'không thành công');
+        }
     }
 }

@@ -24,6 +24,7 @@ Route::resource('requirement', RequirementController::class);
 Route::resource('step', StepController::class);
 Route::resource('track', TrackController::class);
 
-Route::get('track/restore', [TrackController::class, 'getTrashed'])->name('track.getTrashed');
-Route::get('track/restore/{id}', [TrackController::class, 'restore'])->name('track.restore');
-Route::delete('track/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('track.force_destroy');
+
+Route::get('tracks/trash', [TrackController::class, 'getTrashed'])->name('tracks.getTrashed');
+Route::get('tracks/restore/{id}', [TrackController::class, 'restore'])->name('tracks.restore');
+Route::delete('tracks/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('tracks.force_destroy');
