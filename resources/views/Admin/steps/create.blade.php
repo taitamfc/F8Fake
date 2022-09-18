@@ -1,4 +1,4 @@
-@extends('Admin.master')
+@extends('admin.master')
 @section('content')
     <div class="page-inner">
         <!-- .page-title-bar -->
@@ -21,7 +21,7 @@
                         <h4 class="card-title"> Thông tin cơ bản </h4>
 
                         <!-- form -->
-                        <form action="{{ route('step.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('steps.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -63,12 +63,12 @@
                                     <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled selected>
                                         --Vui
                                         lòng chọn--</option>
-                                    <option value="1" {{ old('video_type') == 1 ? 'selected' : '' }}>1080p</option>
-                                    <option value="2" {{ old('video_type') == 2 ? 'selected' : '' }}>720p</option>
-                                    <option value="3" {{ old('video_type') == 3 ? 'selected' : '' }}>480p</option>
-                                    <option value="4" {{ old('video_type') == 4 ? 'selected' : '' }}>360p</option>
-                                    <option value="5" {{ old('video_type') == 5 ? 'selected' : '' }}>240p</option>
-                                    <option value="6" {{ old('video_type') == 6 ? 'selected' : '' }}>144p</option>
+                                    <option value="1080p" {{ old('video_type') == '1080p' ? 'selected' : '' }}>1080p</option>
+                                    <option value="720p" {{ old('video_type') == '720p' ? 'selected' : '' }}>720p</option>
+                                    <option value="480p" {{ old('video_type') == '480p' ? 'selected' : '' }}>480p</option>
+                                    <option value="360p" {{ old('video_type') == '360p' ? 'selected' : '' }}>360p</option>
+                                    <option value="240p" {{ old('video_type') == '240p' ? 'selected' : '' }}>240p</option>
+                                    <option value="144p" {{ old('video_type') == '144p' ? 'selected' : '' }}>144p</option>
                                     {{-- @foreach ($steps as $step)
                                         <option value="">{{ $step->video_type }}>{{ $step->name }}</option>
                                     @endforeach --}}
@@ -102,9 +102,9 @@
                                     aria-label="Default select example">
                                     <option value="0" {{ old('video') == 0 ? 'selected' : '' }} disabled selected>
                                         --Vui lòng chọn--</option>
-                                    <option value="1" {{ old('video') == 1 ? 'selected' : '' }}>Youtube</option>
-                                    <option value="2" {{ old('video') == 2 ? 'selected' : '' }}>Facebook</option>
-                                    <option value="3" {{ old('video') == 3 ? 'selected' : '' }}>Tiktok</option>
+                                    <option value="Youtube" {{ old('video') == 'Youtube' ? 'selected' : '' }}>Youtube</option>
+                                    <option value="Facebook" {{ old('video') == 'Facebook' ? 'selected' : '' }}>Facebook</option>
+                                    <option value="Facebook" {{ old('video') == 'Tiktok' ? 'selected' : '' }}>Tiktok</option>
                                     {{-- @foreach ($steps as $step)
                                         <option value="">{{ $step->video }}{{ $step->name }}</option>
                                     @endforeach --}}
@@ -133,7 +133,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <a class="btn btn-secondary float-left" href="{{ route('step.index') }}">Hủy</a>
+                                <a class="btn btn-secondary float-left" href="{{ route('steps.index') }}">Hủy</a>
                                 <button class="btn btn-info float-right" type="submit">Lưu</button>
                             </div>
                         </form><!-- /form -->

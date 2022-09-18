@@ -57,7 +57,7 @@ class TrackController extends Controller
             'key'       => $key,
             'tracks'    => $tracks,
         ];
-        return view('Admin.track.index', $params);
+        return view('admin.tracks.index', $params);
     }
 
     /**
@@ -67,7 +67,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        return view('Admin.track.create');
+        return view('admin.tracks.create');
     }
 
     /**
@@ -86,11 +86,11 @@ class TrackController extends Controller
         $track->course_id = $request->course_id;
         try {
             $track->save();
-            return redirect()->route('track.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' thành công');
+            return redirect()->route('tracks.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('track.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' không thành công');
+            return redirect()->route('tracks.index')->with('failed', 'Thêm' . ' ' . $request->title . ' ' .  ' không thành công');
         }
     }
 
@@ -116,7 +116,7 @@ class TrackController extends Controller
 
         $tracks = Track::all();
         $tracks = Track::find($id);
-        return view('Admin.track.edit', compact('tracks'));
+        return view('admin.tracks.edit', compact('tracks'));
     }
 
     /**
@@ -135,10 +135,10 @@ class TrackController extends Controller
         $track->course_id = $request->course_id;
         try {
             $track->save();
-            return redirect()->route('track.index')->with('success', 'Sửa' . ' ' . $request->title . ' ' .  'thành công');
+            return redirect()->route('tracks.index')->with('success', 'Sửa' . ' ' . $request->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('track.index')->with('failed', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
+            return redirect()->route('tracks.index')->with('failed', 'Sửa' . ' ' . $request->title . ' ' .  'không thành công');
         }
     }
 
@@ -153,10 +153,10 @@ class TrackController extends Controller
         $track = $tracks->find($id);
         try {
             $track->delete();
-            return redirect()->route('track.index')->with('success', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
+            return redirect()->route('tracks.index')->with('success', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('track.index')->with('failed', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
+            return redirect()->route('tracks.index')->with('failed', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
         }
     }
 
@@ -166,7 +166,7 @@ class TrackController extends Controller
         $params = [
             'tracks' => $tracks,
         ];
-        return view('admin.track.trash', $params);
+        return view('admin.tracks.trash', $params);
     }
 
     public function force_destroy($id)
@@ -175,10 +175,10 @@ class TrackController extends Controller
         $track->forceDelete();
         try {
             $track->forceDelete();
-            return redirect()->route('track.index')->with('success', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
+            return redirect()->route('tracks.index')->with('success', 'Xóa' . ' ' . $track->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('track.index')->with('faild', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
+            return redirect()->route('tracks.index')->with('failed', 'Xóa' . ' ' . $track->title . ' ' .  'không thành công');
         }
     }
 
@@ -187,10 +187,10 @@ class TrackController extends Controller
         $track = Track::withTrashed()->find($id);
         $track->restore();
         try {
-            return redirect()->route('track.index')->with('success', 'Khôi phục' . ' ' . $track->title . ' ' .  'thành công');
+            return redirect()->route('tracks.index')->with('success', 'Khôi phục' . ' ' . $track->title . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('track.index')->with('faild', 'Khôi phục' . ' ' . $track->title . ' ' .  'không thành công');
+            return redirect()->route('tracks.index')->with('failed', 'Khôi phục' . ' ' . $track->title . ' ' .  'không thành công');
         }
     }
 }

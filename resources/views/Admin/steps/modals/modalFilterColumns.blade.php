@@ -14,48 +14,46 @@
                 <!-- #filter-columns -->
                 <div id="filter-columns">
                     <!-- .form-row -->
-                    <div class="form-group form-row filter-row">
+                    {{-- <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Mã số (#)</label>
+                            <label class="">Mã Số (#)</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="number" name="id"
                                     class="form-control filter-column f-name"
-                                    value=" {{"$id"}} "
-                                    id="id" />
+                                    value=" {{"$id"}} " id="id" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group form-row filter-row">
+                    </div> --}}
+                    {{-- <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Nội dung</label>
+                            <label class="">Tiêu đề</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="content"
+                            <div class="input text"><input type="string" name="title"
                                     class="form-control filter-column f-name"
-                                    value=" {{"$content"}} "
-                                    id="content" />
+                                    value=" {{"$title"}} " id="title" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group form-row filter-row">
+                    </div> --}}
+                    {{-- <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Khóa học</label>
+                            <label class="">Tên chính</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="course_id"
+                            <div class="input text"><input type="string" name="original_name"
                                     class="form-control filter-column f-name"
-                                    value=" {{"$course_id"}}"
-                                    id="course_id" /></div>
+                                    value=" {{"$original_name"}} " id="original_name" />
+                            </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->
             <!-- .modal-footer -->
             <div class="modal-footer justify-content-start">
                 <button type="submit" class="btn btn-primary" id="apply-filter">Áp dụng</button>
-                <a href="{{ route('requirement.index') }}" class="btn btn-dark ">Đặt lại</a>
+                <a href="{{ route('steps.index') }}" class="btn btn-dark ">Đặt lại</a>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary ml-auto"
                     id="clear-filter">Hủy</button>
             </div><!-- /.modal-footer -->

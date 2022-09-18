@@ -1,4 +1,4 @@
-@extends('Admin.master')
+@extends('admin.master')
 @section('content')
     <div class="page-inner">
         <header class="page-title-bar">
@@ -9,7 +9,7 @@
                     </li>
                 </ol>
             </nav>
-            <a href="{{ route('track.index') }}" class="btn btn-success btn-floated"></a>
+            <a href="{{ route('requirements.index') }}" class="btn btn-success btn-floated"></a>
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto">Thùng Rác</h1>
             </div>
@@ -19,7 +19,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ route('track.index') }}">Tất Cả</a>
+                            <a class="nav-link " href="{{ route('requirements.index') }}">Tất Cả</a>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('Admin.track.modals.modalFilterColumns')
+                            @include('Admin.requirements.modals.modalFilterColumns')
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -70,27 +70,29 @@
                             <tr>
                                 <th width="50px"> # </th>
                                 <th width="100px"> Nội dung </th>
+                                <th width="100px"> Mã khóa học </th>
                                 <th width="50px"> Chức năng </th>
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
                             <tr>
-                                @foreach ($tracks as $track)
+                                @foreach ($requirements as $requirement)
                             <tr>
-                                <th scope="row"> {{ $track->id }} </th>
-                                <td> {{ $track->title }} </td>
+                                <th scope="row"> {{ $requirement->id }} </th>
+                                <td> {{ $requirement->content }} </td>
+                                <td> {{ $requirement->course_id }} </td>
                                 <td>
 
-                                    <form action="{{ route('tracks.force_destroy', $track->id) }}" style="display:inline"
+                                    <form action="{{ route('requirements.force_destroy', $requirement->id) }}" style="display:inline"
                                         method="post">
-                                        <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $track->title }} ?')"
+                                        <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $requirement->content }} ?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf
                                         @method('delete')
                                     </form>
                                     <span class="sr-only">Edit</span></a> <a
-                                        href="{{ route('tracks.restore', $track->id) }}"
+                                        href="{{ route('requirements.restore', $requirement->id) }}"
                                         class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
                                             class="sr-only">Remove</span></a>
                                 </td>

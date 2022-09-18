@@ -1,29 +1,54 @@
-@extends('Admin.master')
+@extends('admin.master')
 @section('content')
     <div class="page-inner">
+        <!-- .page-title-bar -->
         <header class="page-title-bar">
+            <!-- .breadcrumb -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Trang Chủ</a>
+                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Trang chủ</a>
                     </li>
                 </ol>
-            </nav>
-            <a href="{{ route('track.index') }}" class="btn btn-success btn-floated"></a>
+            </nav><!-- /.breadcrumb -->
+            <!-- floating action -->
+            <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button>
+            <!-- /floating action -->
+            <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto">Thùng Rác</h1>
-            </div>
-        </header>
+                <h1 class="page-title mr-sm-auto"> Danh sách khóa học </h1><!-- .btn-toolbar -->
+                <div class="btn-toolbar">
+                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
+                    <a href="{{ route('steps.create') }}" class="btn btn-info mr-2">
+                        <i class="fa-solid fa fa-plus"></i>
+                        <span class="ml-1">Thêm mới</span>
+                    </a>
+                    <a href="" class="btn btn-info">
+                        <i class="fas fa-file"></i>
+                        <span class="ml-1">Xuất file excel</span>
+                    </a>
+                    {{-- @endif --}}
+                </div><!-- /.btn-toolbar -->
+            </div><!-- /title and toolbar -->
+        </header><!-- /.page-title-bar -->
+        <!-- .page-section -->
         <div class="page-section">
+            <!-- .card -->
             <div class="card card-fluid">
+                <!-- .card-header -->
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ route('step.index') }}">Tất Cả</a>
+                            <a class="nav-link active " href="{{ route('steps.index') }}">Tất Cả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('steps.getTrashed') }}">Thùng Rác</a>
                         </li>
                     </ul>
-                </div>
+                </div><!-- /.card-header -->
+                <!-- .card-body -->
                 <div class="card-body">
+                    <!-- .form-group -->
                     <div class="form-group">
                         <form action="" method="GET" id="form-search">
                             @csrf
@@ -49,7 +74,14 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('Admin.step.modals.modalFilterColumns')
+                            @include('admin.steps.modals.modalFilterColumns')
+                            @if (!count($steps))
+                                <p class="text-success">
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
+                                    không tìm thấy kết quả
+                                </div>
+                                </p>
+                            @endif
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -63,7 +95,9 @@
                                 </p>
                             @endif
                         </form>
-                    </div>
+                        <!-- .input-group -->
+                        <!-- /.input-group -->
+                    </div><!-- /.form-group -->
                     <table class="table table-hover">
                         <!-- thead -->
                         <thead class="thead-">
@@ -72,49 +106,52 @@
                                 <th width="150px"> Tiêu đề </th>
                                 <th width="150px"> Nội dung </th>
                                 <th width="150px"> Mô tả </th>
+                                {{-- <th width="20px"> Thời gian </th> --}}
+                                {{-- <th width="50px"> Loại video </th> --}}
                                 <th width="150px"> Tên chính </th>
+                                {{-- <th width="30px"> Video </th> --}}
+                                {{-- <th width="10px"> Liên kết ảnh </th>
+                                <th width="10px"> Liên kết video </th> --}}
                                 <th width="50px"> Hình ảnh </th>
                                 <th width="100px"> Chức năng </th>
                             </tr>
                         </thead><!-- /thead -->
+                        <!-- tbody -->
                         <tbody>
                             <tr>
                                 @foreach ($steps as $step)
                             <tr>
-                                <th scope="row"> {{ $step->id }} </th>
+                                <th scope="row">{{ $step->id }}</th>
                                 <td>{{ $step->title }}</td>
                                 <td>{{ $step->content }}</td>
                                 <td>{{ $step->description }}</td>
+                                {{-- <td>{{ $step->duration }}</td> --}}
+                                {{-- <td>{{ $step->video_type }}</td> --}}
                                 <td>{{ $step->original_name }}</td>
+                                {{-- <td>{{ $step->video }}</td> --}}
+                                {{-- <td>{{ $step->image_url }}</td>
+                                <td>{{ $step->video_url }}</td> --}}
                                 <td>
-
-                                    <form action="{{ route('steps.force_destroy', $step->id) }}" style="display:inline"
+                                    <img style="width:100px; height:100px" src="{{ asset($step->image) }}">
+                                </td>
+                                <td>
+                                    <a href="{{ route('steps.edit', $step->id) }}"
+                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
+                                    <form action="{{ route('steps.destroy', $step->id) }}" style="display:inline"
                                         method="post">
-                                        <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $step->title }} ?')"
+                                        <button onclick="return confirm('Bạn có muốn xóa {{ $step->name }}không?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf
                                         @method('delete')
                                     </form>
-                                    <span class="sr-only">Edit</span></a> <a
-                                        href="{{ route('steps.restore', $step->id) }}"
-                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
-                                            class="sr-only">Remove</span></a>
                                 </td>
                             </tr>
                             @endforeach
-                        </tbody>
+
+                        </tbody><!-- /tbody -->
                     </table>
-                    {{-- </div> --}}
-                </div>
-            </div>
-        </div>
-        {{-- <nav aria-label="Page navigation example">
-            <div class='float:right'>
-                <ul class="pagination">
-                    <span aria-hidden="true"></span>
-                </ul>
-            </div>
-        </nav> --}}
-        {{-- {!! $tracks->links() !!} --}}
-    @endsection
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            {!! $steps->links() !!}
+        @endsection

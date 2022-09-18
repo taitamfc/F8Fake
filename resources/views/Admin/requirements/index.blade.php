@@ -1,4 +1,4 @@
-@extends('Admin.master')
+@extends('admin.master')
 @section('content')
     <div class="page-inner">
         <!-- .page-title-bar -->
@@ -16,10 +16,10 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Theo dõi chương học </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách yêu cầu </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('track.create') }}" class="btn btn-info mr-2">
+                    <a href="{{ route('requirements.create') }}" class="btn btn-info mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
                     </a>
@@ -39,10 +39,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('track.index') }}">Tất Cả</a>
+                            <a class="nav-link active " href="{{ route('requirements.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tracks.getTrashed') }}">Thùng Rác</a>
+                            <a class="nav-link" href="{{ route('requirements.getTrashed') }}">Thùng Rác</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
@@ -74,14 +74,14 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('Admin.track.modals.modalFilterColumns')
-                            {{-- @if (!count($tracks))
+                            @include('Admin.requirements.modals.modalFilterColumns')
+                            @if (!count($requirements))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
                                     không tìm thấy kết quả
-                                </div> --}}
-                                {{-- </p> --}}
-                            {{-- @endif --}}
+                                </div>
+                                </p>
+                            @endif
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -102,41 +102,38 @@
                         <!-- thead -->
                         <thead class="thead-">
                             <tr>
-                                <th width="50px"> # </th>
-                                <th width="100px"> Tiêu đề </th>
-                                <th width="100px"> Miễn phí </th>
-                                <th width="100px"> Chức vụ </th>
-                                <th width="100px"> Khóa học </th>
-                                <th width="50px"> Chức năng </th>
+                                <th width="100px"> # </th>
+                                <th width="200px"> Nội dung </th>
+                                <th width="200px"> Khóa học </th>
+                                <th width="50px"> Chức năng</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                                @foreach ($tracks as $track)
-                            <tr>
-                                <th scope="row">{{ $track->id }}</th>
-                                <td>{{ $track->title }}</td>
-                                <td>{{ $track->is_free }}</td>
-                                <td>{{ $track->position }}</td>
-                                <td>{{ $track->course_id }}</td>
-                                <td>
-                                    <a href="{{ route('track.edit', $track->id) }}"
-                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                    <form action="{{ route('track.destroy', $track->id) }}" style="display:inline"
-                                        method="post">
-                                        <button onclick="return confirm('Bạn có muốn xóa {{ $track->name }}không?')"
-                                            class="btn btn-sm btn-icon btn-secondary"><i
-                                                class="far fa-trash-alt"></i></button>
-                                        @csrf
-                                        @method('delete')
-                                    </form>
-                                </td>
-                            </tr>
+                            @foreach ($requirements as $requirement)
+                                <tr>
+                                    <th scope="row">{{ $requirement->id }}</th>
+                                    <td>{{ $requirement->content }}</td>
+                                    <td>{{ $requirement->course_id }}</td>
+                                    <td>
+                                        <a href="{{ route('requirements.edit', $requirement->id) }}"
+                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
+                                        <form action="{{ route('requirements.destroy', $requirement->id) }}"
+                                            style="display:inline" method="post">
+                                            <button
+                                                onclick="return confirm('Bạn có muốn xóa {{ $requirement->name }}không?')"
+                                                class="btn btn-sm btn-icon btn-secondary"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+                                    </td>
+
+                                </tr>
                             @endforeach
-                        </tbody>
+                        </tbody><!-- /tbody -->
                     </table>
                 </div><!-- /.card-body -->
             </div><!-- /.card -->
-        </div>
-            {!! $tracks->links() !!}
+            {!! $requirements->links() !!}
         @endsection

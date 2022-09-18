@@ -67,10 +67,10 @@
       <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
       <![endif]-->
         <!-- .app-header -->
-        @include('Admin.layout.header')
+        @include('admin.layouts.header')
         <!-- /.app-header -->
         <!-- .app-aside -->
-        @include('Admin.layout.sidebar')
+        @include('admin.layouts.sidebar')
         <!-- /.app-aside -->
         <!-- .app-main -->
         <main class="app-main">
@@ -144,6 +144,15 @@
             });
         });
     </script>
+    <script>
+        $("document").ready(function() {
+            setTimeout(function() {
+                $("div.alert").remove();
+            }, 3000); // 3 giây
+
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 

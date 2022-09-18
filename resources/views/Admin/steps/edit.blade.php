@@ -1,4 +1,4 @@
-@extends('Admin.master')
+@extends('admin.master')
 @section('content')
     <div class="page-inner">
         <!-- .page-title-bar -->
@@ -21,7 +21,7 @@
                         <h4 class="card-title"> Thông tin cơ bản </h4>
 
                         <!-- form -->
-                        <form action="{{ route('step.update', $steps->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('steps.update', $steps->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <!-- .form-group -->
@@ -95,7 +95,7 @@
                                                         <!-- .form-group -->
                                                         <div class="form-group">
                                                             <a class="btn btn-secondary float-left"
-                                                                href="{{ route('step.index') }}">Hủy</a>
+                                                                href="{{ route('steps.index') }}">Hủy</a>
                                                             <button class="btn btn-info float-right"
                                                                 type="submit">Lưu</button>
                                                         </div>

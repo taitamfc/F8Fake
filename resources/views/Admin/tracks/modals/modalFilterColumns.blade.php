@@ -75,7 +75,7 @@
             <!-- .modal-footer -->
             <div class="modal-footer justify-content-start">
                 <button type="submit" class="btn btn-primary" id="apply-filter">Áp dụng</button>
-                <a href="{{ route('track.index') }}" class="btn btn-dark ">Đặt lại</a>
+                <a href="{{ route('tracks.index') }}" class="btn btn-dark ">Đặt lại</a>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary ml-auto"
                     id="clear-filter">Hủy</button>
             </div><!-- /.modal-footer -->

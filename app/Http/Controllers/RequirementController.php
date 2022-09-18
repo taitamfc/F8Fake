@@ -46,7 +46,7 @@ class RequirementController extends Controller
             'key'       => $key,
             'requirements'    => $requirements,
         ];
-        return view('Admin.requirement.index', $params);
+        return view('admin.requirements.index', $params);
     }
 
     /**
@@ -56,7 +56,7 @@ class RequirementController extends Controller
      */
     public function create()
     {
-        return view('Admin.requirement.create');
+        return view('admin.requirements.create');
     }
 
     /**
@@ -72,11 +72,11 @@ class RequirementController extends Controller
         $requirement->course_id = $request->course_id;
         try {
             $requirement->save();
-            return redirect()->route('requirement.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' thành công');
+            return redirect()->route('requirements.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('failed', 'Thêm mới thất bại');
-            return redirect()->route('requirement.index')->with('failed', 'Thêm' . ' ' . $request->content . ' ' .  ' không thành công');
+            return redirect()->route('requirements.index')->with('failed', 'Thêm' . ' ' . $request->content . ' ' .  ' không thành công');
         }
     }
 
@@ -101,7 +101,7 @@ class RequirementController extends Controller
     {
         $requirements = Requirement::all();
         $requirements = Requirement::find($id);
-        return view('Admin.requirement.edit', compact('requirements'));
+        return view('Admin.requirements.edit', compact('requirements'));
     }
 
     /**
@@ -118,10 +118,10 @@ class RequirementController extends Controller
         $requirement->course_id = $request->course_id;
         try {
             $requirement->save();
-            return redirect()->route('requirement.index')->with('success', 'Sửa' . ' ' . $request->content . ' ' .  'thành công');
+            return redirect()->route('requirements.index')->with('success', 'Sửa' . ' ' . $request->content . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('requirement.index')->with('failed', 'Sửa' . ' ' . $request->content . ' ' .  'không thành công');
+            return redirect()->route('requirements.index')->with('failed', 'Sửa' . ' ' . $request->content . ' ' .  'không thành công');
         }
     }
 
@@ -136,10 +136,43 @@ class RequirementController extends Controller
         $requirement = $requirements->find($id);
         try {
             $requirement->delete();
-            return redirect()->route('requirement.index')->with('success', 'Xóa' . ' ' . $requirement->content . ' ' .  'thành công');
+            return redirect()->route('requirements.index')->with('success', 'Xóa' . ' ' . $requirement->content . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('requirement.index')->with('failed', 'Xóa' . ' ' . $requirement->content . ' ' .  'không thành công');
+            return redirect()->route('requirements.index')->with('failed', 'Xóa' . ' ' . $requirement->content . ' ' .  'không thành công');
+        }
+    }
+    public function getTrashed(Request $request)
+    {
+        $requirements = Requirement::onlyTrashed()->latest()->get();
+        $params = [
+            'requirements' => $requirements,
+        ];
+        return view('admin.requirements.trash', $params);
+    }
+
+    public function force_destroy($id)
+    {
+        $requirement = Requirement::withTrashed()->findOrFail($id);
+        $requirement->forceDelete();
+        try {
+            $requirement->forceDelete();
+            return redirect()->route('requirements.index')->with('success', 'Xóa' . ' ' . $requirement->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('requirements.index')->with('failed', 'Xóa' . ' ' . $requirement->title . ' ' .  'không thành công');
+        }
+    }
+
+    public function restore($id)
+    {
+        $requirement = Requirement::withTrashed()->find($id);
+        $requirement->restore();
+        try {
+            return redirect()->route('requirements.index')->with('success', 'Khôi phục' . ' ' . $requirement->title . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('requirements.index')->with('failed', 'Khôi phục' . ' ' . $requirement->title . ' ' .  'không thành công');
         }
     }
 }

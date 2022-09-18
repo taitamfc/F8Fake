@@ -17,14 +17,25 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/dashboard', function () {
-    return view('Admin.master');
+    return view('admin.master');
 });
 
-Route::resource('requirement', RequirementController::class);
-Route::resource('step', StepController::class);
-Route::resource('track', TrackController::class);
+Route::resource('admin/requirements', RequirementController::class);
+Route::resource('admin/steps', StepController::class);
+Route::resource('admin/tracks', TrackController::class);
 
-
-Route::get('tracks/trash', [TrackController::class, 'getTrashed'])->name('tracks.getTrashed');
-Route::get('tracks/restore/{id}', [TrackController::class, 'restore'])->name('tracks.restore');
-Route::delete('tracks/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('tracks.force_destroy');
+Route::prefix('tracks')->group(function () {
+    Route::get('/trash', [TrackController::class, 'getTrashed'])->name('tracks.getTrashed');
+    Route::get('/restore/{id}', [TrackController::class, 'restore'])->name('tracks.restore');
+    Route::delete('/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('tracks.force_destroy');
+});
+Route::prefix('steps')->group(function () {
+    Route::get('/trash', [StepController::class, 'getTrashed'])->name('steps.getTrashed');
+    Route::get('/restore/{id}', [StepController::class, 'restore'])->name('steps.restore');
+    Route::delete('/force_destroy/{id}', [StepController::class, 'force_destroy'])->name('steps.force_destroy');
+});
+Route::prefix('requirements')->group(function () {
+    Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
+    Route::get('/restore/{id}', [RequirementController::class, 'restore'])->name('requirements.restore');
+    Route::delete('/force_destroy/{id}', [RequirementController::class, 'force_destroy'])->name('requirements.force_destroy');
+});

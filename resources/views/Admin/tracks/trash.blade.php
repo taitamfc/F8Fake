@@ -1,4 +1,4 @@
-@extends('Admin.master')
+@extends('admin.master')
 @section('content')
     <div class="page-inner">
         <header class="page-title-bar">
@@ -9,7 +9,7 @@
                     </li>
                 </ol>
             </nav>
-            <a href="{{ route('track.index') }}" class="btn btn-success btn-floated"></a>
+            <a href="{{ route('tracks.index') }}" class="btn btn-success btn-floated"></a>
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto">Thùng Rác</h1>
             </div>
@@ -19,7 +19,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link " href="{{ route('track.index') }}">Tất Cả</a>
+                            <a class="nav-link " href="{{ route('tracks.index') }}">Tất Cả</a>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('Admin.track.modals.modalFilterColumns')
+                            @include('admin.tracks.modals.modalFilterColumns')
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -60,6 +60,7 @@
                                 <p class="text-danger">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
                                     {{ Session::get('failed') }}</div>
+
                                 </p>
                             @endif
                         </form>
