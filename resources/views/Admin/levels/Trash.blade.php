@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách các cấp độ </h1>
+                <h1 class="page-title mr-sm-auto"> Danh sách các cấp độ đã xóa </h1>
                 <div class="btn-toolbar">
                     <a href="{{ route('levels.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
@@ -39,10 +39,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('levels.index') }}">Tất Cả</a>
+                            <a class="nav-link  " href="{{ route('levels.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('levels.trash') }}">Thùng Rác</a>
+                            <a class="nav-link active" href="">Thùng Rác</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
@@ -111,14 +111,21 @@
                                 <th scope="row">{{ $level->id }}</th>
                                 <td>{{ $level->title }}</td>
                                 <td>
-                                    <form action="{{ route('levels.SoftDeletes', $level->id) }}" method="post">
-                                        <a href="{{ route('levels.edit', $level->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
+
+                                </td>
+                                <td>
+                                    <form action="{{ route('levels.destroy', $level->id) }}" method="post">
                                         @csrf
-                                        @method('PUT')
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                 class="far fa-trash-alt"></i></button>
+                                    </form>
+                                    <form action="{{ route('levels.RestoreDelete', $level->id) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                class="bi bi-arrow-counterclockwise"></i></button>
                                     </form>
                                 </td>
                             </tr>

@@ -20,25 +20,22 @@ class LevelController extends Controller
      */
     public function index(Request $request)
     {
-        //Lấy params trên url
         $key        = $request->key ?? '';
         $title      = $request->title ?? '';
         $id         = $request->id ?? '';
 
-        // thực hiện query
         $query = Level::query(true);
         if($title){
-            $query->where('title','LIKE','%'.$title.'%');
+            $query->where('title','LIKE','%'.$title.'%')->where('deleted_at', '=', null);
         }
         if($id){
-            $query->where('id',$id);
+            $query->where('id',$id)->where('deleted_at', '=', null);
         }
         if($key){
-            $query->orWhere('id',$key);
-            $query->orWhere('title','LIKE','%'.$key.'%');
+            $query->orWhere('id',$key)->where('deleted_at', '=', null);
+            $query->orWhere('title','LIKE','%'.$key.'%')->where('deleted_at', '=', null);
         }
-        $levels = $query->paginate(5);
-
+        $levels = $query->where('deleted_at', '=', null)->paginate(5);
         $params = [
             'f_id'        => $id,
             'f_title'     => $title,
@@ -48,11 +45,7 @@ class LevelController extends Controller
         return view('Admin.levels.index', $params) ;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('Admin.levels.create');
@@ -66,18 +59,16 @@ class LevelController extends Controller
      */
     public function store(StoreLevelRequest $request)
     {
-
         try {
             Level::create([
                 'title' => $request->title,
             ]);
             Session::flash('success','thêm mới thanh công');
             return redirect()->route('levels.index')->with('success', 'Thêm' . ' ' . $request->title . ' ' .  ' mới thành công');
-
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            Session::flash('failed','Thêm mới thất bại');
-            return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            Session::flash('error','Thêm mới thất bại');
+            return redirect()->route('levels.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
 
@@ -120,22 +111,18 @@ class LevelController extends Controller
             'message' => 'Chỉnh sửa danh mục thành công',
             'alert-type' => 'success'
         );
+        Session::flash('success','thêm mới thanh công');
         return redirect()->route('levels.index')->with($notification);
         try {
             $level->update([
                 'title' => $request->title
             ]);
-            $notification = array(
-                'message' => 'Chỉnh sửa danh mục thành công',
-                'alert-type' => 'success'
-            );
-            return redirect()->route('levels.index')->with($notification);
-
-
+            Session::flash('success','cập nhật thành công thanh công');
+            return redirect()->route('levels.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            Session::flash('failed','Thêm mới thất bại');
-            return redirect()->route('track.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            Session::flash('error','Thêm mới thất bại');
+            return redirect()->route('levels.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
 
@@ -145,16 +132,78 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Level $level)
+    public function destroy($id)
     {
        try {
-        $level->delete();
-        return redirect()->route('levels.index');
+        Level::findOrFail($id)->delete();
+        Session::flash('success','Xóa thanh công');
+        return redirect()->route('levels.trash');
     } catch (\Exception $e) {
+
         Log::error($e->getMessage());
-        Session::flash('failed','Thêm mới thất bại');
-        return redirect()->route('track.index')->with('error', 'xóa không thành công');
+        Session::flash('error','xóa thất bại ');
+        return redirect()->route('levels.trash')->with('error', 'xóa không thành công');
     }
+    }
+
+    function SoftDeletes($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $Level = Level::findOrFail($id);
+        $Level->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $Level->save();
+            Session::flash('success', 'Xóa Thành công');
+            return redirect()->route('levels.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('levels.index')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function RestoreDelete($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $Level = Level::findOrFail($id);
+        $Level->deleted_at = null;
+        try {
+            $Level->save();
+            Session::flash('success', 'Khôi phục ' . $Level->title . ' thành công');
+            return redirect()->route('levels.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('levels.trash')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function trash(Request $request)
+    {
+        $key        = $request->key ?? '';
+        $title      = $request->title ?? '';
+        $id         = $request->id ?? '';
+        $query = Level::query(true);
+        if ($title) {
+            $query->where('title', 'LIKE', '%' . $title . '%')->where('deleted_at', '!=', null);
+        }
+        if ($id) {
+            $query->where('id', $id)->where('deleted_at', '!=', null);
+        }
+        if ($key) {
+
+            $query->orWhere('id', $key)->where('deleted_at', '!=', null);
+            $query->orWhere('content', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+        }
+        $levels = $query->where('deleted_at', '!=', null)->paginate(5);
+        $params = [
+            'f_id'        => $id,
+            'f_title'     => $title,
+            'f_key'       => $key,
+            'levels'    => $levels,
+        ];
+        return view('Admin.levels.trash', $params);
     }
 
 }

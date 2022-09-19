@@ -17,7 +17,7 @@ class will_learnsSeeder extends Seeder
     {
        DB::table('will_learns')->insert([
         [
-            'course_id' =>1,
+            'course_id' =>2,
             'content' => 'Hiểu về khái niệm SPA/MPA"'
         ],
         [
@@ -29,7 +29,7 @@ class will_learnsSeeder extends Seeder
             'content' => 'Hiểu về khái niệm SPA/MPA"'
         ],
         [
-            'course_id' =>5,
+            'course_id' =>4,
             'content' => 'Hiểu về khái niệm SPA/MPA"'
         ]
         ]);

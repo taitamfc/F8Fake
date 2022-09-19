@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\Level;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class CourseController extends Controller
@@ -16,10 +17,30 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses= Course::all();
-        return view('Admin.courses.index', compact('courses'));
+        $key        = $request->key ?? '';
+        $title      = $request->title ?? '';
+        $id         = $request->id ?? '';
+         $query = Course::query(true);
+       if($title){
+            $query->where('title','LIKE','%'.$title.'%')->where('deleted_at','=',null);
+        }
+        if($id){
+            $query->where('id',$id)->where('deleted_at','=',null);
+        }
+        if($key){
+            $query->orWhere('id',$key)->where('deleted_at','=',null);
+            $query->orWhere('title','LIKE','%'.$key.'%')->where('deleted_at','=',null);
+        }
+        $Courses = $query->where('deleted_at','=',null)->paginate(5);
+        $params = [
+            'f_id'        => $id,
+            'f_title'     => $title,
+            'f_key'       => $key,
+            'courses'    => $Courses,
+        ];
+        return view('Admin.courses.index', $params) ;
     }
 
     /**
@@ -42,6 +63,7 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        // dd($request->all());
         $course= new Course();
         $course->level_id = $request->level_id;
         $course->title = $request->title;
@@ -72,9 +94,17 @@ class CourseController extends Controller
             $path = 'storage/'. $request->file('image')->store('images', 'public');//lưu file vào mục public/images với tê mới là $newFileName
             $course->image = $path;
         }
-        $course->save();
-        Session::flash('success','Thêm mới Thành công');
-        return redirect()->route('courses.index');
+
+        try {
+            $course->save();
+            Session::flash('success','Thêm mới Thành công');
+            return redirect()->route('courses.index');
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error','Thêm mới thất bại');
+            return redirect()->route('courses.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+        }
     }
 
     /**
@@ -140,9 +170,17 @@ class CourseController extends Controller
             $path = 'storage/'. $request->file('image')->store('images', 'public');//lưu file vào mục public/images với tê mới là $newFileName
             $course->image = $path;
         }
-        $course->save();
-        Session::flash('success','Cập nhật Thành công');
-        return redirect()->route('courses.index');
+
+        try {
+            $course->save();
+            Session::flash('success','Cập nhật Thành công');
+            return redirect()->route('courses.index');
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error','Thêm mới thất bại');
+            return redirect()->route('courses.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+        }
     }
 
     /**
@@ -153,9 +191,71 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        Course::findOrFail($id)->delete();
-        Session::flash('success','Xóa Thành công');
 
-        return redirect()->route('courses.index');
+        try {
+            Course::findOrFail($id)->delete();
+            Session::flash('success','Xóa Thành công');
+            return redirect()->route('courses.trash');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error','xóa thất bại ');
+            return redirect()->route('courses.trash')->with('error', 'xóa không thành công');
+        }
     }
+    function SoftDeletes($id){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $course = Course::findOrFail($id);
+        $course->deleted_at= date("Y-m-d h:i:s");
+        try {
+            $course->save();
+            Session::flash('success','Xóa Thành công');
+            return redirect()->route('courses.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error','xóa thất bại ');
+            return redirect()->route('courses.index')->with('error', 'xóa không thành công');
+        }
+    }
+    function RestoreDelete($id){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $course = Course::findOrFail($id);
+        $course->deleted_at= null;
+        try {
+            $course->save();
+            Session::flash('success','Khôi phục ' .$course->title . ' thành công');
+            return redirect()->route('courses.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error','xóa thất bại ');
+            return redirect()->route('courses.trash')->with('error', 'xóa không thành công');
+        }
+    }
+    function trash(Request $request){
+        $key        = $request->key ?? '';
+        $title      = $request->title ?? '';
+        $id         = $request->id ?? '';
+         $query = Course::query(true);
+       if($title){
+            $query->where('title','LIKE','%'.$title.'%')->where('deleted_at','!=',null);
+        }
+        if($id){
+            $query->where('id',$id)->where('deleted_at','!=',null);
+        }
+        if($key){
+
+            $query->orWhere('id',$key)->where('deleted_at','!=',null);
+            $query->orWhere('title','LIKE','%'.$key.'%')->where('deleted_at','!=',null);
+        }
+        $Courses = $query->where('deleted_at','!=',null)->paginate(5);
+        $params = [
+            'f_id'        => $id,
+            'f_title'     => $title,
+            'f_key'       => $key,
+            'courses'    => $Courses,
+        ];
+        return view('Admin.courses.trash', $params) ;
+    }
+
 }

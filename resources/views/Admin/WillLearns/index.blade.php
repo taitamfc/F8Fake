@@ -16,9 +16,9 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách các cấp độ </h1>
+                <h1 class="page-title mr-sm-auto"> Danh sách các bài học </h1>
                 <div class="btn-toolbar">
-                    <a href="{{ route('levels.create') }}" class="btn btn-primary mr-2">
+                    <a href="{{ route('WillLearns.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm Mới</span>
                     </a>
@@ -39,10 +39,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('levels.index') }}">Tất Cả</a>
+                            <a class="nav-link active " href="{{ route('WillLearns.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('levels.trash') }}">Thùng Rác</a>
+                            <a class="nav-link" href="{{ route('WillLearns.trash') }}">Thùng Rác</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
@@ -74,8 +74,8 @@
                                 </div>
                             </div><!-- /.input-group -->
                     </div>
-                    @include('Admin.levels.modals.modalLevelColumns')
-                    @if (!count($levels))
+                    @include('Admin.WillLearns.modals.modalWillLearnColumns')
+                    @if (!count($WillLearns))
                         <p class="text-success">
                         <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
                             không tìm thấy.
@@ -101,19 +101,23 @@
                     <thead class="thead-">
                         <tr>
                             <th style="min-width:50px"> #</th>
-                            <th> Tên cấp độ </th>
+                            <th >Khóa học</th>
+                            <th> nội dung </th>
                             <th> Tùy chọn</th>
                         </tr>
                     </thead><!-- /thead -->
                     <tbody id="addRow" class="addRow">
-                        @foreach ($levels as $key => $level)
-                            <tr class="item-{{ $level->id }}">
-                                <th scope="row">{{ $level->id }}</th>
-                                <td>{{ $level->title }}</td>
+                        @foreach ($WillLearns as $key => $WillLearn)
+                            <tr class="item-{{ $WillLearn->id }}">
+                                <th scope="row">{{ $WillLearn->id }}</th>
+                                <th scope="row">{{ $WillLearn->course->title }}</th>
+                                <td>{{ $WillLearn->content }}</td>
+
                                 <td>
-                                    <form action="{{ route('levels.SoftDeletes', $level->id) }}" method="post">
-                                        <a href="{{ route('levels.edit', $level->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
+                                    <form action="{{ route('WillLearns.SoftDeletes', $WillLearn->id) }}" method="post">
+                                        <a href="{{ route('WillLearns.edit', $WillLearn->id) }}"
+                                            class="btn btn-sm btn-icon btn-secondary"><i
+                                                class="fa fa-pencil-alt"></i></a>
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"
@@ -126,7 +130,7 @@
                     </tbody>
                 </table>
                 <div style="float:right">
-                    {{ $levels->links() }}
+                    {{ $WillLearns->links() }}
                 </div>
             </div><!-- /.card-body -->
         </div><!-- /.card -->

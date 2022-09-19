@@ -11,9 +11,12 @@
                     </li>
                 </ol>
             </nav><!-- /.breadcrumb -->
+
             <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button>
+            <!-- /floating action -->
+            <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách các Khóa học </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách các Khóa học đã xóa </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('courses.create') }}" class="btn btn-primary mr-2">
@@ -24,7 +27,7 @@
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
                     </a>
-                    {{-- @endif --}}
+
                 </div><!-- /.btn-toolbar -->
             </div><!-- /title and toolbar -->
         </header><!-- /.page-title-bar -->
@@ -36,10 +39,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('courses.index') }}">Tất Cả</a>
+                            <a class="nav-link " href="{{ route('courses.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('courses.trash') }}">Thùng Rác</a>
+                            <a class="nav-link active" href="">Thùng Rác</a>
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
@@ -117,24 +120,27 @@
                                     <td><img src="{{ asset($course->image) }}" alt=""width="150" height="170">
                                     </td>
                                     <td>
-
-                                        <form action="{{ route('courses.SoftDeletes', $course->id) }}" method="post">
-                                            <a href="{{ route('courses.edit', $course->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="fa fa-pencil-alt"></i></a>
+                                        <form action="{{ route('courses.destroy', $course->id) }}" method="post">
                                             @csrf
-                                            @method('PUT')
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                                 onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                     class="far fa-trash-alt"></i></button>
                                         </form>
+                                        <form action="{{ route('courses.RestoreDelete', $course->id) }}" method="post">
+
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                               ><i
+                                                    class="bi bi-arrow-counterclockwise"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                        <!-- /tbody -->
+                        </tbody><!-- /tbody -->
                     </table>
-                    <div style="float: left;">
+                    <div style="float:left">
                         {{ $courses->links() }}
                     </div>
                 </div><!-- /.card-body -->

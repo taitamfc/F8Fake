@@ -18,17 +18,31 @@
                 <div class="card card-fluid">
                     <!-- .card-body -->
                     <div class="card-body">
-                        <form action="{{ route('levels.update',$level->id ) }}" method="post" enctype="multipart/form">
+                        <form action="{{ route('WillLearns.update',$WillLearn->id ) }}" method="post" enctype="multipart/form">
                             @csrf
                             @method('PUT')
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tên cấp độ<abbr name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="title" value="  {{ old('title') ?? $level->title}}"  class="form-control @error('title') is-invalid @enderror" data-toggle="flatpickr">
-                                @error('title')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                <input id="flatpickr01" name="content" value="{{ old('content') ?? $WillLearn->content }}" type="text" class="form-control @error('content') is-invalid @enderror"
+                                    data-toggle="flatpickr">
+                                @error('content')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div><!-- /.form-group -->
+                            <div class="form-group col-lg-3">
+                                <label class="control-label" for="flatpickr01">CouRses<abbr name="Trường bắt buộc">*</abbr></label>
+
+                                    <select name="course_id" id="" class="form-control @error('course_id') is-invalid @enderror">
+                                        <option value="{{ $WillLearn->course_id }}">--Vui lòng chọn--</option>
+                                        @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}">{{ $course->title}}</option>
+                                        @endforeach
+                                    </select>
+                                @error('course_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <a class="btn btn-secondary float-left" href="{{route('levels.index')}}">Hủy</a>
                                 <button class="btn btn-primary float-right" type="submit">Lưu</button>

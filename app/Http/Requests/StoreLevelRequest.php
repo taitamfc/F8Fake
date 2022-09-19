@@ -24,13 +24,14 @@ class StoreLevelRequest extends FormRequest
     public function rules()
     {
         return [
-          'title'=>'required',
+          'title'=>'required|unique:levels',
         ];
     }
     public function messages()
     {
         return [
             'title.required'=> 'Trường bắt buộc',
+            'title.unique'=> 'Đã tồn tại',
         ];
     }
 }

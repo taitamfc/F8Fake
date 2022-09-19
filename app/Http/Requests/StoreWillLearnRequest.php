@@ -24,15 +24,16 @@ class StoreWillLearnRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id'=>'required',
-            'content'=>'content',
+          'content'=>'required|unique:will_learns',
+          'course_id'=>'required'
         ];
     }
     public function messages()
     {
         return [
-            'course_id.requied'=> 'Trường bắt buộc',
-            'content.requied'=> 'Trường bắt buộc',
+            'content.required'=> 'Trường bắt buộc',
+            'course_id.required'=> 'Trường bắt buộc',
+            'content.unique'=> 'Đã tồn tại',
         ];
     }
 }

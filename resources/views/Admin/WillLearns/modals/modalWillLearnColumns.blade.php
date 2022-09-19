@@ -16,34 +16,42 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Tiêu đề:</label>
+                            <label class="">Tên cấp độ</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="title"
-                                    class="form-control filter-column f-name" id="name"
-                                    value="{{ $f_title }}" />
+                            <div class="input text"><input type="text" name="content"
+                                    class="form-control filter-column f-name"
+                                     value="{{ $f_content }}" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">id:</label>
+                            <label class="">Mã</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="id"
-                                    class="form-control filter-column f-name" id="address"
+                                    class="form-control filter-column f-name"
                                     value="{{ $f_id }}" /></div>
                         </div>
                     </div>
-
-
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Id khóa học:</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text"><input type="text" name="course_id"
+                                    class="form-control filter-column f-name" id="address"
+                                    value="{{ $f_course_id}}" /></div>
+                        </div>
+                    </div>
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->
             <!-- .modal-footer -->
             <div class="modal-footer justify-content-start">
                 <button type="submit" class="btn btn-primary" id="apply-filter">Áp dụng</button>
-                <a href="{{ route('courses.index') }}" class="btn btn-dark ">Đặt lại</a>
+                <a href="{{ route('levels.index') }}" class="btn btn-dark ">Đặt lại</a>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary ml-auto"
                     id="clear-filter">Hủy</button>
             </div><!-- /.modal-footer -->
