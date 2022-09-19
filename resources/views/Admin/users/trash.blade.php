@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh Sách Người Dùng </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách các mục đã xóa </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('users.create') }}" class="btn btn-primary mr-2">
@@ -41,10 +41,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('users.index') }}">Tất Cả</a>
+                            <a class="nav-link " href="{{ route('users.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link active"
                                 href="
                             {{ route('users.trash') }}
                             ">Thùng
@@ -128,16 +128,29 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <form action="{{ route('users.SoftDeletes', $user->id) }}" method="post">
-                                            <a href="{{ route('users.edit', $user->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="fa fa-pencil-alt"></i></a>
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                        </form>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <form action="{{ route('users.RestoreDelete', $user->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                                class="bi bi-arrow-counterclockwise"></i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="{{ route('users.destroy', $user->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                class="far fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

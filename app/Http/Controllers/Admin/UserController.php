@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -26,7 +27,7 @@ class UserController extends Controller
         $id                     = $request->id ?? '';
         $email                  = $request->email  ?? '';
         // thực hiện query
-        $query = User::query(true);
+        $query = User::select('*');
 
         if ($name) {
             $query->where('name', 'LIKE', '%' . $name . '%');
@@ -44,6 +45,7 @@ class UserController extends Controller
         }
         //Phân trang
         $users = $query->paginate(5);
+       
 
         $params = [
             'f_id'           => $id,
@@ -62,7 +64,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Admin.users.add');
+        $groups = User::get();
+        return view('Admin.users.add',compact('groups'));
     }
 
     /**
@@ -128,7 +131,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $users = User::findOrFail($id);
-        return view('Admin.users.edit', compact('users'));
+        $groups = Group::get();
+        return view('Admin.users.edit', compact('users','groups'));
     }
 
     /**
@@ -192,11 +196,78 @@ class UserController extends Controller
             //dung session de dua ra thong bao
             Session::flash('success', 'Xóa thành công');
             //xoa xong quay ve trang danh sach customer
-            return redirect()->route('users.index');
+            return redirect()->route('users.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('error', 'Xóa thất bại');
-            return redirect()->route('users.index');
+            return redirect()->route('users.trash');
         }
+    }
+    function SoftDeletes($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $users = User::findOrFail($id);
+        $users->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $users->save();
+            Session::flash('success', 'Xóa Thành công');
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('users.index')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function RestoreDelete($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $users = User::findOrFail($id);
+        $users->deleted_at = null;
+        try {
+            $users->save();
+            Session::flash('success', 'Khôi phục ' . $users->title . ' thành công');
+            return redirect()->route('users.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('users.trash')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function trash(Request $request)
+    {
+        $key                    = $request->key ?? '';
+        $name                   = $request->name ?? '';
+        $id                     = $request->id ?? '';
+        $email                  = $request->email  ?? '';
+        // thực hiện query
+        $query = User::onlyTrashed();
+
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
+        if ($email) {
+            $query->where('email', 'LIKE', '%' . $email . '%');
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%');
+            $query->orWhere('email', 'LIKE', '%' . $key . '%');
+        }
+        //Phân trang
+        $users = $query->paginate(5);
+        $params = [
+            'f_id'           => $id,
+            'f_name'         => $name,
+            'f_key'          => $key,
+            'f_email'        => $email,
+            'users'          => $users
+        ];
+        return view('Admin.users.trash', $params);
     }
 }

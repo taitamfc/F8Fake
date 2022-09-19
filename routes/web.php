@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){
     return view('Admin.master');
 });
+Route::prefix('users')->group(function () {
+    Route::put('SoftDeletes/{id}', [UserController::class, 'SoftDeletes'])->name('users.SoftDeletes');
+    Route::get('trash', [UserController::class, 'trash'])->name('users.trash');
+    Route::put('RestoreDelete/{id}', [UserController::class, 'RestoreDelete'])->name('users.RestoreDelete');
+});
 Route::resource('users', UserController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');

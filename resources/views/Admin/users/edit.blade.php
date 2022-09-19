@@ -81,7 +81,7 @@
                                 <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label><br>
                                 <input accept="image/*" type='file' id="inputFile" name="avatar" /><br>
                                 <img type="hidden" width="90px" height="90px" id="blah1"
-                                    src="{{asset($users->avatar)}}" alt="" />
+                                    src="{{ asset($users->avatar) }}" alt="" />
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Bio</label> <input id="flatpickr01"
@@ -124,9 +124,15 @@
                                 <p style="color:red">{{ $errors->first('is_blocked') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Nhóm</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="group_id" value="{{ $users->group_id }}"
+                                <label class="control-label" for="flatpickr01">Nhóm</label>
+                                <select name="group_id"
+                                    id=""class="form-control @error('group_id') is-invalid @enderror"
                                     data-toggle="flatpickr">
+                                    <option value="">Chọn Nhóm</option>
+                                    @foreach ($groups as $group)
+                                        <option {{$group->id==$users->group_id ? "selected" : ''}} value="{{ $group->id }}">{{ $group->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('group_id') }}</p>
