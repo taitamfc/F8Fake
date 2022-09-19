@@ -22,7 +22,7 @@ class BannerController extends Controller
         $id         = $request->id ?? '';
 
         // thực hiện query
-        $query = Banner::query(true);
+        $query = Banner::select('*');
         if ($placement) {
             $query->where('placement', 'LIKE', '%' . $placement . '%');
         }
@@ -150,10 +150,81 @@ class BannerController extends Controller
             //dung session de dua ra thong bao
             Session::flash('success', 'Xóa thành công');
             //xoa xong quay ve trang danh sach banners
-            return redirect()->route('banners.index');
+            return redirect()->route('banners.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('banners.index')->with('error', 'Xóa không thành công');
+            return redirect()->route('banners.trash')->with('error', 'Xóa không thành công');
         }
+    }
+    function force_destroy($id)
+    {
+        $banners = Banner::findOrFail($id);
+        $banners->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $banners->save();
+            Session::flash('success', 'Xóa Thành công');
+            return redirect()->route('banners.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('banners.index')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function Restore($id)
+    {
+        $banners = Banner::findOrFail($id);
+        $banners->deleted_at = null;
+        try {
+            $banners->save();
+            Session::flash('success', 'Khôi phục ' . $banners->title . ' thành công');
+            return redirect()->route('banners.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('banners.trash')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function trashedItems(Request $request)
+    {
+        $key        = $request->key ?? '';
+        $placement      = $request->placement ?? '';
+        $type      = $request->type ?? '';
+        $title      = $request->title ?? '';
+        $id         = $request->id ?? '';
+
+        // thực hiện query
+        $query = Banner::onlyTrashed();
+        if ($placement) {
+            $query->where('placement', 'LIKE', '%' . $placement . '%');
+        }
+        if ($type) {
+            $query->where('type', 'LIKE', '%' . $type . '%');
+        }
+        if ($title) {
+            $query->where('title', 'LIKE', '%' . $title . '%');
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('placement', 'LIKE', '%' . $key . '%');
+            $query->orWhere('type', 'LIKE', '%' . $key . '%');
+            $query->orWhere('title', 'LIKE', '%' . $key . '%');
+        }
+        $banners = $query->paginate(5);
+
+        $params = [
+            'f_id'        => $id,
+            'f_placement' => $placement,
+            'f_type'     => $type,
+            'f_title'     => $title,
+            'f_key'       => $key,
+            'banners'    => $banners,
+        ];
+        return view('Admin.banners.index', $params);
     }
 }

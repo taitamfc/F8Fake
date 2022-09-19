@@ -29,10 +29,10 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('banners.index') }}">Tất Cả</a>
+                        <a class="nav-link" href="{{ route('banners.index') }}">Tất Cả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ route('banners.trash') }}">Thùng Rác</a>
+                        <a class="nav-link active" href="{{ route('banners.trash') }}">Thùng Rác</a>
                     </li>
                 </ul>
             </div>
@@ -108,16 +108,37 @@
                                     <td class="align-middle"> {{ $banner->type }} </td>
                                     <td class="align-middle"> {{ $banner->title }} </td>
                                     <td>
+                                        {{-- <form action="{{ route('banners.destroy', $banner->id) }}" style="display:inline"
+                                            method="post">
                                         <a href="{{ route('banners.edit', $banner->id) }}"
                                             class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        <form action="{{ route('banners.destroy', $banner->id) }}" style="display:inline"
-                                            method="post">
                                             <button onclick="return confirm('Xóa {{ $banner->name }} ?')"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="far fa-trash-alt"></i></button>
                                             @csrf
                                             @method('delete')
-                                        </form>
+                                        </form> --}}
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <form action="{{ route('banners.restore', $banner->id) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                           ><i class="fa fa-trash-restore"></i> </button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="{{ route('banners.destroy', $banner->id) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                class="far fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                          </div>
                                     </td>
                                 </tr>
                             @endforeach

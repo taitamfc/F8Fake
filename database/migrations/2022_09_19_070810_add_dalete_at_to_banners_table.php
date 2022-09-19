@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function($table) {
-            $table->dropColumn('delete_at');
+        Schema::table('banners', function (Blueprint $table) {
+            $table->string('deleted_at');
         });
     }
 
@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('banners', function (Blueprint $table) {
+            //
+        });
     }
 };
