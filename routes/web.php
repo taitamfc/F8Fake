@@ -14,7 +14,11 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::prefix('students')->group(function () {
+    Route::get('/trash',[StudentController::class , 'trashedItems'])->name('students.trash');
+    Route::delete('/force_destroy/{id}', [StudentController::class, 'force_destroy'])->name('students.force_destroy');
+    Route::put('/restore/{id}', [StudentController::class, 'restore'])->name('students.restore');
+});
 Route::resource('students',StudentController::class);
 
 

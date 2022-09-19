@@ -29,10 +29,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('students.index') }}">Tất Cả</a>
+                            <a class="nav-link  " href="{{ route('students.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('students.trash') }}">Thùng Rác</a>
+                            <a class="nav-link active" href="">Thùng Rác</a>
                         </li>
                     </ul>
                 </div>
@@ -110,18 +110,33 @@
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
                                         <td>
-                                            <form action="{{ route('students.force_destroy', $student->id) }}"
-                                                style="display:inline" method="post">
-                                                <a href="{{ route('students.edit', $student->id) }}"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="fa fa-pencil-alt"></i></a>
-                                                <button onclick="return confirm('Bạn chắc chắn muốn xóa? ?')"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="far fa-trash-alt"></i></button>
-                                                @csrf
-                                                @method('delete')
-                                            </form>
+                                            <div class="container">
+                                                <div class="row">
+
+                                                    <div class="col-2">
+                                                        <form action="{{ route('students.restore', $student->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-icon btn-secondary">
+                                                                <i class="fa fa-trash-restore"></i></button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <form action="{{ route('students.destroy', $student->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                    class="far fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

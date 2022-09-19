@@ -35,20 +35,20 @@ class StudentController extends Controller
         // thực hiện query
         $query = Student::query(true);
         if ($name) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+            $query->where('name', 'LIKE', '%' . $name . '%')->where('deleted_at', '=', null);
         }
         if ($email) {
-            $query->where('email', 'LIKE', '%' . $email . '%');
+            $query->where('email', 'LIKE', '%' . $email . '%')->where('deleted_at', '=', null);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->where('id', $id)->where('deleted_at', '=', null);
         }
         if ($key) {
-            $query->orWhere('id', $key);
-            $query->orWhere('name', 'LIKE', '%' . $key . '%');
-            $query->orWhere('email', 'LIKE', '%' . $key . '%');
+            $query->orWhere('id', $key)->where('deleted_at', '=', null);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%')->where('deleted_at', '=', null);
+            $query->orWhere('email', 'LIKE', '%' . $key . '%')->where('deleted_at', '=', null);
         }
-        $students = $query->paginate(5);
+        $students = $query->where('deleted_at', '=', null)->paginate(5);
 
         $params = [
             'f_id'        => $id,
@@ -167,6 +167,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+     
     public function destroy($id)
     {
         $students = Student::findOrFail($id);
@@ -176,12 +179,80 @@ class StudentController extends Controller
             Storage::delete($image);
             $students->destroy($id);
             //dung session de dua ra thong bao
-            Session::flash('success', 'Xóa thành công');
+            Session::flash('success', 'Xóa Thành công');
             //xoa xong quay ve trang danh sach banners
-            return redirect()->route('students.index');
+            return redirect()->route('students.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('students.index')->with('error', 'Xóa không thành công');
+            return redirect()->route('students.trash')->with('error', 'Xóa không thành công');
+        }
+    }
+
+    public function trashedItems(Request $request){
+        $key        = $request->key ?? '';
+        $name         = $request->name ?? '';
+        $email      = $request->email ?? '';
+        $id         = $request->id ?? '';
+
+
+        // thực hiện query
+        $query = Student::query(true);
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%')->where('deleted_at', '!=', null);
+        }
+        if ($email) {
+            $query->where('email', 'LIKE', '%' . $email . '%')->where('deleted_at', '!=', null);
+        }
+        if ($id) {
+            $query->where('id', $id)->where('deleted_at', '!=', null);
+        }
+        if ($key) {
+            $query->orWhere('id', $key)->where('deleted_at', '!=', null);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+            $query->orWhere('email', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+        }
+        $students = $query->where('deleted_at', '!=', null)->paginate(5);
+
+        $params = [
+            'f_id'        => $id,
+            'f_name'     => $name,
+            'f_email'     => $email,
+            'f_key'       => $key,
+            'students'    => $students,
+        ];
+        return view('Admin.students.trash', $params);
+     }
+
+     public function force_destroy($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $students = Student::findOrFail($id);
+        $students->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $students->save();
+            Session::flash('success', 'Đã chuyển vào thùng rác');
+            return redirect()->route('students.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('students.index')->with('error', 'xóa không thành công');
+        }
+       
+    }
+
+    public function restore($id)
+    {
+        $students = Student::findOrFail($id);
+        $students->deleted_at = null;
+        try {
+            $students->save();
+            Session::flash('success', 'Khôi phục thành công');
+            return redirect()->route('students.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('students.trash')->with('error', 'xóa không thành công');
         }
     }
 }

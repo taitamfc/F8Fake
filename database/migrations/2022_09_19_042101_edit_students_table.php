@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function($table) {
+        Schema::table('students', function (Blueprint $table) {
             $table->dropColumn('delete_at');
         });
     }
@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('students', function (Blueprint $table) {
+            //
+        });
     }
 };
