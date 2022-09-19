@@ -132,7 +132,7 @@
                                 {{-- <td>{{ $step->image_url }}</td>
                                 <td>{{ $step->video_url }}</td> --}}
                                 <td>
-                                    <img style="width:100px; height:100px" src="{{ asset($step->image) }}">
+                                    <img style="width:150px; height:100px" src="{{ asset($step->image) }}">
                                 </td>
                                 <td>
                                     <a href="{{ route('steps.edit', $step->id) }}"

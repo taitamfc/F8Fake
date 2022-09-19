@@ -81,7 +81,6 @@
                                 <th scope="row"> {{ $track->id }} </th>
                                 <td> {{ $track->title }} </td>
                                 <td>
-
                                     <form action="{{ route('tracks.force_destroy', $track->id) }}" style="display:inline"
                                         method="post">
                                         <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $track->title }} ?')"
@@ -106,9 +105,8 @@
         {{-- <nav aria-label="Page navigation example">
             <div class='float:right'>
                 <ul class="pagination">
-                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true">{{ $tracks->links() }}</span>
                 </ul>
             </div>
         </nav> --}}
-        {{-- {!! $tracks->links() !!} --}}
     @endsection

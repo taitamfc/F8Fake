@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('Admin.requirements.modals.modalFilterColumns')
+                            @include('admin.requirements.modals.modalFilterColumns')
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -83,9 +83,10 @@
                                 <td> {{ $requirement->course_id }} </td>
                                 <td>
 
-                                    <form action="{{ route('requirements.force_destroy', $requirement->id) }}" style="display:inline"
-                                        method="post">
-                                        <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $requirement->content }} ?')"
+                                    <form action="{{ route('requirements.force_destroy', $requirement->id) }}"
+                                        style="display:inline" method="post">
+                                        <button
+                                            onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $requirement->content }} ?')"
                                             class="btn btn-sm btn-icon btn-secondary"><i
                                                 class="far fa-trash-alt"></i></button>
                                         @csrf

@@ -68,7 +68,7 @@
                                                     <label class="control-label" for="flatpickr01">Hình ảnh</label>
                                                     <input accept="image/*" type='file' id="imgInp" name="image"
                                                         class="form-control " />
-                                                    <img type="hidden" width="100px" height="100px" id="blah1"
+                                                    <img type="hidden" width="150px" height="100px" id="blah1"
                                                         src="{{ asset($steps->image) ?? $request->inputFile }}"
                                                         alt="" data-toggle="flatpickr" />
                                                     <!-- .form-group -->

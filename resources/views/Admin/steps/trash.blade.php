@@ -86,7 +86,9 @@
                                 <td>{{ $step->content }}</td>
                                 <td>{{ $step->description }}</td>
                                 <td>{{ $step->original_name }}</td>
-                                <td>{{ $step->image }}</td>
+                                <td>
+                                    <img style="width:150px; height:100px" src="{{ asset($step->image) }}">
+                                </td>
                                 <td>
 
                                     <form action="{{ route('steps.force_destroy', $step->id) }}" style="display:inline"

@@ -101,7 +101,7 @@ class RequirementController extends Controller
     {
         $requirements = Requirement::all();
         $requirements = Requirement::find($id);
-        return view('Admin.requirements.edit', compact('requirements'));
+        return view('admin.requirements.edit', compact('requirements'));
     }
 
     /**
