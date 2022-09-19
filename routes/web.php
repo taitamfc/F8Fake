@@ -18,10 +18,12 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('Admin.master');
 });
-Route::get('groups/trash', [GroupController::class, 'trashedItems'])->name('groups.trash');
+Route::prefix('groups')->group(function () {
+    Route::put('SoftDeletes/{id}', [GroupController::class, 'SoftDeletes'])->name('groups.SoftDeletes');
+    Route::get('trash', [GroupController::class, 'trash'])->name('groups.trash');
+    Route::put('RestoreDelete/{id}', [GroupController::class, 'RestoreDelete'])->name('groups.RestoreDelete');
+});
+// Route::get('groups/trash', [GroupController::class, 'trashedItems'])->name('groups.trash');
 // Route::get('groups/{id}/destroy', [GroupController::class, 'destroy'])->name('groups.destroy');
 Route::resource('groups', GroupController::class);
-//  Route::prefix('branches')->group(function () {
-// Route::delete('/force_destroy/{id}', [BranchController::class, 'force_destroy'])->name('branches.force_destroy');
-// Route::get('/restore/{id}', [BranchController::class, 'restore'])->name('branches.restore');
-    // });
+

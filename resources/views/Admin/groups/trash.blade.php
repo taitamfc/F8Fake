@@ -1,38 +1,69 @@
 @extends('Admin.master')
 @section('content')
-    <header class="page-title-bar">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active">
-                    <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Trang Chủ</a>
-                </li>
-            </ol>
-        </nav>
-        <!-- <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button> -->
-        <div class="d-md-flex align-items-md-start">
-            <h1 class="page-title mr-sm-auto">Quản Lý Chi Nhánh - Thùng Rác</h1>
-        </div>
-    </header>
-    <div class="page-section">
-        <div class="card card-fluid">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link  " href="{{ route('groups.index') }}">Tất Cả</a>
+    <div class="page-inner">
+        <!-- .page-title-bar -->
+        <header class="page-title-bar">
+            <!-- .breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                        <a href="#"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Trang chủ</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('groups.trash') }}">Thùng Rác</a>
-                    </li>
-                </ul>
+                </ol>
+            </nav><!-- /.breadcrumb -->
+            <!-- floating action -->
+            <button type="button" class="btn btn-success btn-floated"><span class="fa fa-plus"></span></button>
+            <!-- /floating action -->
+            <!-- title and toolbar -->
+            <div class="d-md-flex align-items-md-start">
+                <h1 class="page-title mr-sm-auto"> Danh sách các nhóm đã xóa </h1><!-- .btn-toolbar -->
+                <div class="btn-toolbar">
+                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
+                    <a href="{{ route('groups.create') }}" class="btn btn-primary mr-2">
+                        <i class="fa-solid fa fa-plus"></i>
+                        <span class="ml-1">Thêm Mới</span>
+                    </a>
+                    <a href="" class="btn btn-primary">
+                        <i class="fas fa-file"></i>
+                        <span class="ml-1">Xuất file excel</span>
+                    </a>
+                    {{-- @endif --}}
+                </div><!-- /.btn-toolbar -->
             </div>
-            <div class="card-body">
-                <div class="row mb-2">
-                    <div class="col">
+            <!-- /title and toolbar -->
+        </header><!-- /.page-title-bar -->
+        <!-- .page-section -->
+        <div class="page-section">
+            <!-- .card -->
+            <div class="card card-fluid">
+                <!-- .card-header -->
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link  " href="{{ route('groups.index') }}">Tất Cả</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                href="
+                            {{ route('groups.trash') }}
+                            ">Thùng
+                                Rác</a>
+                        </li>
+                    </ul>
+                </div><!-- /.card-header -->
+                <!-- .card-body -->
+                <div class="card-body">
+                    <!-- .form-group -->
+                    <div class="form-group">
+                        <!-- .input-group -->
+                        <!-- /.input-group -->
                         <form action="" method="GET" id="form-search">
+                            @csrf
                             <div class="input-group input-group-alt">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
-                                        data-target="#modalFilterColumns">Tìm nâng cao</button>
+                                        data-target="#modalFilterColumns">Tìm nâng cao</button>
+
                                 </div>
                                 <div class="input-group has-clearable">
                                     <button type="button" class="close trigger-submit trigger-submit-delay"
@@ -42,74 +73,112 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="query" value=""
-                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
+                                    <input type="text" class="form-control" name="key"
+                                        value="
+                                    {{ $f_key }}
+                                    "
+                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
-                                        type="button">Lưu bộ lọc</button>
+                                        type="submit">Tìm kiếm</button>
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.groups.modals.modalFilterColumns')
+                            @if (!count($groups))
+                                <p class="text-success">
+                                <div class="alert alert-danger"><i class="bi bi-x-circle"aria-hidden="true"></i>
+                                    không tìm thấy kết quả.
+                                </div>
+                                </p>
+                            @endif
+                            @if (Session::has('success'))
+                                <p class="text-success">
+                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                    {{ Session::get('success') }}</div>
+                                </p>
+                            @endif
+                            @if (Session::has('error'))
+                                <p class="text-danger">
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle"aria-hidden="true"></i>
+                                    {{ Session::get('error') }}</div>
+                                </p>
+                            @endif
+
                         </form>
-                        <!-- modalFilterColumns  -->
-                        {{-- @include('Admin.groups.modals.modalSaveSearch') --}}
-                    </div>
-                </div>
-                @if (Session::has('success'))
-                    <div class="alert alert-success">{{ session::get('success') }}</div>
-                @endif
-                @if (Session::has('error'))
-                    <div class="alert alert-danger">{{ session::get('error') }}</div>
-                @endif
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
+                    </div><!-- /.form-group -->
+
+                    <table class="table table-hover">
+                        <!-- thead -->
+                        <thead class="thead-">
                             <tr>
-                                <th> # </th>
+                                <th style="min-width:50px"> #</th>
                                 <th> Tên </th>
                                 <th> Mô Tả </th>
                                 <th> Hành Động </th>
                             </tr>
-                        </thead>
+                        </thead><!-- /thead -->
                         <tbody>
-                            @foreach ($branches as $branch)
+                            @foreach ($groups as $key => $group)
                                 <tr>
-                                    <td class="align-middle"> {{ $branch->id }} </td>
-                                    <td class="align-middle"> {{ $branch->name }} </td>
-                                    <td class="align-middle"> {{ $branch->ward->name }} </td>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <th scope="row">{{ $group->id }}</th>
 
-                                    <td>
-                                        @if (Auth::user()->hasPermission('Branch_forceDelete'))
-                                            <form action="{{ route('branches.force_destroy', $branch->id) }}"
-                                                style="display:inline" method="post">
-                                                <button onclick="return confirm('Xóa vĩnh viễn {{ $branch->name }} ?')"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="far fa-trash-alt"></i></button>
-                                                @csrf
-                                                @method('delete')
-                                            </form>
-                                        @endif
+                                            </div>
+                                            <div class="col-6">
+                                                <td>{{ $group->name }}</td>
+                                            </div>
+                                            <div class="col-2">
+                                                <td>{{ $group->description }}</td>
+                                            </div>
+                                            <div class="col-2">
+                                                <td>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <form
+                                                                    action="{{ route('groups.RestoreDelete', $group->id) }}"
+                                                                    method="post">
 
-                                        @if (Auth::user()->hasPermission('Branch_restore'))
-                                            <span class="sr-only">Edit</span></a> <a
-                                                href="{{ route('branches.restore', $branch->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="fa fa-trash-restore"></i> <span class="sr-only">Remove</span></a>
-                                        @endif
-                                    </td>
-                                </tr><!-- /tr -->
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <button type="submit"
+                                                                        class="btn btn-sm btn-icon btn-secondary"><i
+                                                                            class="bi bi-arrow-counterclockwise"></i></button>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <form action="{{ route('groups.destroy', $group->id) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-sm btn-icon btn-secondary"
+                                                                        onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                            class="far fa-trash-alt"></i></button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </tr>
                             @endforeach
                         </tbody><!-- /tbody -->
-                    </table><!-- /.table -->
-                    <div style="float:right">
-                        {{ $branches->links() }}
-                    </div>
-                </div>
-                <!-- /.table-responsive -->
-                <!-- .pagination -->
-            </div><!-- /.card-body -->
-        </div>
-    </div>
+                    </table>
+                    {{ $groups->onEachSide(5)->links() }}
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
+        </div><!-- /.card -->
+    </div><!-- /.card -->
 @endsection

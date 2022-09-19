@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách Group </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách nhóm </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('groups.create') }}" class="btn btn-primary mr-2">
@@ -117,22 +117,21 @@
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
-                            @foreach ($groups as $key => $group)
+                            @foreach ($groups as $group)
                                 <tr>
-                                    <th scope="row">{{ ++$key }}</th>
+                                    <th scope="row">{{ $group->id }}</th>
                                     <td>{{ $group->name }}</td>
                                     <td>{{ $group->description }}</td>
                                     <td>
-                                        <a href="{{ route('groups.edit', $group->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        <form action="{{ route('groups.destroy', $group->id) }}" style="display:inline"
-                                            method="post">
-                                            <button
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa {{ $group->name }} ?')"
+                                        <form action="{{ route('groups.SoftDeletes', $group->id) }}" method="post">
+                                            <a href="{{ route('groups.edit', $group->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="far fa-trash-alt"></i></button>
+                                                    class="fa fa-pencil-alt"></i></a>
                                             @csrf
-                                            @method('delete')
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                    class="far fa-trash-alt"></i></button>
                                         </form>
                                         {{-- <a href="{{ route('groups.destroy', $group->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"

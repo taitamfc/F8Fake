@@ -10,7 +10,7 @@
             </ol>
         </nav>
         <header class="page-title-bar">
-            <h1 class="page-title">Thêm Group </h1>
+            <h1 class="page-title">Thêm nhóm </h1>
         </header>
 
         <div class="page-section">

@@ -27,22 +27,22 @@ class GroupController extends Controller
         $description            = $request->description ?? '';
         // thực hiện query
         $query = Group::query(true);
-
+        $query->orderBy('id', 'DESC');
         if ($name) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+            $query->where('name', 'LIKE', '%' . $name . '%')->where('deleted_at', '=', null);
         }
         if ($description) {
-            $query->where('description', 'LIKE', '%' . $description . '%');
+            $query->where('description', 'LIKE', '%' . $description . '%')->where('deleted_at', '=', null);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->where('id', $id)->where('deleted_at', '=', null);
         }
         if ($key) {
-            $query->orWhere('id', $key);
-            $query->orWhere('name', 'LIKE', '%' . $key . '%');
+            $query->orWhere('id', $key)->where('deleted_at', '=', null);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%')->where('deleted_at', '=', null);
         }
         //Phân trang
-        $groups = $query->paginate(3);
+        $groups = $query->where('deleted_at', '=', null)->paginate(3);
 
         $params = [
             'f_id'           => $id,
@@ -149,11 +149,78 @@ class GroupController extends Controller
         try {
             $groups->delete();
             Session::flash('success', 'Xóa thành công');
-            return redirect()->route('groups.index');
+            return redirect()->route('groups.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('error', 'Xóa không thành công');
-            return redirect()->route('groups.index');
+            return redirect()->route('groups.trash');
         }
+    }
+    function SoftDeletes($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $groups = Group::findOrFail($id);
+        $groups->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $groups->save();
+            Session::flash('success', 'Xóa Thành công');
+            return redirect()->route('groups.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('groups.index')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function RestoreDelete($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $groups = Group::findOrFail($id);
+        $groups->deleted_at = null;
+        try {
+            $groups->save();
+            Session::flash('success', 'Khôi phục ' . $groups->title . ' thành công');
+            return redirect()->route('groups.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('groups.trash')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function trash(Request $request)
+    {
+        $key        = $request->key ?? '';
+        $name      = $request->name ?? '';
+        $id         = $request->id ?? '';
+        $description         = $request->description ?? '';
+        
+        $query = Group::query(true);
+        $query->orderBy('id', 'DESC');
+
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%')->where('deleted_at', '!=', null);
+        }
+        if ($description) {
+            $query->where('description', 'LIKE', '%' . $description . '%')->where('deleted_at', '!=', null);
+        }
+        if ($id) {
+            $query->where('id', $id)->where('deleted_at', '!=', null);
+        }
+        if ($key) {
+            $query->orWhere('id', $key)->where('deleted_at', '!=', null);
+            $query->orWhere('name', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+            $query->orWhere('description', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+        }
+        $groups = $query->where('deleted_at', '!=', null)->paginate(5);
+        $params = [
+            'f_id'        => $id,
+            'f_name'     => $name,
+            'f_key'       => $key,
+            'description'       => $description,
+            'groups'    => $groups,
+        ];
+        return view('Admin.groups.trash', $params);
     }
 }
