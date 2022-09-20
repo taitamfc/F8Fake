@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('admin.requirements.modals.modalFilterColumns')
+                            @include('Admin.requirements.modals.modalFilterColumns')
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -82,7 +82,10 @@
                                 <td> {{ $requirement->content }} </td>
                                 <td> {{ $requirement->course_id }} </td>
                                 <td>
-
+                                    <span class="sr-only">Edit</span></a> <a
+                                        href="{{ route('requirements.restore', $requirement->id) }}"
+                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
+                                            class="sr-only">Remove</span></a>
                                     <form action="{{ route('requirements.force_destroy', $requirement->id) }}"
                                         style="display:inline" method="post">
                                         <button
@@ -92,10 +95,6 @@
                                         @csrf
                                         @method('delete')
                                     </form>
-                                    <span class="sr-only">Edit</span></a> <a
-                                        href="{{ route('requirements.restore', $requirement->id) }}"
-                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
-                                            class="sr-only">Remove</span></a>
                                 </td>
                             </tr>
                             @endforeach

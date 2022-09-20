@@ -19,7 +19,7 @@
                 <h1 class="page-title mr-sm-auto"> Theo dõi chương học </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('tracks.create') }}" class="btn btn-info mr-2">
+                    <a href="{{ route('users.create') }}" class="btn btn-info mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
                     </a>
@@ -37,14 +37,14 @@
             <div class="card card-fluid">
                 <!-- .card-header -->
                 <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
+                    {{-- <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
                             <a class="nav-link active " href="{{ route('tracks.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('tracks.getTrashed') }}">Thùng Rác</a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </div><!-- /.card-header -->
                 <!-- .card-body -->
                 <div class="card-body">
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('Admin.tracks.modals.modalFilterColumns')
+                            {{-- @include('admin.tracks.modals.modalFilterColumns')
                             @if (!count($tracks))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
@@ -93,7 +93,7 @@
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
                                     {{ Session::get('failed') }}</div>
                                 </p>
-                            @endif
+                            @endif --}}
                         </form>
                         <!-- .input-group -->
                         <!-- /.input-group -->
@@ -103,33 +103,32 @@
                         <thead class="thead-">
                             <tr>
                                 <th width="50px"> # </th>
-                                <th width="100px"> Tiêu đề </th>
-                                <th width="100px"> Miễn phí </th>
-                                <th width="100px"> Chức vụ </th>
-                                <th width="100px"> Khóa học </th>
+                                <th width="100px"> Tên </th>
+                                <th width="100px"> email </th>
+                                <th width="100px"> password </th>
                                 <th width="50px"> Chức năng </th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            @foreach ($tracks as $track)
+                            @foreach ($users as $user)
                                 <tr>
-                                    <th scope="row">{{ $track->id }}</th>
-                                    <td>{{ $track->title }}</td>
-                                    <td>{{ $track->is_free }}</td>
-                                    <td>{{ $track->position }}</td>
-                                    <td>{{ $track->course_id }}</td>
+                                    <th scope="row">{{ $user->id }}</th>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->password }}</td>
                                     <td>
-                                        <a href="{{ route('tracks.edit', $track->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        <form action="{{ route('tracks.destroy', $track->id) }}" style="display:inline"
+                                        <a href="{{ route('users.edit', $user->id) }}"
+                                            class="btn btn-sm btn-icon btn-secondary">sua<i
+                                                class="fa fa-pencil-alt"></i></a>
+                                        {{-- <form action="{{ route('tracks.destroy', $track->id) }}" style="display:inline"
                                             method="post">
                                             <button onclick="return confirm('Bạn có muốn xóa {{ $track->name }}không?')"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="far fa-trash-alt"></i></button>
                                             @csrf
                                             @method('delete')
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach

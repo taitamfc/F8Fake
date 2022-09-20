@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\TrackController;
@@ -19,6 +21,12 @@ use Illuminate\Http\Request;
 Route::get('/dashboard', function () {
     return view('admin.master');
 });
+Route::get('login', [LoginController::class, 'store'])->name('login');
+Route::post('login', [LoginController::class, 'login'])->name('action.login');
+// Route::get('/role', function () {
+//     return view('Admin.users.index');
+// });
+Route::resource('users', AdminUserController::class);
 
 Route::prefix('admin')->group(function () {
 

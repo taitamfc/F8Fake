@@ -57,7 +57,7 @@ class TrackController extends Controller
             'key'       => $key,
             'tracks'    => $tracks,
         ];
-        return view('admin.tracks.index', $params);
+        return view('Admin.tracks.index', $params);
     }
 
     /**
@@ -67,7 +67,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        return view('admin.tracks.create');
+        return view('Admin.tracks.create');
     }
 
     /**
@@ -116,7 +116,7 @@ class TrackController extends Controller
 
         $tracks = Track::all();
         $tracks = Track::find($id);
-        return view('admin.tracks.edit', compact('tracks'));
+        return view('Admin.tracks.edit', compact('tracks'));
     }
 
     /**

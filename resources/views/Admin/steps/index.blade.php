@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <!-- modalFilterColumns  -->
-                            @include('admin.steps.modals.modalFilterColumns')
+                            @include('Admin.steps.modals.modalFilterColumns')
                             @if (!count($steps))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>

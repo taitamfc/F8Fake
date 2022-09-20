@@ -90,7 +90,9 @@
                                     <img style="width:150px; height:100px" src="{{ asset($step->image) }}">
                                 </td>
                                 <td>
-
+                                    <span class="sr-only">Edit</span></a> <a href="{{ route('steps.restore', $step->id) }}"
+                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
+                                            class="sr-only">Remove</span></a>
                                     <form action="{{ route('steps.force_destroy', $step->id) }}" style="display:inline"
                                         method="post">
                                         <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $step->title }} ?')"
@@ -99,10 +101,6 @@
                                         @csrf
                                         @method('delete')
                                     </form>
-                                    <span class="sr-only">Edit</span></a> <a
-                                        href="{{ route('steps.restore', $step->id) }}"
-                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
-                                            class="sr-only">Remove</span></a>
                                 </td>
                             </tr>
                             @endforeach

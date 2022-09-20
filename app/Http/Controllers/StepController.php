@@ -48,7 +48,7 @@ class StepController extends Controller
             'key'       => $key,
             'steps'    => $steps,
         ];
-        return view('admin.steps.index', $params);
+        return view('Admin.steps.index', $params);
     }
 
     /**
@@ -59,7 +59,7 @@ class StepController extends Controller
     public function create()
     {
         $steps = Step::all();
-        return view('admin.steps.create', compact('steps'));
+        return view('Admin.steps.create', compact('steps'));
     }
 
     /**
@@ -122,7 +122,7 @@ class StepController extends Controller
         $steps = Step::all();
         $steps = Step::find($id);
 
-        return view('admin.steps.edit', compact('steps'));
+        return view('Admin.steps.edit', compact('steps'));
     }
 
     /**

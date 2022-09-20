@@ -81,6 +81,10 @@
                                 <th scope="row"> {{ $track->id }} </th>
                                 <td> {{ $track->title }} </td>
                                 <td>
+                                    <span class="sr-only">Edit</span></a> <a
+                                        href="{{ route('tracks.restore', $track->id) }}"
+                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
+                                            class="sr-only">Remove</span></a>
                                     <form action="{{ route('tracks.force_destroy', $track->id) }}" style="display:inline"
                                         method="post">
                                         <button onclick="return confirm('Bạn muốn xóa vĩnh viễn {{ $track->title }} ?')"
@@ -89,10 +93,6 @@
                                         @csrf
                                         @method('delete')
                                     </form>
-                                    <span class="sr-only">Edit</span></a> <a
-                                        href="{{ route('tracks.restore', $track->id) }}"
-                                        class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-trash-restore"></i> <span
-                                            class="sr-only">Remove</span></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -46,7 +46,7 @@ class RequirementController extends Controller
             'key'       => $key,
             'requirements'    => $requirements,
         ];
-        return view('admin.requirements.index', $params);
+        return view('Admin.requirements.index', $params);
     }
 
     /**
@@ -56,7 +56,7 @@ class RequirementController extends Controller
      */
     public function create()
     {
-        return view('admin.requirements.create');
+        return view('Admin.requirements.create');
     }
 
     /**
@@ -101,7 +101,7 @@ class RequirementController extends Controller
     {
         $requirements = Requirement::all();
         $requirements = Requirement::find($id);
-        return view('admin.requirements.edit', compact('requirements'));
+        return view('Admin.requirements.edit', compact('requirements'));
     }
 
     /**
