@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 */
 Route::prefix('banners')->group(function () {
     Route::get('/trash',[BannerController::class , 'trashedItems'])->name('banners.trash');
-    Route::delete('/force_destroy/{id}', [BannerController::class, 'force_destroy'])->name('banners.force_destroy');
+    Route::put('/force_destroy/{id}', [BannerController::class, 'force_destroy'])->name('banners.force_destroy');
     Route::put('/restore/{id}', [BannerController::class, 'restore'])->name('banners.restore');
 });
 Route::resource('banners',BannerController::class);

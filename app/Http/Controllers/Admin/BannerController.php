@@ -144,16 +144,17 @@ class BannerController extends Controller
         $banners = Banner::findOrFail($id);
 
         try {
-            $banner = str_replace('storage', 'public', $banners->banner);;
+            $banner = str_replace('storage', 'public', $banners->banner);
             Storage::delete($banner);
-            $banners->destroy($id);
+            $banners->delete();
             //dung session de dua ra thong bao
             Session::flash('success', 'Xóa thành công');
             //xoa xong quay ve trang danh sach banners
             return redirect()->route('banners.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('banners.trash')->with('error', 'Xóa không thành công');
+            Session::flash('error', 'Xóa không thành công');
+            return redirect()->route('banners.trash');
         }
     }
     function force_destroy($id)
@@ -175,7 +176,7 @@ class BannerController extends Controller
     function Restore($id)
     {
         $banners = Banner::findOrFail($id);
-        $banners->deleted_at = null;
+        $banners->deleted_at = date("Y-m-d h:i:s");;
         try {
             $banners->save();
             Session::flash('success', 'Khôi phục ' . $banners->title . ' thành công');
@@ -225,6 +226,6 @@ class BannerController extends Controller
             'f_key'       => $key,
             'banners'    => $banners,
         ];
-        return view('Admin.banners.index', $params);
+        return view('Admin.banners.trash', $params);
     }
 }

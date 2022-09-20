@@ -121,15 +121,17 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-2">
-                                                    <form action="{{ route('banners.restore', $banner->id) }}" method="post">
+                                                    <form action="{{ route('banners.restore', $banner->id) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                           ><i class="fa fa-trash-restore"></i> </button>
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary">
+                                                            <i class="fa fa-trash-restore"></i> </button>
                                                     </form>
                                                 </div>
                                                 <div class="col-2">
-                                                    <form action="{{ route('banners.destroy', $banner->id) }}" method="post">
+                                                    <form action="{{ route('banners.destroy', $banner->id) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"
@@ -138,7 +140,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                          </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

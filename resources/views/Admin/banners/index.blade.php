@@ -108,15 +108,16 @@
                                     <td class="align-middle"> {{ $banner->type }} </td>
                                     <td class="align-middle"> {{ $banner->title }} </td>
                                     <td>
-                                        <a href="{{ route('banners.edit', $banner->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        <form action="{{ route('banners.destroy', $banner->id) }}" style="display:inline"
-                                            method="post">
+                                        <form action="{{ route('banners.force_destroy', $banner->id) }}"
+                                            style="display:inline" method="post">
+                                            <a href="{{ route('banners.edit', $banner->id) }}"
+                                                class="btn btn-sm btn-icon btn-secondary"><i
+                                                    class="fa fa-pencil-alt"></i></a>
                                             <button onclick="return confirm('Xóa {{ $banner->name }} ?')"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="far fa-trash-alt"></i></button>
                                             @csrf
-                                            @method('delete')
+                                            @method('PUT')
                                         </form>
                                     </td>
                                 </tr>
