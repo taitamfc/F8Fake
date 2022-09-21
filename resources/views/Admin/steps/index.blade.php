@@ -78,7 +78,7 @@
                             @if (!count($steps))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả
+                                    không tìm thấy kết quả tìm kiếm
                                 </div>
                                 </p>
                             @endif
@@ -118,7 +118,7 @@
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            <tr>
+                            @if(count($steps))
                                 @foreach ($steps as $step)
                             <tr>
                                 <th scope="row">{{ $step->id }}</th>
@@ -148,7 +148,11 @@
                                 </td>
                             </tr>
                             @endforeach
-
+                            @else
+                            <tr>
+                               <td colspan="6" class="text-center">Không có dữ liệu trên hệ thống</td>
+                            </tr>
+                            @endif
                         </tbody><!-- /tbody -->
                     </table>
                 </div><!-- /.card-body -->

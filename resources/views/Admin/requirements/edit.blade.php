@@ -16,7 +16,7 @@
         <div class="page-section">
             <div class="card-deck-xl">
                 <div class="card card-fluid">
-                    <!-- .card-body -->`
+                    <!-- .card-body -->
                     <div class="card-body">
                         <h4 class="card-title"> Thông tin cơ bản </h4>
                         <!-- form -->

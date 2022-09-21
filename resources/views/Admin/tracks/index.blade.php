@@ -78,7 +78,7 @@
                             @if (!count($tracks))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả
+                                    không tìm thấy kết quả tìm kiếm
                                 </div>
                                 </p>
                             @endif
@@ -112,6 +112,7 @@
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
+                            @if (count($tracks))
                             @foreach ($tracks as $track)
                                 <tr>
                                     <th scope="row">{{ $track->id }}</th>

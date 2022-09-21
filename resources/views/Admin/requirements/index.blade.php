@@ -78,7 +78,7 @@
                             @if (!count($requirements))
                                 <p class="text-success">
                                 <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả
+                                    không tìm thấy kết quả tìm kiếm
                                 </div>
                                 </p>
                             @endif
@@ -110,6 +110,7 @@
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
+                            @if (count($requirements))
                             @foreach ($requirements as $requirement)
                                 <tr>
                                     <th scope="row">{{ $requirement->id }}</th>
@@ -128,9 +129,13 @@
                                             @method('delete')
                                         </form>
                                     </td>
-
                                 </tr>
                             @endforeach
+                            @else
+                            <tr>
+                               <td colspan="6" class="text-center">Không có dữ liệu trên hệ thống</td>
+                            </tr>
+                            @endif
                         </tbody><!-- /tbody -->
                     </table>
                 </div><!-- /.card-body -->
