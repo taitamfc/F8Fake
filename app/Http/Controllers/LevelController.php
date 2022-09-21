@@ -10,6 +10,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use App\Exports\ExportLevel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LevelController extends Controller
 {
@@ -204,6 +206,10 @@ class LevelController extends Controller
             'levels'    => $levels,
         ];
         return view('Admin.levels.trash', $params);
+    }
+    public function exportLevel(Request $request){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        return Excel::download(new ExportLevel, "Levels-".date("Y-m-d h:i:s").".xlsx");
     }
 
 }

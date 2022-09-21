@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportCourse;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
@@ -9,6 +10,7 @@ use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CourseController extends Controller
 {
@@ -258,4 +260,8 @@ class CourseController extends Controller
         return view('Admin.courses.trash', $params) ;
     }
 
+    public function exportCourse(Request $request){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        return Excel::download(new ExportCourse, "Course-".date("Y-m-d h:i:s").".xlsx");
+    }
 }

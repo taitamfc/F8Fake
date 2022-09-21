@@ -78,8 +78,8 @@
                                                 id=""class="form-control @error('level_id') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                                 <option value="">--chọn cấp độ--</option>
-                                                @foreach ($levels as $leve)
-                                                    <option value="{{ $leve->id }}">{{ $leve->title }}</option>
+                                                @foreach ($levels as $level)
+                                                    <option value="{{ $level->id }}">{{ $level->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('level_id')

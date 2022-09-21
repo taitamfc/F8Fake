@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportWillLearn;
 use App\Http\Requests\StoreWillLearnRequest;
 use App\Models\Course;
 use App\Models\WillLearn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class WillLearnController extends Controller
 {
@@ -169,5 +171,9 @@ class WillLearnController extends Controller
             'WillLearns'    => $WillLearns,
         ];
         return view('Admin.WillLearns.trash', $params);
+    }
+    public function exportWillLearn(Request $request){
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        return Excel::download(new ExportWillLearn, "WillLearns-".date("Y-m-d h:i:s").".xlsx");
     }
 }

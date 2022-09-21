@@ -26,19 +26,23 @@ Route::prefix('admin')->group(function () {
         Route::put('SoftDeletes/{id}', [CourseController::class, 'SoftDeletes'])->name('courses.SoftDeletes');
         Route::get('trash', [CourseController::class, 'trash'])->name('courses.trash');
         Route::put('RestoreDelete/{id}', [CourseController::class, 'RestoreDelete'])->name('courses.RestoreDelete');
+        Route::get('export-courses',[CourseController::class,'exportCourse'])->name('levels.export-courses');
+
     });
     Route::prefix('levels')->group(function () {
         Route::put('SoftDeletes/{id}', [LevelController::class, 'SoftDeletes'])->name('levels.SoftDeletes');
         Route::get('trash', [LevelController::class, 'trash'])->name('levels.trash');
         Route::put('RestoreDelete/{id}', [LevelController::class, 'RestoreDelete'])->name('levels.RestoreDelete');
+        Route::get('export-levels', [LevelController::class, 'exportLevel'])->name('levels.export-levels');
     });
     Route::prefix('WillLearns')->group(function () {
         Route::put('SoftDeletes/{id}', [WillLearnController::class, 'SoftDeletes'])->name('WillLearns.SoftDeletes');
         Route::get('trash', [WillLearnController::class, 'trash'])->name('WillLearns.trash');
         Route::put('RestoreDelete/{id}', [WillLearnController::class, 'RestoreDelete'])->name('WillLearns.RestoreDelete');
+        Route::get('export-WillLearns', [WillLearnController::class, 'exportWillLearn'])->name('levels.export-WillLearns');
+
     });
     Route::resource('levels', LevelController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('WillLearns', WillLearnController::class);
 });
-
