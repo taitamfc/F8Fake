@@ -75,16 +75,18 @@ class BlogController extends Controller
         $blog->is_approved = $request->is_approved;
         $blog->published_at = $request->published_at;
         $blog->reaction_count = $request->reaction_count;
-        $blog->blogs_count = $request->blogs_count;
         $blog->is_reacted = $request->is_reacted;
         $blog->is_bookmark = $request->is_bookmark;
         $blog->is_published = $request->is_published;
+        $blog->image = $request->image;
+        $blog->comments_count = $request->comments_count;
+
         try {
             $blog->save();
-            return redirect()->route('blogs.index')->with('success', 'Thêm' . ' ' . $request->user_id . ' ' .  'thành công');
+            return redirect()->route('blogs.index')->with('success', 'Thêm' . ' ' . $request->parent_id . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('blogs.index')->with('error', 'Thêm' . ' ' . $request->user_id . ' ' .  'không thành công');
+            return redirect()->route('blogs.index')->with('error', 'Thêm' . ' ' . $request->parent_id . ' ' .  'không thành công');
         }
 
 
@@ -141,10 +143,10 @@ class BlogController extends Controller
 
         try {
             $blog->forceDelete();
-            return redirect()->route('blogs.trash')->with('success', 'Xóa' . ' ' . $blog->user_id . ' ' .  'thành công');
+            return redirect()->route('blogs.trash')->with('success', 'Xóa' . ' ' . $blog->id . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('blogs.trash')->with('error', 'Xóa' . ' ' . $blog->user_id . ' ' .  'không thành công');
+            return redirect()->route('blogs.trash')->with('error', 'Xóa' . ' ' . $blog->id . ' ' .  'không thành công');
         }
     }
 

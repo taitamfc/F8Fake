@@ -19,7 +19,7 @@
                 <h1 class="page-title mr-sm-auto"> Thùng rác Blog  </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{route('comments.create')}}"   class="btn btn-primary mr-2">
+                    <a href="{{route('blogs.create')}}"   class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm Mới</span>
                     </a>
@@ -43,7 +43,7 @@
                             <a class="nav-link  " href="{{ route('blogs.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="">Thùng Rác</a>
+                            <a class="nav-link active" href="{{ route('blogs.trash') }}">Thùng Rác</a>
                         </li>
                     </ul>
                 </div>
@@ -106,9 +106,9 @@
                                 <tr>
                                     <th scope="row">{{ $blog->id }}</th>
                                     <td>{{ $blog->user_id }}</td>
-                                    <td>{{ $blog->blogstable_type }}</td>
-                                    <td>{{ $blog->blog }}</td>
-                                    <td>{{ $blog->approved }}</td>
+                                    <td>{{ $blog->parent_id }}</td>
+                                    <td>{{ $blog->title }}</td>
+                                    <td>{{ $blog->content }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>
                                     <td>{{ $blog->content }}</td> --}}
                                     <td>
@@ -127,7 +127,7 @@
                                                     <form action="{{ route('blogs.force_destroy', $blog->id) }}"
                                                         method="post">
                                                         @csrf
-                                                        @method('put')
+                                                        @method('delete')
                                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                                 class="far fa-trash-alt"></i></button>

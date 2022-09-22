@@ -17,7 +17,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh sách Blog  </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách blog  </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{route('blogs.create')}}"   class="btn btn-primary mr-2">
@@ -44,7 +44,7 @@
                             <a class="nav-link active " href="{{ route('blogs.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Thùng Rác</a>
+                            <a class="nav-link" href="{{route('blogs.trash')}}">Thùng Rác</a>
                         </li>
                     </ul>
                 </div>
@@ -58,12 +58,13 @@
                                 <button class="btn btn-secondary" type="button" data-toggle="modal"
                                     data-target="#modalFilterColumns">Tìm nâng cao</button>
                             </div><!-- /.input-group-prepend -->
+
                             <!-- .input-group -->
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                 </div>
-                                <input type="text" class="form-control" name="key" placeholder="Search record">
+                                <input type="text" class="form-control" name="key" value="{{$f_key}}" placeholder="Search record">
                             </div><!-- /.input-group -->
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
@@ -72,8 +73,11 @@
                         @include('blogs.modals.modalblogcolumn')
                     </form>
                 </div><!-- /.card-header -->
-                @if (Session::has('succes'))
-                <div class="alert alert-success">{{session::get('succes')}}</div>
+                @if (Session::has('success'))
+                <div class="alert alert-success">{{session::get('success')}}</div>
+                @endif
+                @if (Session::has('error'))
+                <div class="alert alert-success">{{session::get('error')}}</div>
                 @endif
                 <div class="card-body">
 
@@ -89,11 +93,11 @@
                             <tr>
 
                                 <th> # </th>
-                                <th> user id </th>
-                                <th> parent id </th>
-                                <th> title </th>
-                                {{-- <th> content </th> --}}
-                                <th> actions</th>
+                                <th>người dùng </th>
+                                <th> loại </th>
+                                <th> nội dung </th>
+                                <th> phê duyệt</th>
+                                <th> thao tác</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
@@ -105,23 +109,20 @@
                                     <td>{{ $blog->user_id }}</td>
                                     <td>{{ $blog->parent_id }}</td>
                                     <td>{{ $blog->title }}</td>
+                                    <td>{{ $blog->description }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>
                                     <td>{{ $blog->content }}</td> --}}
                                     <td>
-                                        <a href="{{ route('blogs.edit', $blog->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        {{-- <a href="{{ route('blogs.destroy', $blog->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"
-                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                class="far fa-trash-alt"></i></a> --}}
-                                                <form action="{{ route('blogs.destroy', $blog->id) }}" style="display:inline"
-                                                    method="post">
-                                                    <button onclick="return confirm('Xóa {{ $blog->title }} ?')"
-                                                        class="btn btn-sm btn-icon btn-secondary"><i
-                                                            class="far fa-trash-alt"></i></button>
-                                                    @csrf
-                                                    @method('delete')
-                                                </form>
+                                        <form action="{{ route('blogs.SoftDeletes', $blog->id) }}" method="post">
+                                            <a href="{{ route('blogs.edit', $blog->id) }}"
+                                                class="btn btn-sm btn-icon btn-secondary"><i
+                                                    class="fa fa-pencil-alt"></i></a>
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
