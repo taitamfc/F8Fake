@@ -14,13 +14,14 @@
                 <!-- #filter-columns -->
                 <div id="filter-columns">
                     <!-- .form-row -->
-                    {{-- <div class="form-group form-row filter-row">
+                    <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Mã Số (#)</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="number" name="id"
-                                    class="form-control filter-column f-name" value="{{ $id }}"
+                            <div class="input text">
+                                <input type="number" name="id"
+                                    class="form-control filter-column f-name" value=""
                                     id="id" />
                             </div>
                         </div>
@@ -30,8 +31,9 @@
                             <label class="">Tiêu đề</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="title"
-                                    class="form-control filter-column f-name" value="{{ $title }}"
+                            <div class="input text">
+                                <input type="text" name="title"
+                                    class="form-control filter-column f-name" value=""
                                     id="title" />
                             </div>
                         </div>
@@ -42,7 +44,7 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="boolean" name="is_free"
-                                    class="form-control filter-column f-name" value="{{ $is_free }}"
+                                    class="form-control filter-column f-name" value=""
                                     id="is_free" />
                             </div>
                         </div>
@@ -53,7 +55,7 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="string" name="position"
-                                    class="form-control filter-column f-name" value="{{ $position }}"
+                                    class="form-control filter-column f-name" value=""
                                     id="position" />
                             </div>
                         </div>
@@ -64,11 +66,11 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="number" name="course_id"
-                                    class="form-control filter-column f-name" value="{{ $course_id }}"
+                                    class="form-control filter-column f-name" value=""
                                     id="course_id" />
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->

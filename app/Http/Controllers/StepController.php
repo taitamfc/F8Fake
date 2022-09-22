@@ -26,16 +26,23 @@ class StepController extends Controller
         // thực hiện query
         $query = Step::query(true);
         if ($title) {
-            $query->where('title', 'LIKE', '%' . $title . '%');
+            $query->title($title);
         }
         if ($original_name) {
-            $query->where('original_name', 'LIKE', '%' . $original_name . '%');
+            $query->original_name($original_name);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->id($id);
         }
+        // thực hiện tìm kiếm nhanh
         if ($key) {
             $query->orWhere('id', $key);
+        }
+        if ($key) {
+            $query->orWhere('title', $key);
+        }
+        if ($key) {
+            $query->orWhere('original_name', $key);
         }
 
         $query->orderBy('id', 'DESC');

@@ -15,10 +15,24 @@ class Step extends Model
     {
         return $this->belongsTo(TrackStep::class);
     }
-    public function scopeSearch($query)
+    public function scopeTitle($query, $term)
     {
-        if ($key = request()->key) {
-            $query = $query->where('title', 'like', '%' . $key . '%');
+        if ($term) {
+            $query->where('title', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeOriginal_name($query, $term)
+    {
+        if ($term) {
+            $query->where('original_name', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeId($query, $term)
+    {
+        if ($term) {
+            $query->where('id', 'like', '%' . $term . '%');
         }
         return $query;
     }

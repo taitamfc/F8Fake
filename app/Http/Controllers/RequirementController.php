@@ -26,17 +26,25 @@ class RequirementController extends Controller
         // thực hiện query
         $query = Requirement::query(true);
         if ($content) {
-            $query->where('content', 'LIKE', '%' . $content . '%');
+            $query->content($content);
         }
         if ($course_id) {
-            $query->where('course_id', 'LIKE', '%' . $course_id . '%');
+            $query->course_id($course_id);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->id($id);
         }
+        //thực hiện tìm kiếm nhanh
         if ($key) {
             $query->orWhere('id', $key);
         }
+        if ($key) {
+            $query->orWhere('content', $key);
+        }
+        if ($key) {
+            $query->orWhere('course_id', $key);
+        }
+
         $query->orderBy('id', 'DESC');
         $requirements = $query->paginate(5);
         $params = [
@@ -157,10 +165,10 @@ class RequirementController extends Controller
         $requirement->forceDelete();
         try {
             $requirement->forceDelete();
-            return redirect()->route('requirements.index')->with('success', 'Xóa' . ' ' . $requirement->title . ' ' .  'thành công');
+            return redirect()->route('requirements.index')->with('success', 'Xóa' . ' ' . $requirement->content . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('requirements.index')->with('failed', 'Xóa' . ' ' . $requirement->title . ' ' .  'không thành công');
+            return redirect()->route('requirements.index')->with('failed', 'Xóa' . ' ' . $requirement->content . ' ' .  'không thành công');
         }
     }
 
@@ -169,10 +177,10 @@ class RequirementController extends Controller
         $requirement = Requirement::withTrashed()->find($id);
         $requirement->restore();
         try {
-            return redirect()->route('requirements.index')->with('success', 'Khôi phục' . ' ' . $requirement->title . ' ' .  'thành công');
+            return redirect()->route('requirements.index')->with('success', 'Khôi phục' . ' ' . $requirement->content . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('requirements.index')->with('failed', 'Khôi phục' . ' ' . $requirement->title . ' ' .  'không thành công');
+            return redirect()->route('requirements.index')->with('failed', 'Khôi phục' . ' ' . $requirement->content . ' ' .  'không thành công');
         }
     }
 }

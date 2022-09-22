@@ -18,7 +18,6 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Danh sách yêu cầu </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('requirements.create') }}" class="btn btn-info mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
@@ -65,7 +64,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value=""
+                                    <input type="text" class="form-control" name="key" value="{{request()->key}}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -75,13 +74,6 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.requirements.modals.modalFilterColumns')
-                            @if (!count($requirements))
-                                <p class="text-success">
-                                <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả tìm kiếm
-                                </div>
-                                </p>
-                            @endif
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -102,15 +94,19 @@
                         <!-- thead -->
                         <thead class="thead-">
                             <tr>
-                                <th width="100px"> # </th>
+                                <th width="50px"> # </th>
                                 <th width="200px"> Nội dung </th>
                                 <th width="200px"> Khóa học </th>
-                                <th width="50px"> Chức năng</th>
+                                <th width="100px"> Chức năng</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            @if (count($requirements))
+                            @if (!$requirements->count())
+                            <tr>
+                                <td class="text-a" colspan="6">Không có dữ liệu trên hệ thống</td>
+                            </tr>
+                        @else
                             @foreach ($requirements as $requirement)
                                 <tr>
                                     <th scope="row">{{ $requirement->id }}</th>
@@ -131,10 +127,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            @else
-                            <tr>
-                               <td colspan="6" class="text-center">Không có dữ liệu trên hệ thống</td>
-                            </tr>
                             @endif
                         </tbody><!-- /tbody -->
                     </table>

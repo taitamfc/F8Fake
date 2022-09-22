@@ -28,23 +28,28 @@ class TrackController extends Controller
         // thực hiện query
         $query = Track::query(true);
         if ($title) {
-            $query->where('title', 'LIKE', '%' . $title . '%');
+            $query->title($title);
         }
         if ($is_free) {
-            $query->where('is_free', 'LIKE', '%' . $is_free . '%');
+            $query->is_free($is_free);
         }
         if ($position) {
-            $query->where('position', 'LIKE', '%' . $position . '%');
+            $query->position($position);
         }
         if ($course_id) {
-            $query->where('course_id', $course_id);
+            $query->course_id($course_id);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->id($id);
         }
+        // thực hiện tìm kiếm nhanh
         if ($key) {
             $query->orWhere('id', $key);
         }
+        if ($key) {
+            $query->orWhere('title', $key);
+        }
+        // sắp xếp và phân trang
         $query->orderBy('id', 'DESC');
         $tracks = $query->paginate(5);
 
@@ -163,7 +168,9 @@ class TrackController extends Controller
     public function getTrashed(Request $request)
     {
         $tracks = Track::onlyTrashed()->latest()->get();
+
         $params = [
+
             'tracks' => $tracks,
         ];
         return view('admin.tracks.trash', $params);

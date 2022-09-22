@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::get('/dashboard', function () {
     return view('admin.master');
+
 });
 Route::prefix('admin')->group(function () {
 

@@ -14,39 +14,36 @@
                 <!-- #filter-columns -->
                 <div id="filter-columns">
                     <!-- .form-row -->
-                    {{-- <div class="form-group form-row filter-row">
+                    <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Mã Số (#)</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="number" name="id"
-                                    class="form-control filter-column f-name"
-                                    value=" {{"$id"}} " id="id" />
+                                    class="form-control filter-column f-name" value="" id="id" />
                             </div>
                         </div>
-                    </div> --}}
-                    {{-- <div class="form-group form-row filter-row">
+                    </div>
+                    <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Tiêu đề</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="string" name="title"
-                                    class="form-control filter-column f-name"
-                                    value=" {{"$title"}} " id="title" />
+                                    class="form-control filter-column f-name" value="" id="title" />
                             </div>
                         </div>
-                    </div> --}}
-                    {{-- <div class="form-group form-row filter-row">
+                    </div>
+                    <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
                             <label class="">Tên chính</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="string" name="original_name"
-                                    class="form-control filter-column f-name"
-                                    value=" {{"$original_name"}} " id="original_name" />
+                                    class="form-control filter-column f-name" value="" id="original_name" />
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->

@@ -15,10 +15,24 @@ class Requirement extends Model
     {
         return $this->belongsTo(Course::class);
     }
-    public function scopeSearch($query)
+    public function scopeContent($query, $term)
     {
-        if ($key = request()->key) {
-            $query = $query->where('content', 'like', '%' . $key . '%');
+        if ($term) {
+            $query->where('content', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeCourse_id($query, $term)
+    {
+        if ($term) {
+            $query->where('course_id', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeId($query, $term)
+    {
+        if ($term) {
+            $query->where('id', 'like', '%' . $term . '%');
         }
         return $query;
     }

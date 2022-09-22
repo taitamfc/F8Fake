@@ -18,7 +18,6 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Theo dõi chương học </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('tracks.create') }}" class="btn btn-info mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
@@ -65,7 +64,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value=""
+                                    <input type="text" class="form-control" name="key" value="{{request()->key}}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -75,13 +74,6 @@
                             </div>
                             <!-- modalFilterColumns  -->
                             @include('Admin.tracks.modals.modalFilterColumns')
-                            @if (!count($tracks))
-                                <p class="text-success">
-                                <div class="alert alert-danger"> <i class="bi bi-x-circle" aria-hidden="true"></i>
-                                    không tìm thấy kết quả tìm kiếm
-                                </div>
-                                </p>
-                            @endif
                             @if (Session::has('success'))
                                 <p class="text-success">
                                 <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -103,16 +95,20 @@
                         <thead class="thead-">
                             <tr>
                                 <th width="50px"> # </th>
-                                <th width="100px"> Tiêu đề </th>
-                                <th width="100px"> Miễn phí </th>
-                                <th width="100px"> Chức vụ </th>
-                                <th width="100px"> Khóa học </th>
+                                <th width="150px"> Tiêu đề </th>
+                                <th width="50px"> Miễn phí </th>
+                                <th width="50px"> Chức vụ </th>
+                                <th width="50px"> Khóa học </th>
                                 <th width="50px"> Chức năng </th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
                         <tbody>
-                            @if (count($tracks))
+                            @if (!$tracks->count())
+                            <tr>
+                                <td class="text-a" colspan="6">Không có dữ liệu trên hệ thống</td>
+                            </tr>
+                        @else
                             @foreach ($tracks as $track)
                                 <tr>
                                     <th scope="row">{{ $track->id }}</th>
@@ -134,6 +130,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div><!-- /.card-body -->

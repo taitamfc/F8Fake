@@ -19,10 +19,38 @@ class Track extends Model
     {
         return $this->hasMany(Track_steps::class);
     }
-    public function scopeSearch($query)
+    public function scopeTitle($query, $term)
     {
-        if ($key = request()->key) {
-            $query = $query->where('title', 'like', '%' . $key . '%');
+        if ($term) {
+            $query->where('title', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeIs_free($query, $term)
+    {
+        if ($term) {
+            $query->where('is_free', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopePosition($query, $term)
+    {
+        if ($term) {
+            $query->where('position', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeCourse_id($query, $term)
+    {
+        if ($term) {
+            $query->where('course_id', 'like', '%' . $term . '%');
+        }
+        return $query;
+    }
+    public function scopeId($query, $term)
+    {
+        if ($term) {
+            $query->where('id', 'like', '%' . $term . '%');
         }
         return $query;
     }
