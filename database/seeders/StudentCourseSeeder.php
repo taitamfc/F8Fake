@@ -15,7 +15,7 @@ class StudentCourseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('student_sourse')->insert([
+        DB::table('student_course')->insert([
             [
                 'course_id' =>'1',
                 'student_id' =>'1'
