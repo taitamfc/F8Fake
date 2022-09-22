@@ -17,6 +17,11 @@ use Illuminate\Http\Request;
 Route::get('/', function(){
     return view('Admin.master');
 });
+Route::prefix('tracksteps')->group(function () {
+    Route::put('SoftDeletes/{id}', [TrackStepController::class, 'SoftDeletes'])->name('tracksteps.SoftDeletes');
+    Route::get('trash', [TrackStepController::class, 'trash'])->name('tracksteps.trash');
+    Route::put('RestoreDelete/{id}', [TrackStepController::class, 'RestoreDelete'])->name('tracksteps.RestoreDelete');
+});
 Route::resource('tracksteps', TrackStepController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');

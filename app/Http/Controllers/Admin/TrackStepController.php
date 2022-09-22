@@ -28,7 +28,7 @@ class TrackStepController extends Controller
         $id             = $request->id ?? '';
 
         // thực hiện query
-        $query = TrackStep::query(true);
+        $query = TrackStep::select("*");
         if ($step_type) {
             $query->where('step_type', 'LIKE', '%' . $step_type . '%');
         }
@@ -156,8 +156,8 @@ class TrackStepController extends Controller
     public function destroy($id)
     {
         
+        $tracksteps = TrackStep::findOrFail($id);
         try {
-            $tracksteps = TrackStep::findOrFail($id);
             $tracksteps->delete();
             Session::flash('error', 'Xóa thành công');
             return redirect()->route('tracksteps.index');
@@ -166,5 +166,71 @@ class TrackStepController extends Controller
             Session::flash('error','Xóa thất bại');
             return redirect()->route('tracksteps.index');
         }
+    }
+    function SoftDeletes($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $tracksteps = TrackStep::withTrashed()->findOrFail($id);
+        $tracksteps->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $tracksteps->save();
+            Session::flash('success', 'Xóa Thành công');
+            return redirect()->route('tracksteps.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('tracksteps.index')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function RestoreDelete($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $tracksteps = TrackStep::withTrashed()->findOrFail($id);
+        $tracksteps->deleted_at = null;
+        try {
+            $tracksteps->save();
+            Session::flash('success', 'Khôi phục ' . $tracksteps->title . ' thành công');
+            return redirect()->route('tracksteps.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('tracksteps.trash')->with('error', 'xóa không thành công');
+        }
+    }
+
+    function trash(Request $request)
+    {
+        $key        = $request->key ?? '';
+        $step_type      = $request->step_type ?? '';
+        $id         = $request->id ?? '';
+        $position         = $request->position ?? '';
+        
+        $query = TrackStep::onlyTrashed();
+
+        if ($step_type) {
+            $query->where('step_type', 'LIKE', '%' . $step_type . '%');
+        }
+        if ($position) {
+            $query->where('position', 'LIKE', '%' . $position . '%');
+        }
+        if ($id) {
+            $query->where('id', $id);
+        }
+        if ($key) {
+            $query->orWhere('id', $key);
+            $query->orWhere('step_type', 'LIKE', '%' . $key . '%');
+            $query->orWhere('position', 'LIKE', '%' . $key . '%');
+        }
+        $tracksteps = $query->paginate(3);
+        $params = [
+            'f_id'        => $id,
+            'f_step_type'     => $step_type,
+            'f_key'       => $key,
+            'f_position'       => $position,
+            'tracksteps'    => $tracksteps,
+        ];
+        return view('Admin.tracksteps.trash', $params);
     }
 }

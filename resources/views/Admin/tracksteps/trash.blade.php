@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh Sách Bài Học </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh Sách Người Dùng </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{ route('tracksteps.create') }}" class="btn btn-primary mr-2">
@@ -28,9 +28,10 @@
                         <span class="ml-1">Xuất file excel</span>
                     </a>
                     {{-- @endif --}}
-                </div><!-- /.btn-toolbar -->
-            </div>
-            <!-- /title and toolbar -->
+                </div>
+                <!-- /.btn-toolbar -->
+            </div><!-- /title and toolbar -->
+
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">
@@ -40,10 +41,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active " href="{{ route('tracksteps.index') }}">Tất Cả</a>
+                            <a class="nav-link " href="{{ route('tracksteps.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link active"
                                 href="
                             {{ route('tracksteps.trash') }}
                             ">Thùng
@@ -63,6 +64,7 @@
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
                                         data-target="#modalFilterColumns">Tìm nâng cao</button>
+
                                 </div>
                                 <div class="input-group has-clearable">
                                     <button type="button" class="close trigger-submit trigger-submit-delay"
@@ -72,7 +74,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value="{{$f_key}}"
+                                    <input type="text" class="form-control" name="key" value="{{ $f_key }}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -96,13 +98,14 @@
                                 </p>
                             @endif
                             @if (Session::has('error'))
-                            <p class="text-danger">
-                            <div class="alert alert-danger"> <i class="bi bi-x-circle"aria-hidden="true"></i>
-                                {{ Session::get('error') }}</div>
-                            </p>
+                                <p class="text-danger">
+                                <div class="alert alert-danger"> <i class="bi bi-x-circle"aria-hidden="true"></i>
+                                    {{ Session::get('error') }}</div>
+                                </p>
                             @endif
                         </form>
                     </div><!-- /.form-group -->
+
                     <table class="table table-hover">
                         <!-- thead -->
                         <thead class="thead-">
@@ -120,20 +123,29 @@
                                     <td>{{ $trackstep->step_type }}</td>
                                     <td>{{ $trackstep->position }}</td>
                                     <td>
-                                        <form action="{{ route('tracksteps.SoftDeletes', $trackstep->id) }}" method="post">
-                                            <a href="{{ route('tracksteps.edit', $trackstep->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="fa fa-pencil-alt"></i></a>
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                        </form>
-                                        {{-- <a href="{{ route('tracksteps.destroy', $group->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></a> --}}
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <form action="{{ route('tracksteps.RestoreDelete', $trackstep->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                                class="bi bi-arrow-counterclockwise"></i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="{{ route('tracksteps.destroy', $trackstep->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                class="far fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
