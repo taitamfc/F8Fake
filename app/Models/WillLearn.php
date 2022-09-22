@@ -10,6 +10,6 @@ class WillLearn extends Model
     use HasFactory;
     protected $table = 'will_learns';
     function course(){
-        return $this->belongsTo(Courses::class);
+        return $this->belongsTo(Course::class,'course_id','id');
     }
 }

@@ -37,16 +37,19 @@
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
     <!-- BEGIN PLUGINS STYLES -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet"
         href="{{ asset('AdminTheme/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/flatpickr/flatpickr.min.css') }}">
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme.min.css') }}" data-skin="default">
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css') }}" data-skin="dark">
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme.min.css')}}" data-skin="default">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css')}}" data-skin="dark">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" > --}}
     <script>
         var skin = localStorage.getItem('skin') || 'default';
         var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
@@ -64,49 +67,49 @@
         <!--[if lt IE 10]>
       <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
       <![endif]-->
-        <!-- .app-header -->
-        @include('Admin.layout.header')
-        <!-- /.app-header -->
-        <!-- .app-aside -->
-        @include('Admin.layout.sidebar')
-        <!-- /.app-aside -->
-        <!-- .app-main -->
-        <main class="app-main">
-            <!-- .wrapper -->
-            <div class="wrapper">
-                <!-- .page -->
-                <div class="page">
-                    <!-- .page-inner -->
-                    @yield('content')
-                    <!-- /.page-inner -->
-                </div><!-- /.page -->
-            </div><!-- .app-footer -->
-            <footer class="app-footer">
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Support</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Help Center</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Privacy</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Terms of Service</a>
-                    </li>
-                </ul>
-                <div class="copyright"> Copyright © 2018. All right reserved. </div>
-            </footer><!-- /.app-footer -->
-            <!-- /.wrapper -->
-        </main><!-- /.app-main -->
+      <!-- .app-header -->
+      @include('Admin.layout.header')
+      <!-- /.app-header -->
+      <!-- .app-aside -->
+      @include('Admin.layout.sidebar')
+      <!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+            <!-- .page-inner -->
+            @yield('content')
+            <!-- /.page-inner -->
+          </div><!-- /.page -->
+        </div><!-- .app-footer -->
+        <footer class="app-footer">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Support</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Help Center</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Privacy</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Terms of Service</a>
+            </li>
+          </ul>
+          <div class="copyright"> Copyright © 2018. All right reserved. </div>
+        </footer><!-- /.app-footer -->
+        <!-- /.wrapper -->
+      </main><!-- /.app-main -->
     </div><!-- /.app -->
-
     <!-- BEGIN BASE JS -->
+   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js') }}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script> <!-- END BASE JS -->
+    <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
     <!-- BEGIN PLUGINS JS -->
     <script src="{{ asset('AdminTheme/assets/vendor/pace-progress/pace.min.js') }}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/stacked-menu/js/stacked-menu.min.js') }}"></script>
@@ -120,12 +123,7 @@
     <script src="{{ asset('AdminTheme/assets/javascript/pages/dashboard-demo.js') }}"></script> <!-- END PAGE LEVEL JS -->
     <!-- Global site tag (gtag.js')}}) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
-
-    <script src="{{ asset('AdminTheme/ckeditor/ckeditor.js') }}"></script> <!-- END THEME JS -->
-    <script>
-        CKEDITOR.replace('ckeditor');
-        CKEDITOR.replace('ckeditor1');
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -135,13 +133,12 @@
         gtag('js', new Date());
         gtag('config', 'UA-116692175-1');
     </script>
-
     <script>
         jQuery(document).ready(function() {
             if ($('#blah').hide()) {
                 $('#blah').hide();
             }
-            jQuery('#inputFile').change(function() {
+            jQuery('#imgInp').change(function() {
                 $('#blah').show();
                 const file = jQuery(this)[0].files;
                 if (file[0]) {
@@ -151,7 +148,16 @@
             });
         });
     </script>
+    <script>
+        $("document").ready(function() {
+            setTimeout(function() {
+                $("div.alert").remove();
+            }, 3000); // 3 giây
 
+        });
+    </script>
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>
