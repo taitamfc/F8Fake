@@ -117,7 +117,7 @@
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="far fa-trash-alt"></i></button>
                                             @csrf
-                                            @method('PUT')
+                                            @method('put')
                                         </form>
                                     </td>
                                 </tr>

@@ -11,18 +11,30 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
+
 class BannerController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
+        // $banners = banner::get();
+        // $banners = banner::orderBy('created_at', 'DESC')->search()->paginate(4);
+        // return view('Admin.banners.index', compact('banners'));
+
+
         $key        = $request->key ?? '';
         $placement      = $request->placement ?? '';
         $type      = $request->type ?? '';
         $title      = $request->title ?? '';
         $id         = $request->id ?? '';
 
+
         // thực hiện query
-        $query = Banner::select('*');
+        $query = Banner::query(true);
         if ($placement) {
             $query->where('placement', 'LIKE', '%' . $placement . '%')->where('deleted_at', '=', null);
         }
@@ -54,12 +66,16 @@ class BannerController extends Controller
         return view('Admin.banners.index', $params);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $banners = Banner::get();
         return view('Admin.banners.add', compact('banners'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -86,27 +102,51 @@ class BannerController extends Controller
         $banners->link_to = $request->input('link_to');
         $banners->priority = $request->input('priority');
         $banners->expires = $request->input('expires');
-
         try {
             $banners->save();
-            Session::flash('success', 'Thêm thành công');
-
+            Session::flash('success', 'Tạo mới thành công');
+            //tao moi xong quay ve trang danh sach task
             return redirect()->route('banners.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('banners.index')->with('error', 'thêm không thành công');
+            return redirect()->route('banners.index')->with('error', 'Tạo mới không thành công');
         }
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $banners = Banner::findOrFail($id);
+
         return view('Admin.banners.edit', compact('banners'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(UpdateBannerRequest $request, $id)
     {
-        $banners = Banner::findOrFail($id);
+
+        $banners = new Banner();
         $banners->placement = $request->input('placement');
         $banners->type = $request->input('type');
 
@@ -115,7 +155,7 @@ class BannerController extends Controller
             $fileExtension = $file->getClientOriginalExtension(); //jpg,png lấy ra định dạng file và trả về
             $fileName = time(); //45678908766 tạo tên file theo thời gian
             $newFileName = $fileName . '.' . $fileExtension; //45678908766.jpg
-            $path = 'storage/' . $request->file('banner')->store('banner', 'public'); //lưu file vào mục public/images với tê mới là $newFileName
+            $path = 'storage/' . $request->file('banner')->store('banner', 'public'); //lưu file vào mục public/banners với tê mới là $newFileName
             $banners->banner = $path;
         }
         $banners->title = $request->input('title');
@@ -125,13 +165,11 @@ class BannerController extends Controller
         $banners->priority = $request->input('priority');
         $banners->expires = $request->input('expires');
 
-       
         try {
             $banners->save();
-
             //dung session de dua ra thong bao
             Session::flash('success', 'Cập nhật thành công');
-            //tao moi xong quay ve trang danh sach banner
+            //tao moi xong quay ve trang danh sach product
             return redirect()->route('banners.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -139,6 +177,15 @@ class BannerController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+
+     
     public function destroy($id)
     {
         $banners = Banner::findOrFail($id);
@@ -159,10 +206,11 @@ class BannerController extends Controller
 
     public function trashedItems(Request $request){
         $key        = $request->key ?? '';
-        $placement      = $request->placement ?? '';
+        $placement         = $request->placement ?? '';
         $type      = $request->type ?? '';
         $title      = $request->title ?? '';
         $id         = $request->id ?? '';
+
 
         // thực hiện query
         $query = Banner::query(true);
@@ -229,5 +277,5 @@ class BannerController extends Controller
             return redirect()->route('banners.trash')->with('error', 'xóa không thành công');
         }
     }
-    
 }
+

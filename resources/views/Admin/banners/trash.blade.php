@@ -125,7 +125,8 @@
                                                         method="post">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary">
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary" onclick="return confirm('Bạn muốn khôi phục?')">
+                                                            
                                                             <i class="fa fa-trash-restore"></i> </button>
                                                     </form>
                                                 </div>
@@ -135,7 +136,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"> <i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </form>
                                                 </div>
