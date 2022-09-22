@@ -79,8 +79,7 @@ class UserController extends Controller
         $users = new User();
         $users->name = $request->name;
         $users->email = $request->email;
-        $users->password = $request->password;
-        $users->remember_token = $request->remember_token;
+        $users->password = bcrypt($request->password);
         $users->username = $request->username;
         $users->first_name = $request->first_name;
         $users->last_name = $request->last_name;
@@ -148,8 +147,7 @@ class UserController extends Controller
 
         $users->name = $request->name;
         $users->email = $request->email;
-        $users->password = $request->password;
-        $users->remember_token = $request->remember_token;
+        $users->password = bcrypt($request->password);
         $users->username = $request->username;
         $users->first_name = $request->first_name;
         $users->last_name = $request->last_name;

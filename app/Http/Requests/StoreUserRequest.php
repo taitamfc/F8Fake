@@ -33,7 +33,7 @@ class StoreUserRequest extends FormRequest
           'full_name'=>'required',
           'avatar'=>'required',
           'bio'=>'required',
-          'group_id'=>'required|numeric|max:2',
+          'group_id'=>'required',
           'avatar_url'=>'required',
           'cover_url'=>'required',
           'is_comment_blocked'=>'required',
