@@ -20,6 +20,13 @@ Route::get('/', function(){
 });
 
 Route::resource('blogs', BlogController::class);
+
+Route::prefix('blogs')->group(function () {
+    Route::put('SoftDeletes/{id}', [BlogController::class, 'SoftDeletes'])->name('blogs.SoftDeletes');
+    Route::get('trash', [BlogController::class, 'trash'])->name('blogs.trash');
+    Route::put('RestoreDelete/{id}', [BlogController::class, 'RestoreDelete'])->name('blogs.RestoreDelete');
+    Route::put('force_destroy/{id}', [BlogController::class, 'force_destroy'])->name('blogs.force_destroy');
+});
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');
