@@ -31,4 +31,5 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+    
 }

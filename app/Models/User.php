@@ -7,11 +7,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
+    protected $table = 'users';
+    function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+    function blog()
+    {
+        return $this->hasMany(Blog::class);
+    }
+    function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('name', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -42,3 +62,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+
+

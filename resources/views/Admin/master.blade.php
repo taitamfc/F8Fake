@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
@@ -30,35 +31,43 @@
       }
     </script><!-- End SEO tag -->
     <!-- FAVICONS -->
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('AdminTheme/assets/apple-touch-icon.png')}}">
-    <link rel="shortcut icon" href="{{ asset('AdminTheme/assets/favicon.ico')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('AdminTheme/assets/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('AdminTheme/assets/favicon.ico') }}">
     <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
     <!-- BEGIN PLUGINS STYLES -->
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/flatpickr/flatpickr.min.css')}}"><!-- END PLUGINS STYLES -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="{{ asset('AdminTheme/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/flatpickr/flatpickr.min.css') }}">
+    <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme.min.css')}}" data-skin="default">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css')}}" data-skin="dark">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<<<<<<< HEAD
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" > --}}
+=======
+>>>>>>> develop
     <script>
-      var skin = localStorage.getItem('skin') || 'default';
-      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
-      // Disable unused skin immediately
-      disabledSkinStylesheet.setAttribute('rel', '');
-      disabledSkinStylesheet.setAttribute('disabled', true);
-      // add loading class to html immediately
-      document.querySelector('html').classList.add('loading');
+        var skin = localStorage.getItem('skin') || 'default';
+        var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+        // Disable unused skin immediately
+        disabledSkinStylesheet.setAttribute('rel', '');
+        disabledSkinStylesheet.setAttribute('disabled', true);
+        // add loading class to html immediately
+        document.querySelector('html').classList.add('loading');
     </script><!-- END THEME STYLES -->
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- .app -->
     <div class="app">
-      <!--[if lt IE 10]>
+        <!--[if lt IE 10]>
       <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
       <![endif]-->
       <!-- .app-header -->
@@ -99,50 +108,65 @@
       </main><!-- /.app-main -->
     </div><!-- /.app -->
     <!-- BEGIN BASE JS -->
+<<<<<<< HEAD
    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
+=======
+    <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script> <!-- END BASE JS -->
+>>>>>>> develop
     <!-- BEGIN PLUGINS JS -->
-    <script src="{{ asset('AdminTheme/assets/vendor/pace-progress/pace.min.js')}}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/stacked-menu/js/stacked-menu.min.js')}}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/flatpickr/flatpickr.min.js')}}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
-    <script src="{{ asset('AdminTheme/assets/vendor/chart.js/Chart.min.js')}}"></script> <!-- END PLUGINS JS -->
+    <script src="{{ asset('AdminTheme/assets/vendor/pace-progress/pace.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/stacked-menu/js/stacked-menu.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/chart.js/Chart.min.js') }}"></script> <!-- END PLUGINS JS -->
     <!-- BEGIN THEME JS -->
-    <script src="{{ asset('AdminTheme/assets/javascript/theme.min.js')}}"></script> <!-- END THEME JS -->
+    <script src="{{ asset('AdminTheme/assets/javascript/theme.min.js') }}"></script> <!-- END THEME JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="{{ asset('AdminTheme/assets/javascript/pages/dashboard-demo.js')}}"></script> <!-- END PAGE LEVEL JS -->
+    <script src="{{ asset('AdminTheme/assets/javascript/pages/dashboard-demo.js') }}"></script> <!-- END PAGE LEVEL JS -->
     <!-- Global site tag (gtag.js')}}) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || [];
 
-      function gtag()
-      {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'UA-116692175-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-116692175-1');
     </script>
-     <script>
-       jQuery(document).ready(function() {
-         if( $('#blah').hide()){
-           $('#blah').hide();
-         }
-           jQuery('#inputFile').change(function() {
-               $('#blah').show();
-               const file = jQuery(this)[0].files;
-               if (file[0]) {
-                   jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
-                   jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
-               }
-           });
-       });
-       
-   </script>
-  </body>
+    <script>
+        jQuery(document).ready(function() {
+            if ($('#blah').hide()) {
+                $('#blah').hide();
+            }
+            jQuery('#imgInp').change(function() {
+                $('#blah').show();
+                const file = jQuery(this)[0].files;
+                if (file[0]) {
+                    jQuery('#blah').attr('src', URL.createObjectURL(file[0]));
+                    jQuery('#blah1').attr('src', URL.createObjectURL(file[0]));
+                }
+            });
+        });
+    </script>
+    <script>
+        $("document").ready(function() {
+            setTimeout(function() {
+                $("div.alert").remove();
+            }, 3000); // 3 giây
+
+        });
+    </script>
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
 </html>

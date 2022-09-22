@@ -14,7 +14,7 @@ class CourseSeeder extends Seeder
         DB::table('courses')->insert([
             [
                 'level_id' => 1,
-                'title' => 'Xây Dựng Website với ReactJS',
+                'title' => 'Xây Dựng Website với Reac',
                 'certificate_name' => 'Build Website With ReactJS',
                 'slug' => 'reactjs',
                 'description' => 'Khóa học ReactJS từ cơ bản tới nâng cao, kết quả của khóa học này là bạn có thể làm hầu hết các dự án thường gặp với ReactJS. Cuối khóa học này bạn sẽ sở hữu một dự án giống Tiktok.com, bạn có thể tự tin đi xin việc khi nắm chắc các kiến thức được chia sẻ trong khóa học này.',
