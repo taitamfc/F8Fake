@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\GroupController;
@@ -46,6 +47,19 @@ Route::prefix('login')->group(function () {
 Route::get('/', function () {
     return view('Admin.master');
 });
+
+
+
+Route::prefix('blogs')->group(function () {
+    Route::put('SoftDeletes/{id}', [BlogController::class, 'SoftDeletes'])->name('blogs.SoftDeletes');
+    Route::get('trash', [BlogController::class, 'trash'])->name('blogs.trash');
+    Route::put('RestoreDelete/{id}', [BlogController::class, 'RestoreDelete'])->name('blogs.RestoreDelete');
+    Route::put('force_destroy/{id}', [BlogController::class, 'force_destroy'])->name('blogs.force_destroy');
+});
+Route::resource('blogs', BlogController::class);
+// Route::get('/index', function () {
+//     // echo '<br>'.route('index');
+//     // echo '<br>'.route('create');
 Route::prefix('groups')->group(function () {
     Route::put('SoftDeletes/{id}', [GroupController::class, 'SoftDeletes'])->name('groups.SoftDeletes');
     Route::get('trash', [GroupController::class, 'trash'])->name('groups.trash');
