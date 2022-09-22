@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->text('description');
-            $table->datetime('duration');
+            $table->string('duration');
             $table->string('video_type');
             $table->string('original_name');
             $table->string('image');
