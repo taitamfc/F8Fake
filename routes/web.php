@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Admin\UserController;
@@ -28,8 +30,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+    Route::get('/trash',[StudentController::class , 'trashedItems'])->name('students.trash');
+    Route::delete('/force_destroy/{id}', [StudentController::class, 'force_destroy'])->name('students.force_destroy');
+    Route::put('/restore/{id}', [StudentController::class, 'restore'])->name('students.restore');
+});
+Route::resource('students',StudentController::class);
 
-Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
+
+
+
     Route::get('/', function () {
         return view('Admin.master');
     })->middleware('auth');

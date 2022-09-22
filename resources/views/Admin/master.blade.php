@@ -49,6 +49,10 @@
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css')}}" data-skin="dark">
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<<<<<<< HEAD
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" > --}}
+=======
+>>>>>>> develop
     <script>
         var skin = localStorage.getItem('skin') || 'default';
         var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
@@ -104,9 +108,17 @@
       </main><!-- /.app-main -->
     </div><!-- /.app -->
     <!-- BEGIN BASE JS -->
+<<<<<<< HEAD
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
+    <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
+=======
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/popper.js/umd/popper.min.js') }}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script> <!-- END BASE JS -->
+>>>>>>> develop
     <!-- BEGIN PLUGINS JS -->
     <script src="{{ asset('AdminTheme/assets/vendor/pace-progress/pace.min.js') }}"></script>
     <script src="{{ asset('AdminTheme/assets/vendor/stacked-menu/js/stacked-menu.min.js') }}"></script>
@@ -120,6 +132,7 @@
     <script src="{{ asset('AdminTheme/assets/javascript/pages/dashboard-demo.js') }}"></script> <!-- END PAGE LEVEL JS -->
     <!-- Global site tag (gtag.js')}}) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
