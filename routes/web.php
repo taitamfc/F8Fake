@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\Admin\TrackStepController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\RequirementExportController;
 use App\Http\Controllers\StepController;
@@ -8,7 +10,6 @@ use App\Http\Controllers\TrackController;
 use App\Http\Controllers\TrackExportController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LevelController;
-use App\Http\Controllers\TrackStepController;
 use App\Http\Controllers\Admin\WillLearnController;
 use App\Http\Controllers\LevelController as ControllersLevelController;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +25,6 @@ use Illuminate\Http\Request;
 |
 */
 
-<<<<<<< HEAD
-Route::get('/dashboard', function () {
-    return view('admin.master');
-});
 Route::prefix('admin')->group(function () {
     Route::prefix('requirements')->group(function () {
         Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
@@ -52,11 +49,16 @@ Route::prefix('admin')->group(function () {
         Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
     });
     Route::resource('tracks', TrackController::class);
-=======
 Route::get('/', function () {
     return view('Admin.master');
 });
-
+Route::prefix('tracksteps')->group(function () {
+    Route::put('SoftDeletes/{id}', [TrackStepController::class, 'SoftDeletes'])->name('tracksteps.SoftDeletes');
+    Route::get('trash', [TrackStepController::class, 'trash'])->name('tracksteps.trash');
+    Route::put('RestoreDelete/{id}', [TrackStepController::class, 'RestoreDelete'])->name('tracksteps.RestoreDelete');
+    Route::get('/export-track_steps',[TrackStepController::class,'export'])->name('export-track_steps');
+});
+Route::resource('tracksteps', TrackStepController::class);
 Route::prefix('admin')->group(function () {
     Route::prefix('courses')->group(function () {
         Route::put('SoftDeletes/{id}', [CourseController::class, 'SoftDeletes'])->name('courses.SoftDeletes');
@@ -81,5 +83,4 @@ Route::prefix('admin')->group(function () {
     Route::resource('levels', LevelController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('WillLearns', WillLearnController::class);
->>>>>>> develop
 });

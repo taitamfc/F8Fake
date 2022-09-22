@@ -31,16 +31,9 @@
       }
     </script><!-- End SEO tag -->
     <!-- FAVICONS -->
-<<<<<<< HEAD
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('AdminTheme/assets/apple-touch-icon.png') }}">
     <link rel="shortcut icon" href="{{ asset('AdminTheme/assets/favicon.ico') }}">
     <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
-=======
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('AdminTheme/assets/apple-touch-icon.png')}}">
-    <link rel="shortcut icon" href="{{ asset('AdminTheme/assets/favicon.ico')}}">
-    <meta name="theme-color" content="#3063A0">
-    <!-- End FAVICONS -->
->>>>>>> develop
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
     <!-- BEGIN PLUGINS STYLES -->
@@ -52,9 +45,9 @@
     <link rel="stylesheet" href="{{ asset('AdminTheme/assets/vendor/flatpickr/flatpickr.min.css') }}">
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme.min.css') }}" data-skin="default">
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css') }}" data-skin="dark">
-    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme.min.css')}}" data-skin="default">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/theme-dark.min.css')}}" data-skin="dark">
+    <link rel="stylesheet" href="{{ asset('AdminTheme/assets/stylesheets/custom.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script>
         var skin = localStorage.getItem('skin') || 'default';
