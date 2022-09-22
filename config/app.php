@@ -83,7 +83,6 @@ return [
     */
 
     'locale' => 'en',
-
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -212,5 +211,5 @@ return [
 
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
-  
+
 ];

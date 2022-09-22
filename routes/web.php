@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\RequirementExportController;
 use App\Http\Controllers\StepController;
@@ -20,7 +21,6 @@ use Illuminate\Http\Request;
 
 Route::get('/dashboard', function () {
     return view('admin.master');
-
 });
 Route::get('steps/export/', [StepExportController::class, 'export'])->name('steps.export');
 Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');

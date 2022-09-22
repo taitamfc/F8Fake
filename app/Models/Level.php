@@ -9,7 +9,8 @@ class Level extends Model
 {
     use HasFactory;
     protected $table = 'levels';
-    function courses(){
+    function courses()
+    {
         return $this->hasMany(Course::class);
     }
 }
