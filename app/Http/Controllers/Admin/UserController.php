@@ -64,7 +64,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $groups = User::get();
+        $groups = Group::get();
         return view('Admin.users.add',compact('groups'));
     }
 
