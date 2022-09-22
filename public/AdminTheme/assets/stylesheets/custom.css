@@ -10,3 +10,6 @@
 .figure-img .img-link {
 	background-color: hsla(0,0%,100%,.5)  !important;
 }
+.export{
+    margin-left:10px;
+}
