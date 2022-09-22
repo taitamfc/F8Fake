@@ -8882,6 +8882,9 @@
         "This file is @generated automatically"
     ],
 <<<<<<< HEAD
+    "content-hash": "cdb226983875d28117a37d249cb08d35",
+=======
+<<<<<<< HEAD
     "content-hash": "170b37b8bd4c531c19ec4bdf12eced7b",
 =======
 <<<<<<< HEAD
@@ -8894,6 +8897,7 @@
     "content-hash": "170b37b8bd4c531c19ec4bdf12eced7b",
 =======
     "content-hash": "6f39b444300059d5f6a1cc1bde2c0fb5",
+>>>>>>> develop
 >>>>>>> develop
 >>>>>>> develop
 >>>>>>> develop
@@ -12262,6 +12266,18 @@
         {
             "name": "psr/simple-cache",
 <<<<<<< HEAD
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "8707bf3cea6f710bf6ef05491234e3ab06f6432a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/8707bf3cea6f710bf6ef05491234e3ab06f6432a",
+                "reference": "8707bf3cea6f710bf6ef05491234e3ab06f6432a",
+=======
+<<<<<<< HEAD
             "version": "1.0.1",
             "source": {
                 "type": "git",
@@ -12284,6 +12300,7 @@
                 "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/8707bf3cea6f710bf6ef05491234e3ab06f6432a",
                 "reference": "8707bf3cea6f710bf6ef05491234e3ab06f6432a",
 >>>>>>> develop
+>>>>>>> develop
                 "shasum": ""
             },
             "require": {
@@ -12293,9 +12310,13 @@
             "extra": {
                 "branch-alias": {
 <<<<<<< HEAD
+                    "dev-master": "2.0.x-dev"
+=======
+<<<<<<< HEAD
                     "dev-master": "1.0.x-dev"
 =======
                     "dev-master": "2.0.x-dev"
+>>>>>>> develop
 >>>>>>> develop
                 }
             },
@@ -12324,6 +12345,11 @@
             ],
             "support": {
 <<<<<<< HEAD
+                "source": "https://github.com/php-fig/simple-cache/tree/2.0.0"
+            },
+            "time": "2021-10-29T13:22:09+00:00"
+=======
+<<<<<<< HEAD
                 "source": "https://github.com/php-fig/simple-cache/tree/master"
             },
             "time": "2017-10-23T01:57:42+00:00"
@@ -12331,6 +12357,7 @@
                 "source": "https://github.com/php-fig/simple-cache/tree/2.0.0"
             },
             "time": "2021-10-29T13:22:09+00:00"
+>>>>>>> develop
 >>>>>>> develop
         },
         {

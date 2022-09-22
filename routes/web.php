@@ -30,6 +30,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::prefix('banners')->group(function () {
+    Route::get('/trash',[BannerController::class , 'trashedItems'])->name('banners.trash');
+    Route::put('/force_destroy/{id}', [BannerController::class, 'force_destroy'])->name('banners.force_destroy');
+    Route::put('/restore/{id}', [BannerController::class, 'restore'])->name('banners.restore');
+    Route::get('/export-banners',[BannerController::class,'exportBanners'])->name('export-banners');
+});
+Route::resource('banners',BannerController::class);
+
+
+
+
     Route::get('/trash',[StudentController::class , 'trashedItems'])->name('students.trash');
     Route::delete('/force_destroy/{id}', [StudentController::class, 'force_destroy'])->name('students.force_destroy');
     Route::put('/restore/{id}', [StudentController::class, 'restore'])->name('students.restore');
