@@ -1,6 +1,7 @@
 <?php
 
-
+use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\TrackStepController;
 use App\Http\Controllers\Admin\TrackStepController;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\RequirementExportController;
@@ -24,6 +25,18 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', function () {
+    return view('Admin.master');
+});
+Route::prefix('groups')->group(function () {
+    Route::put('SoftDeletes/{id}', [GroupController::class, 'SoftDeletes'])->name('groups.SoftDeletes');
+    Route::get('trash', [GroupController::class, 'trash'])->name('groups.trash');
+    Route::put('RestoreDelete/{id}', [GroupController::class, 'RestoreDelete'])->name('groups.RestoreDelete');
+});
+// Route::get('groups/trash', [GroupController::class, 'trashedItems'])->name('groups.trash');
+// Route::get('groups/{id}/destroy', [GroupController::class, 'destroy'])->name('groups.destroy');
+Route::resource('groups', GroupController::class);
 
 Route::prefix('admin')->group(function () {
     Route::prefix('requirements')->group(function () {
