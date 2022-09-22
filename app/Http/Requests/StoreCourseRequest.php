@@ -24,7 +24,7 @@ class StoreCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'             => 'required|unique:course',
+            'title'             => 'required|unique:courses',
             'level_id'          => 'required',
             'certificate_name'  => 'required',
             'slug'              => 'required',
@@ -52,12 +52,12 @@ class StoreCourseRequest extends FormRequest
     {
         return [
 
-            'title.required'            => 'Trường bắt buộc',
-            'title.unique'              => 'đã tồn tại',
-            'level_id.required'         => 'Trường bắt buộc',
-            'certificate_name.required' => 'Trường bắt buộc',
-            'slug.required'             => 'Trường bắt buộc',
-            'description.required'      => 'Trường bắt buộc',
+            'title.required'             => 'Trường bắt buộc',
+            'title.unique'               => 'đã tồn tại',
+            'level_id.required'          => 'Trường bắt buộc',
+            'certificate_name.required'  => 'Trường bắt buộc',
+            'slug.required'              => 'Trường bắt buộc',
+            'description.required'       => 'Trường bắt buộc',
             'compeleted_content.required'=> 'Trường bắt buộc',
             'image.required'             => 'Trường bắt buộc',
             'icon.required'              => 'Trường bắt buộc',
