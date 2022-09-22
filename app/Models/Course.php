@@ -9,7 +9,9 @@ class Course extends Model
 {
     use HasFactory;
     protected $table = 'courses';
+
+
     function will_learns(){
-        return $this->hasMany(WillLearn::class);
+        return $this->hasMany(WillLearn::class,'course_id');
     }
 }
