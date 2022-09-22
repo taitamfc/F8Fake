@@ -21,6 +21,7 @@ Route::prefix('tracksteps')->group(function () {
     Route::put('SoftDeletes/{id}', [TrackStepController::class, 'SoftDeletes'])->name('tracksteps.SoftDeletes');
     Route::get('trash', [TrackStepController::class, 'trash'])->name('tracksteps.trash');
     Route::put('RestoreDelete/{id}', [TrackStepController::class, 'RestoreDelete'])->name('tracksteps.RestoreDelete');
+    Route::get('/export-track_steps',[TrackStepController::class,'export'])->name('export-track_steps');
 });
 Route::resource('tracksteps', TrackStepController::class);
 // Route::get('/index', function () {

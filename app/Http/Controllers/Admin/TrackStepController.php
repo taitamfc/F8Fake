@@ -11,6 +11,9 @@ use App\Models\TrackStep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\exportTrackSteps;
+use App\Exports\TrackStepExport;
 
 class TrackStepController extends Controller
 {
@@ -19,6 +22,10 @@ class TrackStepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function export() 
+    {
+        return Excel::download(new TrackStepExport, 'tracksteps.xlsx');
+    }
     public function index(Request $request)
     {
         //Lấy params trên url
