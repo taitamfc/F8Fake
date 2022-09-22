@@ -19,7 +19,7 @@ Route::get('/', function(){
     return view('Admin.master');
 });
 
-Route::resource('blogs', BlogController::class);
+
 
 Route::prefix('blogs')->group(function () {
     Route::put('SoftDeletes/{id}', [BlogController::class, 'SoftDeletes'])->name('blogs.SoftDeletes');
@@ -27,6 +27,7 @@ Route::prefix('blogs')->group(function () {
     Route::put('RestoreDelete/{id}', [BlogController::class, 'RestoreDelete'])->name('blogs.RestoreDelete');
     Route::put('force_destroy/{id}', [BlogController::class, 'force_destroy'])->name('blogs.force_destroy');
 });
+Route::resource('blogs', BlogController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
 //     // echo '<br>'.route('create');

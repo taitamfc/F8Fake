@@ -64,13 +64,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                 </div>
-                                <input type="text" class="form-control" name="key" value="{{$f_key}}" placeholder="Search record">
+                                <input type="text" class="form-control" name="key" value="{{$f_key}}" placeholder="Tìm tiêu đề">
                             </div><!-- /.input-group -->
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
                             </div>
                         </div>
-                        @include('blogs.modals.modalblogcolumn')
+                        @include('Admin.blogs.modals.modalblogcolumn')
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
@@ -93,10 +93,10 @@
                             <tr>
 
                                 <th> # </th>
-                                <th>người dùng </th>
-                                <th> loại </th>
-                                <th> nội dung </th>
-                                <th> phê duyệt</th>
+                                <th>mã người dùng </th>
+                                <th> phụ huynh </th>
+                                <th> tiêu đề </th>
+                                <th> mô tả</th>
                                 <th> thao tác</th>
                             </tr>
                         </thead><!-- /thead -->

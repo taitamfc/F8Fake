@@ -34,7 +34,7 @@
                             </div><!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >parent id</label>
+                                <label class="control-label" >phụ huynh</label>
                                 <input type="number" name="parent_id" class="form-control"  >
                             </div>
                             @if ($errors->any())
@@ -42,7 +42,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >title</label>
+                                <label class="control-label" >tiêu đề</label>
                                 <input   type="text" name="title" class="form-control">
                             </div>
                             @if ($errors->any())
@@ -59,7 +59,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >description</label>
+                                <label class="control-label" >mô tả</label>
                                 <input type="text" name="description" class="form-control">
                             </div>
                             @if ($errors->any())
@@ -67,7 +67,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >meta_title</label> <input
+                                <label class="control-label" >kiểu tiêu đề</label> <input
                                      type="text" name="meta_title" class="form-control">
                             </div>
                             @if ($errors->any())
@@ -75,7 +75,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >meta_description</label> <input
+                                <label class="control-label" >kiểu mô tả</label> <input
                                      type="text" name="meta_description" class="form-control">
                             </div>
                             @if ($errors->any())
@@ -83,7 +83,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >thumbnail</label> <input id="flatpickr08"
+                                <label class="control-label" >hình bìa</label> <input id="flatpickr08"
                                     type="text" name="thumbnail" class="form-control"  data-enable-time="true">
                             </div>
                             @if ($errors->any())
@@ -99,7 +99,7 @@
                             @endif
 
                             <div class="form-group">
-                                <label class="control-label" >min read</label> <input
+                                <label class="control-label" >thời gian </label> <input
                                      type="number" name="min_read" class="form-control"
                                     >
                             </div>
@@ -115,7 +115,7 @@
                             <p style="color:red">{{ $errors->first('view_count') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >is_recommend</label>
+                                <label class="control-label" >phản hồi</label>
                                     <select class="form-control" name="is_recommend" id="">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -125,7 +125,7 @@
                             <p style="color:red">{{ $errors->first('is_recommend') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >is_approved</label>
+                                <label class="control-label" >kiểm duyệt</label>
                                     <select class="form-control" name="is_approved" id="">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -135,7 +135,7 @@
                             <p style="color:red">{{ $errors->first('is_approved') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >published_at</label> <input
+                                <label class="control-label" >xuất bản</label> <input
                                      type="date" name="published_at" class="form-control"
                                     >
                             </div>
@@ -143,7 +143,7 @@
                             <p style="color:red">{{ $errors->first('published_at') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >reactions_count</label> <input
+                                <label class="control-label" >đánh giá</label> <input
                                      type="number" name="reaction_count" class="form-control"
                                     >
                             </div>
@@ -151,7 +151,7 @@
                             <p style="color:red">{{ $errors->first('reaction_count') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >comments_count</label> <input
+                                <label class="control-label" >lượt bình luận</label> <input
                                      type="number" name="comments_count" class="form-control"
                                     >
                             </div>
@@ -159,7 +159,7 @@
                             <p style="color:red">{{ $errors->first('comments_count') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >is_reacted</label>
+                                <label class="control-label" >phản hồi</label>
                                     <select class="form-control" name="is_reacted" id="">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -169,7 +169,7 @@
                             <p style="color:red">{{ $errors->first('is_reacted') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >is_bookmark</label>
+                                <label class="control-label" >dấu trang</label>
                                     <select class="form-control" name="is_bookmark" id="">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -179,7 +179,7 @@
                             <p style="color:red">{{ $errors->first('is_bookmark') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >is_published</label>
+                                <label class="control-label" >phát hành</label>
                                      <select class="form-control" name="is_published" id="">
                                         <option value="0">0</option>
                                         <option value="1">1</option>

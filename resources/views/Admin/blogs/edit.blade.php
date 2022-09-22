@@ -19,21 +19,21 @@
                             @csrf
                             @method('put')
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">User id</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">mã người dùng</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="user_id" value="{{$blog->user_id}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('user_id') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Parent id</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">phụ huynh</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="parent_id" value="{{$blog->parent_id}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('parent_id') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Title</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">tiêu đề</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="title" value="{{$blog->title}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())

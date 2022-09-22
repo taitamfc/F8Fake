@@ -69,7 +69,7 @@
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
                             </div>
                         </div>
-                        @include('blogs.modals.modalblogcolumn')
+                        @include('Admin.blogs.modals.modalblogcolumn')
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
@@ -127,7 +127,7 @@
                                                     <form action="{{ route('blogs.force_destroy', $blog->id) }}"
                                                         method="post">
                                                         @csrf
-                                                        @method('delete')
+                                                        @method('PUT')
                                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                                 class="far fa-trash-alt"></i></button>

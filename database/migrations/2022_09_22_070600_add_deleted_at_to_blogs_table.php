@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('blogs', function (Blueprint $table) {
-            $table->softDeletes('delete_at');
-
+            $table->string('deleted_at');
         });
     }
 

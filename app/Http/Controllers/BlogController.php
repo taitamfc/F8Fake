@@ -26,7 +26,7 @@ class BlogController extends Controller
         }
 
         if ($title) {
-            $query->where('blog', 'LIKE', '%' . $title . '%');
+            $query->where('title', 'LIKE', '%' . $title . '%');
         }
 
         if ($id) {
@@ -45,7 +45,7 @@ class BlogController extends Controller
             'f_key'       => $key,
             'blogs'    => $blogs,
         ];
-        return view('blogs.index', $params);
+        return view('Admin.blogs.index', $params);
 
     }
     public function create()
@@ -54,7 +54,7 @@ class BlogController extends Controller
         $users = User::all();
 
         // dd($users);
-        return view('blogs.create',compact('users','blogs'));
+        return view('Admin.blogs.create',compact('users','blogs'));
     }
     public function store( StoreBlogRequest $request)
     {
@@ -100,7 +100,7 @@ class BlogController extends Controller
         $blog = Blog::find($id);
 
         // dd($blog);
-        return view('blogs.edit', compact('blog'));
+        return view('Admin.blogs.edit', compact('blog'));
     }
     public function update(UpdateBlogRequest $request ,$id)
     {
@@ -125,11 +125,9 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $blog = Blog::find($id);
-
-
+        // dd($id);
         try {
             $blog->delete();
-
             return redirect()->route('blogs.index')->with('success', 'Xóa' . ' ' . $blog->id . ' ' .  'thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -154,7 +152,7 @@ class BlogController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $blog = Blog::findOrFail($id);
-        $blog->delete_at = date("Y-m-d h:i:s");
+        $blog->deleted_at = date("Y-m-d h:i:s");
         try {
             $blog->save();
             Session::flash('success', 'Xóa Thành công');
@@ -170,7 +168,7 @@ class BlogController extends Controller
     function RestoreDelete($id)
     {
         $blog = Blog::withTrashed()->find($id);
-        $blog->delete_at = null;
+        $blog->deleted_at = null;
         try {
             $blog->save();
 
@@ -196,22 +194,22 @@ class BlogController extends Controller
         $query->orderBy('id', 'DESC');
 
         if ($user_id) {
-            $query->where('user_id', 'LIKE', '%' . $user_id . '%')->where('delete_at', '!=', null);
+            $query->where('user_id', 'LIKE', '%' . $user_id . '%');
         }
         if ($title) {
-            $query->where('title', 'LIKE', '%' . $title . '%')->where('delete_at', '!=', null);
+            $query->where('title', 'LIKE', '%' . $title . '%');
         }
         if ($id) {
-            $query->where('id', $id)->where('delete_at', '!=', null);
+            $query->where('id', $id);
         }
         if ($parent_id) {
-            $query->where('parent_id', 'LIKE', '%' . $parent_id . '%')->where('delete_at', '!=', null);
+            $query->where('parent_id', 'LIKE', '%' . $parent_id . '%');
         }
         if ($key) {
-            $query->orWhere('id', $key)->where('delete_at', '!=', null);
-            $query->orWhere('user_id', 'LIKE', '%' . $key . '%')->where('delete_at', '!=', null);
-            $query->orWhere('title', 'LIKE', '%' . $key . '%')->where('delete_at', '!=', null);
-            $query->orWhere('parent_id', 'LIKE', '%' . $key . '%')->where('delete_at', '!=', null);
+            $query->orWhere('id', $key);
+            $query->orWhere('user_id', 'LIKE', '%' . $key . '%');
+            $query->orWhere('title', 'LIKE', '%' . $key . '%');
+            $query->orWhere('parent_id', 'LIKE', '%' . $key . '%');
         }
         $blogs = $query->paginate(5);
         $params = [
@@ -222,6 +220,6 @@ class BlogController extends Controller
             'f_parent_id'       => $parent_id,
             'blogs'    => $blogs,
         ];
-        return view('blogs.trash', $params);
+        return view('Admin.blogs.trash', $params);
     }
 }
