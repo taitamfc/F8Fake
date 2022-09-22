@@ -13,15 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('student_course', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('course_id')->constrained('courses');
-            $table->foreignId('student_id')->constrained('students');
-            $table->timestamps();
+        Schema::table('levels', function (Blueprint $table) {
+            //
+            $table->softDeletes();
+
         });
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('student_sourse');
+        Schema::table('levels', function (Blueprint $table) {
+            //
+        });
     }
 };

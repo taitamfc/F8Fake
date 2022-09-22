@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RoleSeeder extends Seeder
+class Student_sourseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,16 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
+        DB::table('student_course')->insert([
             [
-                'name'=>'mai xuan thao',
-                'group_name'=>'Kiến Thức Nhập Môn IT',
+                'course_id' =>'1',
+                'student_id' =>'1'
+            ],
+            [
+                'course_id' =>'2',
+                'student_id' =>'2'
             ]
-            ]);
+          
+        ]);
     }
 }

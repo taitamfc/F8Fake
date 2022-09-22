@@ -13,11 +13,10 @@ class Track extends Model
     protected $fillable = ['title', 'is_free', 'position', 'course_id'];
     function course()
     {
-        return $this->belongsTo(Courses::class);
+        return $this->belongsTo(Course::class);
     }
-    function track_steps()
-    {
-        return $this->hasMany(Track_steps::class);
+    function track_steps(){
+        return $this->hasMany(TrackStep::class);
     }
     public function scopeTitle($query, $term)
     {

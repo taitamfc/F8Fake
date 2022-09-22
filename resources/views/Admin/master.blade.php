@@ -31,9 +31,16 @@
       }
     </script><!-- End SEO tag -->
     <!-- FAVICONS -->
+<<<<<<< HEAD
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('AdminTheme/assets/apple-touch-icon.png') }}">
     <link rel="shortcut icon" href="{{ asset('AdminTheme/assets/favicon.ico') }}">
     <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
+=======
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('AdminTheme/assets/apple-touch-icon.png')}}">
+    <link rel="shortcut icon" href="{{ asset('AdminTheme/assets/favicon.ico')}}">
+    <meta name="theme-color" content="#3063A0">
+    <!-- End FAVICONS -->
+>>>>>>> develop
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
     <!-- BEGIN PLUGINS STYLES -->
@@ -66,42 +73,42 @@
         <!--[if lt IE 10]>
       <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
       <![endif]-->
-        <!-- .app-header -->
-        @include('admin.layouts.header')
-        <!-- /.app-header -->
-        <!-- .app-aside -->
-        @include('admin.layouts.sidebar')
-        <!-- /.app-aside -->
-        <!-- .app-main -->
-        <main class="app-main">
-            <!-- .wrapper -->
-            <div class="wrapper">
-                <!-- .page -->
-                <div class="page">
-                    <!-- .page-inner -->
-                    @yield('content')
-                    <!-- /.page-inner -->
-                </div><!-- /.page -->
-            </div><!-- .app-footer -->
-            <footer class="app-footer">
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Support</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Help Center</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Privacy</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Terms of Service</a>
-                    </li>
-                </ul>
-                <div class="copyright"> Copyright © 2018. All right reserved. </div>
-            </footer><!-- /.app-footer -->
-            <!-- /.wrapper -->
-        </main><!-- /.app-main -->
+      <!-- .app-header -->
+      @include('Admin.layout.header')
+      <!-- /.app-header -->
+      <!-- .app-aside -->
+      @include('Admin.layout.sidebar')
+      <!-- /.app-aside -->
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+            <!-- .page-inner -->
+            @yield('content')
+            <!-- /.page-inner -->
+          </div><!-- /.page -->
+        </div><!-- .app-footer -->
+        <footer class="app-footer">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Support</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Help Center</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Privacy</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted" href="#">Terms of Service</a>
+            </li>
+          </ul>
+          <div class="copyright"> Copyright © 2018. All right reserved. </div>
+        </footer><!-- /.app-footer -->
+        <!-- /.wrapper -->
+      </main><!-- /.app-main -->
     </div><!-- /.app -->
     <!-- BEGIN BASE JS -->
     <script src="{{ asset('AdminTheme/assets/vendor/jquery/jquery.min.js') }}"></script>

@@ -208,7 +208,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+<<<<<<< HEAD
 
+=======
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+>>>>>>> develop
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

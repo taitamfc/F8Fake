@@ -6,6 +6,11 @@ use App\Http\Controllers\StepController;
 use App\Http\Controllers\StepExportController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\TrackExportController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\TrackStepController;
+use App\Http\Controllers\Admin\WillLearnController;
+use App\Http\Controllers\LevelController as ControllersLevelController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -19,6 +24,7 @@ use Illuminate\Http\Request;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/dashboard', function () {
     return view('admin.master');
 });
@@ -46,4 +52,34 @@ Route::prefix('admin')->group(function () {
         Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
     });
     Route::resource('tracks', TrackController::class);
+=======
+Route::get('/', function () {
+    return view('Admin.master');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::prefix('courses')->group(function () {
+        Route::put('SoftDeletes/{id}', [CourseController::class, 'SoftDeletes'])->name('courses.SoftDeletes');
+        Route::get('trash', [CourseController::class, 'trash'])->name('courses.trash');
+        Route::put('RestoreDelete/{id}', [CourseController::class, 'RestoreDelete'])->name('courses.RestoreDelete');
+        Route::get('export-courses',[CourseController::class,'exportCourse'])->name('levels.export-courses');
+
+    });
+    Route::prefix('levels')->group(function () {
+        Route::put('SoftDeletes/{id}', [LevelController::class, 'SoftDeletes'])->name('levels.SoftDeletes');
+        Route::get('trash', [LevelController::class, 'trash'])->name('levels.trash');
+        Route::put('RestoreDelete/{id}', [LevelController::class, 'RestoreDelete'])->name('levels.RestoreDelete');
+        Route::get('export-levels', [LevelController::class, 'exportLevel'])->name('levels.export-levels');
+    });
+    Route::prefix('WillLearns')->group(function () {
+        Route::put('SoftDeletes/{id}', [WillLearnController::class, 'SoftDeletes'])->name('WillLearns.SoftDeletes');
+        Route::get('trash', [WillLearnController::class, 'trash'])->name('WillLearns.trash');
+        Route::put('RestoreDelete/{id}', [WillLearnController::class, 'RestoreDelete'])->name('WillLearns.RestoreDelete');
+        Route::get('export-WillLearns', [WillLearnController::class, 'exportWillLearn'])->name('levels.export-WillLearns');
+
+    });
+    Route::resource('levels', LevelController::class);
+    Route::resource('courses', CourseController::class);
+    Route::resource('WillLearns', WillLearnController::class);
+>>>>>>> develop
 });

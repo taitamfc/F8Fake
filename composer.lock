@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4369e8a7b9f55554e64dbf2a066c3af",
+    "content-hash": "6f39b444300059d5f6a1cc1bde2c0fb5",
     "packages": [
         {
             "name": "brick/math",
@@ -2981,6 +2981,7 @@
         },
         {
             "name": "psr/simple-cache",
+<<<<<<< HEAD
             "version": "1.0.1",
             "source": {
                 "type": "git",
@@ -2991,6 +2992,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
                 "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+=======
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "8707bf3cea6f710bf6ef05491234e3ab06f6432a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/8707bf3cea6f710bf6ef05491234e3ab06f6432a",
+                "reference": "8707bf3cea6f710bf6ef05491234e3ab06f6432a",
+>>>>>>> develop
                 "shasum": ""
             },
             "require": {
@@ -2999,7 +3012,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.0.x-dev"
+=======
+                    "dev-master": "2.0.x-dev"
+>>>>>>> develop
                 }
             },
             "autoload": {
@@ -3026,9 +3043,15 @@
                 "simple-cache"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/php-fig/simple-cache/tree/master"
             },
             "time": "2017-10-23T01:57:42+00:00"
+=======
+                "source": "https://github.com/php-fig/simple-cache/tree/2.0.0"
+            },
+            "time": "2021-10-29T13:22:09+00:00"
+>>>>>>> develop
         },
         {
             "name": "psy/psysh",

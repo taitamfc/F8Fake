@@ -17,20 +17,14 @@ class Student_sourseSeeder extends Seeder
     {
         DB::table('student_sourse')->insert([
             [
-                'id' =>1,
                 'course_id' =>'1',
                 'student_id' =>'1'
             ],
             [
-                'id' =>2,
                 'course_id' =>'2',
                 'student_id' =>'2'
-            ],
-            [
-                'id' =>3,
-                'course_id' =>'3',
-                'student_id' =>'3'
             ]
+          
         ]);
     }
 }
