@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content');
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

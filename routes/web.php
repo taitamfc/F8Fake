@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\RequirementController;
+use App\Http\Controllers\RequirementExportController;
+use App\Http\Controllers\StepController;
+use App\Http\Controllers\StepExportController;
+use App\Http\Controllers\TrackController;
+use App\Http\Controllers\TrackExportController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\TrackStepController;
@@ -18,6 +24,35 @@ use Illuminate\Http\Request;
 |
 */
 
+<<<<<<< HEAD
+Route::get('/dashboard', function () {
+    return view('admin.master');
+});
+Route::prefix('admin')->group(function () {
+    Route::prefix('requirements')->group(function () {
+        Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
+        Route::get('/restore/{id}', [RequirementController::class, 'restore'])->name('requirements.restore');
+        Route::delete('/force_destroy/{id}', [RequirementController::class, 'force_destroy'])->name('requirements.force_destroy');
+        Route::get('requirements/export/', [RequirementExportController::class, 'export'])->name('requirements.export');
+    });
+    Route::resource('requirements', RequirementController::class);
+
+    Route::prefix('steps')->group(function () {
+        Route::get('/trash', [StepController::class, 'getTrashed'])->name('steps.getTrashed');
+        Route::get('/restore/{id}', [StepController::class, 'restore'])->name('steps.restore');
+        Route::delete('/force_destroy/{id}', [StepController::class, 'force_destroy'])->name('steps.force_destroy');
+        Route::get('steps/export/', [StepExportController::class, 'export'])->name('steps.export');
+    });
+    Route::resource('steps', StepController::class);
+
+    Route::prefix('tracks')->group(function () {
+        Route::get('/trash', [TrackController::class, 'getTrashed'])->name('tracks.getTrashed');
+        Route::get('/restore/{id}', [TrackController::class, 'restore'])->name('tracks.restore');
+        Route::delete('/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('tracks.force_destroy');
+        Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
+    });
+    Route::resource('tracks', TrackController::class);
+=======
 Route::get('/', function () {
     return view('Admin.master');
 });
@@ -46,4 +81,5 @@ Route::prefix('admin')->group(function () {
     Route::resource('levels', LevelController::class);
     Route::resource('courses', CourseController::class);
     Route::resource('WillLearns', WillLearnController::class);
+>>>>>>> develop
 });
