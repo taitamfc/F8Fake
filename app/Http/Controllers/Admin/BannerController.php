@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportBanner;
+use App\Exports\ExportBanner;
 
 
 class BannerController extends Controller
@@ -276,6 +279,10 @@ class BannerController extends Controller
             Session::flash('error', 'xóa thất bại ');
             return redirect()->route('banners.trash')->with('error', 'xóa không thành công');
         }
+    }
+
+    public function exportBanners(Request $request){
+        return Excel::download(new ExportBanner, 'users.xlsx');
     }
 }
 
