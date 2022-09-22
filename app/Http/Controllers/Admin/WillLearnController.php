@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Exports\ExportWillLearn;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWillLearnRequest;
 use App\Models\Course;
 use App\Models\WillLearn;
@@ -48,13 +50,13 @@ class WillLearnController extends Controller
             'f_course_id'       => $course_id,
             'WillLearns'    => $WillLearns,
         ];
-        return view('Admin.WillLearns.index', $params);
+        return view('Admin.will_learns.index', $params);
     }
 
     public function create()
     {
-        $courses = Course::all();
-        return view('Admin.WillLearns.create', compact('courses'));
+        $courses = Course::all()->where('deleted_at','=',null);
+        return view('Admin.will_learns.create', compact('courses'));
     }
     public function store(StoreWillLearnRequest $request)
     {
@@ -75,9 +77,9 @@ class WillLearnController extends Controller
 
     public function edit($id)
     {
-        $courses = Course::all();
+        $courses = Course::all()->where('deleted_at','=',null);
         $WillLearn =  WillLearn::find($id);
-        return view('Admin.WillLEarns.edit', compact('courses', 'WillLearn'));
+        return view('Admin.will-learns.edit', compact('courses', 'WillLearn'));
     }
     public function update(Request $request, $id)
     {
@@ -170,7 +172,7 @@ class WillLearnController extends Controller
             'f_course_id'       => $course_id,
             'WillLearns'    => $WillLearns,
         ];
-        return view('Admin.WillLearns.trash', $params);
+        return view('Admin.will-learns.trash', $params);
     }
     public function exportWillLearn(Request $request){
         date_default_timezone_set("Asia/Ho_Chi_Minh");

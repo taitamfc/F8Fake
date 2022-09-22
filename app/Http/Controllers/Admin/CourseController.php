@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 
 use App\Exports\ExportCourse;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
@@ -52,7 +54,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-       $levels = Level::all();
+       $levels = Level::all()->where('deleted_at','=',null);
        return view('Admin.courses.create', compact('levels'));
 
     }
@@ -129,7 +131,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::find($id);
-        $levels = Level::all();
+        $levels = Level::all()->where('deleted_at','=',null);
         return view('Admin.courses.edit', compact('levels','course'));
     }
 

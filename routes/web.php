@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\LevelController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\TrackStepController;
-use App\Http\Controllers\WillLearnController;
+use App\Http\Controllers\Admin\WillLearnController;
+use App\Http\Controllers\LevelController as ControllersLevelController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
