@@ -149,7 +149,7 @@ class BannerController extends Controller
     public function update(UpdateBannerRequest $request, $id)
     {
 
-        $banners = new Banner();
+        $banners = Banner::findOrFail($id);
         $banners->placement = $request->input('placement');
         $banners->type = $request->input('type');
 
