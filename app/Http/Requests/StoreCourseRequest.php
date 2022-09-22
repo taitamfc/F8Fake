@@ -24,7 +24,7 @@ class StoreCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'             => 'required|unique:course',
+            'title'             => 'required|unique:courses',
             'level_id'          => 'required',
             'certificate_name'  => 'required',
             'slug'              => 'required',

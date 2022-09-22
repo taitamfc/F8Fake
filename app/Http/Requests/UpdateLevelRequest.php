@@ -30,7 +30,7 @@ class UpdateLevelRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.requied'=> 'Trường bắt buộc',
+            'title.required'=> 'Trường bắt buộc',
         ];
     }
 }
