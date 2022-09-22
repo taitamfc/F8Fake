@@ -22,15 +22,12 @@ use Illuminate\Http\Request;
 Route::get('/dashboard', function () {
     return view('admin.master');
 });
-Route::get('steps/export/', [StepExportController::class, 'export'])->name('steps.export');
-Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
-Route::get('requirements/export/', [RequirementExportController::class, 'export'])->name('requirements.export');
 Route::prefix('admin')->group(function () {
-
     Route::prefix('requirements')->group(function () {
         Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
         Route::get('/restore/{id}', [RequirementController::class, 'restore'])->name('requirements.restore');
         Route::delete('/force_destroy/{id}', [RequirementController::class, 'force_destroy'])->name('requirements.force_destroy');
+        Route::get('requirements/export/', [RequirementExportController::class, 'export'])->name('requirements.export');
     });
     Route::resource('requirements', RequirementController::class);
 
@@ -38,6 +35,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/trash', [StepController::class, 'getTrashed'])->name('steps.getTrashed');
         Route::get('/restore/{id}', [StepController::class, 'restore'])->name('steps.restore');
         Route::delete('/force_destroy/{id}', [StepController::class, 'force_destroy'])->name('steps.force_destroy');
+        Route::get('steps/export/', [StepExportController::class, 'export'])->name('steps.export');
     });
     Route::resource('steps', StepController::class);
 
@@ -45,6 +43,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/trash', [TrackController::class, 'getTrashed'])->name('tracks.getTrashed');
         Route::get('/restore/{id}', [TrackController::class, 'restore'])->name('tracks.restore');
         Route::delete('/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('tracks.force_destroy');
+        Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
     });
     Route::resource('tracks', TrackController::class);
 });

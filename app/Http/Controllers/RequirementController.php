@@ -152,7 +152,7 @@ class RequirementController extends Controller
     }
     public function getTrashed(Request $request)
     {
-        $requirements = Requirement::onlyTrashed()->latest()->get();
+        $requirements = Requirement::onlyTrashed()->latest()->paginate(5);
         $params = [
             'requirements' => $requirements,
         ];

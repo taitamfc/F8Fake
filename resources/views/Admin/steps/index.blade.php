@@ -151,5 +151,5 @@
                     </table>
                 </div><!-- /.card-body -->
             </div><!-- /.card -->
-            {!! $steps->links() !!}
+            {{$steps->links()}}
         @endsection

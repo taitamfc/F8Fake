@@ -189,7 +189,7 @@ class StepController extends Controller
     }
     public function getTrashed(Request $request)
     {
-        $steps = Step::onlyTrashed()->latest()->get();
+        $steps = Step::onlyTrashed()->latest()->paginate(5);
         $params = [
             'steps' => $steps,
         ];

@@ -167,10 +167,8 @@ class TrackController extends Controller
 
     public function getTrashed(Request $request)
     {
-        $tracks = Track::onlyTrashed()->latest()->get();
-
+        $tracks = Track::onlyTrashed()->latest()->paginate(5);
         $params = [
-
             'tracks' => $tracks,
         ];
         return view('admin.tracks.trash', $params);

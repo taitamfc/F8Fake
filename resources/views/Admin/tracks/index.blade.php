@@ -136,5 +136,5 @@
                 </div><!-- /.card-body -->
             </div><!-- /.card -->
         </div>
-        {!! $tracks->links() !!}
+        {{$tracks->links()}}
     @endsection

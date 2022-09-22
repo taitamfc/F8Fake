@@ -102,11 +102,5 @@
                 </div>
             </div>
         </div>
-        {{-- <nav aria-label="Page navigation example">
-            <div class='float:right'>
-                <ul class="pagination">
-                    <span aria-hidden="true">{{ $tracks->links() }}</span>
-                </ul>
-            </div>
-        </nav> --}}
+        {{ $tracks->links() }}
     @endsection

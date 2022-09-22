@@ -133,5 +133,5 @@
                     </table>
                 </div><!-- /.card-body -->
             </div><!-- /.card -->
-            {!! $requirements->links() !!}
+            {{$requirements->links()}}
         @endsection
