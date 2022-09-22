@@ -24,24 +24,24 @@ class BannerController extends Controller
         // thực hiện query
         $query = Banner::select('*');
         if ($placement) {
-            $query->where('placement', 'LIKE', '%' . $placement . '%');
+            $query->where('placement', 'LIKE', '%' . $placement . '%')->where('deleted_at', '=', null);
         }
         if ($type) {
-            $query->where('type', 'LIKE', '%' . $type . '%');
+            $query->where('type', 'LIKE', '%' . $type . '%')->where('deleted_at', '=', null);
         }
         if ($title) {
-            $query->where('title', 'LIKE', '%' . $title . '%');
+            $query->where('title', 'LIKE', '%' . $title . '%')->where('deleted_at', '=', null);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->where('id', $id)->where('deleted_at', '=', null);
         }
         if ($key) {
-            $query->orWhere('id', $key);
-            $query->orWhere('placement', 'LIKE', '%' . $key . '%');
-            $query->orWhere('type', 'LIKE', '%' . $key . '%');
-            $query->orWhere('title', 'LIKE', '%' . $key . '%');
+            $query->orWhere('id', $key)->where('deleted_at', '=', null);
+            $query->orWhere('placement', 'LIKE', '%' . $key . '%')->where('deleted_at', '=', null);
+            $query->orWhere('type', 'LIKE', '%' . $key . '%')->where('deleted_at', '=', null);
+            $query->orWhere('title', 'LIKE', '%' . $key . '%')->where('deleted_at', '=', null);
         }
-        $banners = $query->paginate(5);
+        $banners = $query->where('deleted_at', '=', null)->paginate(5);
 
         $params = [
             'f_id'        => $id,
@@ -144,52 +144,20 @@ class BannerController extends Controller
         $banners = Banner::findOrFail($id);
 
         try {
-            $banner = str_replace('storage', 'public', $banners->banner);
-            Storage::delete($banner);
-            $banners->delete();
+            $image = str_replace('storage', 'public', $banners->image);;
+            Storage::delete($image);
+            $banners->destroy($id);
             //dung session de dua ra thong bao
-            Session::flash('success', 'Xóa thành công');
+            Session::flash('success', 'Xóa Thành công');
             //xoa xong quay ve trang danh sach banners
             return redirect()->route('banners.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            Session::flash('error', 'Xóa không thành công');
-            return redirect()->route('banners.trash');
-        }
-    }
-    function force_destroy($id)
-    {
-        $banners = Banner::findOrFail($id);
-        $banners->deleted_at = date("Y-m-d h:i:s");
-        try {
-            $banners->save();
-            Session::flash('success', 'Xóa Thành công');
-            return redirect()->route('banners.index');
-        } catch (\Exception $e) {
-
-            Log::error($e->getMessage());
-            Session::flash('error', 'xóa thất bại ');
-            return redirect()->route('banners.index')->with('error', 'xóa không thành công');
+            return redirect()->route('banners.trash')->with('error', 'Xóa không thành công');
         }
     }
 
-    function Restore($id)
-    {
-        $banners = Banner::findOrFail($id);
-        $banners->deleted_at = date("Y-m-d h:i:s");;
-        try {
-            $banners->save();
-            Session::flash('success', 'Khôi phục ' . $banners->title . ' thành công');
-            return redirect()->route('banners.trash');
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            Session::flash('error', 'xóa thất bại ');
-            return redirect()->route('banners.trash')->with('error', 'xóa không thành công');
-        }
-    }
-
-    function trashedItems(Request $request)
-    {
+    public function trashedItems(Request $request){
         $key        = $request->key ?? '';
         $placement      = $request->placement ?? '';
         $type      = $request->type ?? '';
@@ -197,26 +165,26 @@ class BannerController extends Controller
         $id         = $request->id ?? '';
 
         // thực hiện query
-        $query = Banner::onlyTrashed();
+        $query = Banner::query(true);
         if ($placement) {
-            $query->where('placement', 'LIKE', '%' . $placement . '%');
+            $query->where('placement', 'LIKE', '%' . $placement . '%')->where('deleted_at', '!=', null);
         }
         if ($type) {
-            $query->where('type', 'LIKE', '%' . $type . '%');
+            $query->where('type', 'LIKE', '%' . $type . '%')->where('deleted_at', '!=', null);
         }
         if ($title) {
-            $query->where('title', 'LIKE', '%' . $title . '%');
+            $query->where('title', 'LIKE', '%' . $title . '%')->where('deleted_at', '!=', null);
         }
         if ($id) {
-            $query->where('id', $id);
+            $query->where('id', $id)->where('deleted_at', '!=', null);
         }
         if ($key) {
-            $query->orWhere('id', $key);
-            $query->orWhere('placement', 'LIKE', '%' . $key . '%');
-            $query->orWhere('type', 'LIKE', '%' . $key . '%');
-            $query->orWhere('title', 'LIKE', '%' . $key . '%');
+            $query->orWhere('id', $key)->where('deleted_at', '!=', null);
+            $query->orWhere('placement', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+            $query->orWhere('type', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+            $query->orWhere('title', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
         }
-        $banners = $query->paginate(5);
+        $banners = $query->where('deleted_at', '!=', null)->paginate(5);
 
         $params = [
             'f_id'        => $id,
@@ -227,5 +195,39 @@ class BannerController extends Controller
             'banners'    => $banners,
         ];
         return view('Admin.banners.trash', $params);
+     }
+
+     public function force_destroy($id)
+    {
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $banners = Banner::findOrFail($id);
+        $banners->deleted_at = date("Y-m-d h:i:s");
+        try {
+            $banners->save();
+            Session::flash('success', 'Đã chuyển vào thùng rác');
+            return redirect()->route('banners.index');
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('banners.index')->with('error', 'xóa không thành công');
+        }
+       
     }
+
+    public function restore($id)
+    {
+        $banners = Banner::findOrFail($id);
+        $banners->deleted_at = null;
+        try {
+            $banners->save();
+            Session::flash('success', 'Khôi phục thành công');
+            return redirect()->route('banners.trash');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('error', 'xóa thất bại ');
+            return redirect()->route('banners.trash')->with('error', 'xóa không thành công');
+        }
+    }
+    
 }
