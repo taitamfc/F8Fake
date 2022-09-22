@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tracks', function (Blueprint $table) {
-            $table->id();
-            $table->text('title');
-            $table->boolean('is_free');
-            $table->string('position');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->timestamps();
+        Schema::table('levels', function (Blueprint $table) {
+            //
+            $table->softDeletes();
+
         });
     }
 
@@ -31,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tracks');
+        Schema::table('levels', function (Blueprint $table) {
+            //
+        });
     }
 };
