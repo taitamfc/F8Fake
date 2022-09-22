@@ -22,7 +22,7 @@
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm mới</span>
                     </a>
-                    <a href="" class="btn btn-info">
+                    <a href="{{ route('requirements.export') }}" class="btn btn-info">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
                     </a>
@@ -64,7 +64,7 @@
                                     <div class="input-group-prepend trigger-submit">
                                         <span class="input-group-text"><span class="fas fa-search"></span></span>
                                     </div>
-                                    <input type="text" class="form-control" name="key" value="{{request()->key}}"
+                                    <input type="text" class="form-control" name="key" value="{{ request()->key }}"
                                         placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
                                 </div>
                                 <div class="input-group-append">
@@ -103,30 +103,31 @@
                         <!-- tbody -->
                         <tbody>
                             @if (!$requirements->count())
-                            <tr>
-                                <td class="text-a" colspan="6">Không có dữ liệu trên hệ thống</td>
-                            </tr>
-                        @else
-                            @foreach ($requirements as $requirement)
                                 <tr>
-                                    <th scope="row">{{ $requirement->id }}</th>
-                                    <td>{{ $requirement->content }}</td>
-                                    <td>{{ $requirement->course_id }}</td>
-                                    <td>
-                                        <a href="{{ route('requirements.edit', $requirement->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                        <form action="{{ route('requirements.destroy', $requirement->id) }}"
-                                            style="display:inline" method="post">
-                                            <button
-                                                onclick="return confirm('Bạn có muốn xóa {{ $requirement->name }}không?')"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                            @csrf
-                                            @method('delete')
-                                        </form>
-                                    </td>
+                                    <td class="text-a" colspan="6">Không có dữ liệu trên hệ thống</td>
                                 </tr>
-                            @endforeach
+                            @else
+                                @foreach ($requirements as $requirement)
+                                    <tr>
+                                        <th scope="row">{{ $requirement->id }}</th>
+                                        <td>{{ $requirement->content }}</td>
+                                        <td>{{ $requirement->course_id }}</td>
+                                        <td>
+                                            <a href="{{ route('requirements.edit', $requirement->id) }}"
+                                                class="btn btn-sm btn-icon btn-secondary"><i
+                                                    class="fa fa-pencil-alt"></i></a>
+                                            <form action="{{ route('requirements.destroy', $requirement->id) }}"
+                                                style="display:inline" method="post">
+                                                <button
+                                                    onclick="return confirm('Bạn có muốn xóa {{ $requirement->name }}không?')"
+                                                    class="btn btn-sm btn-icon btn-secondary"><i
+                                                        class="far fa-trash-alt"></i></button>
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endif
                         </tbody><!-- /tbody -->
                     </table>

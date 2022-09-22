@@ -1,9 +1,10 @@
 <?php
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RequirementController;
+use App\Http\Controllers\RequirementExportController;
 use App\Http\Controllers\StepController;
+use App\Http\Controllers\StepExportController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\TrackExportController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -21,6 +22,9 @@ Route::get('/dashboard', function () {
     return view('admin.master');
 
 });
+Route::get('steps/export/', [StepExportController::class, 'export'])->name('steps.export');
+Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
+Route::get('requirements/export/', [RequirementExportController::class, 'export'])->name('requirements.export');
 Route::prefix('admin')->group(function () {
 
     Route::prefix('requirements')->group(function () {
