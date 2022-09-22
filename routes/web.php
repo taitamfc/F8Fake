@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\TrackStepController;
 use App\Http\Controllers\Admin\TrackStepController;
@@ -14,7 +16,6 @@ use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\WillLearnController;
 use App\Http\Controllers\LevelController as ControllersLevelController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,22 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::middleware(['auth', 'PreventBackHistory'])->group(function () {
+    Route::get('/', function () {
+        return view('Admin.master');
+    })->middleware('auth');
+    Route::prefix('users')->middleware('auth')->group(function () {
+        Route::put('SoftDeletes/{id}', [UserController::class, 'SoftDeletes'])->name('users.SoftDeletes');
+        Route::get('trash', [UserController::class, 'trash'])->name('users.trash');
+        Route::put('RestoreDelete/{id}', [UserController::class, 'RestoreDelete'])->name('users.RestoreDelete');
+    });
+    Route::resource('users', UserController::class);
+
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+Route::prefix('login')->group(function () {
+    Route::get('/', [LoginController::class, 'login'])->name('login');
+    Route::post('/loginProcessing', [LoginController::class, 'loginProcessing'])->name('loginProcessing');
 Route::get('/', function () {
     return view('Admin.master');
 });
