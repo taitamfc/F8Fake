@@ -19,27 +19,27 @@
                             @csrf
                             @method('put')
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">commentstable_type</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">loại</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="commentstable_type" value="{{$comment->commentstable_type}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('commentstable_type') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">comment</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">nội dung</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="comment" value="{{$comment->comment}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('comment') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">approved</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">phê duyệt</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="approved" value="{{$comment->approved}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('approved') }}</p>
                             @endif
-                            
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Sửa</button>
                             </div>

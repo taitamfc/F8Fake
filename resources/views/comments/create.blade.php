@@ -34,7 +34,7 @@
                             </div><!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" > commentstable_type</label>
+                                <label class="control-label" > loại</label>
                                 <input type="text" name="commentstable_type" class="form-control"  >
                             </div>
                             @if ($errors->any())
@@ -42,7 +42,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >comment</label>
+                                <label class="control-label" >nội dung</label>
                                 <input   type="text" name="comment" class="form-control">
                             </div>
                             @if ($errors->any())
@@ -50,7 +50,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >approved</label>
+                                <label class="control-label" >phê duyệt</label>
                                 {{-- <input type="number" name="approved" class="form-control"> --}}
                                 <select name="approved" id="" class="form-control">
                                     <option value="1">1</option>
@@ -63,7 +63,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >course_id</label>
+                                <label class="control-label" >khóa học</label>
                                 <select name="course_id" id="" class="form-control">
                                     @foreach ($courses as $course )
                                         <option value="{{$course->id}}">{{$course->title}}</option>

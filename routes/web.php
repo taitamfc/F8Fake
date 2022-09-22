@@ -18,6 +18,13 @@ use Illuminate\Http\Request;
 Route::get('/', function(){
     return view('Admin.master');
 });
+
+Route::prefix('comments')->group(function () {
+    Route::put('SoftDeletes/{id}', [CommentController::class, 'SoftDeletes'])->name('comments.SoftDeletes');
+    Route::get('trash', [CommentController::class, 'trash'])->name('comments.trash');
+    Route::put('RestoreDelete/{id}', [CommentController::class, 'RestoreDelete'])->name('comments.RestoreDelete');
+    Route::put('force_destroy/{id}', [CommentController::class, 'force_destroy'])->name('comments.force_destroy');
+});
 Route::resource('comments',CommentController::class);
 // Route::get('/index', function () {
 //     // echo '<br>'.route('index');
