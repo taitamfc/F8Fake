@@ -32,7 +32,7 @@ class LoginController extends Controller
             // dd($arr);
             return redirect()->route('users.index');
         } else {
-            dd($arr);
+            // dd($arr);
             $kq='tài khoản, hoặc mật khẩu không tồn tại';
             return redirect()->route('login')->with($kq);
         }
