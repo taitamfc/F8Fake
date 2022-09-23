@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StepsExport;
 use App\Http\Requests\StepRequest;
 use App\Models\Step;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StepController extends Controller
 {
@@ -124,7 +126,7 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
         $steps = Step::all();
         $steps = Step::find($id);
@@ -220,5 +222,8 @@ class StepController extends Controller
             return redirect()->route('steps.index')->with('failed', 'Khôi phục' . ' ' . $step->title . ' ' .  'không thành công');
         }
     }
+    public function export()
+    {
+        return Excel::download(new StepsExport, 'steps.xlsx');
+    }
 }
-

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TracksExport;
 use App\Http\Requests\TrackRequest;
 use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrackController extends Controller
 {
@@ -197,5 +199,9 @@ class TrackController extends Controller
             Log::error($e->getMessage());
             return redirect()->route('tracks.index')->with('failed', 'Khôi phục' . ' ' . $track->title . ' ' .  'không thành công');
         }
+    }
+    public function export()
+    {
+        return Excel::download(new TracksExport, 'tracks.xlsx');
     }
 }
