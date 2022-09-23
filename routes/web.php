@@ -8,12 +8,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\TrackStepController;
-use App\Http\Controllers\RequirementController;
-use App\Http\Controllers\RequirementExportController;
-use App\Http\Controllers\StepController;
-use App\Http\Controllers\StepExportController;
-use App\Http\Controllers\TrackController;
-use App\Http\Controllers\TrackExportController;
+use App\Http\Controllers\Admin\RequirementController;
+use App\Http\Controllers\Admin\StepController;
+use App\Http\Controllers\Admin\TrackController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\WillLearnController;
@@ -29,23 +26,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::prefix('admin')->group(function () {
     // Banners
     Route::prefix('banners')->group(function () {
-        Route::get('/trash',[BannerController::class , 'trashedItems'])->name('banners.trash');
+        Route::get('/trash', [BannerController::class, 'trashedItems'])->name('banners.trash');
         Route::put('/force_destroy/{id}', [BannerController::class, 'force_destroy'])->name('banners.force_destroy');
         Route::put('/restore/{id}', [BannerController::class, 'restore'])->name('banners.restore');
-        Route::get('/export-banners',[BannerController::class,'exportBanners'])->name('export-banners');
+        Route::get('/export-banners', [BannerController::class, 'exportBanners'])->name('export-banners');
     });
-    Route::resource('banners',BannerController::class);
+    Route::resource('banners', BannerController::class);
 
     // Students
     Route::prefix('students')->group(function () {
-        Route::get('/trash',[StudentController::class , 'trashedItems'])->name('students.trash');
+        Route::get('/trash', [StudentController::class, 'trashedItems'])->name('students.trash');
         Route::delete('/force_destroy/{id}', [StudentController::class, 'force_destroy'])->name('students.force_destroy');
         Route::put('/restore/{id}', [StudentController::class, 'restore'])->name('students.restore');
     });
-    Route::resource('students',StudentController::class);
+    Route::resource('students', StudentController::class);
 
     // User
     Route::prefix('users')->middleware('auth')->group(function () {
@@ -69,7 +67,7 @@ Route::prefix('admin')->group(function () {
         Route::put('RestoreDelete/{id}', [CommentController::class, 'RestoreDelete'])->name('comments.RestoreDelete');
         Route::put('force_destroy/{id}', [CommentController::class, 'force_destroy'])->name('comments.force_destroy');
     });
-    Route::resource('comments',CommentController::class);
+    Route::resource('comments', CommentController::class);
 
     // Blog
     Route::prefix('blogs')->group(function () {
@@ -93,7 +91,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
         Route::get('/restore/{id}', [RequirementController::class, 'restore'])->name('requirements.restore');
         Route::delete('/force_destroy/{id}', [RequirementController::class, 'force_destroy'])->name('requirements.force_destroy');
-        Route::get('requirements/export/', [RequirementExportController::class, 'export'])->name('requirements.export');
+        Route::get('requirements/export/', [RequirementController::class, 'export'])->name('requirements.export');
     });
     Route::resource('requirements', RequirementController::class);
 
@@ -102,7 +100,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/trash', [StepController::class, 'getTrashed'])->name('steps.getTrashed');
         Route::get('/restore/{id}', [StepController::class, 'restore'])->name('steps.restore');
         Route::delete('/force_destroy/{id}', [StepController::class, 'force_destroy'])->name('steps.force_destroy');
-        Route::get('steps/export/', [StepExportController::class, 'export'])->name('steps.export');
+        Route::get('steps/export/', [StepController::class, 'export'])->name('steps.export');
     });
     Route::resource('steps', StepController::class);
 
@@ -111,7 +109,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/trash', [TrackController::class, 'getTrashed'])->name('tracks.getTrashed');
         Route::get('/restore/{id}', [TrackController::class, 'restore'])->name('tracks.restore');
         Route::delete('/force_destroy/{id}', [TrackController::class, 'force_destroy'])->name('tracks.force_destroy');
-        Route::get('tracks/export/', [TrackExportController::class, 'export'])->name('tracks.export');
+        Route::get('tracks/export/', [TrackController::class, 'export'])->name('tracks.export');
     });
     Route::resource('tracks', TrackController::class);
 
@@ -120,7 +118,7 @@ Route::prefix('admin')->group(function () {
         Route::put('SoftDeletes/{id}', [TrackStepController::class, 'SoftDeletes'])->name('tracksteps.SoftDeletes');
         Route::get('trash', [TrackStepController::class, 'trash'])->name('tracksteps.trash');
         Route::put('RestoreDelete/{id}', [TrackStepController::class, 'RestoreDelete'])->name('tracksteps.RestoreDelete');
-        Route::get('/export-track_steps',[TrackStepController::class,'export'])->name('export-track_steps');
+        Route::get('/export-track_steps', [TrackStepController::class, 'export'])->name('export-track_steps');
     });
     Route::resource('tracksteps', TrackStepController::class);
 
@@ -129,7 +127,7 @@ Route::prefix('admin')->group(function () {
         Route::put('SoftDeletes/{id}', [CourseController::class, 'SoftDeletes'])->name('courses.SoftDeletes');
         Route::get('trash', [CourseController::class, 'trash'])->name('courses.trash');
         Route::put('RestoreDelete/{id}', [CourseController::class, 'RestoreDelete'])->name('courses.RestoreDelete');
-        Route::get('export-courses',[CourseController::class,'exportCourse'])->name('levels.export-courses');
+        Route::get('export-courses', [CourseController::class, 'exportCourse'])->name('levels.export-courses');
     });
     Route::resource('courses', CourseController::class);
 

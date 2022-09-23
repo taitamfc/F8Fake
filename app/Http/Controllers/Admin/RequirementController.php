@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RequirementsExport;
 use App\Http\Requests\RequirementRequest;
 use App\Models\Requirement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RequirementController extends Controller
 {
@@ -182,5 +184,9 @@ class RequirementController extends Controller
             Log::error($e->getMessage());
             return redirect()->route('requirements.index')->with('failed', 'Khôi phục' . ' ' . $requirement->content . ' ' .  'không thành công');
         }
+    }
+    public function export()
+    {
+        return Excel::download(new RequirementsExport, 'requirements.xlsx');
     }
 }
