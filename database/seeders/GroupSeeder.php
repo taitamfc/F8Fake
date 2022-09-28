@@ -17,10 +17,12 @@ class GroupSeeder extends Seeder
     {
         DB::table('groups')->insert([
             [
-                'id' => 1,
-                'name' => "App",
-                'description' => "a",
-                'deleted_at' => "",
+                'name' => "Admin",
+                'description' => "Admin"
+            ],
+            [
+                'name' => "Manager",
+                'description' => "Manager"
             ]
         ]);
     }
