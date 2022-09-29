@@ -8,8 +8,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\TrackStepController;
-use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\StepController;
+use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\TrackController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LevelController;
@@ -88,7 +88,7 @@ Route::prefix('admin')->group(function () {
 
     // Requirement
     Route::prefix('requirements')->group(function () {
-        Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
+        Route::get('/trash', [ControllersRequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
         Route::get('/restore/{id}', [RequirementController::class, 'restore'])->name('requirements.restore');
         Route::delete('/force_destroy/{id}', [RequirementController::class, 'force_destroy'])->name('requirements.force_destroy');
         Route::get('requirements/export/', [RequirementController::class, 'export'])->name('requirements.export');
