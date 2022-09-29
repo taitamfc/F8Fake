@@ -45,7 +45,7 @@ class UserController extends Controller
         }
         //Phân trang
         $users = $query->paginate(5);
-       
+
 
         $params = [
             'f_id'           => $id,
