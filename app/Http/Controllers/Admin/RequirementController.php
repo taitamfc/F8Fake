@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\RequirementsExport;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RequirementRequest;
 use App\Models\Requirement;
 use Illuminate\Http\Request;
