@@ -49,7 +49,7 @@
                                 <p style="color:red">{{ $errors->first('step_id') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Chức Vụ</label>
+                                <label class="control-label" for="flatpickr01">Vị Trí</label>
                                 <input id="flatpickr01" type="text" class="form-control" value="{{ old('position') }}"
                                     name="position" data-toggle="flatpickr">
                             </div>

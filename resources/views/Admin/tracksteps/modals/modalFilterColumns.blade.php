@@ -4,7 +4,7 @@
     <!-- .modal-dialog -->
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- .modal-content -->
-        <div class="modal-content">
+        <div class="modal-content" style="height: fit-content;">
             <!-- .modal-header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFilterColumnsLabel"> Lọc nâng cao </h5>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Chức Vụ</label>
+                            <label class="">Vị Trí  </label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="position"
