@@ -88,9 +88,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Hình ảnh</label>
-                                <input accept="image/*" type='file' id="imgInp" name="image"
+                                <input accept="image/*" type='file' id="inputFile" name="image"
                                     class="form-control @error('image') @enderror" />
-                                <img type="hidden" width="100px" height="100px" id="blah" src=""
+                                <img type="hidden" width="200px" height="150px" id="blah" src=""
                                     alt="" />
                                 @error('image')
                                     <div style="color: red">*{{ $message }}</div>
