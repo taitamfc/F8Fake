@@ -88,7 +88,7 @@ Route::prefix('admin')->group(function () {
 
     // Requirement
     Route::prefix('requirements')->group(function () {
-        Route::get('/trash', [ControllersRequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
+        Route::get('/trash', [RequirementController::class, 'getTrashed'])->name('requirements.getTrashed');
         Route::get('/restore/{id}', [RequirementController::class, 'restore'])->name('requirements.restore');
         Route::delete('/force_destroy/{id}', [RequirementController::class, 'force_destroy'])->name('requirements.force_destroy');
         Route::get('requirements/export/', [RequirementController::class, 'export'])->name('requirements.export');
