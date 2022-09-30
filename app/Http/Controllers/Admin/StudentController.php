@@ -24,6 +24,8 @@ class StudentController extends Controller
         // $students = Student::get();
         // $students = Student::orderBy('created_at', 'DESC')->search()->paginate(4);
         // return view('Admin.students.index', compact('students'));
+        $this->authorize('viewAny', Student::class);
+
 
 
         $key        = $request->key ?? '';
@@ -67,6 +69,7 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $this->authorize('view', Student::class);
         $students = Student::get();
         return view('Admin.students.add', compact('students'));
     }
@@ -122,7 +125,7 @@ class StudentController extends Controller
     public function edit($id)
     {
         $students = Student::findOrFail($id);
-
+        $this->authorize('update', Student::class);
         return view('Admin.students.edit', compact('students'));
     }
 
@@ -169,10 +172,11 @@ class StudentController extends Controller
      */
 
 
-     
+
     public function destroy($id)
     {
         $students = Student::findOrFail($id);
+        $this->authorize('delete', Student::class);
 
         try {
             $image = str_replace('storage', 'public', $students->image);;
@@ -188,7 +192,8 @@ class StudentController extends Controller
         }
     }
 
-    public function trashedItems(Request $request){
+    public function trashedItems(Request $request)
+    {
         $key        = $request->key ?? '';
         $name         = $request->name ?? '';
         $email      = $request->email ?? '';
@@ -221,12 +226,14 @@ class StudentController extends Controller
             'students'    => $students,
         ];
         return view('Admin.students.trash', $params);
-     }
+    }
 
-     public function force_destroy($id)
+    public function force_destroy($id)
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $students = Student::findOrFail($id);
+        $this->authorize('viewAny', force_destroy::class);
+
         $students->deleted_at = date("Y-m-d h:i:s");
         try {
             $students->save();
@@ -238,12 +245,13 @@ class StudentController extends Controller
             Session::flash('error', 'xóa thất bại ');
             return redirect()->route('students.index')->with('error', 'xóa không thành công');
         }
-       
     }
 
     public function restore($id)
     {
         $students = Student::findOrFail($id);
+        $this->authorize('restore', Student::class);
+
         $students->deleted_at = null;
         try {
             $students->save();

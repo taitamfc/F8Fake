@@ -18,7 +18,7 @@ class StudentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('Student_viewAny');
     }
 
     /**
@@ -28,9 +28,10 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Student $student)
+    public function view(User $user)
     {
-        //
+        return $user->hasPermission('Student_view');
+        
     }
 
     /**
@@ -41,7 +42,8 @@ class StudentPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('Student_create');
+        
     }
 
     /**
@@ -51,9 +53,10 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Student $student)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('Student_update');
+        
     }
 
     /**
@@ -63,9 +66,10 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Student $student)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('Student_delete');
+        
     }
 
     /**
@@ -75,9 +79,10 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Student $student)
+    public function restore(User $user)
     {
-        //
+        return $user->hasPermission('Student_restore');
+        
     }
 
     /**
@@ -87,8 +92,9 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Student $student)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('Student_forceDelete');
+        
     }
 }
