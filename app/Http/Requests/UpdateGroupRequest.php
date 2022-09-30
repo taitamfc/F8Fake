@@ -25,7 +25,7 @@ class UpdateGroupRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'description' => 'required|min:10',
+            'description' => 'required',
         ];
     }
     public function messages()
@@ -34,7 +34,6 @@ class UpdateGroupRequest extends FormRequest
             'name.required' => 'Trường bắt buộc',
             'description.required' => 'Trường bắt buộc',
             'name.min' => 'Trường quá ngắn',
-            'description.min' => 'Trường quá ngắn',
         ];
     }
 }

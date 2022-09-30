@@ -21,6 +21,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', User::class);
         //Lấy params trên url
         $key                    = $request->key ?? '';
         $name                   = $request->name ?? '';
@@ -45,7 +46,7 @@ class UserController extends Controller
         }
         //Phân trang
         $users = $query->paginate(5);
-       
+
 
         $params = [
             'f_id'           => $id,
@@ -64,6 +65,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
         $groups = Group::get();
         return view('Admin.users.add',compact('groups'));
     }
@@ -131,6 +133,7 @@ class UserController extends Controller
     {
         $users = User::findOrFail($id);
         $groups = Group::get();
+        $this->authorize('update', $users);
         return view('Admin.users.edit', compact('users','groups'));
     }
 
@@ -186,7 +189,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $users = User::findOrFail($id);
-
+        $this->authorize('delete', $users);
         try {
             $image = str_replace('storage', 'public', $users->avatar);;
             Storage::delete($image);
@@ -203,8 +206,10 @@ class UserController extends Controller
     }
     function SoftDeletes($id)
     {
+
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $users = User::findOrFail($id);
+        $this->authorize('forceDelete', $users);
         $users->deleted_at = date("Y-m-d h:i:s");
         try {
             $users->save();
@@ -222,6 +227,7 @@ class UserController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $users = User::findOrFail($id);
+        $this->authorize('restore', $users);
         $users->deleted_at = null;
         try {
             $users->save();

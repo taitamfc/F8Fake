@@ -48,7 +48,7 @@
                             <p style="color:red">{{ $errors->first('step_id') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Chức Vụ</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Vị Trí</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{$tracksteps->position}}" name="position" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())

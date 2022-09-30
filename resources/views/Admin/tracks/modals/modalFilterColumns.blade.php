@@ -4,7 +4,7 @@
     <!-- .modal-dialog -->
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- .modal-content -->
-        <div class="modal-content">
+        <div class="modal-content" style="height: fit-content">
             <!-- .modal-header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFilterColumnsLabel"> Lọc nâng cao </h5>
@@ -76,7 +76,7 @@
             </div><!-- /.modal-body -->
             <!-- .modal-footer -->
             <div class="modal-footer justify-content-start">
-                <button type="submit" class="btn btn-primary" id="apply-filter">Áp dụng</button>
+                <button type="submit" class="btn btn-info" id="apply-filter">Áp dụng</button>
                 <a href="{{ route('tracks.index') }}" class="btn btn-dark ">Đặt lại</a>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary ml-auto"
                     id="clear-filter">Hủy</button>

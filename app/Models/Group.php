@@ -9,13 +9,13 @@ class Group extends Model
 {
     use HasFactory;
     protected $table = 'groups';
-    function user()
+    function users()
     {
         return $this->hasMany(User::class);
     }
-    function Role()
+    function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class,'group_roles');
     }
     public function scopeSearch($query)
     {

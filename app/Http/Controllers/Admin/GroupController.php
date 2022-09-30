@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +28,7 @@ class GroupController extends Controller
         $description            = $request->description ?? '';
         // thực hiện query
         $query = Group::query(true);
-        $query->orderBy('id', 'DESC');
+        // $query->orderBy('id', 'DESC');
         if ($name) {
             $query->where('name', 'LIKE', '%' . $name . '%')->where('deleted_at', '=', null);
         }
@@ -61,6 +62,7 @@ class GroupController extends Controller
      */
     public function create()
     {
+
         return view('Admin.groups.add');
     }
 
@@ -107,8 +109,20 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $groups = Group::find($id);
-        return view('Admin.groups.edit', compact('groups'));
+        $group = Group::find($id);
+        $roles = Role::all()->toArray();
+        $userRoles = $group->roles->pluck('id', 'name')->toArray();
+        $group_names = [];
+        foreach ($roles as $role) {
+            $group_names[$role['group_name']][] = $role;
+        }
+        $params = [
+            'group' => $group,
+            'userRoles' => $userRoles,
+            'group_names' => $group_names
+        ];
+        return view('Admin.groups.edit', $params);
+
     }
 
     /**
@@ -120,11 +134,16 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, $id)
     {
-        $groups = Group::findOrFail($id);
-        $groups->name = $request->name;
-        $groups->description = $request->description;
+        $group = Group::findOrFail($id);
+        $group->name = $request->name;
+        $group->description = $request->description;
+        // dd($request->all());
         try {
-            $groups->save();
+            $group->save();
+             //detach xóa hết tất cả các record của bảng trung gian hiện tại
+             $group->roles()->detach();
+             //attach cập nhập các record của bảng trung gian hiện tại
+             $group->roles()->attach($request->roles);
             //dung session de dua ra thong bao
             Session::flash('success', 'Cập nhật thành công');
             return redirect()->route('groups.index');
