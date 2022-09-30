@@ -48,14 +48,6 @@
                                     <div style="color: red">*{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Thời gian</label> <input id="flatpickr01"
-                                    type="datetime-local" name="duration" value="{!! old('duration') !!}"
-                                    class="form-control @error('duration') @enderror" data-toggle="flatpickr">
-                                @error('duration')
-                                    <div style="color: red">*{{ $message }}</div>
-                                @enderror
-                            </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -108,6 +100,17 @@
                                         @endforeach --}}
                                         </select>
                                         @error('video')
+                                            <div style="color: red">*{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="control-label" for="flatpickr01">Thời gian</label> <input
+                                            id="flatpickr01" type="datetime-local" name="duration"
+                                            value="{!! old('duration') !!}"
+                                            class="form-control @error('duration') @enderror" data-toggle="flatpickr">
+                                        @error('duration')
                                             <div style="color: red">*{{ $message }}</div>
                                         @enderror
                                     </div>
