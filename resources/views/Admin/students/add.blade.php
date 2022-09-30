@@ -1,6 +1,6 @@
 @extends('Admin.master')
 @section('content')
-    <div class="container">
+    <div class="page-inner">
         <header class="page-title-bar">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -22,7 +22,8 @@
                         <legend>Thông tin cơ bản</legend>
                         <div class="form-group">
                             <label for="tf1">Họ tên<abbr name="Trường bắt buộc">*</abbr></label> <input name="name"
-                                type="text" class="form-control" id="" value="{{old('name')}}" placeholder="Nhập tên học viên">
+                                type="text" class="form-control" id="" value="{{ old('name') }}"
+                                placeholder="Nhập tên học viên">
                             <small id="" class="form-text text-muted"></small>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('name') }}</p>
@@ -30,7 +31,8 @@
                         </div>
                         <div class="form-group">
                             <label for="tf1">Email<abbr name="Trường bắt buộc">*</abbr></label> <input name="email"
-                                type="text" class="form-control" id="" value="{{old('email')}}" placeholder="Nhập Email">
+                                type="text" class="form-control" id="" value="{{ old('email') }}"
+                                placeholder="Nhập Email">
                             <small id="" class="form-text text-muted"></small>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('email') }}</p>
@@ -38,8 +40,8 @@
                         </div>
                         <div class="form-group">
                             <label for="tf1">Password<abbr name="Trường bắt buộc">*</abbr></label> <input
-                                name="password" type="password"  value="{{old('password')}}" class="form-control" id=""
-                                placeholder="Nhập password">
+                                name="password" type="password" value="{{ old('password') }}" class="form-control"
+                                id="" placeholder="Nhập password">
                             <small id="" class="form-text text-muted"></small>
                             @if ($errors->any())
                                 <p style="color:red">{{ $errors->first('password') }}</p>
@@ -59,11 +61,11 @@
                             <input accept="image/*" type='file' id="inputFile" name="image" /><br>
                             <br>
                             <img type="hidden" width="90px" height="90px" id="blah" src="#"
-                                alt=""  />
+                                alt="" />
                         </div>
                         @if ($errors->any())
-                        <p style="color:red">{{ $errors->first('image') }}</p>
-                    @endif
+                            <p style="color:red">{{ $errors->first('image') }}</p>
+                        @endif
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 $('.file').change(function(e) {
