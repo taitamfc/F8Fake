@@ -18,7 +18,7 @@ class GroupPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('Group_viewAny');
     }
 
     /**
@@ -28,9 +28,9 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Group $group)
+    public function view(User $user)
     {
-        //
+        return $user->hasPermission('Group_view');
     }
 
     /**
@@ -41,7 +41,7 @@ class GroupPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('Group_create');
     }
 
     /**
@@ -51,9 +51,9 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Group $group)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('Group_update');
     }
 
     /**
@@ -63,9 +63,9 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Group $group)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('Group_delete');
     }
 
     /**
@@ -75,9 +75,9 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Group $group)
+    public function restore(User $user)
     {
-        //
+        return $user->hasPermission('Group_restore');
     }
 
     /**
@@ -87,8 +87,8 @@ class GroupPolicy
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Group $group)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('Group_forceDelete');
     }
 }

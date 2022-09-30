@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
     public function importRoles()
     {
         $groups = ['Level','Course','WillLearn','Requirement','Step','Track'
-        ,'TrackStep','Group','User','Blog','Comment','Student','Banner'];
+        ,'TrackStep','Group','User','Blog','Comment','Student','Banner','Role'];
         $actions = ['viewAny', 'view', 'create', 'update', 'delete', 'restore', 'forceDelete'];
         foreach ($groups as $group) {
             foreach ($actions as $action) {

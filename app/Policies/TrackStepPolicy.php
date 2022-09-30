@@ -18,7 +18,7 @@ class TrackStepPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_viewAny');
     }
 
     /**
@@ -28,9 +28,9 @@ class TrackStepPolicy
      * @param  \App\Models\TrackStep  $trackStep
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, TrackStep $trackStep)
+    public function view(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_view');
     }
 
     /**
@@ -41,7 +41,7 @@ class TrackStepPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_create');
     }
 
     /**
@@ -51,9 +51,9 @@ class TrackStepPolicy
      * @param  \App\Models\TrackStep  $trackStep
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, TrackStep $trackStep)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_update');
     }
 
     /**
@@ -63,9 +63,9 @@ class TrackStepPolicy
      * @param  \App\Models\TrackStep  $trackStep
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, TrackStep $trackStep)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_delete');
     }
 
     /**
@@ -75,9 +75,9 @@ class TrackStepPolicy
      * @param  \App\Models\TrackStep  $trackStep
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, TrackStep $trackStep)
+    public function restore(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_restore');
     }
 
     /**
@@ -87,8 +87,8 @@ class TrackStepPolicy
      * @param  \App\Models\TrackStep  $trackStep
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, TrackStep $trackStep)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('TrackStep_forceDelete');
     }
 }

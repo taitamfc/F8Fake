@@ -19,14 +19,14 @@
                             @csrf
                             @method('put')
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Tên Nhóm</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="name" value="{{$group->name}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Mô Tả</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Mô Tả Nhóm</label> <input id="flatpickr01"
                                     type="text" class="form-control" name="description" value="{{$group->description}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())

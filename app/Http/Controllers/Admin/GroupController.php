@@ -28,7 +28,7 @@ class GroupController extends Controller
         $description            = $request->description ?? '';
         // thực hiện query
         $query = Group::query(true);
-        $query->orderBy('id', 'DESC');
+        // $query->orderBy('id', 'DESC');
         if ($name) {
             $query->where('name', 'LIKE', '%' . $name . '%')->where('deleted_at', '=', null);
         }
