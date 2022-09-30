@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\GroupController;

@@ -74,10 +74,10 @@
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
-                <div class="alert alert-success">{{session::get('success')}}</div>
+                <div class="alert alert-success">  <i class="fa fa-check" aria-hidden="true"></i>{{session::get('success')}}</div>
                 @endif
                 @if (Session::has('error'))
-                <div class="alert alert-success">{{session::get('error')}}</div>
+                <div class="alert alert-success"> <i class="bi bi-x-circle"></i> {{session::get('error')}}</div>
                 @endif
                 @if (!count($comments))
                     <div class="alert alert-danger"> <i class="bi bi-x-circle"></i> Không tìm thấy kết quả
