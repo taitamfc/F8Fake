@@ -74,10 +74,14 @@
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
-                <div class="alert alert-success">{{session::get('success')}}</div>
+                <div class="alert alert-success"><i class="fa fa-check" aria-hidden="true"></i>{{session::get('success')}}</div>
                 @endif
                 @if (Session::has('error'))
-                <div class="alert alert-success">{{session::get('error')}}</div>
+                <div class="alert alert-success"> <i class="bi bi-x-circle"></i>{{session::get('error')}}</div>
+                @endif
+                @if (!count($blogs))
+                    <div class="alert alert-danger"> <i class="bi bi-x-circle"></i> Không tìm thấy kết quả
+                        {{ Session::get('error') }}</div>
                 @endif
                 <div class="card-body">
 
@@ -93,11 +97,11 @@
                             <tr>
 
                                 <th> # </th>
-                                <th>mã người dùng </th>
-                                <th> phụ huynh </th>
-                                <th> tiêu đề </th>
-                                <th> mô tả</th>
-                                <th> thao tác</th>
+                                <th> Tiêu đề </th>
+                                <th> Người đăng </th>
+                                <th> Ngày đăng </th>
+                                <th> Xuất bản</th>
+                                <th> Thao tác</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
@@ -106,10 +110,10 @@
                             @foreach ($blogs as $blog)
                                 <tr>
                                     <th scope="row">{{ $blog->id }}</th>
-                                    <td>{{ $blog->user_id }}</td>
-                                    <td>{{ $blog->parent_id }}</td>
                                     <td>{{ $blog->title }}</td>
-                                    <td>{{ $blog->description }}</td>
+                                    <td>{{ $blog->user->username }}</td>
+                                    <td>{{ $blog->published_at }}</td>
+                                    <td>{{$blog->is_published }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>
                                     <td>{{ $blog->content }}</td> --}}
                                     <td>

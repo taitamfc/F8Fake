@@ -4,7 +4,7 @@
     <!-- .modal-dialog -->
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- .modal-content -->
-        <div class="modal-content">
+        <div class="modal-content" style="height: fit-content" >
             <!-- .modal-header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFilterColumnsLabel"> Lọc nâng cao </h5>
@@ -16,37 +16,28 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">id</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="id"
-                                    class="form-control filter-column f-name"
-                                    value=" {{$f_id}} " id="name" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group form-row filter-row">
-                        <div class="col-lg-4">
-                            <label class=""> mã người dùng</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="user_id"
-                                    class="form-control filter-column f-name"
-                                    value=" {{ $f_user_id }}"
-                                    id="address" /></div>
-                        </div>
-                    </div>
-                    <div class="form-group form-row filter-row">
-                        <div class="col-lg-4">
                             <label class="">tiêu đề</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="title"
                                     class="form-control filter-column f-name"
-                                    value=" {{$f_title }} " id="phone" />
+                                    value=" {{$f_title }} " id="name" />
                             </div>
                         </div>
                     </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class=""> người đăng</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <select name="user_id" id="" class="form-control">
+                                @foreach ($blogs as $blog )
+                                    <option value="{{$f_user_id}}">{{$blog->user->username}}</option>
+                                @endforeach
+
+                               </select>
+                    </div>
+
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
@@ -15,7 +16,9 @@ class CommentController extends Controller
 {
     public function index(Request $request)
     {
-
+        $users = User::all();
+        
+        // $this->authorize('viewAny', Comment::class);
         $key        = $request->key ?? '';
         $user_id      = $request->user_id ?? '';
         $comment      = $request->comment ?? '';
@@ -45,17 +48,19 @@ class CommentController extends Controller
             'f_comment'     => $comment,
             'f_key'       => $key,
             'comments'    => $comments,
+            'users' => $users,
         ];
-        return view('comments.index', $params);
+        return view('Admin.comments.index', $params );
 
     }
     public function create()
     {
+        $this->authorize('create', Comment::class);
         $courses = Course::all();
         $users = User::all();
 
         // dd($users);
-        return view('comments.create',compact('users','courses'));
+        return view('Admin.comments.create',compact('users','courses'));
     }
     public function store( StoreCommentRequest $request)
     {
@@ -76,7 +81,7 @@ class CommentController extends Controller
         }
 
 
-        return redirect()->route('comments.index');
+        return redirect()->route('Admin.comments.index');
 
     }
 
@@ -84,9 +89,10 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::find($id);
+        $this->authorize('update', Comment::class);
 
         // dd($blog);
-        return view('comments.edit', compact('comment'));
+        return view('Admin.comments.edit', compact('comment'));
     }
     public function update(UpdateCommentRequest $request ,$id)
     {
@@ -98,12 +104,12 @@ class CommentController extends Controller
 
         try {
             $comment->save();
-            return redirect()->route('comments.index')->with('success', 'Sửa' . ' ' . $request->commentstable_type . ' ' .  'thành công');
+            return redirect()->route('comments.index')->with('success', 'Sửa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('comments.index')->with('error', 'Sửa' . ' ' . $request->commentstable_type . ' ' .  'không thành công');
+            return redirect()->route('comments.index')->with('error', 'Sửa không thành công');
         }
-        Session::flash('succes', 'Sửa thành công');
+        Session::flash('success', 'Sửa thành công');
 
         return redirect()->route('comments.index');
 
@@ -111,28 +117,28 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::find($id);
-
+        $this->authorize('delete', Comment::class);
 
         try {
             $comment->delete();
 
-            return redirect()->route('comments.index')->with('success', 'Xóa' . ' ' . $comment->id . ' ' .  'thành công');
+            return redirect()->route('comments.index')->with('success', 'Xóa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('comments.index')->with('error', 'Xóa' . ' ' . $comment->id . ' ' .  'không thành công');
+            return redirect()->route('comments.index')->with('error', 'Xóa không thành công');
         }
     }
     public function force_destroy($id)
     {
 
         $comment = Comment::withTrashed()->find($id);
-
+        $this->authorize('force_destroy',Comment::class);
         try {
             $comment->forceDelete();
-            return redirect()->route('comments.trash')->with('success', 'Xóa' . ' ' . $comment->name . ' ' .  'thành công');
+            return redirect()->route('comments.trash')->with('success', 'Xóa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('comments.trash')->with('error', 'Xóa' . ' ' . $comment->name . ' ' .  'không thành công');
+            return redirect()->route('comments.trash')->with('error', 'Xóa không thành công');
         }
     }
 
@@ -140,6 +146,7 @@ class CommentController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $comment = Comment::findOrFail($id);
+        $this->authorize('force_destroy',Comment::class);
         $comment->deleted_at = date("Y-m-d h:i:s");
         try {
             $comment->save();
@@ -156,6 +163,7 @@ class CommentController extends Controller
     function RestoreDelete($id)
     {
         $comment = Comment::withTrashed()->find($id);
+        $this->authorize('restore',Comment::class);
         $comment->deleted_at = null;
         try {
             $comment->save();
@@ -208,6 +216,6 @@ class CommentController extends Controller
             'f_parent_id'       => $parent_id,
             'comments'    => $comments,
         ];
-        return view('comments.trash', $params);
+        return view('Admin.comments.trash', $params);
     }
 }
