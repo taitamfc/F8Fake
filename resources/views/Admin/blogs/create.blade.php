@@ -42,7 +42,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" ></label>
+                                        <label class="control-label" >aaaaaaa</label>
                                         <input type="number" name="parent_id" class="form-control"  >
                                     </div>
                                     @if ($errors->any())
@@ -57,6 +57,34 @@
                                     <p style="color:red">{{ $errors->first('title') }}</p>
                                     @endif<!-- /.form-group -->
                                     <!-- .form-group -->
+                                    <div class="form-group">
+                                        <label class="control-label" >lượt xem</label> <input
+                                             type="number" name="view_count" class="form-control"
+                                            >
+                                    </div>
+                                    @if ($errors->any())
+                                    <p style="color:red">{{ $errors->first('view_count') }}</p>
+                                    @endif<!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label class="control-label" >phản hồi</label>
+                                            <select class="form-control" name="is_recommend" id="">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                    </div>
+                                    @if ($errors->any())
+                                    <p style="color:red">{{ $errors->first('is_recommend') }}</p>
+                                    @endif<!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label class="control-label" >kiểm duyệt</label>
+                                            <select class="form-control" name="is_approved" id="">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                    </div>
+                                    @if ($errors->any())
+                                    <p style="color:red">{{ $errors->first('is_approved') }}</p>
+                                    @endif<!-- /.form-group -->
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -83,6 +111,30 @@
                                     @if ($errors->any())
                                     <p style="color:red">{{ $errors->first('meta_title') }}</p>
                                     @endif<!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label class="control-label" >xuất bản</label> <input
+                                             type="date" name="published_at" class="form-control"
+                                            >
+                                    </div>
+                                    @if ($errors->any())
+                                    <p style="color:red">{{ $errors->first('published_at') }}</p>
+                                    @endif<!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label class="control-label" >đánh giá</label> <input
+                                             type="number" name="reaction_count" class="form-control"
+                                            >
+                                    </div>
+                                    @if ($errors->any())
+                                    <p style="color:red">{{ $errors->first('reaction_count') }}</p>
+                                    @endif<!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label class="control-label" >lượt bình luận</label> <input
+                                             type="number" name="comments_count" class="form-control"
+                                            >
+                                    </div>
+                                    @if ($errors->any())
+                                    <p style="color:red">{{ $errors->first('comments_count') }}</p>
+                                    @endif<!-- /.form-group -->
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -103,8 +155,37 @@
 
                                     <div class="form-group">
                                         <label class="control-label" >thời gian </label> <input
-                                             type="number" name="min_read" class="form-control"
-                                            >
+                                             type="number" name="min_read" class="form-control">
+                                    </div>
+                                            <div class="form-group">
+                                                <label class="control-label" >phản hồi</label>
+                                                    <select class="form-control" name="is_reacted" id="">
+                                                        <option value="0">0</option>
+                                                        <option value="1">1</option>
+                                                    </select>
+                                            </div>
+                                            @if ($errors->any())
+                                            <p style="color:red">{{ $errors->first('is_reacted') }}</p>
+                                            @endif<!-- /.form-group -->
+                                            <div class="form-group">
+                                                <label class="control-label" >dấu trang</label>
+                                                    <select class="form-control" name="is_bookmark" id="">
+                                                        <option value="0">0</option>
+                                                        <option value="1">1</option>
+                                                    </select>
+                                            </div>
+                                            @if ($errors->any())
+                                            <p style="color:red">{{ $errors->first('is_bookmark') }}</p>
+                                            @endif<!-- /.form-group -->
+                                            <div class="form-group">
+                                                <label class="control-label" >phát hành</label>
+                                                     <select class="form-control" name="is_published" id="">
+                                                        <option value="0">0</option>
+                                                        <option value="1">1</option>
+                                                     </select>
+                                            </div>@if ($errors->any())
+                                            <p style="color:red">{{ $errors->first('is_published') }}</p>
+                                            @endif<!-- /.form-group -->
                                     </div>
                                     @if ($errors->any())
                                     <p style="color:red">{{ $errors->first('min_read') }}</p>
@@ -127,87 +208,9 @@
                             <!-- .form-group -->
 
 
-                            <div class="form-group">
-                                <label class="control-label" >lượt xem</label> <input
-                                     type="number" name="view_count" class="form-control"
-                                    >
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('view_count') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >phản hồi</label>
-                                    <select class="form-control" name="is_recommend" id="">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                    </select>
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_recommend') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >kiểm duyệt</label>
-                                    <select class="form-control" name="is_approved" id="">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                    </select>
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_approved') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >xuất bản</label> <input
-                                     type="date" name="published_at" class="form-control"
-                                    >
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('published_at') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >đánh giá</label> <input
-                                     type="number" name="reaction_count" class="form-control"
-                                    >
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('reaction_count') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >lượt bình luận</label> <input
-                                     type="number" name="comments_count" class="form-control"
-                                    >
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('comments_count') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >phản hồi</label>
-                                    <select class="form-control" name="is_reacted" id="">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                    </select>
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_reacted') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >dấu trang</label>
-                                    <select class="form-control" name="is_bookmark" id="">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                    </select>
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_bookmark') }}</p>
-                            @endif<!-- /.form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >phát hành</label>
-                                     <select class="form-control" name="is_published" id="">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                     </select>
-                            </div>@if ($errors->any())
-                            <p style="color:red">{{ $errors->first('is_published') }}</p>
-                            @endif<!-- /.form-group -->
+
+
+
                             <div class="form-group">
                                image
                                 <input
@@ -217,7 +220,7 @@
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('image') }}</p>
                             @endif<!-- /.form-group -->
-                        </div>
+                        
 
                             <div class="form-actions">
                                 <a class="btn btn-secondary float-right" href="{{route('blogs.index')}}">Hủy</a>
