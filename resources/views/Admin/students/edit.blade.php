@@ -57,7 +57,7 @@
                         @endif
                         <div class="form-actions">
                             <a class="btn btn-secondary float-right" href="{{ route('students.index') }}">Hủy</a>
-                            <button class="btn btn-primary ml-auto" type="submit">Cập nhật</button>
+                            <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
                         </div>
                     </div>
                 </div>
