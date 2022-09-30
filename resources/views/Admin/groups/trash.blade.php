@@ -114,8 +114,8 @@
                         <thead class="thead-">
                             <tr>
                                 <th style="min-width:50px"> #</th>
-                                <th> Tên </th>
-                                <th> Mô Tả </th>
+                                <th> Tên Nhóm</th>
+                                <th> Mô Tả Nhóm</th>
                                 <th> Hành Động </th>
                             </tr>
                         </thead><!-- /thead -->

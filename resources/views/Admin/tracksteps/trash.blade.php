@@ -111,8 +111,10 @@
                         <thead class="thead-">
                             <tr>
                                 <th style="min-width:50px"> #</th>
+                                <th> Tên Chương Học </th>
+                                <th> Tên Khóa Học </th>
                                 <th> Thể Loại </th>
-                                <th> Chức Vụ </th>
+                                <th> Vị Trí</th>
                                 <th> Hành Động </th>
                             </tr>
                         </thead><!-- /thead -->
@@ -120,6 +122,8 @@
                             @foreach ($tracksteps as $key => $trackstep)
                                 <tr>
                                     <th scope="row">{{ $trackstep->id }}</th>
+                                    <td >{{ $trackstep->track->title }}</td>
+                                    <td>{{ $trackstep->step->title }}</td>
                                     <td>{{ $trackstep->step_type }}</td>
                                     <td>{{ $trackstep->position }}</td>
                                     <td>

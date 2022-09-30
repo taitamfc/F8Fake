@@ -28,6 +28,7 @@ class TrackStepController extends Controller
     }
     public function index(Request $request)
     {
+        $this->authorize('viewAny', TrackStep::class);
         //Lấy params trên url
         $key            = $request->key ?? '';
         $step_type      = $request->step_type ?? '';
@@ -69,6 +70,7 @@ class TrackStepController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', TrackStep::class);
         $tracks = Track::get();
         $steps = Step::get();
         $tracksteps = TrackStep::get();
@@ -124,6 +126,7 @@ class TrackStepController extends Controller
         $tracks = Track::get();
         $steps = Step::get();
         $tracksteps = TrackStep::findOrFail($id);
+        $this->authorize('update', $tracksteps);
         return view('Admin.tracksteps.edit', compact('tracksteps', 'tracks', 'steps'));
     }
 
@@ -164,6 +167,7 @@ class TrackStepController extends Controller
     {
         
         $tracksteps = TrackStep::findOrFail($id);
+        $this->authorize('delete', $tracksteps);
         try {
             $tracksteps->delete();
             Session::flash('error', 'Xóa thành công');
@@ -178,6 +182,7 @@ class TrackStepController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $tracksteps = TrackStep::withTrashed()->findOrFail($id);
+        $this->authorize('forceDelete', $tracksteps);
         $tracksteps->deleted_at = date("Y-m-d h:i:s");
         try {
             $tracksteps->save();
@@ -195,6 +200,7 @@ class TrackStepController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $tracksteps = TrackStep::withTrashed()->findOrFail($id);
+        $this->authorize('restore', $tracksteps);
         $tracksteps->deleted_at = null;
         try {
             $tracksteps->save();

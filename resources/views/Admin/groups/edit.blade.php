@@ -15,23 +15,47 @@
             <div class="card-deck-xl">
                 <div class="card card-fluid">
                     <div class="card-body">
-                        <form action="{{ route('groups.update', $groups->id) }}" method="post">
+                        <form action="{{ route('groups.update', $group->id) }}" method="post">
                             @csrf
                             @method('put')
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tên</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="name" value="{{$groups->name}}" data-toggle="flatpickr">
+                                <label class="control-label" for="flatpickr01">Tên Nhóm</label> <input id="flatpickr01"
+                                    type="text" class="form-control" name="name" value="{{$group->name}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('name') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Mô Tả</label> <input id="flatpickr01"
-                                    type="text" class="form-control" name="description" value="{{$groups->description}}" data-toggle="flatpickr">
+                                <label class="control-label" for="flatpickr01">Mô Tả Nhóm</label> <input id="flatpickr01"
+                                    type="text" class="form-control" name="description" value="{{$group->description}}" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('description') }}</p>
                             @endif
+                            <div class="form-group">
+                                <label for="tf1">Quyền hạn </label>
+                                <div class="row">
+                                    @foreach ($group_names as $group_name => $roles)
+                                    <div class="list-group list-group-flush list-group-bordered col-lg-4" >
+                                        <div class="list-group-header"> {{ __($group_name) }} </div>
+                                        @foreach ($roles as $role)
+                                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span>{{ __($role['name']) }}</span> 
+                                            <!-- .switcher-control -->
+                                            <label class="switcher-control">
+                                                <input type="checkbox" 
+                                                @checked( in_array($role['id'],$userRoles) )
+                                                name="roles[]" class="switcher-input" value="{{ $role['id'] }}" > 
+                                                <span class="switcher-indicator"></span>
+                                            </label> 
+                                            <!-- /.switcher-control -->
+                                        </div>
+                                    @endforeach
+                                    </div>
+                                    @endforeach
+                                </div>
+                               
+                            </div>
                             <div class="form-actions">
                                 <a class="btn btn-secondary float-right" href="{{route('groups.index')}}">Hủy</a>
                                 <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
