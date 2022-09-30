@@ -43,25 +43,35 @@
                                     type="text" name="description" value="{{ $steps->description }}"
                                     class="form-control " data-toggle="flatpickr">
                             </div>
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Thời gian</label> <input id="flatpickr01"
-                                    type="datetime" name="duration" value="{{ $steps->duration }}" class="form-control "
-                                    data-toggle="flatpickr">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="control-label" for="flatpickr01">Video</label> <input id="flatpickr01"
+                                            type="text" name="video" value="{{ $steps->video }}" class="form-control  "
+                                            data-toggle="flatpickr">
+                                    </div>
+                                </div>
+                                <!-- .form-group -->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="control-label" for="flatpickr01">Loại video</label> <input
+                                            id="flatpickr01" type="text" name="video_type"
+                                            value="{{ $steps->video_type }}" class="form-control " data-toggle="flatpickr">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="control-label" for="flatpickr01">Thời gian</label> <input
+                                            id="flatpickr01" type="datetime" name="duration" value="{{ $steps->duration }}"
+                                            class="form-control " data-toggle="flatpickr">
+                                    </div>
+                                </div>
                             </div>
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Loại video</label> <input id="flatpickr01"
-                                    type="text" name="video_type" value="{{ $steps->video_type }}" class="form-control "
-                                    data-toggle="flatpickr">
-                            </div>
-                            <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tên chính</label> <input id="flatpickr01"
                                     type="text" name="original_name" value="{{ $steps->original_name }}"
                                     class="form-control " data-toggle="flatpickr">
                             </div>
-                            <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Hình ảnh</label>
                                 <input accept="image/*" type='file' id="inputFile" name="image"
@@ -69,12 +79,6 @@
                                 <img type="hidden" width="200px" height="150px" id="blah1"
                                     src="{{ asset($steps->image) ?? $request->inputFile }}" alt=""
                                     data-toggle="flatpickr" />
-                            </div>
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Video</label> <input id="flatpickr01"
-                                    type="text" name="video" value="{{ $steps->video }}" class="form-control  "
-                                    data-toggle="flatpickr">
                             </div>
                             <!-- .form-group -->
                             <div class="form-group">
@@ -88,15 +92,14 @@
                                     video</label> <input id="flatpickr01" type="text" name="video_url"
                                     value="{{ $steps->video_url }}" class="form-control " data-toggle="flatpickr">
                             </div>
-                            <!-- .form-group -->
                             <div class="form-group">
                                 <a class="btn btn-secondary float-left" href="{{ route('steps.index') }}">Hủy</a>
                                 <button class="btn btn-info float-right" type="submit">Lưu</button>
                             </div>
                         </form><!-- /form -->
-                    </div><!-- /.card-body -->
-                </div><!-- /.card -->
-            </div><!-- /.card-deck-xl -->
-        </div>
+                    </div>
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
+        </div><!-- /.card-deck-xl -->
     </div>
 @endsection
