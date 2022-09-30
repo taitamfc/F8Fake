@@ -1,6 +1,6 @@
 <!-- #modalFilterColumns -->
-<div class="modal fade" id="modalFilterColumns" tabindex="-1" role="dialog" aria-labelledby="modalFilterColumnsLabel"
-    aria-hidden="true">
+<div class="modal fade" style="height: fit-content;" id="modalFilterColumns" tabindex="-1" role="dialog"
+    aria-labelledby="modalFilterColumnsLabel" aria-hidden="true">
     <!-- .modal-dialog -->
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- .modal-content -->

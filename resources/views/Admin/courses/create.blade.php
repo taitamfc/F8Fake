@@ -1,15 +1,18 @@
 @extends('Admin.master')
+@include('Admin.courses.slugs.slug')
 @section('content')
+
     <div class="page-inner">
         <header class="page-title-bar">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        <a href="{{route('courses.index')}}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Cấp độ</a>
+                        <a href="{{ route('courses.index') }}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Khóa
+                            học</a>
                     </li>
                 </ol>
             </nav>
-            <h1 class="page-title"> Thêm cấp độ </h1>
+            <h1 class="page-title"> Thêm khóa học </h1>
         </header>
         <div class="page-section">
             <div class="card-deck-xl">
@@ -20,9 +23,9 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tiêu đề<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="title" value="{{ old('title')  }}"
-                                    type="text" class="form-control @error('title') is-invalid @enderror"
-                                    data-toggle="flatpickr">
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}"
+                                    onkeyup="ChangeToSlug();" name="title" id="slug" aria-describedby="emailHelp"
+                                    placeholder="">
                                 @error('title')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -30,9 +33,8 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tên chứng chỉ<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="certificate_name"
-                                    value="{{ old('certificate_name')  }}" type="text"
-                                    class="form-control @error('certificate_name') is-invalid @enderror"
+                                <input id="flatpickr01" name="certificate_name" value="{{ old('certificate_name') }}"
+                                    type="text" class="form-control @error('certificate_name') is-invalid @enderror"
                                     data-toggle="flatpickr">
                                 @error('certificate_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -41,9 +43,10 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Đường dẫn<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="slug" value="{{ old('slug')  }}"
-                                    type="text" class="form-control @error('slug') is-invalid @enderror"
-                                    data-toggle="flatpickr">
+
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}"
+                                    onkeyup="ChangeToSlug();" name="slug" id="convert_slug" aria-describedby="emailHelp"
+                                    placeholder="">
                                 @error('slug')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -51,23 +54,14 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Mô tả<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="description"
-                                    value="{{ old('description') }}" type="text"
-                                    class="form-control @error('description') is-invalid @enderror" data-toggle="flatpickr">
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" id="ckeditor1" rows="5"
+                                    style="resize: none"></textarea>
                                 @error('description')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">nội dung tổng hơp<abbr
-                                        name="Trường bắt buộc">*</abbr></label>
-                                <textarea id="flatpickr01" name="compeleted_content" type="text"
-                                    class="form-control @error('compeleted_content') is-invalid @enderror" data-toggle="flatpickr"
-                                    style="width:850px; height:200px;">{{ old('compeleted_content')  }}</textarea>
-                                @error('compeleted_content')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
+
                             <div class="card-body border-top">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -77,7 +71,7 @@
                                             <select name="level_id"
                                                 id=""class="form-control @error('level_id') is-invalid @enderror"
                                                 data-toggle="flatpickr">
-                                                <option value="">--chọn cấp độ--</option>
+                                                <option value="">--Chọn cấp độ--</option>
                                                 @foreach ($levels as $level)
                                                     <option value="{{ $level->id }}">{{ $level->title }}</option>
                                                 @endforeach
@@ -89,11 +83,10 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">ảnh<abbr
+                                            <label class="control-label" for="flatpickr01">Ảnh<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="image"
-                                                value="{{ old('image') }}" type="file"
-                                                class="form-control @error('image') is-invalid @enderror"
+                                            <input id="flatpickr01" name="image" value="{{ old('image') }}"
+                                                type="file" class="form-control @error('image') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('image')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -104,9 +97,8 @@
                                         <div class="form-group">
                                             <label class="control-label" for="flatpickr01">Icon<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="icon"
-                                                value="{{ old('icon') }}" type="text"
-                                                class="form-control @error('icon') is-invalid @enderror"
+                                            <input id="flatpickr01" name="icon" value="{{ old('icon') }}"
+                                                type="text" class="form-control @error('icon') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('icon')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -118,28 +110,17 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nội dung<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <textarea id="flatpickr01" name="content" type="text" class="form-control @error('content') is-invalid @enderror"
-                                    data-toggle="flatpickr" style="width:850px; height:200px;">{{ old('content')  }}</textarea>
+                                <textarea name="content" class="form-control @error('content') is-invalid @enderror" value="{{ old('description') }}" id="ckeditor" rows="5"
+                                    style="resize: none"></textarea>
                                 @error('content')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tiêu đề<abbr
-                                        name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="title" value="{{ old('title') }}"
-                                    type="text" class="form-control @error('title') is-invalid @enderror"
-                                    data-toggle="flatpickr">
-                                @error('title')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Loại video<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="video_type"
-                                    value="{{ old('video_type') }}" type="text"
-                                    class="form-control @error('video_type') is-invalid @enderror"
+                                <input id="flatpickr01" name="video_type" value="{{ old('video_type') }}"
+                                    type="text" class="form-control @error('video_type') is-invalid @enderror"
                                     data-toggle="flatpickr">
                                 @error('video_type')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -151,9 +132,8 @@
                                         <div class="form-group">
                                             <label class="control-label" for="flatpickr01">Đường dẫn video<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="video"
-                                                value="{{ old('video')  }}" type="text"
-                                                class="form-control @error('video') is-invalid @enderror"
+                                            <input id="flatpickr01" name="video" value="{{ old('video') }}"
+                                                type="text" class="form-control @error('video') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('video')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -177,8 +157,8 @@
                                         <div class="form-group">
                                             <label class="control-label" for="flatpickr01">Quyền Ưu Tiên<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="priority"
-                                                value="{{ old('priority')  }}" type="number"
+                                            <input id="flatpickr01" name="priority" value="{{ old('priority') }}"
+                                                type="number"
                                                 class="form-control @error('priority') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('priority')
@@ -192,11 +172,10 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">giá<abbr
+                                            <label class="control-label" for="flatpickr01">Giá<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="price"
-                                                value="{{ old('price')  }}" type="number"
-                                                class="form-control @error('price') is-invalid @enderror"
+                                            <input id="flatpickr01" name="price" value="{{ old('price') }}"
+                                                type="number" class="form-control @error('price') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('price')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -205,10 +184,10 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">old_prive<abbr
+                                            <label class="control-label" for="flatpickr01">Old_prive<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="old_prive"
-                                                value="{{ old('old_prive')  }}" type="number"
+                                            <input id="flatpickr01" name="old_prive" value="{{ old('old_prive') }}"
+                                                type="number"
                                                 class="form-control @error('old_prive') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('old_prive')
@@ -221,8 +200,7 @@
                                             <label class="control-label" for="flatpickr01">Số sinh viên<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
                                             <input id="flatpickr01" name="student_count"
-                                                value="{{ old('student_count')  }}"
-                                                type="number"
+                                                value="{{ old('student_count') }}" type="number"
                                                 class="form-control @error('student_count') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('student_count')
@@ -239,8 +217,7 @@
                                             <label class="control-label" for="flatpickr01">Giá đặt hàng<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
                                             <input id="flatpickr01" name="pre_order_price"
-                                                value="{{ old('pre_order_price')}}"
-                                                type="number"
+                                                value="{{ old('pre_order_price') }}" type="number"
                                                 class="form-control @error('pre_order_price') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('pre_order_price')
@@ -253,8 +230,7 @@
                                             <label class="control-label" for="flatpickr01">Có liên quan<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
                                             <input id="flatpickr01" name="is_relatable"
-                                                value="{{ old('is_relatable ') }}"
-                                                type="text"
+                                                value="{{ old('is_relatable ') }}" type="text"
                                                 class="form-control @error('is_relatable') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('is_relatable ')
@@ -277,6 +253,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label" for="flatpickr01">Nội dung tổng hơp<abbr
+                                        name="Trường bắt buộc">*</abbr></label>
+                                {{-- <textarea id="flatpickr01" name="compeleted_content" type="text"
+                                    class="form-control @error('compeleted_content') is-invalid @enderror" data-toggle="flatpickr"
+                                    style="width:850px; height:200px;">{{ old('compeleted_content') }}</textarea> --}}
+                                <textarea name="compeleted_content" class="form-control" value="{{ old('description') }}" id="ckeditor0"
+                                    rows="5" style="resize: none"></textarea>
+                                @error('compeleted_content')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="card-body border-top">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -305,11 +294,13 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">Hoàn Thành:<abbr
-                                                    name="Trường bắt buộc">*</abbr></label>
-                                            <br>
-                                            <input name="is_completable" type="radio" value="1" />True<br>
-                                            <input name="is_completable" type="radio" value="0" />False<br>
+                                            <label class="switcher-control">
+                                                <input type="checkbox"
+                                                {{-- @checked( in_array($role['id'],$userRoles) ) --}}
+                                                name="is_completable"id="checkbox1" class="switcher-input" value="0" >
+                                                <span class="switcher-indicator"></span>
+                                            </label>
+                                            <label class="control-label" for="flatpickr01"> Hoàn Thành </label>
                                             @error('is_completable')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -324,5 +315,6 @@
                         </form><!-- /form -->
                     </div><!-- /.card-body -->
                 </div><!-- /.card -->
-            </div><!-- /.card-deck-xl -->
+            </div>
+      <!-- /.card-deck-xl -->
         @endsection

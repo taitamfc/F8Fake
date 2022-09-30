@@ -67,7 +67,7 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        // dd($request->all());
+        // dd($request->is_completable);
         $course= new Course();
         $course->level_id = $request->level_id;
         $course->title = $request->title;
@@ -174,12 +174,10 @@ class CourseController extends Controller
             $path = 'storage/'. $request->file('image')->store('images', 'public');//lưu file vào mục public/images với tê mới là $newFileName
             $course->image = $path;
         }
-
         try {
             $course->save();
             Session::flash('success','Cập nhật Thành công');
             return redirect()->route('courses.index');
-
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('error','Thêm mới thất bại');
