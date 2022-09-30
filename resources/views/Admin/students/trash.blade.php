@@ -94,7 +94,7 @@
                                     <th> Ảnh </th>
                                     <th> Tên </th>
                                     <th> Email </th>
-                                    <th></th>
+                                    <th> Tùy chọn </th>
                                 </tr>
                             </thead>
                             <tbody>

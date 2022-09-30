@@ -94,7 +94,7 @@
                                 <th> Vị trí </th>
                                 <th> loại </th>
                                 <th> Tiêu đề </th>
-                                <th> </th>
+                                <th> Tùy Chọn</th>
                             </tr>
                         </thead>
                         <tbody>
