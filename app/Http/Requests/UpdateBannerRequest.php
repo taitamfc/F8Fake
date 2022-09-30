@@ -31,6 +31,7 @@ class UpdateBannerRequest extends FormRequest
             'cta_title' => 'required',
             'link_to' => 'required',
             'priority' => 'required',
+            'priority' => 'required|numeric|max:99',
             'expires' => 'required',
         ];
     }
@@ -45,6 +46,8 @@ class UpdateBannerRequest extends FormRequest
             'cta_title.required' => 'Trường bắt buộc',
             'link_to.required' => 'Trường bắt buộc',
             'priority.required' => 'Trường bắt buộc',
+            'priority.numeric' => 'Trường bắt buộc phải là số',
+            'priority.max' => 'Trường bắt buộc nhỏ hơn 2 chữ số',
             'expires.required' => 'Trường bắt buộc',
         ];
     }
