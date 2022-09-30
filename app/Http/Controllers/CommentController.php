@@ -15,7 +15,7 @@ class CommentController extends Controller
 {
     public function index(Request $request)
     {
-
+    
         $key        = $request->key ?? '';
         $user_id      = $request->user_id ?? '';
         $comment      = $request->comment ?? '';
@@ -46,7 +46,7 @@ class CommentController extends Controller
             'f_key'       => $key,
             'comments'    => $comments,
         ];
-        return view('comments.index', $params);
+        return view('Admin.comments.index', $params);
 
     }
     public function create()
@@ -55,7 +55,7 @@ class CommentController extends Controller
         $users = User::all();
 
         // dd($users);
-        return view('comments.create',compact('users','courses'));
+        return view('Admin.comments.create',compact('users','courses'));
     }
     public function store( StoreCommentRequest $request)
     {
@@ -76,7 +76,7 @@ class CommentController extends Controller
         }
 
 
-        return redirect()->route('comments.index');
+        return redirect()->route('Admin.comments.index');
 
     }
 
@@ -86,7 +86,7 @@ class CommentController extends Controller
         $comment = Comment::find($id);
 
         // dd($blog);
-        return view('comments.edit', compact('comment'));
+        return view('Admin.comments.edit', compact('comment'));
     }
     public function update(UpdateCommentRequest $request ,$id)
     {
@@ -208,6 +208,6 @@ class CommentController extends Controller
             'f_parent_id'       => $parent_id,
             'comments'    => $comments,
         ];
-        return view('comments.trash', $params);
+        return view('Admin.comments.trash', $params);
     }
 }

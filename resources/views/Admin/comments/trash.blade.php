@@ -70,7 +70,7 @@
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
                             </div>
                         </div>
-                        @include('comments.modals.modalcommentcolumn')
+                        @include('Admin.comments.modals.modalcommentcolumn')
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
@@ -78,6 +78,10 @@
                 @endif
                 @if (Session::has('error'))
                 <div class="alert alert-success">{{session::get('error')}}</div>
+                @endif
+                @if (!count($comments))
+                    <div class="alert alert-danger"> <i class="bi bi-x-circle"></i> Không tìm thấy kết quả
+                        {{ Session::get('error') }}</div>
                 @endif
                 <div class="card-body">
 

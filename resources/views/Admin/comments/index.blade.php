@@ -70,7 +70,7 @@
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
                             </div>
                         </div>
-                        @include('comments.modals.modalcommentcolumn')
+                        @include('Admin.comments.modals.modalcommentcolumn')
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
@@ -78,6 +78,10 @@
                 @endif
                 @if (Session::has('error'))
                 <div class="alert alert-success">{{session::get('error')}}</div>
+                @endif
+                @if (!count($comments))
+                    <div class="alert alert-danger"> <i class="bi bi-x-circle"></i> Không tìm thấy kết quả
+                        {{ Session::get('error') }}</div>
                 @endif
                 <div class="card-body">
 
@@ -93,11 +97,11 @@
                             <tr>
 
                                 <th> # </th>
-                                <th>người dùng </th>
-                                <th> loại </th>
-                                <th> nội dung </th>
-                                <th> phê duyệt</th>
-                                <th> thao tác</th>
+                                <th> Tên người dùng </th>
+                                <th> Tên khóa học </th>
+                                <th> Ngày tạo </th>
+                                <th> Phê duyệt</th>
+                                <th> Thao tác</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
@@ -106,9 +110,9 @@
                             @foreach ($comments as $comment)
                                 <tr>
                                     <th scope="row">{{ $comment->id }}</th>
-                                    <td>{{ $comment->user_id }}</td>
+                                    <td>{{ $comment->user->username }}</td>
                                     <td>{{ $comment->commentstable_type }}</td>
-                                    <td>{{ $comment->comment }}</td>
+                                    <td>{{ $comment->created_at }}</td>
                                     <td>{{ $comment->approved }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>
                                     <td>{{ $blog->content }}</td> --}}

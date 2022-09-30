@@ -28,13 +28,18 @@
                                 <label class="control-label" >Người đăng</label>
                                <select name="user_id" id="" class="form-control">
                                 @foreach ($users as $user )
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    <option value="{{$user->id}}">{{$user->username}}</option>
                                 @endforeach
+                                {{-- <select name="user_id" class="form-control " id="inputGroupSelect02">
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                    @endforeach
+                                </select> --}}
                                </select>
                             </div><!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >phụ huynh</label>
+                                <label class="control-label" ></label>
                                 <input type="number" name="parent_id" class="form-control"  >
                             </div>
                             @if ($errors->any())
@@ -60,7 +65,8 @@
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" >mô tả</label>
-                                <input type="text" name="description" class="form-control">
+                                <textarea name="description" class="form-control" value="{{ old('description') }}" id="ckeditor1" rows="5"
+                            style="resize: none"></textarea>
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('description') }}</p>
@@ -107,7 +113,7 @@
                             <p style="color:red">{{ $errors->first('min_read') }}</p>
                             @endif<!-- /.form-group -->
                             <div class="form-group">
-                                <label class="control-label" >views_count</label> <input
+                                <label class="control-label" >lượt xem</label> <input
                                      type="number" name="view_count" class="form-control"
                                     >
                             </div>

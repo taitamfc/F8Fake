@@ -4,7 +4,7 @@
     <!-- .modal-dialog -->
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- .modal-content -->
-        <div class="modal-content">
+        <div class="modal-content" style="height: fit-content">
             <!-- .modal-header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFilterColumnsLabel"> Lọc nâng cao </h5>
