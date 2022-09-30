@@ -9,7 +9,7 @@
             </ol>
         </nav>
         <header class="page-title-bar">
-            <h1 class="page-title">Sửa TrackStep </h1>
+            <h1 class="page-title">Sửa Bài Học </h1>
         </header>
         <div class="page-section">
             <div class="card-deck-xl">
@@ -48,7 +48,7 @@
                             <p style="color:red">{{ $errors->first('step_id') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Chức Vụ</label> <input id="flatpickr01"
+                                <label class="control-label" for="flatpickr01">Vị Trí</label> <input id="flatpickr01"
                                     type="text" class="form-control" value="{{$tracksteps->position}}" name="position" data-toggle="flatpickr">
                             </div>
                             @if ($errors->any())

@@ -10,7 +10,7 @@
             </ol>
         </nav>
         <header class="page-title-bar">
-            <h1 class="page-title">Thêm Group </h1>
+            <h1 class="page-title">Thêm Bài Học </h1>
         </header>
         <div class="page-section">
             <div class="card-deck-xl">
@@ -49,7 +49,7 @@
                                 <p style="color:red">{{ $errors->first('step_id') }}</p>
                             @endif
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Chức Vụ</label>
+                                <label class="control-label" for="flatpickr01">Vị Trí</label>
                                 <input id="flatpickr01" type="text" class="form-control" value="{{ old('position') }}"
                                     name="position" data-toggle="flatpickr">
                             </div>

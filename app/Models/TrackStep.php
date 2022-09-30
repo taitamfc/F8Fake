@@ -10,6 +10,7 @@ class TrackStep extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'track_steps';
+    protected $fillable = ['title'];
     function track()
     {
         return $this->belongsTo(Track::class);

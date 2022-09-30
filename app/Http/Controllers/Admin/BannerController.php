@@ -27,7 +27,8 @@ class BannerController extends Controller
         // $banners = banner::get();
         // $banners = banner::orderBy('created_at', 'DESC')->search()->paginate(4);
         // return view('Admin.banners.index', compact('banners'));
-
+        $this->authorize('viewAny', Banner::class);
+        // dd(12456);
 
         $key        = $request->key ?? '';
         $placement      = $request->placement ?? '';
@@ -76,6 +77,7 @@ class BannerController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Banner::class);
         $banners = Banner::get();
         return view('Admin.banners.add', compact('banners'));
     }
@@ -134,7 +136,9 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
+        
         $banners = Banner::findOrFail($id);
+        $this->authorize('update', Banner::class);
 
         return view('Admin.banners.edit', compact('banners'));
     }
@@ -192,6 +196,8 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $banners = Banner::findOrFail($id);
+        $this->authorize('delete', Banner::class);
+
 
         try {
             $image = str_replace('storage', 'public', $banners->image);;
@@ -252,6 +258,8 @@ class BannerController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $banners = Banner::findOrFail($id);
+        $this->authorize('force_destroy',Banner::class);
+
         $banners->deleted_at = date("Y-m-d h:i:s");
         try {
             $banners->save();
@@ -269,6 +277,7 @@ class BannerController extends Controller
     public function restore($id)
     {
         $banners = Banner::findOrFail($id);
+        $this->authorize('restore',Banner::class);
         $banners->deleted_at = null;
         try {
             $banners->save();
