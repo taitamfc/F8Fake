@@ -9,7 +9,7 @@
             </ol>
         </nav>
         <header class="page-title-bar">
-            <h1 class="page-title">Sửa TrackStep </h1>
+            <h1 class="page-title">Sửa Bài Học </h1>
         </header>
         <div class="page-section">
             <div class="card-deck-xl">
