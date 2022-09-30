@@ -51,6 +51,31 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
+                                        <label>Video</label>
+                                        <select class="form-select @error('video') @enderror" name="video"
+                                            aria-label="Default select example">
+                                            <option value="0" {{ old('video') == 0 ? 'selected' : '' }} disabled
+                                                selected>
+                                                Vui lòng chọn</option>
+                                            <option value="Youtube" {{ old('video') == 'Youtube' ? 'selected' : '' }}>
+                                                Youtube
+                                            </option>
+                                            <option value="Facebook" {{ old('video') == 'Facebook' ? 'selected' : '' }}>
+                                                Facebook</option>
+                                            <option value="Facebook" {{ old('video') == 'Tiktok' ? 'selected' : '' }}>
+                                                Tiktok
+                                            </option>
+                                            {{-- @foreach ($steps as $step)
+                                            <option value="">{{ $step->video }}{{ $step->name }}</option>
+                                        @endforeach --}}
+                                        </select>
+                                        @error('video')
+                                            <div style="color: red">*{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
                                         <label>Loại video</label>
                                         <select class="form-select @error('video_type') @enderror" name="video_type"
                                             aria-label="Default select example">
@@ -79,31 +104,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Video</label>
-                                        <select class="form-select @error('video') @enderror" name="video"
-                                            aria-label="Default select example">
-                                            <option value="0" {{ old('video') == 0 ? 'selected' : '' }} disabled
-                                                selected>
-                                                Vui lòng chọn</option>
-                                            <option value="Youtube" {{ old('video') == 'Youtube' ? 'selected' : '' }}>
-                                                Youtube
-                                            </option>
-                                            <option value="Facebook" {{ old('video') == 'Facebook' ? 'selected' : '' }}>
-                                                Facebook</option>
-                                            <option value="Facebook" {{ old('video') == 'Tiktok' ? 'selected' : '' }}>
-                                                Tiktok
-                                            </option>
-                                            {{-- @foreach ($steps as $step)
-                                            <option value="">{{ $step->video }}{{ $step->name }}</option>
-                                        @endforeach --}}
-                                        </select>
-                                        @error('video')
-                                            <div style="color: red">*{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="flatpickr01">Thời gian</label> <input
