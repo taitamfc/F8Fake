@@ -42,7 +42,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" >aaaaaaa</label>
+                                        <label class="control-label" >nội dung</label>
                                         <input type="number" name="parent_id" class="form-control"  >
                                     </div>
                                     @if ($errors->any())
@@ -220,7 +220,7 @@
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('image') }}</p>
                             @endif<!-- /.form-group -->
-                        
+
 
                             <div class="form-actions">
                                 <a class="btn btn-secondary float-right" href="{{route('blogs.index')}}">Hủy</a>

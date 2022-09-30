@@ -16,18 +16,18 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">user id</label>
+                            <label class="">id</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="user_id"
                                     class="form-control filter-column f-name"
-                                    value=" {{ $f_user_id }} " id="name" />
+                                    value=" {{ $f_id }} " id="name" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">parent id</label>
+                            <label class="">Tên người dùng</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="parent_id"

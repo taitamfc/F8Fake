@@ -16,7 +16,8 @@ class CommentController extends Controller
 {
     public function index(Request $request)
     {
-
+        $users = User::all();
+        
         // $this->authorize('viewAny', Comment::class);
         $key        = $request->key ?? '';
         $user_id      = $request->user_id ?? '';
@@ -47,13 +48,14 @@ class CommentController extends Controller
             'f_comment'     => $comment,
             'f_key'       => $key,
             'comments'    => $comments,
+            'users' => $users,
         ];
-        return view('Admin.comments.index', $params);
+        return view('Admin.comments.index', $params );
 
     }
     public function create()
     {
-        // $this->authorize('create', Comment::class);
+        $this->authorize('create', Comment::class);
         $courses = Course::all();
         $users = User::all();
 

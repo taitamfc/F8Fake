@@ -15,7 +15,8 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-
+        $users = User::all();
+        // dd($users);
         $key        = $request->key ?? '';
         $user_id      = $request->user_id ?? '';
         $title      = $request->title ?? '';
@@ -29,6 +30,7 @@ class BlogController extends Controller
         if ($title) {
             $query->where('title', 'LIKE', '%' . $title . '%');
         }
+
 
         if ($id) {
             $query->where('id', $id);
@@ -44,6 +46,8 @@ class BlogController extends Controller
             'f_user_id' => $user_id,
             'f_title'     => $title,
             'f_key'       => $key,
+            'f_user'       => $users,
+
             'blogs'    => $blogs,
         ];
         return view('Admin.blogs.index', $params);
@@ -84,10 +88,10 @@ class BlogController extends Controller
 
         try {
             $blog->save();
-            return redirect()->route('blogs.index')->with('success', 'Thêm' . ' ' . $request->parent_id . ' ' .  'thành công');
+            return redirect()->route('blogs.index')->with('success', 'Thêm thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('blogs.index')->with('error', 'Thêm' . ' ' . $request->parent_id . ' ' .  'không thành công');
+            return redirect()->route('blogs.index')->with('error', 'Thêm không thành công');
         }
 
 
@@ -107,9 +111,9 @@ class BlogController extends Controller
     {
 
         $blogs = Blog::find($id);
+        $blogs->user_id = $request->user_id;
+        $blogs->parent_id = $request->parent_id;
         $blogs->title = $request->title;
-        $blogs->user->username = $request->user->username;
-        $blogs->published_at = $request->published_at;
         $blogs->slug = $request->slug;
         $blogs->description = $request->description;
         $blogs->meta_title = $request->meta_title;
@@ -127,14 +131,13 @@ class BlogController extends Controller
         $blogs->is_published = $request->is_published;
         $blogs->image = $request->image;
         $blogs->comments_count = $request->comments_count;
-        $blogs->parent_id = $request->parent_id;
 
         try {
             $blogs->save();
-            return redirect()->route('blogs.index')->with('success', 'Sửa' . ' ' . $request->user_id . ' ' .  'thành công');
+            return redirect()->route('blogs.index')->with('success', 'Sửa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('blogs.index')->with('error', 'Sửa' . ' ' . $request->user_id . ' ' .  'không thành công');
+            return redirect()->route('blogs.index')->with('error', 'Sửa không thành công');
         }
         Session::flash('success', 'Sửa thành công');
 
@@ -147,10 +150,10 @@ class BlogController extends Controller
         // dd($id);
         try {
             $blogs->delete();
-            return redirect()->route('blogs.index')->with('success', 'Xóa' . ' ' . $blogs->id . ' ' .  'thành công');
+            return redirect()->route('blogs.index')->with('success', 'Xóa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('blogs.index')->with('error', 'Xóa' . ' ' . $blogs->id . ' ' .  'không thành công');
+            return redirect()->route('blogs.index')->with('error', 'Xóa không thành công');
         }
     }
     public function force_destroy($id)
@@ -160,10 +163,10 @@ class BlogController extends Controller
 
         try {
             $blogs->forceDelete();
-            return redirect()->route('blogs.trash')->with('success', 'Xóa' . ' ' . $blogs->id . ' ' .  'thành công');
+            return redirect()->route('blogs.trash')->with('success', 'Xóa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('blogs.trash')->with('error', 'Xóa' . ' ' . $blogs->id . ' ' .  'không thành công');
+            return redirect()->route('blogs.trash')->with('error', 'Xóa không thành công');
         }
     }
 
@@ -191,7 +194,7 @@ class BlogController extends Controller
         try {
             $blogs->save();
 
-            Session::flash('success', 'Khôi phục ' . $blogs->id . ' thành công');
+            Session::flash('success', 'Khôi phục   thành công');
             return redirect()->route('blogs.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
