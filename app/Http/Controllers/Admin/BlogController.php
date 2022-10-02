@@ -15,6 +15,7 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
+        $blogs = Blog::all();
         $users = User::all();
         // dd($users);
         $key        = $request->key ?? '';
@@ -102,38 +103,38 @@ class BlogController extends Controller
 
     public function edit($id)
     {
-        $blogs = Blog::find($id);
-        $users = User::all();
+        $blogs = Blog::findOrFail($id);
+        $users = User::get();
         // dd($blog);
         return view('Admin.blogs.edit', compact('blogs','users'));
     }
     public function update(UpdateBlogRequest $request ,$id)
     {
 
-        $blogs = Blog::find($id);
-        $blogs->user_id = $request->user_id;
-        $blogs->parent_id = $request->parent_id;
-        $blogs->title = $request->title;
-        $blogs->slug = $request->slug;
-        $blogs->description = $request->description;
-        $blogs->meta_title = $request->meta_title;
-        $blogs->meta_description = $request->meta_description;
-        $blogs->thumbnail = $request->thumbnail;
-        $blogs->content = $request->content;
-        $blogs->min_read = $request->min_read;
-        $blogs->view_count = $request->view_count;
-        $blogs->is_recommend = $request->is_recommend;
-        $blogs->is_approved = $request->is_approved;
-        $blogs->published_at = $request->published_at;
-        $blogs->reaction_count = $request->reaction_count;
-        $blogs->is_reacted = $request->is_reacted;
-        $blogs->is_bookmark = $request->is_bookmark;
-        $blogs->is_published = $request->is_published;
-        $blogs->image = $request->image;
-        $blogs->comments_count = $request->comments_count;
+        $blog = Blog::find($id);
+        $blog->user_id = $request->user_id;
+        $blog->parent_id = $request->parent_id;
+        $blog->title = $request->title;
+        $blog->slug = $request->slug;
+        $blog->description = $request->description;
+        $blog->meta_title = $request->meta_title;
+        $blog->meta_description = $request->meta_description;
+        $blog->thumbnail = $request->thumbnail;
+        $blog->content = $request->content;
+        $blog->min_read = $request->min_read;
+        $blog->view_count = $request->view_count;
+        $blog->is_recommend = $request->is_recommend;
+        $blog->is_approved = $request->is_approved;
+        $blog->published_at = $request->published_at;
+        $blog->reaction_count = $request->reaction_count;
+        $blog->is_reacted = $request->is_reacted;
+        $blog->is_bookmark = $request->is_bookmark;
+        $blog->is_published = $request->is_published;
+        $blog->image = $request->image;
+        $blog->comments_count = $request->comments_count;
 
         try {
-            $blogs->save();
+            $blog->save();
             return redirect()->route('blogs.index')->with('success', 'Sửa thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());

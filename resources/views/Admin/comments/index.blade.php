@@ -111,7 +111,7 @@
                                 <tr>
                                     <th scope="row">{{ $comment->id }}</th>
                                     <td>{{ $comment->user->username }}</td>
-                                    <td>{{ $comment->commentstable_type }}</td>
+                                    <td>{{ $comment->course->certificate_name }}</td>
                                     <td>{{ $comment->created_at }}</td>
                                     <td>{{ $comment->approved }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>

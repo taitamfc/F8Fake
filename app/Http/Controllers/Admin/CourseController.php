@@ -228,7 +228,7 @@ class CourseController extends Controller
         $course->deleted_at= null;
         try {
             $course->save();
-            Session::flash('success','Khôi phục ' .$course->title . ' thành công');
+            Session::flash('success','Khôi phục ' .$course->title . 'thành công');
             return redirect()->route('courses.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());

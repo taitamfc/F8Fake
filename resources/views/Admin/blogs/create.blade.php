@@ -33,11 +33,6 @@
                                         @foreach ($users as $user )
                                             <option value="{{$user->id}}">{{$user->username}}</option>
                                         @endforeach
-                                        {{-- <select name="user_id" class="form-control " id="inputGroupSelect02">
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->username }}</option>
-                                            @endforeach
-                                        </select> --}}
                                        </select>
 
                                     </div>
@@ -178,10 +173,12 @@
                                             <p style="color:red">{{ $errors->first('is_bookmark') }}</p>
                                             @endif<!-- /.form-group -->
                                             <div class="form-group">
-                                                <label class="control-label" >phát hành</label>
+                                                <label class="control-label" >Lượng xuất bản</label>
                                                      <select class="form-control" name="is_published" id="">
                                                         <option value="0">0</option>
                                                         <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
                                                      </select>
                                             </div>@if ($errors->any())
                                             <p style="color:red">{{ $errors->first('is_published') }}</p>
