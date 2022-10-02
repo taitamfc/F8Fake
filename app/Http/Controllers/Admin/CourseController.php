@@ -23,6 +23,7 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Course::class);
         $key        = $request->key ?? '';
         $title      = $request->title ?? '';
         $id         = $request->id ?? '';
@@ -54,9 +55,9 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Course::class);
        $levels = Level::all()->where('deleted_at','=',null);
        return view('Admin.courses.create', compact('levels'));
-
     }
 
     /**
@@ -67,7 +68,23 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        // dd($request->is_completable);
+        if($request->is_completable==null){
+            $is_relatable = '0';
+        }else{
+            $is_relatable = '1';
+        }
+        if($request->is_coming_soon==null){
+            $is_coming_soon = '0';
+        }else{
+            $is_coming_soon = '1';
+        }
+        if($request->is_pro==null){
+            $is_pro = '0';
+        }else{
+            $is_pro = '1';
+        }
+        // dd($is_relatable);
+        $request->is_completable;
         $course= new Course();
         $course->level_id = $request->level_id;
         $course->title = $request->title;
@@ -85,9 +102,9 @@ class CourseController extends Controller
         $course->old_prive = $request->old_prive;
         $course->price = $request->price;
         $course->pre_order_price = $request->pre_order_price;
-        $course->is_relatable = $request->is_relatable;
-        $course->is_coming_soon = $request->is_coming_soon;
-        $course->is_pro = $request->is_pro;
+        $course->is_relatable = $is_relatable;
+        $course->is_coming_soon = $is_coming_soon;
+        $course->is_pro = $is_pro;
         $course->is_completable = $request->is_completable;
         $course->published_at = $request->published_at;
         if ($request->hasFile('image')) {
@@ -130,6 +147,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Course::class);
         $course = Course::find($id);
         $levels = Level::all()->where('deleted_at','=',null);
         return view('Admin.courses.edit', compact('levels','course'));
@@ -144,6 +162,21 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, $id)
     {
+        if($request->is_completable==null){
+            $is_relatable = '0';
+        }else{
+            $is_relatable = '1';
+        }
+        if($request->is_coming_soon==null){
+            $is_coming_soon = '0';
+        }else{
+            $is_coming_soon = '1';
+        }
+        if($request->is_pro==null){
+            $is_pro = '0';
+        }else{
+            $is_pro = '1';
+        }
         $course = Course::find($id);
         $course->level_id = $request->level_id;
         $course->title = $request->title;
@@ -161,9 +194,9 @@ class CourseController extends Controller
         $course->old_prive = $request->old_prive;
         $course->price = $request->price;
         $course->pre_order_price = $request->pre_order_price;
-        $course->is_relatable = $request->is_relatable;
-        $course->is_coming_soon = $request->is_coming_soon;
-        $course->is_pro = $request->is_pro;
+        $course->is_relatable = $is_relatable;
+        $course->is_coming_soon = $is_coming_soon;
+        $course->is_pro = $is_pro;
         $course->is_completable = $request->is_completable;
         $course->published_at = $request->published_at;
         if ($request->hasFile('image')) {
@@ -193,6 +226,7 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Course::class);
 
         try {
             Course::findOrFail($id)->delete();
@@ -206,6 +240,8 @@ class CourseController extends Controller
         }
     }
     function SoftDeletes($id){
+        $this->authorize('forceDelete', Course::class);
+
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $course = Course::findOrFail($id);
         $course->deleted_at= date("Y-m-d h:i:s");
@@ -221,6 +257,7 @@ class CourseController extends Controller
         }
     }
     function RestoreDelete($id){
+        $this->authorize('restore', Course::class);
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $course = Course::findOrFail($id);
         $course->deleted_at= null;

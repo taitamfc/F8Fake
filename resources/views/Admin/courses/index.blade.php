@@ -72,27 +72,27 @@
                                             type="submit">Tìm kiếm</button>
                                     </div>
                                 </div>
-                                    <!-- /.input-group -->
-                                    @include('Admin.courses.modals.modalCouseColumns')
-                                    @if (!count($courses))
-                                        <p class="text-success">
-                                        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                                            không tìm thấy.
-                                        </div>
-                                        </p>
-                                    @endif
-                                    @if (Session::has('success'))
-                                        <p class="text-success">
-                                        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                                            {{ Session::get('success') }}</div>
-                                        </p>
-                                    @endif
-                                    @if (Session::has('error'))
-                                        <p class="text-danger">
-                                        <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
-                                            {{ Session::get('error') }}</div>
-                                        </p>
-                                    @endif
+                                <!-- /.input-group -->
+                                @include('Admin.courses.modals.modalCouseColumns')
+                                @if (!count($courses))
+                                    <p class="text-success">
+                                    <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        không tìm thấy.
+                                    </div>
+                                    </p>
+                                @endif
+                                @if (Session::has('success'))
+                                    <p class="text-success">
+                                    <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ Session::get('success') }}</div>
+                                    </p>
+                                @endif
+                                @if (Session::has('error'))
+                                    <p class="text-danger">
+                                    <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ Session::get('error') }}</div>
+                                    </p>
+                                @endif
                             </form>
                         </div>
                     </div><!-- /.form-group -->
@@ -102,9 +102,8 @@
                             <tr>
                                 <th style="min-width:50px"> #</th>
                                 <th> Tiêu đề</th>
-                                <th> tên chứng chỉ</th>
-                                <Th> video</Th>
-                                <th> ảnh</th>
+                                <th> Tên chứng chỉ</th>
+                                <th> Ngày xuất bản</th>
                                 <th> Tùy chọn</th>
                             </tr>
                         </thead><!-- /thead -->
@@ -114,24 +113,24 @@
                                     <th scope="row">{{ $course->id }}</th>
                                     <td>{{ $course->title }}</td>
                                     <td>{{ $course->certificate_name }}</td>
-                                    <td><iframe width="270" height="150"
-                                            src="https://www.youtube.com/embed/{{ $course->video }}"
-                                            title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe></td>
-                                    <td><img src="{{ asset($course->image) }}" alt=""width="150" height="170">
-                                    </td>
+                                    <td>{{ $course->published_at }}</td>
+
                                     <td>
 
                                         <form action="{{ route('courses.SoftDeletes', $course->id) }}" method="post">
-                                            <a href="{{ route('courses.edit', $course->id) }}"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="fa fa-pencil-alt"></i></a>
+                                            @can('update', App\Models\Course::class)
+                                                <a href="{{ route('courses.edit', $course->id) }}"
+                                                    class="btn btn-sm btn-icon btn-secondary"><i
+                                                        class="fa fa-pencil-alt"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></button>
+                                            @can('forceDelete', App\Models\Course::class)
+                                                <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                    onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                        class="far fa-trash-alt"></i></button>
+                                            @endcan
+
                                         </form>
                                     </td>
                                 </tr>

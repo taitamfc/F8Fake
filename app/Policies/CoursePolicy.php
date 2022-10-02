@@ -18,7 +18,7 @@ class CoursePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('Course_viewAny');
     }
 
     /**
@@ -28,9 +28,9 @@ class CoursePolicy
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Course $course)
+    public function view(User $user)
     {
-        //
+        return $user->hasPermission('Group_viewAny');
     }
 
     /**
@@ -41,7 +41,8 @@ class CoursePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('Course_create');
+
     }
 
     /**
@@ -51,9 +52,10 @@ class CoursePolicy
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Course $course)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('Course_update');
+
     }
 
     /**
@@ -63,9 +65,10 @@ class CoursePolicy
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Course $course)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('Course_delete');
+
     }
 
     /**
@@ -75,8 +78,9 @@ class CoursePolicy
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Course $course)
+    public function restore(User $user)
     {
+        return $user->hasPermission('Course_restore');
         //
     }
 
@@ -87,8 +91,8 @@ class CoursePolicy
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Course $course)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('Course_forceDelete');
     }
 }

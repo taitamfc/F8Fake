@@ -256,9 +256,6 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nội dung tổng hơp<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                {{-- <textarea id="flatpickr01" name="compeleted_content" type="text"
-                                    class="form-control @error('compeleted_content') is-invalid @enderror" data-toggle="flatpickr"
-                                    style="width:850px; height:200px;">{{ old('compeleted_content') }}</textarea> --}}
                                 <textarea name="compeleted_content" class="form-control" value="{{ old('description') }}" id="ckeditor0"
                                     rows="5" style="resize: none"></textarea>
                                 @error('compeleted_content')
@@ -270,11 +267,13 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">Chuyên nghiệp<abbr
-                                                    name="Trường bắt buộc">*</abbr></label>
-                                            <br>
-                                            <input name="is_pro" type="radio" value="1" />True<br>
-                                            <input name="is_pro" type="radio" value="0" />False<br>
+                                            <label class="switcher-control">
+                                                <input type="checkbox"
+                                                name="is_pro"id="checkbox1" class="switcher-input" value="1" >
+                                                <span class="switcher-indicator"></span>
+                                            </label>
+                                            <label class="control-label" for="flatpickr01">Chuyên nghiệp</label>
+
                                             @error('is_pro')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -282,11 +281,12 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">Chuẩn bị ra mắt<abbr
-                                                    name="Trường bắt buộc">*</abbr></label><br>
-                                            <input name="is_coming_soon" type="radio" value="1" />True<br>
-                                            <input name="is_coming_soon" type="radio" value="0" />False<br>
-
+                                            <label class="switcher-control">
+                                                <input type="checkbox"
+                                                name="is_coming_soon"id="checkbox1" class="switcher-input" value="1" >
+                                                <span class="switcher-indicator"></span>
+                                            </label>
+                                            <label class="control-label" for="flatpickr01">Chuẩn bị ra mắt</label><br>
                                             @error('is_coming_soon')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -296,8 +296,7 @@
                                         <div class="form-group">
                                             <label class="switcher-control">
                                                 <input type="checkbox"
-                                                {{-- @checked( in_array($role['id'],$userRoles) ) --}}
-                                                name="is_completable"id="checkbox1" class="switcher-input" value="0" >
+                                                name="is_completable"id="checkbox1" class="switcher-input" value="1" >
                                                 <span class="switcher-indicator"></span>
                                             </label>
                                             <label class="control-label" for="flatpickr01"> Hoàn Thành </label>

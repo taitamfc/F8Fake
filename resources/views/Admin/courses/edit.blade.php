@@ -1,4 +1,5 @@
 @extends('Admin.master')
+@include('Admin.courses.slugs.slug')
 @section('content')
     <div class="page-inner">
         <header class="page-title-bar">
@@ -24,9 +25,9 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Tiêu đề<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="title" value="{{ old('title') ?? $course->title }}"
-                                    type="text" class="form-control @error('title') is-invalid @enderror"
-                                    data-toggle="flatpickr">
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $course->title }}"
+                                    onkeyup="ChangeToSlug();" name="title" id="slug" aria-describedby="emailHelp"
+                                    placeholder="">
                                 @error('title')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -47,9 +48,9 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Đường dẫn<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="slug" value="{{ old('slug') ?? $course->slug }}"
-                                    type="text" class="form-control @error('slug') is-invalid @enderror"
-                                    data-toggle="flatpickr">
+                                    <input type="text" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') ?? $course->slug }}"
+                                    onkeyup="ChangeToSlug();" name="slug" id="convert_slug" aria-describedby="emailHelp"
+                                    placeholder="">
                                 @error('slug')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -57,23 +58,13 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Mô tả<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="description"
-                                    value="{{ old('description') ?? $course->description }}" type="text"
-                                    class="form-control @error('description') is-invalid @enderror" data-toggle="flatpickr">
+                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}" id="ckeditor1" rows="5"
+                                    style="resize: none">{{ old('description') ?? $course->description }}"</textarea>
                                 @error('description')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Nội dung tổng hơp<abbr
-                                        name="Trường bắt buộc">*</abbr></label>
-                                <textarea id="flatpickr01" name="compeleted_content" type="text"
-                                    class="form-control @error('compeleted_content') is-invalid @enderror" data-toggle="flatpickr"
-                                    style="width:850px; height:200px;">{{ old('compeleted_content') ?? $course->compeleted_content }}</textarea>
-                                @error('compeleted_content')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                             <div class="card-body border-top">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -124,19 +115,9 @@
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Nội dung<abbr
                                         name="Trường bắt buộc">*</abbr></label>
-                                <textarea id="flatpickr01" name="content" type="text" class="form-control @error('content') is-invalid @enderror"
-                                    data-toggle="flatpickr" style="width:850px; height:200px;">{{ old('content') ?? $course->content }}</textarea>
+                                    <textarea name="content" class="form-control @error('content') is-invalid @enderror" value="{{ old('description') }}" id="ckeditor" rows="5"
+                                    style="resize: none">{{ old('content') ?? $course->content }}</textarea>
                                 @error('content')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tiêu đề<abbr
-                                        name="Trường bắt buộc">*</abbr></label>
-                                <input id="flatpickr01" name="title" value="{{ old('title') ?? $course->title }}"
-                                    type="text" class="form-control @error('title') is-invalid @enderror"
-                                    data-toggle="flatpickr">
-                                @error('title')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -272,8 +253,9 @@
                                         <div class="form-group">
                                             <label class="control-label" for="flatpickr01">Ngày xuất bản<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="published_at" type="date"
-                                                value="{{ old('published_at') ?? $course->published_at }}"
+                                            <input id="flatpickr01" name="published_at" type="text"
+                                                value="{{ old('published_at') ?? $course->published_at }}
+                                                {{-- value="{{ $course->published_at->format('D-m-y') }}" --}}
                                                 class="form-control @error('published_at') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('published_at ')
@@ -283,18 +265,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label" for="flatpickr01">Nội dung tổng hơp<abbr
+                                        name="Trường bắt buộc">*</abbr></label>
+
+                                    <textarea name="compeleted_content" class="form-control" value="{{ old('description') }}" id="ckeditor0"
+                                    rows="5" style="resize: none">{{ old('compeleted_content') ?? $course->compeleted_content }}</textarea>
+                                @error('compeleted_content')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="card-body border-top">
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">Chuyên nghiệp<abbr
-                                                    name="Trường bắt buộc">*</abbr></label>
-                                            <br>
-                                            <input name="is_pro" type="radio"
-                                                {{ $course->is_pro == 1 ? 'checked' : '' }} value="1" />True<br>
-                                            <input name="is_pro"
-                                                type="radio"{{ $course->is_pro == 0 ? 'checked' : '' }}
-                                                value="0" />False<br>
+                                            <label class="switcher-control">
+                                                <input type="checkbox" {{ $course->is_pro == 1 ? 'checked' : '' }}
+                                                name="is_pro"id="checkbox1" class="switcher-input" value="1" >
+                                                <span class="switcher-indicator"></span>
+                                            </label>
+                                            <label class="control-label" for="flatpickr01">Chuyên nghiệp</label>
 
                                             @error('is_pro')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -303,15 +294,12 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">Chuẩn bị ra mắt<abbr
-                                                    name="Trường bắt buộc">*</abbr></label><br>
-                                            <input name="is_coming_soon"
-                                                {{ $course->is_coming_soon == 1 ? 'checked' : '' }} type="radio"
-                                                value="1" />True<br>
-                                            <input name="is_coming_soon"
-                                                {{ $course->is_coming_soon == 0 ? 'checked' : '' }} type="radio"
-                                                value="0" />False<br>
-
+                                            <label class="switcher-control">
+                                                <input type="checkbox" {{ $course->is_coming_soon == 1 ? 'checked' : '' }}
+                                                name="is_coming_soon"id="checkbox1" class="switcher-input" value="1" >
+                                                <span class="switcher-indicator"></span>
+                                            </label>
+                                            <label class="control-label" for="flatpickr01">Chuẩn bị ra mắt</label><br>
                                             @error('is_coming_soon')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -319,14 +307,12 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label" for="flatpickr01">Hoàn Thành:<abbr
-                                                    name="Trường bắt buộc">*</abbr></label>
-                                            <br>
-                                            <input name="is_completable"{{ $course->is_completable == 1 ? 'checked' : '' }}
-                                                type="radio" value="1" />True<br>
-                                            <input name="is_completable"{{ $course->is_completable == 0 ? 'checked' : '' }}
-                                                type="radio" value="0" />False<br>
-
+                                            <label class="switcher-control">
+                                                <input type="checkbox" {{ $course->is_completable == 1 ? 'checked' : '' }}
+                                                name="is_completable"id="checkbox1" class="switcher-input" value="1" >
+                                                <span class="switcher-indicator"></span>
+                                            </label>
+                                            <label class="control-label" for="flatpickr01"> Hoàn Thành </label>
                                             @error('is_completable')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror

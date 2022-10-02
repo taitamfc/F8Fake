@@ -42,9 +42,6 @@ class StoreCourseRequest extends FormRequest
             'price'             => 'required',
             'pre_order_price'   => 'required',
             'is_relatable'      => 'required',
-            'is_coming_soon'    => 'required',
-            'is_pro'            => 'required',
-            'is_completable'    => 'required',
             'published_at'      => 'required',
         ];
     }
