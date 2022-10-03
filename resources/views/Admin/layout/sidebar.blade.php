@@ -79,33 +79,36 @@
 
                     </li><!-- /.menu-item -->
                     <!-- .menu-item -->
-                    <li class="menu-item has-child">
-                        <a href="{{ route('levels.index') }}" class="menu-link"><span
-                                class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Cấp Độ</span></a>
-
-                    </li><!-- /.menu-item -->
+                    @can('viewAny', App\Models\Level::class)
+                        <li class="menu-item has-child">
+                            <a href="{{ route('levels.index') }}" class="menu-link"><span
+                                    class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Cấp Độ</span></a>
+                        </li><!-- /.menu-item -->
+                    @endcan
                     <!-- .menu-item -->
                     <li class="menu-item has-child">
-                        <a href="{{ route('blogs.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">Bài Viết</span></a>
+                        <a href="{{ route('blogs.index') }}" class="menu-link"><span
+                                class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Bài Viết</span></a>
                     </li>
                     <li class="menu-item has-child">
-                        <a href="{{ route('comments.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">Bình Luận</span></a>
+                        <a href="{{ route('comments.index') }}" class="menu-link"><span
+                                class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Bình Luận</span></a>
                     </li>
                     <li class="menu-item has-child">
-                        <a href="{{ route('banners.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">Ảnh Bìa</span></a>
+                        <a href="{{ route('banners.index') }}" class="menu-link"><span
+                                class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Ảnh Bìa</span></a>
                     </li>
                     <li class="menu-item has-child">
-                        <a href="{{ route('WillLearns.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">will learns</span></a>
+                        <a href="{{ route('WillLearns.index') }}" class="menu-link"><span
+                                class="menu-icon oi oi-list-rich"></span> <span class="menu-text">will
+                                learns</span></a>
                     </li>
                     <li class="menu-item has-child">
-                        <a href="{{ route('requirements.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
+                        <a href="{{ route('requirements.index') }}" class="menu-link"><span
+                                class="menu-icon oi oi-list-rich"></span> <span
                                 class="menu-text">Requirement</span></a>
                     </li>
-                    
+
                 </ul>
             </nav>
         </div>

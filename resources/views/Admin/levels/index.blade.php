@@ -18,10 +18,12 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Danh sách các cấp độ </h1>
                 <div class="btn-toolbar">
-                    <a href="{{ route('levels.create') }}" class="btn btn-primary mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm Mới</span>
-                    </a>
+                    @can('create', App\Models\Level::class)
+                        <a href="{{ route('levels.create') }}" class="btn btn-primary mr-2">
+                            <i class="fa-solid fa fa-plus"></i>
+                            <span class="ml-1">Thêm Mới</span>
+                        </a>
+                    @endcan
                     <a href="{{ route('levels.export-levels') }}" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
@@ -114,14 +116,18 @@
                                     <td>{{ $level->title }}</td>
                                     <td>
                                         <form action="{{ route('levels.SoftDeletes', $level->id) }}" method="post">
+                    @can('update', App\Models\Level::class)
                                             <a href="{{ route('levels.edit', $level->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="fa fa-pencil-alt"></i></a>
+                                                    @endcan
                                             @csrf
                                             @method('PUT')
+                    @can('forceDelete', App\Models\Level::class)
                                             <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                                 onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                     class="far fa-trash-alt"></i></button>
+                                                    @endcan
                                         </form>
                                     </td>
                                 </tr>

@@ -113,22 +113,33 @@
                                     <th scope="row">{{ $level->id }}</th>
                                     <td>{{ $level->title }}</td>
                                     <td>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-1">
+                                                    @can('delete', App\Models\Level::class)
+                                                        <form action="{{ route('levels.destroy', $level->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                    class="far fa-trash-alt"></i></button>
+                                                        </form>
+                                                    @endcan
+                                                </div>
+                                                <div class="col-1">
+                                                    @can('restore', App\Models\Level::class)
+                                                        <form action="{{ route('levels.RestoreDelete', $level->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                                    class="bi bi-arrow-counterclockwise"></i></button>
+                                                        </form>
+                                                    @endcan
 
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('levels.destroy', $level->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                        </form>
-                                        <form action="{{ route('levels.RestoreDelete', $level->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="bi bi-arrow-counterclockwise"></i></button>
-                                        </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
