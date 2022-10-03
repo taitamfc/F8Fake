@@ -22,11 +22,13 @@ class WillLearnController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', WillLearn::class);
+
+        $courses = Course::all();
         $key        = $request->key ?? '';
         $content      = $request->content ?? '';
         $id         = $request->id ?? '';
         $course_id         = $request->course_id ?? '';
-
         $query = WillLearn::query(true);
         if ($content) {
             $query->where('content', 'LIKE', '%' . $content . '%')->where('deleted_at', '=', null);
@@ -44,10 +46,11 @@ class WillLearnController extends Controller
         }
         $WillLearns = $query->where('deleted_at', '=', null)->paginate(5);
         $params = [
-            'f_id'        => $id,
+            'f_id'          => $id,
             'f_content'     => $content,
-            'f_key'       => $key,
-            'f_course_id'       => $course_id,
+            'f_key'         => $key,
+            'f_course_id'   => $course_id,
+            'f_courses'       => $courses,
             'WillLearns'    => $WillLearns,
         ];
         return view('Admin.will_learns.index', $params);
@@ -55,6 +58,8 @@ class WillLearnController extends Controller
 
     public function create()
     {
+        $this->authorize('create', WillLearn::class);
+
         $courses = Course::all()->where('deleted_at','=',null);
         return view('Admin.will_learns.create', compact('courses'));
     }
@@ -65,10 +70,10 @@ class WillLearnController extends Controller
         $WillLearns->content = $request->content;
         try {
             $WillLearns->save();
-            return redirect()->route('WillLearns.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' mới thành công');
+            return redirect()->route('Will-learns.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' mới thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->route('WillLearns.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('Will-learns.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
     public function show($id)
@@ -77,9 +82,10 @@ class WillLearnController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('update', WillLearn::class);
         $courses = Course::all()->where('deleted_at','=',null);
         $WillLearn =  WillLearn::find($id);
-        return view('Admin.will-learns.edit', compact('courses', 'WillLearn'));
+        return view('Admin.will_learns.edit', compact('courses', 'WillLearn'));
     }
     public function update(Request $request, $id)
     {
@@ -88,63 +94,68 @@ class WillLearnController extends Controller
         $WillLearn->content = $request->content;
         try {
             $WillLearn->save();
-            return redirect()->route('WillLearns.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' mới thành công');
+            return redirect()->route('Will-learns.index')->with('success', 'Thêm' . ' ' . $request->content . ' ' .  ' mới thành công');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('error', 'cập nhật thất bại');
-            return redirect()->route('WillLearns.index')->with('error', 'cập nhật' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('Will-learns.index')->with('error', 'cập nhật' . ' ' . $request->title . ' ' .  ' mới không thành công');
         }
     }
 
     public function destroy($id)
     {
+        $this->authorize('delete', WillLearn::class);
         try {
             WillLearn::findOrFail($id)->delete();
             Session::flash('success', 'Xóa thanh công');
-            return redirect()->route('WillLearns.trash');
+            return redirect()->route('Will-learns.trash');
         } catch (\Exception $e) {
 
             Log::error($e->getMessage());
             Session::flash('error', 'xóa thất bại ');
-            return redirect()->route('WillLearns.trash')->with('error', 'xóa không thành công');
+            return redirect()->route('Will-learns.trash')->with('error', 'xóa không thành công');
         }
     }
 
     function SoftDeletes($id)
     {
+        $this->authorize('forceDelete', WillLearn::class);
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $course = WillLearn::findOrFail($id);
         $course->deleted_at = date("Y-m-d h:i:s");
         try {
             $course->save();
             Session::flash('success', 'Xóa Thành công');
-            return redirect()->route('WillLearns.index');
+            return redirect()->route('Will-learns.index');
         } catch (\Exception $e) {
 
             Log::error($e->getMessage());
             Session::flash('error', 'xóa thất bại ');
-            return redirect()->route('WillLearns.index')->with('error', 'xóa không thành công');
+            return redirect()->route('Will-learns.index')->with('error', 'xóa không thành công');
         }
     }
 
     function RestoreDelete($id)
     {
+        $this->authorize('restore', WillLearn::class);
+
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $WillLearn = WillLearn::findOrFail($id);
         $WillLearn->deleted_at = null;
         try {
             $WillLearn->save();
             Session::flash('success', 'Khôi phục ' . $WillLearn->title . ' thành công');
-            return redirect()->route('WillLearns.trash');
+            return redirect()->route('Will-learns.trash');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             Session::flash('error', 'xóa thất bại ');
-            return redirect()->route('WillLearns.trash')->with('error', 'xóa không thành công');
+            return redirect()->route('Will-learns.trash')->with('error', 'xóa không thành công');
         }
     }
 
     function trash(Request $request)
     {
+        $courses = Course::all();
         $key        = $request->key ?? '';
         $content      = $request->content ?? '';
         $id         = $request->id ?? '';
@@ -171,8 +182,9 @@ class WillLearnController extends Controller
             'f_key'       => $key,
             'f_course_id'       => $course_id,
             'WillLearns'    => $WillLearns,
+            'f_courses'       => $courses,
         ];
-        return view('Admin.will-learns.trash', $params);
+        return view('Admin.will_learns.trash', $params);
     }
     public function exportWillLearn(Request $request){
         date_default_timezone_set("Asia/Ho_Chi_Minh");

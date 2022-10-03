@@ -6,11 +6,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
-                        <a href="{{route('levels.index')}}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Cấp độ</a>
+                        <a href="{{route('Will-learns.index')}}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Các bài học</a>
                     </li>
                 </ol>
             </nav>
-            <h1 class="page-title"> Thêm cấp độ </h1>
+            <h1 class="page-title"> Thêm bài học</h1>
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">
@@ -21,10 +21,10 @@
                         {{-- <h4 class="card-title"> Flatpickr </h4>
                         <h6 class="card-subtitle mb-4"> Lightweight and powerful datetimepicker with no dependencies. </h6> --}}
                         <!-- form -->
-                        <form action="{{ route('WillLearns.store') }}" method="post" enctype="multipart/form">
+                        <form action="{{ route('Will-learns.store') }}" method="post" enctype="multipart/form">
                             @csrf
                              <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Tên cấp độ<abbr name="Trường bắt buộc">*</abbr></label>
+                                <label class="control-label" for="flatpickr01">Tên Bài học<abbr name="Trường bắt buộc">*</abbr></label>
                                 <input id="flatpickr01" name="content" value="{{ old('content') }}" type="text" class="form-control @error('content') is-invalid @enderror"
                                     data-toggle="flatpickr">
                                 @error('content')
@@ -32,8 +32,7 @@
                                 @enderror
                             </div><!-- /.form-group -->
                             <div class="form-group col-lg-3">
-                                <label class="control-label" for="flatpickr01">CouRses<abbr name="Trường bắt buộc">*</abbr></label>
-
+                                <label class="control-label" for="flatpickr01">Khóa học<abbr name="Trường bắt buộc">*</abbr></label>
                                     <select name="course_id" id="" class="form-control @error('course_id') is-invalid @enderror">
                                         <option value="">--Vui lòng chọn--</option>
                                         @foreach ($courses as $course)
@@ -46,7 +45,7 @@
                             </div>
 
                             <div class="form-group">
-                                <a class="btn btn-secondary float-left" href="{{route('levels.index')}}">Hủy</a>
+                                <a class="btn btn-secondary float-left" href="{{route('Will-learns.index')}}">Hủy</a>
                                 <button class="btn btn-primary float-right" type="submit">Lưu</button>
                             </div>
                         </form><!-- /form -->
