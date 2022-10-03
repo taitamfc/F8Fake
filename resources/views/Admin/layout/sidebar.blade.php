@@ -56,11 +56,12 @@
 
                     <li class="menu-header">HỌC</li><!-- /.menu-header -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\Course::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('courses.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-puzzle-piece"></span> <span class="menu-text">Khóa Học</span></a>
-
                     </li>
+                    @endcan
                     <li class="menu-item has-child">
                         <a href="{{ route('steps.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-puzzle-piece"></span> <span class="menu-text">Lộ Trình</span></a>

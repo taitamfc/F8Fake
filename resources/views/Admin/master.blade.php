@@ -15,6 +15,9 @@
     <meta property="og:url" content="https://uselooper.com">
     <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
     <script type="application/ld+json">
+
+
+
       {
         "name": "Looper - Bootstrap 4 Admin Theme",
         "description": "Responsive admin theme build on top of Bootstrap 4",

@@ -49,50 +49,53 @@
                 <!-- .card-body -->
                 <div class="card-body">
                     <!-- .form-group -->
-                    <div class="form-group">
-                        <!-- .input-group -->
-                        <!-- /.input-group -->
-                        <form action="" method="GET" id="form-search">
-                            <!-- .nav-tabs -->
-                            <div class="input-group input-group-alt">
-                                <!-- .input-group-prepend -->
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
-                                        data-target="#modalFilterColumns">Tìm nâng cao</button>
-                                </div><!-- /.input-group-prepend -->
-                                <!-- .input-group -->
-                                <div class="input-group">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <!-- .input-group -->
+                            <!-- /.input-group -->
+                            <form action="" method="GET" id="form-search">
+                                <!-- .nav-tabs -->
+                                <div class="input-group input-group-alt">
+                                    <!-- .input-group-prepend -->
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                    </div><input type="text" class="form-control" name='key'
-                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)"value="{{ $f_key }}">
+                                        <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                            data-target="#modalFilterColumns">Tìm nâng cao</button>
+                                    </div><!-- /.input-group-prepend -->
+                                    <!-- .input-group -->
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span
+                                                    class="oi oi-magnifying-glass"></span></span>
+                                        </div><input type="text" class="form-control" name='key'
+                                            placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)"value="{{ $f_key }}">
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
+                                            type="submit">Tìm kiếm</button>
+                                    </div><!-- /.input-group -->
+                                    @include('Admin.courses.modals.modalCouseColumns')
                                 </div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
-                                        type="submit">Tìm kiếm</button>
-                                </div><!-- /.input-group -->
-                            </div>
-                            @include('Admin.courses.modals.modalCouseColumns')
-                            @if (!count($courses))
-                                <p class="text-success">
-                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                                    không tìm thấy.
-                                </div>
-                                </p>
-                            @endif
-                            @if (Session::has('success'))
-                                <p class="text-success">
-                                <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                                    {{ Session::get('success') }}</div>
-                                </p>
-                            @endif
-                            @if (Session::has('error'))
-                                <p class="text-danger">
-                                <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
-                                    {{ Session::get('error') }}</div>
-                                </p>
-                            @endif
-                        </form>
+                                @if (!count($courses))
+                                    <p class="text-success">
+                                    <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        không tìm thấy.
+                                    </div>
+                                    </p>
+                                @endif
+                                @if (Session::has('success'))
+                                    <p class="text-success">
+                                    <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ Session::get('success') }}</div>
+                                    </p>
+                                @endif
+                                @if (Session::has('error'))
+                                    <p class="text-danger">
+                                    <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ Session::get('error') }}</div>
+                                    </p>
+                                @endif
+                            </form>
+                        </div>
                     </div><!-- /.form-group -->
                     <table class="table table-hover">
                         <!-- thead -->
@@ -101,8 +104,7 @@
                                 <th style="min-width:50px"> #</th>
                                 <th> Tiêu đề</th>
                                 <th> tên chứng chỉ</th>
-                                <Th> video</Th>
-                                <th> ảnh</th>
+                                <th> Ngày xuất bản</th>
                                 <th> Tùy chọn</th>
                             </tr>
                         </thead><!-- /thead -->
@@ -112,29 +114,36 @@
                                     <th scope="row">{{ $course->id }}</th>
                                     <td>{{ $course->title }}</td>
                                     <td>{{ $course->certificate_name }}</td>
-                                    <td><iframe width="270" height="150"
-                                            src="https://www.youtube.com/embed/{{ $course->video }}"
-                                            title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe></td>
-                                    <td><img src="{{ asset($course->image) }}" alt=""width="150" height="170">
-                                    </td>
+                                    <td>{{ $course->published_at }}</td>
                                     <td>
-                                        <form action="{{ route('courses.destroy', $course->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                        </form>
-                                        <form action="{{ route('courses.RestoreDelete', $course->id) }}" method="post">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <form action="{{ route('courses.destroy', $course->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        @can('delete', App\Models\Course::class)
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                    class="far fa-trash-alt"></i></button>
+                                                        @endcan
+                                                    </form>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form action="{{ route('courses.RestoreDelete', $course->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        @can('restore', App\Models\Course::class)
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                                    class="bi bi-arrow-counterclockwise"></i></button>
+                                                        @endcan
 
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                               ><i
-                                                    class="bi bi-arrow-counterclockwise"></i></button>
-                                        </form>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
