@@ -38,26 +38,17 @@
                                     data-toggle="flatpickr">
                             </div>
                             <!-- .form-group -->
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Mô tả</label> <input id="flatpickr01"
-                                    type="text" name="description" value="{{ $steps->description }}"
-                                    class="form-control " data-toggle="flatpickr">
-                            </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Video</label>
-                                        <select class="form-select @error('video') @enderror" name="video"
-                                            aria-label="Default select example">
-                                            <option value="0" {{ old('video') == 0 ? 'selected' : '' }} disabled
-                                                selected>
-                                                Vui lòng chọn</option>
-                                            <option value="Youtube" {{ old('video') == 'Youtube' ? 'selected' : '' }}>
+                                        <select class="form-select" name="video" aria-label="Default select example">
+                                            <option value="Youtube" {{ $steps->video == 'Youtube' ? 'selected' : '' }}>
                                                 Youtube
                                             </option>
-                                            <option value="Facebook" {{ old('video') == 'Facebook' ? 'selected' : '' }}>
+                                            <option value="Facebook" {{ $steps->video == 'Facebook' ? 'selected' : '' }}>
                                                 Facebook</option>
-                                            <option value="Facebook" {{ old('video') == 'Tiktok' ? 'selected' : '' }}>
+                                            <option value="Facebook" {{ $steps->video == 'Tiktok' ? 'selected' : '' }}>
                                                 Tiktok
                                             </option>
                                         </select>
@@ -66,23 +57,22 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Loại video</label>
+                                        {{-- {{ $course->id == $WillLearn->course_id ? 'selected':''}} --}}
                                         <select class="form-select @error('video_type') @enderror" name="video_type"
                                             aria-label="Default select example">
-                                            <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled
-                                                selected>
-                                                Vui
-                                                lòng chọn</option>
-                                            <option value="1080p" {{ old('video_type') == '1080p' ? 'selected' : '' }}>
+                                            <option value="1080p" {{ $steps->video_type == '1080p' ? 'selected' : '' }}>
                                                 1080p</option>
-                                            <option value="720p" {{ old('video_type') == '720p' ? 'selected' : '' }}>720p
+                                            <option value="720p" {{ $steps->video_type == '720p' ? 'selected' : '' }}>720p
                                             </option>
-                                            <option value="480p" {{ old('video_type') == '480p' ? 'selected' : '' }}>480p
+                                            <option value="480p" {{ $steps->video_type == '480p' ? 'selected' : '' }}>480p
                                             </option>
-                                            <option value="360p" {{ old('video_type') == '360p' ? 'selected' : '' }}>360p
+                                            <option value="360p" {{ $steps->video_type == '360p' ? 'selected' : '' }}>360p
                                             </option>
-                                            <option value="240p" {{ old('video_type') == '240p' ? 'selected' : '' }}>240p
+                                            <option value="240p" {{ $steps->video_type == '240p' ? 'selected' : '' }}>
+                                                240p
                                             </option>
-                                            <option value="144p" {{ old('video_type') == '144p' ? 'selected' : '' }}>144p
+                                            <option value="144p" {{ $steps->video_type == '144p' ? 'selected' : '' }}>
+                                                144p
                                             </option>
                                         </select>
                                     </div>
@@ -92,7 +82,7 @@
                                     <div class="form-group">
                                         <label class="control-label" for="flatpickr01">Thời gian</label> <input
                                             id="flatpickr01" type="datetime-local" name="duration"
-                                            value="{!! old('duration') !!}"
+                                            value="{{ $steps->duration }}"
                                             class="form-control @error('duration') @enderror" data-toggle="flatpickr">
                                     </div>
                                 </div>
@@ -121,6 +111,14 @@
                                 <label class="control-label" for="flatpickr01">Liên kết
                                     video</label> <input id="flatpickr01" type="text" name="video_url"
                                     value="{{ $steps->video_url }}" class="form-control " data-toggle="flatpickr">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="flatpickr01">Mô tả</label>
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror"
+                                    value="{{ old('description') }}" id="ckeditor1" rows="5" style="resize: none">{{ old('description') ?? $steps->description }}"</textarea>
+                                @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <a class="btn btn-secondary float-left" href="{{ route('steps.index') }}">Hủy</a>
