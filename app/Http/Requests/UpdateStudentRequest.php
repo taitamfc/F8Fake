@@ -27,7 +27,6 @@ class UpdateStudentRequest extends FormRequest
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'image' => 'required'
         ];
     }
     public function messages()
@@ -36,7 +35,6 @@ class UpdateStudentRequest extends FormRequest
             'name.required' => 'Vui lòng nhập tên',
             'email.required' => 'Vui lòng nhập email',
             'password.required' => 'Vui lòng nhập mật khẩu',
-            'image.required' => 'Vui lòng thêm ảnh'
         ];
     }
 }

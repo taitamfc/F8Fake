@@ -9,13 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Banner extends Model
 {
     use HasFactory;
+    protected $fillable = ['placement'];
     protected $table = 'banners';
-
-    public function scopeSearch($query)
-    {
-        if ($key = request()->key) {
-            $query = $query->where('title', 'like', '%' . $key . '%');
-        }
-        return $query;
-    }
 }

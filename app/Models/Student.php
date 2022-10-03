@@ -13,11 +13,5 @@ class Student extends Model
         return $this->belongsToMany(Course::class );
     }
 
-    public function scopeSearch($query)
-    {
-        if ($key = request()->key) {
-            $query = $query->where('name', 'like', '%' . $key . '%');
-        }
-        return $query;
-    }
+    
 }
