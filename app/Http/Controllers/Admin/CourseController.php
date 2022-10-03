@@ -69,9 +69,9 @@ class CourseController extends Controller
     public function store(StoreCourseRequest $request)
     {
         if($request->is_completable==null){
-            $is_relatable = '0';
+            $is_completable = '0';
         }else{
-            $is_relatable = '1';
+            $is_completable = '1';
         }
         if($request->is_coming_soon==null){
             $is_coming_soon = '0';
@@ -101,10 +101,10 @@ class CourseController extends Controller
         $course->old_prive = $request->old_prive;
         $course->price = $request->price;
         $course->pre_order_price = $request->pre_order_price;
-        $course->is_relatable = $is_relatable;
+        $course->is_relatable = $request->is_relatable;
         $course->is_coming_soon = $is_coming_soon;
         $course->is_pro = $is_pro;
-        $course->is_completable = $request->is_completable;
+        $course->is_completable = $is_completable;
         $course->published_at = $request->published_at;
         if ($request->hasFile('image')) {
             $file = $request->image;
@@ -162,9 +162,9 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, $id)
     {
         if($request->is_completable==null){
-            $is_relatable = '0';
+            $is_completable = '0';
         }else{
-            $is_relatable = '1';
+            $is_completable = '1';
         }
         if($request->is_coming_soon==null){
             $is_coming_soon = '0';
@@ -194,10 +194,10 @@ class CourseController extends Controller
         $course->old_prive = $request->old_prive;
         $course->price = $request->price;
         $course->pre_order_price = $request->pre_order_price;
-        $course->is_relatable = $is_relatable;
+        $course->is_relatable = $request->is_relatable;
         $course->is_coming_soon = $is_coming_soon;
         $course->is_pro = $is_pro;
-        $course->is_completable = $request->is_completable;
+        $course->is_completable = $is_completable;
         $course->published_at = $request->published_at;
         if ($request->hasFile('image')) {
             $file = $request->image;
