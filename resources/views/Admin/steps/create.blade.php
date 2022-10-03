@@ -40,14 +40,6 @@
                                     <div style="color: red">*{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Mô tả</label> <input id="flatpickr01"
-                                    type="text" name="description" class="form-control @error('description') @enderror"
-                                    data-toggle="flatpickr" placeholder="Nhập mô tả" value="{!! old('description') !!}">
-                                @error('description')
-                                    <div style="color: red">*{{ $message }}</div>
-                                @enderror
-                            </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -133,10 +125,10 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Liên kết ảnh</label> <input
-                                    id="flatpickr01" type="text" name="image_url"
-                                    class="form-control @error('image_url') @enderror" data-toggle="flatpickr"
-                                    placeholder="Nhập liên kết ảnh" value="{!! old('image_url') !!}">
+                                <label class="control-label" for="flatpickr01">Liên kết ảnh</label> <input id="flatpickr01"
+                                    type="text" name="image_url" class="form-control @error('image_url') @enderror"
+                                    data-toggle="flatpickr" placeholder="Nhập liên kết ảnh"
+                                    value="{!! old('image_url') !!}">
                                 @error('image_url')
                                     <div style="color: red">*{{ $message }}</div>
                                 @enderror
@@ -151,9 +143,18 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label class="control-label" for="flatpickr01">Mô tả</label>
+                                <textarea name="description" class="form-control @error('description') is-invalid @enderror"
+                                    value="{{ old('description') }}" id="ckeditor1" rows="5" style="resize: none"></textarea>
+                                @error('description')
+                                    <div style="color: red">*{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <a class="btn btn-secondary float-left" href="{{ route('steps.index') }}">Hủy</a>
                                 <button class="btn btn-info float-right" type="submit">Lưu</button>
                             </div>
+
                         </form><!-- /form -->
                     </div><!-- /.card-body -->
                 </div><!-- /.card -->

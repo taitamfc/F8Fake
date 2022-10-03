@@ -120,7 +120,7 @@
                                         <th scope="row">{{ $step->id }}</th>
                                         <td>{{ $step->title }}</td>
                                         <td>{{ $step->content }}</td>
-                                        <td>{{ $step->description }}</td>
+                                        <td>{!! $step->description !!}</td>
                                         {{-- <td>{{ $step->duration }}</td> --}}
                                         {{-- <td>{{ $step->video_type }}</td> --}}
                                         <td>{{ $step->original_name }}</td>
