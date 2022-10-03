@@ -18,6 +18,27 @@ class CommentSeeder extends Seeder
         DB::table('comments')->insert([
 
             [
+<<<<<<< HEAD
+                'user_id' => 1,
+                'commentstable_type' => 'Lộ trình học Front-end',
+                'comment' => 'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
+                'is_approved' => true,
+                'course_id' => 1,
+            ],
+            [
+                'user_id' => 1,
+                'commentstable_type' => 'Lộ trình học Front-end',
+                'comment' => 'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
+                'is_approved' => true,
+                'course_id' => 1,
+            ],
+            [
+                'user_id' => 1,
+                'commentstable_type' => 'Lộ trình học Front-end',
+                'comment' => 'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
+                'is_approved' => true,
+                'course_id' => 1,
+=======
                 'user_id'=> 1,
                 'commentstable_type'=>'Lộ trình học Front-end',
                 'comment'=>'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
@@ -37,6 +58,7 @@ class CommentSeeder extends Seeder
                 'comment'=>'tại sao lại phải tạo ra mô hình clan sever trong khi nếu suy nghĩ theo cách đơn giản thì truy cập trực tiết vào một sever thì có phải là tốc độ sử lý sẽ nhanh hơn nhiều không ạ',
                 'is_approved'=>true,
                 'course_id'=>15,
+>>>>>>> f9628a96d0bd210e88ee536e66290e033436c7f8
             ]
 
 

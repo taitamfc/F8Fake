@@ -37,7 +37,6 @@ return new class extends Migration
             $table->boolean('is_pro');
             $table->boolean('is_completable');
             $table->datetime('published_at');
-            $table->string('delete_at');
             $table->timestamps();
         });
     }
