@@ -18,6 +18,8 @@ class BlogController extends Controller
         $blogs = Blog::all();
         $users = User::all();
         // dd($users);
+        $this->authorize('viewAny', Blog::class);
+
         $key        = $request->key ?? '';
         $user_id      = $request->user_id ?? '';
         $title      = $request->title ?? '';
@@ -47,7 +49,7 @@ class BlogController extends Controller
             'f_user_id' => $user_id,
             'f_title'     => $title,
             'f_key'       => $key,
-            'f_user'       => $users,
+            'f_users'       => $users,
 
             'blogs'    => $blogs,
         ];
@@ -56,6 +58,8 @@ class BlogController extends Controller
     }
     public function create()
     {
+        $this->authorize('create', Blog::class);
+
         $blogs = Blog::all();
         $users = User::all();
 
@@ -103,8 +107,10 @@ class BlogController extends Controller
 
     public function edit($id)
     {
+
         $blogs = Blog::findOrFail($id);
         $users = User::get();
+        $this->authorize('update', Blog::class);
         // dd($blog);
         return view('Admin.blogs.edit', compact('blogs','users'));
     }
@@ -131,7 +137,7 @@ class BlogController extends Controller
         $blog->is_bookmark = $request->is_bookmark;
         $blog->is_published = $request->is_published;
         $blog->image = $request->image;
-        $blog->comments_count = $request->comments_count;
+
 
         try {
             $blog->save();
@@ -148,6 +154,7 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $blogs = Blog::find($id);
+        $this->authorize('delete', Blog::class);
         // dd($id);
         try {
             $blogs->delete();
@@ -161,7 +168,7 @@ class BlogController extends Controller
     {
 
         $blogs = Blog::withTrashed()->find($id);
-
+        $this->authorize('force_destroy',Blog::class);
         try {
             $blogs->forceDelete();
             return redirect()->route('blogs.trash')->with('success', 'Xóa thành công');
@@ -175,6 +182,7 @@ class BlogController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $blogs = Blog::findOrFail($id);
+        $this->authorize('force_destroy',Blog::class);
         $blogs->deleted_at = date("Y-m-d h:i:s");
         try {
             $blogs->save();
@@ -191,6 +199,7 @@ class BlogController extends Controller
     function RestoreDelete($id)
     {
         $blogs = Blog::withTrashed()->find($id);
+        $this->authorize('restore',Blog::class);
         $blogs->deleted_at = null;
         try {
             $blogs->save();

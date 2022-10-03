@@ -209,10 +209,11 @@
 
 
                             <div class="form-group">
-                               image
-                                <input
-                                     type="file" name="image" class="form-control"
-                                   >
+                                <label class="control-label" for="flatpickr01">Ảnh</label><br>
+                                <input accept="image/*" type='file' id="inputFile" name="image" /><br>
+                                <br>
+                                <img type="hidden" width="90px" height="90px" id="blah" src="#"
+                                    alt="" />
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('image') }}</p>
