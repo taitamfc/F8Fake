@@ -51,36 +51,6 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Loại video</label>
-                                        <select class="form-select @error('video_type') @enderror" name="video_type"
-                                            aria-label="Default select example">
-                                            <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled
-                                                selected>
-                                                Vui
-                                                lòng chọn</option>
-                                            <option value="1080p" {{ old('video_type') == '1080p' ? 'selected' : '' }}>
-                                                1080p</option>
-                                            <option value="720p" {{ old('video_type') == '720p' ? 'selected' : '' }}>720p
-                                            </option>
-                                            <option value="480p" {{ old('video_type') == '480p' ? 'selected' : '' }}>480p
-                                            </option>
-                                            <option value="360p" {{ old('video_type') == '360p' ? 'selected' : '' }}>360p
-                                            </option>
-                                            <option value="240p" {{ old('video_type') == '240p' ? 'selected' : '' }}>240p
-                                            </option>
-                                            <option value="144p" {{ old('video_type') == '144p' ? 'selected' : '' }}>144p
-                                            </option>
-                                            {{-- @foreach ($steps as $step)
-                                        <option value="">{{ $step->video_type }}>{{ $step->name }}</option>
-                                    @endforeach --}}
-                                        </select>
-                                        @error('video_type')
-                                            <div style="color: red">*{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
                                         <label>Video</label>
                                         <select class="form-select @error('video') @enderror" name="video"
                                             aria-label="Default select example">
@@ -100,6 +70,33 @@
                                         @endforeach --}}
                                         </select>
                                         @error('video')
+                                            <div style="color: red">*{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Loại video</label>
+                                        <select class="form-select @error('video_type') @enderror" name="video_type"
+                                            aria-label="Default select example">
+                                            <option value="0" {{ old('video_type') == 0 ? 'selected' : '' }} disabled
+                                                selected>
+                                                Vui
+                                                lòng chọn</option>
+                                            <option value="1080p" {{ old('video_type') == '1080p' ? 'selected' : '' }}>
+                                                1080p</option>
+                                            <option value="720p" {{ old('video_type') == '720p' ? 'selected' : '' }}>720p
+                                            </option>
+                                            <option value="480p" {{ old('video_type') == '480p' ? 'selected' : '' }}>480p
+                                            </option>
+                                            <option value="360p" {{ old('video_type') == '360p' ? 'selected' : '' }}>360p
+                                            </option>
+                                            <option value="240p" {{ old('video_type') == '240p' ? 'selected' : '' }}>240p
+                                            </option>
+                                            <option value="144p" {{ old('video_type') == '144p' ? 'selected' : '' }}>144p
+                                            </option>
+                                        </select>
+                                        @error('video_type')
                                             <div style="color: red">*{{ $message }}</div>
                                         @enderror
                                     </div>
