@@ -98,7 +98,7 @@
                             <tr>
                                 <th style="min-width:50px"> #</th>
                                 <th> Ảnh Đại Diện </th>
-                                <th> Tên Sinh Viên </th>
+                                <th> Tên Nhân Viên </th>
                                 <th> Email </th>
                                 <th> Tùy Chọn </th>
                             </tr>
