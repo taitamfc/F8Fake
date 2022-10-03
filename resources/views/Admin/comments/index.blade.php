@@ -64,7 +64,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                 </div>
-                                <input type="text" class="form-control" name="key" value="{{$f_key}}" placeholder="Search record">
+                                <input type="text" class="form-control" name="key" value="{{$f_key}}" placeholder="Tìm id người dùng">
                             </div><!-- /.input-group -->
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
@@ -110,7 +110,7 @@
                             @foreach ($comments as $comment)
                                 <tr>
                                     <th scope="row">{{ $comment->id }}</th>
-                                    <td>{{ $comment->user->username }}</td>
+                                    <td>{{ $comment->user->name }}</td>
                                     <td>{{ $comment->course->certificate_name }}</td>
                                     <td>{{ $comment->created_at }}</td>
                                     <td>{{ $comment->approved }}</td>

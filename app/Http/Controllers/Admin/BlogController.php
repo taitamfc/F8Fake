@@ -49,8 +49,7 @@ class BlogController extends Controller
             'f_user_id' => $user_id,
             'f_title'     => $title,
             'f_key'       => $key,
-            'f_users'       => $users,
-
+            'users'       => $users,
             'blogs'    => $blogs,
         ];
         return view('Admin.blogs.index', $params);
@@ -244,6 +243,8 @@ class BlogController extends Controller
             $query->orWhere('parent_id', 'LIKE', '%' . $key . '%');
         }
         $blogs = $query->paginate(5);
+        $users = User::all();
+
         $params = [
             'f_id'        => $id,
             'f_user_id'     => $user_id,
@@ -251,6 +252,7 @@ class BlogController extends Controller
             'f_title'       => $title,
             'f_parent_id'       => $parent_id,
             'blogs'    => $blogs,
+            'users'    => $users,
         ];
         return view('Admin.blogs.trash', $params);
     }

@@ -29,7 +29,7 @@ class BlogPolicy
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Blog $blog)
+    public function view(User $user)
     {
         return $user->hasPermission('Blog_view');
 
@@ -54,7 +54,7 @@ class BlogPolicy
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Blog $blog)
+    public function update(User $user)
     {
         return $user->hasPermission('Blog_update');
     }
@@ -66,7 +66,7 @@ class BlogPolicy
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Blog $blog)
+    public function delete(User $user)
     {
         return $user->hasPermission('Blog_delete');
     }
@@ -78,7 +78,7 @@ class BlogPolicy
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Blog $blog)
+    public function restore(User $user)
     {
         return $user->hasPermission('Blog_restore');
 
@@ -91,7 +91,7 @@ class BlogPolicy
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Blog $blog)
+    public function forceDelete(User $user)
     {
         return $user->hasPermission('Blog_forceDelete');
 

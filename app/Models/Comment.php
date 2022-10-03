@@ -9,13 +9,15 @@ class Comment extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'comments';
-
-    function scopeSearch($query){
-        if($key = request()->key){
-            $query =$query->where('comment','LIKE','%'.$key.'%');
+   
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('id', 'like', '%' . $key . '%');
         }
         return $query;
     }
+
 
     function user(){
         return $this->belongsTo(User::class);
