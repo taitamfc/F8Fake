@@ -112,6 +112,7 @@
                     </li>
                     @endcan
                     @can('viewAny', App\Models\WillLearn::class)
+
                     <li class="menu-item has-child">
                         <a href="{{ route('Will-learns.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">will
@@ -119,27 +120,17 @@
                     </li>
                     @endcan
                     <li class="menu-item has-child">
-                        <a href="{{ route('comments.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">Bình Luận</span></a>
+                        <a href="{{ route('requirements.index') }}" class="menu-link"><span
+                                class="menu-icon oi oi-list-rich"></span> <span
+                                class="menu-text">Requirement</span></a>
                     </li>
-                    <li class="menu-item has-child">
-                        <a href="{{ route('banners.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">Ảnh Bìa</span></a>
-                    </li>
-                    <li class="menu-item has-child">
-                        <a href="{{ route('WillLearns.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">will learns</span></a>
-                    </li>
-                    <li class="menu-item has-child">
-                        <a href="{{ route('requirements.index') }}" class="menu-link"><span class="menu-icon oi oi-list-rich"></span> <span
-                                class="menu-text">Yêu Cầu</span></a>
-                    </li>
+
                 </ul>
             </nav>
         </div>
         <footer class="aside-footer border-top p-2">
             <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span
-                    class="d-compact-menu-none">Chế Độ Ban Đêm</span> <i class="fas fa-moon ml-1"></i></button>
+                    class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
         </footer><!-- /Skin changer -->
     </div><!-- /.aside-content -->
 </aside>
