@@ -12,10 +12,12 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto">Quản Lý Ảnh bìa</h1>
                 <div class="btn-toolbar">
-                    <a href="{{ route('banners.create') }}" class="btn btn-primary mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm Mới</span>
-                    </a>
+                    @can('create', App\Models\Banner::class)
+                        <a href="{{ route('banners.create') }}" class="btn btn-primary mr-2">
+                            <i class="fa-solid fa fa-plus"></i>
+                            <span class="ml-1">Thêm Mới</span>
+                        </a>
+                    @endcan
                     <a href="{{ route('export-banners') }}" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
@@ -113,12 +115,16 @@
                                         <td>
                                             <form action="{{ route('banners.force_destroy', $banner->id) }}"
                                                 style="display:inline" method="post">
-                                                <a href="{{ route('banners.edit', $banner->id) }}"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="fa fa-pencil-alt"></i></a>
-                                                <button onclick="return confirm('Xóa {{ $banner->name }} ?')"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="far fa-trash-alt"></i></button>
+                                                @can('update', App\Models\Banner::class)
+                                                    <a href="{{ route('banners.edit', $banner->id) }}"
+                                                        class="btn btn-sm btn-icon btn-secondary"><i
+                                                            class="fa fa-pencil-alt"></i></a>
+                                                @endcan
+                                                @can('forceDelete', App\Models\Banner::class)
+                                                    <button onclick="return confirm('Xóa {{ $banner->name }} ?')"
+                                                        class="btn btn-sm btn-icon btn-secondary"><i
+                                                            class="far fa-trash-alt"></i></button>
+                                                @endcan
                                                 @csrf
                                                 @method('put')
                                             </form>
