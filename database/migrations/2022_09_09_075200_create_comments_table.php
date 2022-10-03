@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('commentstable_type');
             $table->string('comment');
-            $table->boolean('approved');
+            $table->boolean('is_approved');
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamps();
