@@ -16,7 +16,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Danh Sách Người Dùng </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh Sách Nhân Viên </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     @can('create', App\Models\User::class)
                     <a href="{{ route('users.create') }}" class="btn btn-primary mr-2">
@@ -111,7 +111,7 @@
                             <tr>
                                 <th style="min-width:50px"> #</th>
                                 <th> Ảnh Đại Diện </th>
-                                <th> Tên Sinh Viên </th>
+                                <th> Tên Nhân Viên </th>
                                 <th> Email </th>
                                 <th> Tùy Chọn </th>
                             </tr>

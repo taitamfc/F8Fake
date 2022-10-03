@@ -10,7 +10,7 @@
             </ol>
         </nav>
         <header class="page-title-bar">
-            <h1 class="page-title">Thêm người dùng </h1>
+            <h1 class="page-title">Thêm Nhân Viên </h1>
         </header>
 
         <div class="page-section">
@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label class="control-label" for="flatpickr01">Tên Sinh Viên</label>
+                                        <label class="control-label" for="flatpickr01">Tên Nhân Viên</label>
                                         <input id="flatpickr01" type="text" class="form-control" placeholder="vui lòng nhập" value="{{ old('name') }}"
                                             name="name" data-toggle="flatpickr">
                                     </div>
