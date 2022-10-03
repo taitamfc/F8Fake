@@ -189,7 +189,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $users = User::findOrFail($id);
-        $this->authorize('delete', $users);
+        $this->authorize('delete',User::class);
         try {
             $image = str_replace('storage', 'public', $users->avatar);;
             Storage::delete($image);
@@ -226,8 +226,8 @@ class UserController extends Controller
     function RestoreDelete($id)
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
-        $users = User::findOrFail($id);
-        $this->authorize('restore', $users);
+        $users = User::withTrashed()->findOrFail($id);
+        $this->authorize('restore', User::class);
         $users->deleted_at = null;
         try {
             $users->save();

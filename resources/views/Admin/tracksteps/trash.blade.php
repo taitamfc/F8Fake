@@ -17,18 +17,6 @@
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Danh Sách Người Dùng </h1><!-- .btn-toolbar -->
-                <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('tracksteps.create') }}" class="btn btn-primary mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm Mới</span>
-                    </a>
-                    <a href="" class="btn btn-primary">
-                        <i class="fas fa-file"></i>
-                        <span class="ml-1">Xuất file excel</span>
-                    </a>
-                    {{-- @endif --}}
-                </div>
                 <!-- /.btn-toolbar -->
             </div><!-- /title and toolbar -->
 
@@ -59,7 +47,6 @@
                         <!-- .input-group -->
                         <!-- /.input-group -->
                         <form action="" method="GET" id="form-search">
-                            @csrf
                             <div class="input-group input-group-alt">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
@@ -112,10 +99,10 @@
                             <tr>
                                 <th style="min-width:50px"> #</th>
                                 <th> Tên Chương Học </th>
-                                <th> Tên Khóa Học </th>
+                                <th> Tên Lộ Trình </th>
                                 <th> Thể Loại </th>
                                 <th> Vị Trí</th>
-                                <th> Hành Động </th>
+                                <th> Tùy Chọn </th>
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
@@ -130,6 +117,7 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-2">
+                                                    @can('restore', App\Models\TrackStep::class)
                                                     <form action="{{ route('tracksteps.RestoreDelete', $trackstep->id) }}"
                                                         method="post">
                                                         @csrf
@@ -137,8 +125,10 @@
                                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
                                                                 class="bi bi-arrow-counterclockwise"></i></button>
                                                     </form>
+                                                    @endcan
                                                 </div>
                                                 <div class="col-2">
+                                                    @can('delete', App\Models\TrackStep::class)
                                                     <form action="{{ route('tracksteps.destroy', $trackstep->id) }}"
                                                         method="post">
                                                         @csrf
@@ -147,6 +137,7 @@
                                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </form>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </div>
