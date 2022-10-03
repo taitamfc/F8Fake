@@ -18,7 +18,7 @@ class WillLearnPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('WillLearn_viewAny');
     }
 
     /**
@@ -28,9 +28,9 @@ class WillLearnPolicy
      * @param  \App\Models\WillLearn  $willLearn
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, WillLearn $willLearn)
+    public function view(User $user)
     {
-        //
+
     }
 
     /**
@@ -41,7 +41,8 @@ class WillLearnPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('WillLearn_create');
+
     }
 
     /**
@@ -51,9 +52,10 @@ class WillLearnPolicy
      * @param  \App\Models\WillLearn  $willLearn
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, WillLearn $willLearn)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('WillLearn_update');
+
     }
 
     /**
@@ -63,9 +65,10 @@ class WillLearnPolicy
      * @param  \App\Models\WillLearn  $willLearn
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, WillLearn $willLearn)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('WillLearn_delete');
+
     }
 
     /**
@@ -75,9 +78,10 @@ class WillLearnPolicy
      * @param  \App\Models\WillLearn  $willLearn
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, WillLearn $willLearn)
+    public function restore(User $user)
     {
-        //
+        return $user->hasPermission('WillLearn_restore');
+
     }
 
     /**
@@ -87,8 +91,9 @@ class WillLearnPolicy
      * @param  \App\Models\WillLearn  $willLearn
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, WillLearn $willLearn)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('WillLearn_forceDelete');
+
     }
 }

@@ -99,11 +99,13 @@
                         <a href="{{ route('banners.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Ảnh Bìa</span></a>
                     </li>
+                    @can('viewAny', App\Models\WillLearn::class)
                     <li class="menu-item has-child">
-                        <a href="{{ route('WillLearns.index') }}" class="menu-link"><span
+                        <a href="{{ route('Will-learns.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">will
                                 learns</span></a>
                     </li>
+                    @endcan
                     <li class="menu-item has-child">
                         <a href="{{ route('requirements.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span

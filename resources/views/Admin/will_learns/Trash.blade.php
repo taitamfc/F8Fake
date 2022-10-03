@@ -17,18 +17,7 @@
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Danh sách các bài học đã xóa</h1>
-                <div class="btn-toolbar">
-                    <a href="{{ route('WillLearns.create') }}" class="btn btn-primary mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm Mới</span>
-                    </a>
-                    <a href="" class="btn btn-primary">
-                        <i class="fas fa-file"></i>
-                        <span class="ml-1">Xuất file excel</span>
-                    </a>
-                </div><!-- /.btn-toolbar -->
             </div>
-
             <!-- /title and toolbar -->
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
@@ -39,7 +28,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ route('WillLearns.index') }}">Tất Cả</a>
+                            <a class="nav-link  " href="{{ route('Will-learns.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="">Thùng Rác</a>
@@ -62,7 +51,6 @@
                                 </div><!-- /.input-group-prepend -->
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-
                                         <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                     </div><input type="text" class="form-control" name="key"
                                         value="{{ $f_key }}"
@@ -74,7 +62,7 @@
                                 </div>
                             </div><!-- /.input-group -->
                     </div>
-                    @include('Admin.WillLearns.modals.modalWillLearnColumns')
+                    @include('Admin.will_learns.modals.modalWillLearnColumns')
                     @if (!count($WillLearns))
                         <p class="text-success">
                         <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
@@ -101,7 +89,7 @@
                     <thead class="thead-">
                         <tr>
                             <th style="min-width:50px"> #</th>
-                            <th >Khóa học</th>
+                            <th>Khóa học</th>
                             <th> nội dung </th>
                             <th> Tùy chọn</th>
                         </tr>
@@ -110,24 +98,37 @@
                         @foreach ($WillLearns as $key => $WillLearn)
                             <tr class="item-{{ $WillLearn->id }}">
                                 <th scope="row">{{ $WillLearn->id }}</th>
-                                <th scope="row">{{ $WillLearn->course->title}}</th>
+                                <th scope="row">{{ $WillLearn->course->title }}</th>
                                 <td>{{ $WillLearn->content }}</td>
-                                    <td>
-                                        <form action="{{ route('WillLearns.destroy', $WillLearn->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                        </form>
-                                        <form action="{{ route('WillLearns.RestoreDelete', $WillLearn->id) }}" method="post">
+                                <td>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                @can('delete', App\Models\WillLearn::class)
+                                                    <form action="{{ route('Will-learns.destroy', $WillLearn->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                class="far fa-trash-alt"></i></button>
+                                                    </form>
+                                                @endcan
+                                            </div>
+                                            <div class="col-2">
+                                                <form action="{{ route('Will-learns.RestoreDelete', $WillLearn->id) }}"
+                                                    method="post">
 
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                               ><i
-                                                    class="bi bi-arrow-counterclockwise"></i></button>
-                                        </form>
+                                                    @csrf
+                                                    @method('PUT')
+                                                    @can('restore', App\Models\WillLearn::class)
+                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                                class="bi bi-arrow-counterclockwise"></i></button>
+                                                    @endcan
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
