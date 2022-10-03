@@ -18,7 +18,8 @@ class LevelPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('Level_viewAny');
+
     }
 
     /**
@@ -28,9 +29,10 @@ class LevelPolicy
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Level $level)
+    public function view(User $user)
     {
-        //
+        return $user->hasPermission('Level_view');
+
     }
 
     /**
@@ -41,7 +43,8 @@ class LevelPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('Level_create');
+
     }
 
     /**
@@ -51,9 +54,10 @@ class LevelPolicy
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Level $level)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('Level_update');
+
     }
 
     /**
@@ -63,9 +67,10 @@ class LevelPolicy
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Level $level)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('Level_delete');
+
     }
 
     /**
@@ -75,9 +80,10 @@ class LevelPolicy
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Level $level)
+    public function restore(User $user)
     {
-        //
+        return $user->hasPermission('Level_restore');
+
     }
 
     /**
@@ -87,8 +93,9 @@ class LevelPolicy
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Level $level)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('Level_forceDelete');
+
     }
 }
