@@ -17,21 +17,7 @@
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Danh sách các mục đã xóa </h1><!-- .btn-toolbar -->
-                <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
-                    <a href="{{ route('users.create') }}" class="btn btn-primary mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm Mới</span>
-                    </a>
-                    <a href="" class="btn btn-primary">
-                        <i class="fas fa-file"></i>
-                        <span class="ml-1">Xuất file excel</span>
-                    </a>
-                    {{-- @endif --}}
-                </div>
-                <!-- /.btn-toolbar -->
             </div><!-- /title and toolbar -->
-
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">
@@ -114,7 +100,7 @@
                                 <th> Ảnh Đại Diện </th>
                                 <th> Tên Sinh Viên </th>
                                 <th> Email </th>
-                                <th> Hành Động </th>
+                                <th> Tùy Chọn </th>
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
@@ -131,6 +117,7 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-2">
+                                                    @can('restore', App\Models\User::class)
                                                     <form action="{{ route('users.RestoreDelete', $user->id) }}"
                                                         method="post">
                                                         @csrf
@@ -138,8 +125,10 @@
                                                         <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
                                                                 class="bi bi-arrow-counterclockwise"></i></button>
                                                     </form>
+                                                    @endcan
                                                 </div>
                                                 <div class="col-2">
+                                                    @can('delete', App\Models\User::class)
                                                     <form action="{{ route('users.destroy', $user->id) }}"
                                                         method="post">
                                                         @csrf
@@ -148,6 +137,7 @@
                                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </form>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </div>

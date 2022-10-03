@@ -18,16 +18,16 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto"> Danh sách nhóm </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
-                    {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
+                    @can('create', App\Models\Group::class)
                     <a href="{{ route('groups.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm Mới</span>
                     </a>
+                    @endcan
                     <a href="" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
                     </a>
-                    {{-- @endif --}}
                 </div><!-- /.btn-toolbar -->
             </div>
             <!-- /title and toolbar -->
@@ -63,7 +63,6 @@
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
                                         data-target="#modalFilterColumns">Tìm nâng cao</button>
-
                                 </div>
                                 <div class="input-group has-clearable">
                                     <button type="button" class="close trigger-submit trigger-submit-delay"
@@ -102,10 +101,8 @@
                                     {{ Session::get('error') }}</div>
                                 </p>
                             @endif
-
                         </form>
                     </div><!-- /.form-group -->
-
                     <table class="table table-hover">
                         <!-- thead -->
                         <thead class="thead-">
@@ -113,7 +110,7 @@
                                 <th style="min-width:50px"> #</th>
                                 <th> Tên Nhóm </th>
                                 <th> Mô Tả Nhóm</th>
-                                <th> Hành Động </th>
+                                <th> Tùy Chọn </th>
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
@@ -124,14 +121,18 @@
                                     <td>{{ $group->description }}</td>
                                     <td>
                                         <form action="{{ route('groups.SoftDeletes', $group->id) }}" method="post">
+                                            @can('update', App\Models\Group::class)
                                             <a href="{{ route('groups.edit', $group->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="fa fa-pencil-alt"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('PUT')
+                                            @can('forceDelete', App\Models\Group::class)
                                             <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                                 onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                     class="far fa-trash-alt"></i></button>
+                                            @endcan
                                         </form>
                                         {{-- <a href="{{ route('groups.destroy', $group->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"

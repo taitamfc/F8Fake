@@ -35,18 +35,24 @@
                                 class="menu-text">Trang Chủ</span></a>
                     </li>
                     <li class="menu-header">NGUỒN LỰC </li>
+                    @can('viewAny', App\Models\User::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('users.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-person"></span> <span class="menu-text">Nhân Viên</span></a>
 
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\Group::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('groups.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-people"></span> <span class="menu-text">Nhóm Nhân Viên</span></a>
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
                     <!-- .menu-item -->
                     @can('viewAny', App\Models\Student::class)
                     <li class="menu-item has-child">
@@ -77,11 +83,14 @@
 
                     </li><!-- /.menu-item -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\TrackStep::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('tracksteps.index') }}" class="menu-link"><span
                                 class="menu-icon fas fa-table"></span> <span class="menu-text">Bài Học</span></a>
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
                     <!-- .menu-item -->
                     @can('viewAny', App\Models\Level::class)
                         <li class="menu-item has-child">

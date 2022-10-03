@@ -27,6 +27,36 @@
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
+                            <label class="">Tên Chương Học</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text">
+                                    <select name="track_id" id="" class="form-control filter-column f-name">
+                                        <option value="">vui lòng chọn</option>
+                                        @foreach ($tracks as $track)
+                                            <option value="{{$track->id }} "{{$track->id==$f_track_id ?'selected':''}}>{{$track->title}}</option>
+                                        @endforeach
+                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
+                            <label class="">Tên Lộ Trình</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input text">
+                                <select name="step_id" id="" class="form-control filter-column f-name">
+                                    <option value="">vui lòng chọn</option>
+                                    @foreach ($steps as $step)
+                                        <option value="{{$step->id }} "{{$step->id==$f_step_id ?'selected':''}}>{{$step->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row filter-row">
+                        <div class="col-lg-4">
                             <label class="">Tên Thể Loại</label>
                         </div>
                         <div class="col-lg-8">
