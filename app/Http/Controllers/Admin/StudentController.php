@@ -232,7 +232,7 @@ class StudentController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $students = Student::findOrFail($id);
-        $this->authorize('viewAny', force_destroy::class);
+        $this->authorize('forceDelete', Student::class);
 
         $students->deleted_at = date("Y-m-d h:i:s");
         try {

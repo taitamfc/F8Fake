@@ -1,6 +1,6 @@
 @extends('Admin.master')
 @section('content')
-    <div class="container">
+    <div class="page-inner">
         <header class="page-title-bar">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -12,10 +12,10 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto">Quản Lý Học viên-Thùng Rác</h1>
                 <div class="btn-toolbar">
-                    <a href="{{ route('students.create') }}" class="btn btn-primary mr-2">
+                    {{-- <a href="{{ route('students.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm Mới</span>
-                    </a>
+                    </a> --}}
                     <a href="" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
@@ -112,26 +112,30 @@
                                         <td>
                                             <div class="container">
                                                 <div class="row">
+                                                    @can('restore', App\Models\Student::class)
+                                                        <div class="col-2">
+                                                            <form action="{{ route('students.restore', $student->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-icon btn-secondary">
+                                                                    <i class="fa fa-trash-restore"></i></button>
+                                                            </form>
+                                                        @endcan
 
-                                                    <div class="col-2">
-                                                        <form action="{{ route('students.restore', $student->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-icon btn-secondary">
-                                                                <i class="fa fa-trash-restore"></i></button>
-                                                        </form>
                                                     </div>
                                                     <div class="col-2">
-                                                        <form action="{{ route('students.destroy', $student->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                                    class="far fa-trash-alt"></i></button>
-                                                        </form>
+                                                        @can('delete', App\Models\Student::class)
+                                                            <form action="{{ route('students.destroy', $student->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                                    onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                                        class="far fa-trash-alt"></i></button>
+                                                            </form>
+                                                        @endcan
                                                     </div>
                                                 </div>
                                             </div>

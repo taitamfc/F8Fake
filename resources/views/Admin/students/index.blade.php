@@ -12,10 +12,12 @@
             <div class="d-md-flex align-items-md-start">
                 <h1 class="page-title mr-sm-auto">Quản Lý Học viên</h1>
                 <div class="btn-toolbar">
-                    <a href="{{ route('students.create') }}" class="btn btn-primary mr-2">
-                        <i class="fa-solid fa fa-plus"></i>
-                        <span class="ml-1">Thêm Mới</span>
-                    </a>
+                    @can('create', App\Models\Student::class)
+                        <a href="{{ route('students.create') }}" class="btn btn-primary mr-2">
+                            <i class="fa-solid fa fa-plus"></i>
+                            <span class="ml-1">Thêm Mới</span>
+                        </a>
+                    @endcan
                     <a href="" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
@@ -112,12 +114,16 @@
                                         <td>
                                             <form action="{{ route('students.force_destroy', $student->id) }}"
                                                 style="display:inline" method="post">
-                                                <a href="{{ route('students.edit', $student->id) }}"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="fa fa-pencil-alt"></i></a>
-                                                <button onclick="return confirm('Bạn chắc chắn muốn xóa? ?')"
-                                                    class="btn btn-sm btn-icon btn-secondary"><i
-                                                        class="far fa-trash-alt"></i></button>
+                                                @can('update', App\Models\Student::class)
+                                                    <a href="{{ route('students.edit', $student->id) }}"
+                                                        class="btn btn-sm btn-icon btn-secondary"><i
+                                                            class="fa fa-pencil-alt"></i></a>
+                                                @endcan
+                                                @can('forceDelete', App\Models\Student::class)
+                                                    <button onclick="return confirm('Bạn chắc chắn muốn xóa? ?')"
+                                                        class="btn btn-sm btn-icon btn-secondary"><i
+                                                            class="far fa-trash-alt"></i></button>
+                                                @endcan
                                                 @csrf
                                                 @method('delete')
                                             </form>

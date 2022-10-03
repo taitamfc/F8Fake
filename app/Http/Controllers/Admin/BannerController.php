@@ -258,7 +258,7 @@ class BannerController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $banners = Banner::findOrFail($id);
-        $this->authorize('force_destroy',Banner::class);
+        $this->authorize('forceDelete',Banner::class);
 
         $banners->deleted_at = date("Y-m-d h:i:s");
         try {

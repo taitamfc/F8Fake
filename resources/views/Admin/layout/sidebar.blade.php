@@ -48,11 +48,14 @@
 
                     </li><!-- /.menu-item -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\Student::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('students.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-people"></span> <span class="menu-text">Học Viên</span></a>
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
 
                     <li class="menu-header">HỌC</li><!-- /.menu-header -->
                     <!-- .menu-item -->
@@ -95,10 +98,13 @@
                         <a href="{{ route('comments.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Bình Luận</span></a>
                     </li>
+                    @can('viewAny', App\Models\Banner::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('banners.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Ảnh Bìa</span></a>
                     </li>
+                    @endcan
+
                     <li class="menu-item has-child">
                         <a href="{{ route('WillLearns.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">will
