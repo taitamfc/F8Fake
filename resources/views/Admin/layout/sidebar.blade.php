@@ -39,8 +39,6 @@
                     <li class="menu-item has-child">
                         <a href="{{ route('users.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-person"></span> <span class="menu-text">Nhân Viên</span></a>
-
-
                     </li>
                     @endcan
                     <!-- /.menu-item -->
@@ -112,6 +110,7 @@
                         <a href="{{ route('banners.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Ảnh Bìa</span></a>
                     </li>
+                    @endcan
                     @can('viewAny', App\Models\WillLearn::class)
 
                     <li class="menu-item has-child">
