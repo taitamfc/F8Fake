@@ -34,11 +34,20 @@ class TrackStepController extends Controller
         $step_type      = $request->step_type ?? '';
         $position       = $request->position ?? '';
         $id             = $request->id ?? '';
-
+        $track_id       = $request->track_id ?? '';
+        $step_id       = $request->step_id ?? '';
         // thực hiện query
+        $tracks      = Track::all();
+        $steps      = Step::all();
         $query = TrackStep::select("*");
         if ($step_type) {
             $query->where('step_type', 'LIKE', '%' . $step_type . '%');
+        }
+        if ($track_id) {
+            $query->where('track_id', 'LIKE', '%' . $track_id . '%');
+        }
+        if ($step_id) {
+            $query->where('step_id', 'LIKE', '%' . $step_id . '%');
         }
         if ($position) {
             $query->where('position', 'LIKE', '%' . $position . '%');
@@ -50,6 +59,8 @@ class TrackStepController extends Controller
             $query->orWhere('id', $key);
             $query->orWhere('step_type', 'LIKE', '%' . $key . '%');
             $query->orWhere('position', 'LIKE', '%' . $key . '%');
+            $query->orWhere('step_id', 'LIKE', '%' . $key . '%');
+            $query->orWhere('track_id', 'LIKE', '%' . $key . '%');
         }
         $tracksteps = $query->paginate(3);
 
@@ -59,6 +70,10 @@ class TrackStepController extends Controller
             'f_position'      => $position,
             'f_key'           => $key,
             'tracksteps'      => $tracksteps,
+            'f_step_id'      => $step_id,
+            'f_track_id'      => $track_id,
+            'tracks'         => $tracks,
+            'steps'         => $steps,
         ];
         return view('Admin.tracksteps.index', $params);
     }
@@ -126,7 +141,7 @@ class TrackStepController extends Controller
         $tracks = Track::get();
         $steps = Step::get();
         $tracksteps = TrackStep::findOrFail($id);
-        $this->authorize('update', $tracksteps);
+        $this->authorize('update', TrackStep::class);
         return view('Admin.tracksteps.edit', compact('tracksteps', 'tracks', 'steps'));
     }
 
@@ -167,7 +182,7 @@ class TrackStepController extends Controller
     {
         
         $tracksteps = TrackStep::findOrFail($id);
-        $this->authorize('delete', $tracksteps);
+        $this->authorize('delete', TrackStep::class);
         try {
             $tracksteps->delete();
             Session::flash('error', 'Xóa thành công');
@@ -182,7 +197,7 @@ class TrackStepController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $tracksteps = TrackStep::withTrashed()->findOrFail($id);
-        $this->authorize('forceDelete', $tracksteps);
+        $this->authorize('forceDelete',TrackStep::class);
         $tracksteps->deleted_at = date("Y-m-d h:i:s");
         try {
             $tracksteps->save();
@@ -200,7 +215,7 @@ class TrackStepController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $tracksteps = TrackStep::withTrashed()->findOrFail($id);
-        $this->authorize('restore', $tracksteps);
+        $this->authorize('restore', TrackStep::class);
         $tracksteps->deleted_at = null;
         try {
             $tracksteps->save();
@@ -215,15 +230,24 @@ class TrackStepController extends Controller
 
     function trash(Request $request)
     {
-        $key        = $request->key ?? '';
+        $key            = $request->key ?? '';
         $step_type      = $request->step_type ?? '';
-        $id         = $request->id ?? '';
-        $position         = $request->position ?? '';
-        
+        $position       = $request->position ?? '';
+        $id             = $request->id ?? '';
+        $track_id       = $request->track_id ?? '';
+        $step_id       = $request->step_id ?? '';
+        // thực hiện query
+        $tracks      = Track::all();
+        $steps      = Step::all();
         $query = TrackStep::onlyTrashed();
-
         if ($step_type) {
             $query->where('step_type', 'LIKE', '%' . $step_type . '%');
+        }
+        if ($track_id) {
+            $query->where('track_id', 'LIKE', '%' . $track_id . '%');
+        }
+        if ($step_id) {
+            $query->where('step_id', 'LIKE', '%' . $step_id . '%');
         }
         if ($position) {
             $query->where('position', 'LIKE', '%' . $position . '%');
@@ -235,14 +259,21 @@ class TrackStepController extends Controller
             $query->orWhere('id', $key);
             $query->orWhere('step_type', 'LIKE', '%' . $key . '%');
             $query->orWhere('position', 'LIKE', '%' . $key . '%');
+            $query->orWhere('step_id', 'LIKE', '%' . $key . '%');
+            $query->orWhere('track_id', 'LIKE', '%' . $key . '%');
         }
         $tracksteps = $query->paginate(3);
+
         $params = [
-            'f_id'        => $id,
+            'f_id'            => $id,
             'f_step_type'     => $step_type,
-            'f_key'       => $key,
-            'f_position'       => $position,
-            'tracksteps'    => $tracksteps,
+            'f_position'      => $position,
+            'f_key'           => $key,
+            'tracksteps'      => $tracksteps,
+            'f_step_id'      => $step_id,
+            'f_track_id'      => $track_id,
+            'tracks'         => $tracks,
+            'steps'         => $steps,
         ];
         return view('Admin.tracksteps.trash', $params);
     }

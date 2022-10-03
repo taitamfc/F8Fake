@@ -19,10 +19,12 @@
                 <h1 class="page-title mr-sm-auto"> Danh Sách Bài Học </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
+                    @can('create', App\Models\TrackStep::class)
                     <a href="{{ route('tracksteps.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
                         <span class="ml-1">Thêm Mới</span>
                     </a>
+                    @endcan
                     <a href="{{route('export-track_steps')}}" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất file excel</span>
@@ -58,7 +60,6 @@
                         <!-- .input-group -->
                         <!-- /.input-group -->
                         <form action="" method="GET" id="form-search">
-                            @csrf
                             <div class="input-group input-group-alt">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-secondary" type="button" data-toggle="modal"
@@ -109,10 +110,10 @@
                             <tr>
                                 <th style="min-width:50px"> #</th>
                                 <th> Tên Chương Học </th>
-                                <th> Tên Khóa Học </th>
+                                <th> Tên Lộ Trình </th>
                                 <th> Thể Loại </th>
                                 <th> Vị Trí</th>
-                                <th> Hành Động </th>
+                                <th> Tùy Chọn </th>
                             </tr>
                         </thead><!-- /thead -->
                         <tbody>
@@ -125,14 +126,18 @@
                                     <td>{{ $trackstep->position }}</td>
                                     <td>
                                         <form action="{{ route('tracksteps.SoftDeletes', $trackstep->id) }}" method="post">
+                                            @can('update', App\Models\TrackStep::class)
                                             <a href="{{ route('tracksteps.edit', $trackstep->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"><i
                                                     class="fa fa-pencil-alt"></i></a>
+                                            @endcan
                                             @csrf
                                             @method('PUT')
+                                            @can('forceDelete', App\Models\TrackStep::class)
                                             <button type="submit" class="btn btn-sm btn-icon btn-secondary"
                                                 onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
                                                     class="far fa-trash-alt"></i></button>
+                                            @endcan
                                         </form>
                                         {{-- <a href="{{ route('tracksteps.destroy', $group->id) }}"
                                                 class="btn btn-sm btn-icon btn-secondary"

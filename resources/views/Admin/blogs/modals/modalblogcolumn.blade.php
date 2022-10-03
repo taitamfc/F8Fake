@@ -31,8 +31,8 @@
                         </div>
                         <div class="col-lg-8">
                             <select name="user_id" id="" class="form-control">
-                                @foreach ($blogs as $blog )
-                                    <option value="{{$f_user_id}}">{{$blog->user->username}}</option>
+                                @foreach ($f_users as $user )
+                                    <option value="{{$user->id}}">{{$user->username}}</option>
                                 @endforeach
 
                                </select>

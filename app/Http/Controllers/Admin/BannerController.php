@@ -136,7 +136,7 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        
+
         $banners = Banner::findOrFail($id);
         $this->authorize('update', Banner::class);
 
@@ -192,7 +192,7 @@ class BannerController extends Controller
      */
 
 
-     
+
     public function destroy($id)
     {
         $banners = Banner::findOrFail($id);
@@ -258,7 +258,7 @@ class BannerController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $banners = Banner::findOrFail($id);
-        $this->authorize('force_destroy',Banner::class);
+        $this->authorize('forceDelete',Banner::class);
 
         $banners->deleted_at = date("Y-m-d h:i:s");
         try {
@@ -271,7 +271,7 @@ class BannerController extends Controller
             Session::flash('error', 'xóa thất bại ');
             return redirect()->route('banners.index')->with('error', 'xóa không thành công');
         }
-       
+
     }
 
     public function restore($id)

@@ -35,24 +35,33 @@
                                 class="menu-text">Trang Chủ</span></a>
                     </li>
                     <li class="menu-header">NGUỒN LỰC </li>
+                    @can('viewAny', App\Models\User::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('users.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-person"></span> <span class="menu-text">Nhân Viên</span></a>
 
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\Group::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('groups.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-people"></span> <span class="menu-text">Nhóm Nhân Viên</span></a>
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\Student::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('students.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-people"></span> <span class="menu-text">Học Viên</span></a>
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
 
                     <li class="menu-header">HỌC</li><!-- /.menu-header -->
                     <!-- .menu-item -->
@@ -74,11 +83,14 @@
 
                     </li><!-- /.menu-item -->
                     <!-- .menu-item -->
+                    @can('viewAny', App\Models\TrackStep::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('tracksteps.index') }}" class="menu-link"><span
                                 class="menu-icon fas fa-table"></span> <span class="menu-text">Bài Học</span></a>
 
-                    </li><!-- /.menu-item -->
+                    </li>
+                    @endcan
+                    <!-- /.menu-item -->
                     <!-- .menu-item -->
                     @can('viewAny', App\Models\Level::class)
                         <li class="menu-item has-child">
@@ -95,11 +107,13 @@
                         <a href="{{ route('comments.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Bình Luận</span></a>
                     </li>
+                    @can('viewAny', App\Models\Banner::class)
                     <li class="menu-item has-child">
                         <a href="{{ route('banners.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">Ảnh Bìa</span></a>
                     </li>
                     @can('viewAny', App\Models\WillLearn::class)
+
                     <li class="menu-item has-child">
                         <a href="{{ route('Will-learns.index') }}" class="menu-link"><span
                                 class="menu-icon oi oi-list-rich"></span> <span class="menu-text">will

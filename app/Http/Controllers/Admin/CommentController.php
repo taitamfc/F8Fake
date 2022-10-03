@@ -17,12 +17,13 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         $users = User::all();
+        $courses = Course::all();
 
-
-        // $this->authorize('viewAny', Comment::class);
+        $this->authorize('viewAny', Comment::class);
         $key        = $request->key ?? '';
         $user_id      = $request->user_id ?? '';
         $comment      = $request->comment ?? '';
+        $course_id     = $request->course_id ?? '';
         $id         = $request->id ?? '';
         // thực hiện query
         $query = Comment::query(true);
@@ -33,6 +34,9 @@ class CommentController extends Controller
         if ($comment) {
             $query->where('comment', 'LIKE', '%' . $comment . '%');
         }
+        if ($course_id) {
+            $query->where('course_id', 'LIKE', '%' . $course_id . '%');
+        }
 
         if ($id) {
             $query->where('id', $id);
@@ -41,23 +45,25 @@ class CommentController extends Controller
             $query->orWhere('id', $key);
             $query->orWhere('user_id', 'LIKE', '%' . $key . '%');
             $query->orWhere('comment', 'LIKE', '%' . $key . '%');
+            $query->orWhere('course_id', 'LIKE', '%' . $key . '%');
         }
         $comments = $query->search()->paginate(5);
         $params = [
             'f_id'        => $id,
             'f_user_id' => $user_id,
             'f_comment'     => $comment,
+            'f_course_id'       => $course_id,
             'f_key'       => $key,
+            'f_users' => $users,
+            'f_courses' => $courses,
             'comments'    => $comments,
-            'users' => $users,
-
         ];
         return view('Admin.comments.index', $params );
 
     }
     public function create()
     {
-        // $this->authorize('create', Comment::class);
+        $this->authorize('create', Comment::class);
         $comments = Comment::all();
         $courses = Course::all();
         $users = User::all();
@@ -93,7 +99,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $courses = Course::get();
         $users = User::get();
-        // $this->authorize('update', Comment::class);
+        $this->authorize('update', Comment::class);
 
         // dd($blog);
         return view('Admin.comments.edit', compact('comment','courses','users'));
@@ -123,7 +129,7 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::find($id);
-        // $this->authorize('delete', Comment::class);
+        $this->authorize('delete', Comment::class);
 
         try {
             $comment->delete();
@@ -138,7 +144,7 @@ class CommentController extends Controller
     {
 
         $comment = Comment::withTrashed()->find($id);
-        // $this->authorize('force_destroy',Comment::class);
+        $this->authorize('force_destroy',Comment::class);
         try {
             $comment->forceDelete();
             return redirect()->route('comments.trash')->with('success', 'Xóa thành công');
@@ -152,7 +158,7 @@ class CommentController extends Controller
     {
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $comment = Comment::findOrFail($id);
-        // $this->authorize('force_destroy',Comment::class);
+        $this->authorize('force_destroy',Comment::class);
         $comment->deleted_at = date("Y-m-d h:i:s");
         try {
             $comment->save();
@@ -169,7 +175,7 @@ class CommentController extends Controller
     function RestoreDelete($id)
     {
         $comment = Comment::withTrashed()->find($id);
-        // $this->authorize('restore',Comment::class);
+        $this->authorize('restore',Comment::class);
         $comment->deleted_at = null;
         try {
             $comment->save();

@@ -11,18 +11,16 @@
         <div class="d-md-flex align-items-md-start">
             <h1 class="page-title mr-sm-auto">Quản Lý Ảnh Bìa-Thùng Rác</h1>
             <div class="btn-toolbar">
-                <a href="{{ route('banners.create') }}" class="btn btn-primary mr-2">
+                {{-- <a href="{{ route('banners.create') }}" class="btn btn-primary mr-2">
                     <i class="fa-solid fa fa-plus"></i>
                     <span class="ml-1">Thêm Mới</span>
-                </a>
-                <a href="" class="btn btn-primary">
+                </a> --}}
+                {{-- <a href="" class="btn btn-primary">
                     <i class="fas fa-file"></i>
                     <span class="ml-1">Xuất file excel</span>
-                </a>
+                </a> --}}
             </div>
-
         </div>
-
     </header>
     <div class="page-section">
         <div class="card card-fluid">
@@ -108,19 +106,10 @@
                                     <td class="align-middle"> {{ $banner->type }} </td>
                                     <td class="align-middle"> {{ $banner->title }} </td>
                                     <td>
-                                        {{-- <form action="{{ route('banners.destroy', $banner->id) }}" style="display:inline"
-                                            method="post">
-                                        <a href="{{ route('banners.edit', $banner->id) }}"
-                                            class="btn btn-sm btn-icon btn-secondary"><i class="fa fa-pencil-alt"></i></a>
-                                            <button onclick="return confirm('Xóa {{ $banner->name }} ?')"
-                                                class="btn btn-sm btn-icon btn-secondary"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                            @csrf
-                                            @method('delete')
-                                        </form> --}}
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-2">
+                                                    @can('restore', App\Models\Banner::class)
                                                     <form action="{{ route('banners.restore', $banner->id) }}"
                                                         method="post">
                                                         @csrf
@@ -129,8 +118,10 @@
                                                             
                                                             <i class="fa fa-trash-restore"></i> </button>
                                                     </form>
+                                                    @endcan
                                                 </div>
                                                 <div class="col-2">
+                                                    @can('delete', App\Models\Banner::class)
                                                     <form action="{{ route('banners.destroy', $banner->id) }}"
                                                         method="post">
                                                         @csrf
@@ -139,6 +130,7 @@
                                                             onclick="return confirm('Bạn chắc chắn muốn xóa?')"> <i
                                                                 class="far fa-trash-alt"></i></button>
                                                     </form>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </div>
