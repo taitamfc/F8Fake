@@ -38,7 +38,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" >nội dung</label>
+                                        <label class="control-label" >Phụ huynh</label>
                                         <input type="number" value="{{$blogs->parent_id}}" name="parent_id" class="form-control"  >
                                     </div>
                                     @if ($errors->any())
@@ -46,7 +46,7 @@
                                     @endif<!-- /.form-group -->
                                     <!-- .form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >tiêu đề</label>
+                                        <label class="control-label" >Tiêu đề</label>
                                         <input   type="text" name="title" value="{{$blogs->title}}" class="form-control">
                                     </div>
                                     @if ($errors->any())
@@ -54,7 +54,7 @@
                                     @endif<!-- /.form-group -->
                                     <!-- .form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >lượt xem</label> <input
+                                        <label class="control-label" >Lượt xem</label> <input
                                              type="number" name="view_count" value="{{$blogs->view_count}}" class="form-control"
                                             >
                                     </div>
@@ -62,7 +62,7 @@
                                     <p style="color:red">{{ $errors->first('view_count') }}</p>
                                     @endif<!-- /.form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >phản hồi</label>
+                                        <label class="control-label" >Phản hồi</label>
                                             <select class="form-control" name="is_recommend" value="{{$blogs->is_recommend}} id="">
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
@@ -72,7 +72,7 @@
                                     <p style="color:red">{{ $errors->first('is_recommend') }}</p>
                                     @endif<!-- /.form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >kiểm duyệt</label>
+                                        <label class="control-label" >Kiểm duyệt</label>
                                             <select class="form-control" name="is_approved" value="{{$blogs->is_approved}}" id="">
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label class="control-label" >slug</label>
+                                        <label class="control-label" >Slug</label>
                                         <input type="text" name="slug" value="{{$blogs->slug}}" class="form-control">
                                         <small class="form-text text-muted"></small>
                                     </div>
@@ -93,7 +93,7 @@
                                     @endif<!-- /.form-group -->
                                     <!-- .form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >kiểu mô tả</label> <input
+                                        <label class="control-label" >Kiểu mô tả</label> <input
                                              type="text" name="meta_description" value="{{$blogs->meta_description}}" class="form-control">
                                     </div>
                                     @if ($errors->any())
@@ -108,7 +108,7 @@
                                     <p style="color:red">{{ $errors->first('meta_title') }}</p>
                                     @endif<!-- /.form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >xuất bản</label> <input
+                                        <label class="control-label" >Ngày đăng</label> <input
                                              type="date" name="published_at" value="{{$blogs->published_at}}" class="form-control"
                                             >
                                     </div>
@@ -116,7 +116,7 @@
                                     <p style="color:red">{{ $errors->first('published_at') }}</p>
                                     @endif<!-- /.form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >đánh giá</label> <input
+                                        <label class="control-label" >Đánh giá</label> <input
                                              type="number" name="reaction_count" value="{{$blogs->reaction_count}}" class="form-control"
                                             >
                                     </div>
@@ -124,7 +124,7 @@
                                     <p style="color:red">{{ $errors->first('reaction_count') }}</p>
                                     @endif<!-- /.form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >lượt bình luận</label> <input
+                                        <label class="control-label" >Lượt bình luận</label> <input
                                              type="number" name="comments_count" value="{{$blogs->comments_count}}" class="form-control"
                                             >
                                     </div>
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label class="control-label" >hình bìa</label> <input id="flatpickr08"
+                                        <label class="control-label" >Hình bìa</label> <input id="flatpickr08"
                                             type="text" name="thumbnail" class="form-control" value="{{$blogs->thumbnail}}"  data-enable-time="true">
                                     </div>
                                     @if ($errors->any())
@@ -142,7 +142,7 @@
                                     @endif<!-- /.form-group -->
                                     <!-- .form-group -->
                                     <div class="form-group">
-                                        <label class="control-label" >nội dung</label>
+                                        <label class="control-label" >Nội dung</label>
                                         <input type="text" name="content"  value="{{$blogs->content}}"    class="form-control" >
                                      </div>
                                      @if ($errors->any())
@@ -150,14 +150,14 @@
                                     @endif
 
                                     <div class="form-group">
-                                        <label class="control-label" >thời gian </label> <input
+                                        <label class="control-label" >Phút đọc </label> <input
                                              type="number" name="min_read" value="{{$blogs->min_read}}" class="form-control">
                                     </div>
                                     @if ($errors->any())
                                     <p style="color:red">{{ $errors->first('min_read') }}</p>
                                     @endif<!-- /.form-group -->
                                             <div class="form-group">
-                                                <label class="control-label" >lượt phản ứng</label>
+                                                <label class="control-label" >Lượt phản ứng</label>
                                                     <select class="form-control" name="is_reacted" value="{{$blogs->is_reacted}}"id="">
                                                         <option value="0">0</option>
                                                         <option value="1">1</option>
@@ -167,7 +167,7 @@
                                             <p style="color:red">{{ $errors->first('is_reacted') }}</p>
                                             @endif<!-- /.form-group -->
                                             <div class="form-group">
-                                                <label class="control-label" >dấu trang</label>
+                                                <label class="control-label" >Dấu trang</label>
                                                     <select class="form-control" name="is_bookmark" value="{{$blogs->is_bookmark}}" id="">
                                                         <option value="0">0</option>
                                                         <option value="1">1</option>
@@ -196,7 +196,7 @@
 
 
                             <div class="form-group">
-                                <label class="control-label" >mô tả</label>
+                                <label class="control-label" >Mô tả</label>
                                 <textarea name="description" value="{{$blogs->description}}" class="form-control"  id="ckeditor1" rows="5"
                             style="resize: none"></textarea>
                             </div>
@@ -211,7 +211,7 @@
 
 
                             <div class="form-group">
-                               image
+                               Image
                                 <input
                                      type="file" name="image" value="{{$blogs->image}}" class="form-control"
                                    >

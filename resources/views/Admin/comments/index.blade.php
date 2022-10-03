@@ -97,7 +97,7 @@
                             <tr>
 
                                 <th> # </th>
-                                <th> Tên người dùng </th>
+                                <th> Tên người đăng </th>
                                 <th> Tên khóa học </th>
                                 <th> Ngày tạo </th>
                                 <th> Phê duyệt</th>

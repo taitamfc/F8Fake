@@ -18,7 +18,8 @@ class BlogPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('Blog_viewAny');
+
     }
 
     /**
@@ -30,7 +31,8 @@ class BlogPolicy
      */
     public function view(User $user, Blog $blog)
     {
-        //
+        return $user->hasPermission('Blog_view');
+
     }
 
     /**
@@ -41,7 +43,8 @@ class BlogPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('Blog_create');
+
     }
 
     /**
@@ -53,7 +56,7 @@ class BlogPolicy
      */
     public function update(User $user, Blog $blog)
     {
-        //
+        return $user->hasPermission('Blog_update');
     }
 
     /**
@@ -65,7 +68,7 @@ class BlogPolicy
      */
     public function delete(User $user, Blog $blog)
     {
-        //
+        return $user->hasPermission('Blog_delete');
     }
 
     /**
@@ -77,7 +80,8 @@ class BlogPolicy
      */
     public function restore(User $user, Blog $blog)
     {
-        //
+        return $user->hasPermission('Blog_restore');
+
     }
 
     /**
@@ -89,6 +93,7 @@ class BlogPolicy
      */
     public function forceDelete(User $user, Blog $blog)
     {
-        //
+        return $user->hasPermission('Blog_forceDelete');
+
     }
 }

@@ -4,7 +4,7 @@
     <!-- .modal-dialog -->
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- .modal-content -->
-        <div class="modal-content" style="height: fit-content">
+        <div class="modal-content" style="height: fit-content" >
             <!-- .modal-header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="modalFilterColumnsLabel"> Lọc nâng cao </h5>
@@ -16,37 +16,28 @@
                     <!-- .form-row -->
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">id</label>
+                            <label class="">Tên người đăng</label>
                         </div>
                         <div class="col-lg-8">
                             <div class="input text"><input type="text" name="user_id"
                                     class="form-control filter-column f-name"
-                                    value=" {{ $f_id }} " id="name" />
+                                    value=" {{$f_user_id }} " id="name" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-row filter-row">
                         <div class="col-lg-4">
-                            <label class="">Tên người dùng</label>
+                            <label class=""> Khóa học</label>
                         </div>
                         <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="parent_id"
-                                    class="form-control filter-column f-name"
-                                    value=" {{ $f_id }}"
-                                    id="address" /></div>
-                        </div>
+                            <select name="course_id" id="" class="form-control">
+                                @foreach ($f_courses as $course )
+                                    <option value="{{$course->id}}">{{$course->certificate_name}}</option>
+                                @endforeach
+
+                               </select>
                     </div>
-                    <div class="form-group form-row filter-row">
-                        <div class="col-lg-4">
-                            <label class="">comment</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="input text"><input type="text" name="comment"
-                                    class="form-control filter-column f-name"
-                                    value=" {{$f_comment }} " id="phone" />
-                            </div>
-                        </div>
-                    </div>
+
                 </div><!-- #filter-columns -->
                 <!-- .btn -->
             </div><!-- /.modal-body -->

@@ -55,8 +55,10 @@
                             @endif<!-- /.form-group -->
                             <div class="form-group">
                                 <label class="control-label" >Loại bảng nhận xét</label>
-                                <input   type="text" name="commentstable_type" class="form-control">
-
+                                <select name="commentstable_type" id="" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('commentstable_type') }}</p>
