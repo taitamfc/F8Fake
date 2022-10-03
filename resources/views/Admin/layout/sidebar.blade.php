@@ -124,7 +124,6 @@
                                 class="menu-icon oi oi-list-rich"></span> <span
                                 class="menu-text">Requirement</span></a>
                     </li>
-
                 </ul>
             </nav>
         </div>
