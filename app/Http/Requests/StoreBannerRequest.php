@@ -31,7 +31,7 @@ class StoreBannerRequest extends FormRequest
             'description' => 'required',
             'cta_title' => 'required',
             'link_to' => 'required',
-            'priority' => 'required|numeric|max:2',
+            'priority' => 'required|numeric|max:99',
             'expires' => 'required',
         ];
     }

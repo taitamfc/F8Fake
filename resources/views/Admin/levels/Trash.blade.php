@@ -49,92 +49,94 @@
                 <!-- .card-body -->
                 <div class="card-body">
                     <!-- .form-group -->
-                    <div class="form-group">
-                        <!-- .input-group -->
-                        <!-- /.input-group -->
-                        <form action="" method="GET" id="form-search">
-                            <!-- .nav-tabs -->
-                            <div class="input-group input-group-alt">
-                                <!-- .input-group-prepend -->
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-secondary" type="button" data-toggle="modal"
-                                        data-target="#modalFilterColumns">Tìm nâng cao</button>
-                                </div><!-- /.input-group-prepend -->
-                                <div class="input-group">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <!-- .input-group -->
+                            <!-- /.input-group -->
+                            <form action="" method="GET" id="form-search">
+                                <!-- .nav-tabs -->
+                                <div class="input-group input-group-alt">
+                                    <!-- .input-group-prepend -->
                                     <div class="input-group-prepend">
+                                        <button class="btn btn-secondary" type="button" data-toggle="modal"
+                                            data-target="#modalFilterColumns">Tìm nâng cao</button>
+                                    </div><!-- /.input-group-prepend -->
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
 
-                                        <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
-                                    </div><input type="text" class="form-control" name="key"
-                                        value="{{ $f_key }}"
-                                        placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
-                                </div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
-                                        type="submit">Tìm kiếm</button>
-                                </div>
-                            </div><!-- /.input-group -->
-                    </div>
-                    @include('Admin.levels.modals.modalLevelColumns')
-                    @if (!count($levels))
-                        <p class="text-success">
-                        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                            không tìm thấy.
+                                            <span class="input-group-text"><span
+                                                    class="oi oi-magnifying-glass"></span></span>
+                                        </div><input type="text" class="form-control" name="key"
+                                            value="{{ $f_key }}"
+                                            placeholder="Tìm nhanh theo cú pháp (ma:Mã kết quả hoặc ten:Tên kết quả)">
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#modalSaveSearch"
+                                            type="submit">Tìm kiếm</button>
+                                    </div>
+                                </div><!-- /.input-group -->
+                                @include('Admin.levels.modals.modalLevelColumns')
+                                @if (!count($levels))
+                                    <p class="text-success">
+                                    <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        không tìm thấy.
+                                    </div>
+                                    </p>
+                                @endif
+                                @if (Session::has('success'))
+                                    <p class="text-success">
+                                    <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ Session::get('success') }}</div>
+                                    </p>
+                                @endif
+                                @if (Session::has('error'))
+                                    <p class="text-danger">
+                                    <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ Session::get('error') }}</div>
+                                    </p>
+                                @endif
+                            </form>
                         </div>
-                        </p>
-                    @endif
-                    @if (Session::has('success'))
-                        <p class="text-success">
-                        <div class="alert alert-success"> <i class="fa fa-check" aria-hidden="true"></i>
-                            {{ Session::get('success') }}</div>
-                        </p>
-                    @endif
-                    @if (Session::has('error'))
-                        <p class="text-danger">
-                        <div class="alert alert-danger"> <i class="fa fa-check" aria-hidden="true"></i>
-                            {{ Session::get('error') }}</div>
-                        </p>
-                    @endif
-                    </form>
-                </div><!-- /.form-group -->
-                <table class="table table-hover">
-                    <!-- thead -->
-                    <thead class="thead-">
-                        <tr>
-                            <th style="min-width:50px"> #</th>
-                            <th> Tên cấp độ </th>
-                            <th> Tùy chọn</th>
-                        </tr>
-                    </thead><!-- /thead -->
-                    <tbody id="addRow" class="addRow">
-                        @foreach ($levels as $key => $level)
-                            <tr class="item-{{ $level->id }}">
-                                <th scope="row">{{ $level->id }}</th>
-                                <td>{{ $level->title }}</td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <form action="{{ route('levels.destroy', $level->id) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                class="far fa-trash-alt"></i></button>
-                                    </form>
-                                    <form action="{{ route('levels.RestoreDelete', $level->id) }}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
-                                                class="bi bi-arrow-counterclockwise"></i></button>
-                                    </form>
-                                </td>
+                    </div><!-- /.form-group -->
+                    <table class="table table-hover">
+                        <!-- thead -->
+                        <thead class="thead-">
+                            <tr>
+                                <th style="min-width:50px"> #</th>
+                                <th> Tên cấp độ </th>
+                                <th> Tùy chọn</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div style="float:right">
-                    {{ $levels->links() }}
-                </div>
-            </div><!-- /.card-body -->
-        </div><!-- /.card -->
-    @endsection
+                        </thead><!-- /thead -->
+                        <tbody id="addRow" class="addRow">
+                            @foreach ($levels as $key => $level)
+                                <tr class="item-{{ $level->id }}">
+                                    <th scope="row">{{ $level->id }}</th>
+                                    <td>{{ $level->title }}</td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('levels.destroy', $level->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </form>
+                                        <form action="{{ route('levels.RestoreDelete', $level->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
+                                                    class="bi bi-arrow-counterclockwise"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div style="float:right">
+                        {{ $levels->links() }}
+                    </div>
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
+        @endsection

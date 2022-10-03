@@ -17,7 +17,7 @@
             <!-- /floating action -->
             <!-- title and toolbar -->
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto"> Thùng rác Comment  </h1><!-- .btn-toolbar -->
+                <h1 class="page-title mr-sm-auto"> Danh sách Comment  </h1><!-- .btn-toolbar -->
                 <div class="btn-toolbar">
                     {{-- @if (Auth::user()->hasPermission('Customer_create')) --}}
                     <a href="{{route('comments.create')}}"   class="btn btn-primary mr-2">
@@ -41,10 +41,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ route('comments.index') }}">Tất Cả</a>
+                            <a class="nav-link active " href="{{ route('comments.index') }}">Tất Cả</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="">Thùng Rác</a>
+                            <a class="nav-link" href="{{route('comments.trash')}}">Thùng Rác</a>
                         </li>
                     </ul>
                 </div>
@@ -64,20 +64,24 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
                                 </div>
-                                <input type="text" class="form-control" name="key" placeholder="Search record">
+                                <input type="text" class="form-control" name="key" value="{{$f_key}}" placeholder="Search record">
                             </div><!-- /.input-group -->
                             <div class="input-group-append">
                                 <button class="btn btn-secondary" type="submit" data-toggle="modal" data-target="#modalSaveSearch" >Tìm kiếm</button>
                             </div>
                         </div>
-                        @include('comments.modals.modalcommentcolumn')
+                        @include('Admin.comments.modals.modalcommentcolumn')
                     </form>
                 </div><!-- /.card-header -->
                 @if (Session::has('success'))
-                <div class="alert alert-success">{{session::get('success')}}</div>
+                <div class="alert alert-success">  <i class="fa fa-check" aria-hidden="true"></i>{{session::get('success')}}</div>
                 @endif
                 @if (Session::has('error'))
-                <div class="alert alert-success">{{session::get('error')}}</div>
+                <div class="alert alert-success"> <i class="bi bi-x-circle"></i> {{session::get('error')}}</div>
+                @endif
+                @if (!count($comments))
+                    <div class="alert alert-danger"> <i class="bi bi-x-circle"></i> Không tìm thấy kết quả
+                        {{ Session::get('error') }}</div>
                 @endif
                 <div class="card-body">
 
@@ -93,11 +97,11 @@
                             <tr>
 
                                 <th> # </th>
-                                <th>người dùng </th>
-                                <th> loại </th>
-                                <th> nội dung </th>
-                                <th> phê duyệt</th>
-                                <th> thao tác</th>
+                                <th> Tên người dùng </th>
+                                <th> Tên khóa học </th>
+                                <th> Ngày tạo </th>
+                                <th> Phê duyệt</th>
+                                <th> Thao tác</th>
                             </tr>
                         </thead><!-- /thead -->
                         <!-- tbody -->
@@ -106,37 +110,23 @@
                             @foreach ($comments as $comment)
                                 <tr>
                                     <th scope="row">{{ $comment->id }}</th>
-                                    <td>{{ $comment->user_id }}</td>
-                                    <td>{{ $comment->commentstable_type }}</td>
-                                    <td>{{ $comment->comment }}</td>
+                                    <td>{{ $comment->user->username }}</td>
+                                    <td>{{ $comment->course->certificate_name }}</td>
+                                    <td>{{ $comment->created_at }}</td>
                                     <td>{{ $comment->approved }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>
                                     <td>{{ $blog->content }}</td> --}}
                                     <td>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <form action="{{ route('comments.RestoreDelete', $comment->id) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"><i
-                                                                class="bi bi-arrow-counterclockwise"></i></button>
-                                                    </form>
-                                                </div>
-                                                <div class="col-2">
-                                                    <form action="{{ route('comments.force_destroy', $comment->id) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('put')
-                                                        <button type="submit" class="btn btn-sm btn-icon btn-secondary"
-                                                            onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                                                class="far fa-trash-alt"></i></button>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <form action="{{ route('comments.SoftDeletes', $comment->id) }}" method="post">
+                                            <a href="{{ route('comments.edit', $comment->id) }}"
+                                                class="btn btn-sm btn-icon btn-secondary"><i
+                                                    class="fa fa-pencil-alt"></i></a>
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                                onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                                    class="far fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

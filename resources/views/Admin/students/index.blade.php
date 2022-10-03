@@ -1,6 +1,6 @@
 @extends('Admin.master')
 @section('content')
-    <div class="container">
+    <div class="page-inner">
         <header class="page-title-bar">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -94,7 +94,7 @@
                                     <th> Ảnh </th>
                                     <th> Tên </th>
                                     <th> Email </th>
-                                    <th></th>
+                                    <th> Tùy Chọn</th>
                                 </tr>
                             </thead>
                             <tbody>

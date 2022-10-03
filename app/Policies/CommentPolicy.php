@@ -18,7 +18,7 @@ class CommentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasPermission('Comment_viewAny');
     }
 
     /**
@@ -30,7 +30,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment)
     {
-        //
+        return $user->hasPermission('Comment_view');
     }
 
     /**
@@ -41,7 +41,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermission('Comment_create');
     }
 
     /**
@@ -51,9 +51,10 @@ class CommentPolicy
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Comment $comment)
+    public function update(User $user)
     {
-        //
+        return $user->hasPermission('Comment_update');
+
     }
 
     /**
@@ -63,9 +64,10 @@ class CommentPolicy
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Comment $comment)
+    public function delete(User $user)
     {
-        //
+        return $user->hasPermission('Comment_delete');
+
     }
 
     /**
@@ -75,9 +77,10 @@ class CommentPolicy
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Comment $comment)
+    public function restore(User $user)
     {
-        //
+        return $user->hasPermission('Comment_restore');
+
     }
 
     /**
@@ -87,8 +90,8 @@ class CommentPolicy
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Comment $comment)
+    public function forceDelete(User $user)
     {
-        //
+        return $user->hasPermission('Comment_forceDelete');
     }
 }

@@ -197,7 +197,7 @@ class LevelController extends Controller
         if ($key) {
 
             $query->orWhere('id', $key)->where('deleted_at', '!=', null);
-            $query->orWhere('content', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
+            $query->orWhere('title', 'LIKE', '%' . $key . '%')->where('deleted_at', '!=', null);
         }
         $levels = $query->where('deleted_at', '!=', null)->paginate(5);
         $params = [

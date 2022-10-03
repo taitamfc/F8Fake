@@ -10,7 +10,7 @@
                     </li>
                 </ol>
             </nav>
-            <h1 class="page-title"> Thêm mới </h1>
+            <h1 class="page-title"> Sửa </h1>
         </header><!-- /.page-title-bar -->
         <!-- .page-section -->
         <div class="page-section">
@@ -21,40 +21,54 @@
                         <h4 class="card-title">  </h4>
                         <h6 class="card-subtitle mb-4"> </h6>
                         <!-- form -->
-                        <form action="{{route('comments.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('comments.update', $comment->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <!-- .form-group -->
                             <div class="form-group">
                                 <label class="control-label" >Người đăng</label>
                                <select name="user_id" id="" class="form-control">
                                 @foreach ($users as $user )
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    <option value="{{$user->id}}">{{$user->username}}</option>
                                 @endforeach
                                </select>
                             </div><!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" > loại</label>
-                                <input type="text" name="commentstable_type" class="form-control"  >
+                                <label class="control-label" > Tên khóa học</label>
+                                <select name="course_id" id="" class="form-control">
+                                    @foreach ($courses as $course )
+                                        <option value="{{$course->id}}">{{$course->certificate_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @if ($errors->any())
+                            <p style="color:red">{{ $errors->first('course_id') }}</p>
+                            @endif<!-- /.form-group -->
+                            <!-- .form-group -->
+                            <div class="form-group">
+                                <label class="control-label" >Bình luận</label>
+                                <input   type="text" name="comment" value="{{$comment->comment}}" class="form-control">
+
+                            </div>
+                            @if ($errors->any())
+                            <p style="color:red">{{ $errors->first('comment') }}</p>
+                            @endif<!-- /.form-group -->
+                            <div class="form-group">
+                                <label class="control-label" >Loại bảng nhận xét</label>
+                                <input   type="text" name="commentstable_type" value="{{$comment->commentstable_type}}" class="form-control">
+
                             </div>
                             @if ($errors->any())
                             <p style="color:red">{{ $errors->first('commentstable_type') }}</p>
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >nội dung</label>
-                                <input   type="text" name="comment" class="form-control">
-                            </div>
-                            @if ($errors->any())
-                            <p style="color:red">{{ $errors->first('comment') }}</p>
-                            @endif<!-- /.form-group -->
-                            <!-- .form-group -->
-                            <div class="form-group">
-                                <label class="control-label" >phê duyệt</label>
+                                <label class="control-label" >Phê duyệt</label>
                                 {{-- <input type="number" name="approved" class="form-control"> --}}
-                                <select name="approved" id="" class="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                <select name="approved"  id=""  class="form-control">
+                                    <option value="{{$comment->approved}}">1</option>
+                                    <option value="{{$comment->approved}}">2</option>
                                 </select>
                                 <small class="form-text text-muted"></small>
                             </div>
@@ -63,7 +77,7 @@
                             @endif<!-- /.form-group -->
                             <!-- .form-group -->
                             <div class="form-group">
-                                <label class="control-label" >khóa học</label>
+                                <label class="control-label" >Tiêu đề</label>
                                 <select name="course_id" id="" class="form-control">
                                     @foreach ($courses as $course )
                                         <option value="{{$course->id}}">{{$course->title}}</option>

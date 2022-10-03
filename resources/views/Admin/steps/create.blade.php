@@ -95,16 +95,12 @@
                                             </option>
                                             <option value="144p" {{ old('video_type') == '144p' ? 'selected' : '' }}>144p
                                             </option>
-                                            {{-- @foreach ($steps as $step)
-                                        <option value="">{{ $step->video_type }}>{{ $step->name }}</option>
-                                    @endforeach --}}
                                         </select>
                                         @error('video_type')
                                             <div style="color: red">*{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label" for="flatpickr01">Thời gian</label> <input

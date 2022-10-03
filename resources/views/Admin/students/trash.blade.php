@@ -10,7 +10,7 @@
                 </ol>
             </nav>
             <div class="d-md-flex align-items-md-start">
-                <h1 class="page-title mr-sm-auto">Quản Lý Học viên</h1>
+                <h1 class="page-title mr-sm-auto">Quản Lý Học viên-Thùng Rác</h1>
                 <div class="btn-toolbar">
                     <a href="{{ route('students.create') }}" class="btn btn-primary mr-2">
                         <i class="fa-solid fa fa-plus"></i>
@@ -94,7 +94,7 @@
                                     <th> Ảnh </th>
                                     <th> Tên </th>
                                     <th> Email </th>
-                                    <th></th>
+                                    <th> Tùy chọn </th>
                                 </tr>
                             </thead>
                             <tbody>
