@@ -31,8 +31,8 @@
                         </div>
                         <div class="col-lg-8">
                             <select name="user_id" id="" class="form-control">
-                                @foreach ($f_users as $user )
-                                    <option value="{{$user->id}}">{{$user->username}}</option>
+                                @foreach ($users as $user )
+                                    <option @selected($f_user_id == $user->id) value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
 
                                </select>

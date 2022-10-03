@@ -111,7 +111,7 @@
                                 <tr>
                                     <th scope="row">{{ $blog->id }}</th>
                                     <td>{{ $blog->title }}</td>
-                                    <td>{{ $blog->user->username }}</td>
+                                    <td>{{ $blog->user->name }}</td>
                                     <td>{{ $blog->published_at }}</td>
                                     <td>{{$blog->is_published }}</td>
                                     {{-- <td><img src="{{$blog->image}}" alt="" height="80px" width="100px" ></td>
