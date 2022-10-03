@@ -83,8 +83,7 @@ class CourseController extends Controller
         }else{
             $is_pro = '1';
         }
-        // dd($is_relatable);
-        $request->is_completable;
+        // $request->is_completable;
         $course= new Course();
         $course->level_id = $request->level_id;
         $course->title = $request->title;
@@ -177,6 +176,7 @@ class CourseController extends Controller
         }else{
             $is_pro = '1';
         }
+
         $course = Course::find($id);
         $course->level_id = $request->level_id;
         $course->title = $request->title;
@@ -213,8 +213,7 @@ class CourseController extends Controller
             return redirect()->route('courses.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            Session::flash('error','Thêm mới thất bại');
-            return redirect()->route('courses.index')->with('error', 'Thêm' . ' ' . $request->title . ' ' .  ' mới không thành công');
+            return redirect()->route('courses.index')->with('error', 'cập nhật' . ' ' . $request->title . ' ' .  ' không thành công');
         }
     }
 

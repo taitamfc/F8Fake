@@ -37,10 +37,8 @@ class UpdateCourseRequest extends FormRequest
                 'pass_percent'      => 'required',
                 'priority'          => 'required',
                 'student_count'     => 'required',
-                'old_prive'         => 'required',
                 'price'             => 'required',
                 'pre_order_price'   => 'required',
-                'is_completable'    => 'required',
                 'published_at'      => 'required',
         ];
     }

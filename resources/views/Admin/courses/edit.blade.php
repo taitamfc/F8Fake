@@ -253,9 +253,8 @@
                                         <div class="form-group">
                                             <label class="control-label" for="flatpickr01">Ngày xuất bản<abbr
                                                     name="Trường bắt buộc">*</abbr></label>
-                                            <input id="flatpickr01" name="published_at" type="text"
-                                                value="{{ old('published_at') ?? $course->published_at }}
-                                                {{-- value="{{ $course->published_at->format('D-m-y') }}" --}}
+                                            <input id="flatpickr01" name="published_at" type="datetime"
+                                                value="{{  $course->published_at }}"
                                                 class="form-control @error('published_at') is-invalid @enderror"
                                                 data-toggle="flatpickr">
                                             @error('published_at ')
