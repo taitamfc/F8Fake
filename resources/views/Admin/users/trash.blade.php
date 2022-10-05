@@ -99,6 +99,7 @@
                                 <th style="min-width:50px"> #</th>
                                 <th> Ảnh Đại Diện </th>
                                 <th> Tên Nhân Viên </th>
+                                <th> Chức Vụ </th>
                                 <th> Email </th>
                                 <th> Tùy Chọn </th>
                             </tr>
@@ -112,6 +113,7 @@
                                             style="width:75px;height:75px">
                                     </td>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->group->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <div class="container">
