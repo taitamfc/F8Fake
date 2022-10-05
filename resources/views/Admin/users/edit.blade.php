@@ -56,6 +56,7 @@
                                     @endif
                                 </div>
                                 <div class="col-4">
+                                   
                                     <div class="form-group">
                                         <label class="control-label" for="flatpickr01">Email</label> <input id="flatpickr01"
                                             type="text" class="form-control" name="email" value="{{ $users->email }}"

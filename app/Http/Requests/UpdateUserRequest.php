@@ -26,7 +26,6 @@ class UpdateUserRequest extends FormRequest
         return [
           'name'=>'required',
           'email'=>'required',
-          'password'=>'required',
           'username'=>'required',
           'first_name'=>'required',
           'last_name'=>'required',
@@ -44,7 +43,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'name.required'=> 'Trường bắt buộc',
             'email.required'=> 'Trường bắt buộc',
-            'password.required'=> 'Trường bắt buộc',
             'username.required'=> 'Trường bắt buộc',
             'first_name.required'=> 'Trường bắt buộc',
             'last_name.required'=> 'Trường bắt buộc',
