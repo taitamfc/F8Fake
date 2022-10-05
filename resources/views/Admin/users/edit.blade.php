@@ -91,14 +91,6 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label class="control-label" for="flatpickr01">Mật Khẩu</label> <input
-                                            id="flatpickr01" type="password" class="form-control" name="password"
-                                            value="{{ $users->password }}" data-toggle="flatpickr">
-                                    </div>
-                                    @if ($errors->any())
-                                        <p style="color:red">{{ $errors->first('password') }}</p>
-                                    @endif
-                                    <div class="form-group">
                                         <label class="control-label" for="flatpickr01">Bio</label> <input
                                             id="flatpickr01" type="text" class="form-control" name="bio"
                                             value="{{ $users->bio }}"data-toggle="flatpickr">
@@ -122,23 +114,24 @@
                                     @if ($errors->any())
                                         <p style="color:red">{{ $errors->first('cover_url') }}</p>
                                     @endif
+                                    <div class="form-group">
+                                        <label class="control-label" for="flatpickr01">Nhóm</label>
+                                        <select name="group_id"
+                                            id=""class="form-control @error('group_id') is-invalid @enderror"
+                                            data-toggle="flatpickr">
+                                            <option value="">Chọn Nhóm</option>
+                                            @foreach ($groups as $group)
+                                                <option {{ $group->id == $users->group_id ? 'selected' : '' }}
+                                                    value="{{ $group->id }}">{{ $group->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @if ($errors->any())
+                                        <p style="color:red">{{ $errors->first('group_id') }}</p>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" for="flatpickr01">Nhóm</label>
-                                <select name="group_id"
-                                    id=""class="form-control @error('group_id') is-invalid @enderror"
-                                    data-toggle="flatpickr">
-                                    <option value="">Chọn Nhóm</option>
-                                    @foreach ($groups as $group)
-                                        <option {{ $group->id == $users->group_id ? 'selected' : '' }}
-                                            value="{{ $group->id }}">{{ $group->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @if ($errors->any())
-                                <p style="color:red">{{ $errors->first('group_id') }}</p>
-                            @endif
+                           
                             <div class="form-group">
                                 <label class="control-label" for="flatpickr01">Ảnh Đại Diện</label><br>
                                 <input accept="image/*" type='file' id="inputFile" name="avatar" /><br><br>
