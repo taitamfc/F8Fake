@@ -14,4 +14,7 @@ class Course extends Model
     function will_learns(){
         return $this->hasMany(WillLearn::class,'course_id');
     }
+    function level(){
+        return $this->belongsTo(Level::class,'level_id');
+    }
 }
